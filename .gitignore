@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+AminoAcidFighter.pro.user
+Makefile
+Makefile.Debug
+Makefile.Release
+debug/
+AminoAcidFighter
