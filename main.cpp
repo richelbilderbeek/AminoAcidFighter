@@ -13,11 +13,13 @@ int main()
 
   sf::Texture glycine_texture;
   glycine_texture.loadFromFile("Glycine.png");
-
+  auto x = glycine_texture.getSize().x;
+  auto y = glycine_texture.getSize().y;
+  std::cout << x << ", " << y;
   sf::Sprite glycine_sprite;
   glycine_sprite.setTexture(glycine_texture);
   glycine_sprite.setScale(sf::Vector2f(0.1, 0.1));
-  glycine_sprite.setOrigin(sf::Vector2f(443.517, 208.489));
+  glycine_sprite.setOrigin(sf::Vector2f(323.905, 171.034));
   glycine_sprite.setPosition(sf::Vector2f(200, 200));
 
   while(window.isOpen())
@@ -47,11 +49,11 @@ int main()
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
           {
-            auto glycine_rot_degree = glycine_sprite.getRotation();
+            auto glycine_rot_degree = glycine_sprite.getRotation() - 30;
             auto glycine_rot_radials = glycine_rot_degree * M_PI / 180;
             auto glycine_pos_x = glycine_sprite.getPosition().x;
             auto glycine_pos_y = glycine_sprite.getPosition().y;
-            glycine_pos_x = glycine_pos_x + cos(-glycine_rot_radials) * 5;
+            glycine_pos_x = glycine_pos_x + cos(glycine_rot_radials) * 5;
             glycine_pos_y = glycine_pos_y - sin(-glycine_rot_radials) * 5;
             glycine_sprite.setPosition(glycine_pos_x, glycine_pos_y);
           }
