@@ -15,15 +15,13 @@ int main()
   glycine_texture.loadFromFile("Glycine.png");
   auto x = glycine_texture.getSize().x;
   auto y = glycine_texture.getSize().y;
-  double x_size_inch = 7.58;
-  double y_size_inch = 4.43;
-  double x_coordinate = 3.10;
-  double y_coordinat= 1.68;
+  double x_ratio = 0.4242424;
+  double y_ratio = 0.3813747;
   std::cout << x << ", " << y;
   sf::Sprite glycine_sprite;
   glycine_sprite.setTexture(glycine_texture);
   glycine_sprite.setScale(sf::Vector2f(0.1, 0.1));
-  glycine_sprite.setOrigin(sf::Vector2f(x / x_size_inch * x_coordinate, y / y_size_inch * y_coordinat));
+  glycine_sprite.setOrigin(sf::Vector2f(x * x_ratio, y * y_ratio));
   glycine_sprite.setPosition(sf::Vector2f(200, 200));
 
   while(window.isOpen())
