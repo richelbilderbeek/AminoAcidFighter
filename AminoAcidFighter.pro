@@ -3,7 +3,9 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    amino_acid.cpp \
+    amino_acids.cpp
 
 CONFIG += c++14
 QMAKE_CXX = g++-5
@@ -33,3 +35,7 @@ CONFIG(debug, debug|release) {
   QMAKE_LFLAGS += -fsanitize=undefined
   LIBS += -lubsan
 }
+
+HEADERS += \
+    amino_acid.h \
+    amino_acids.h
