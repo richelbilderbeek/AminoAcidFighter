@@ -49,7 +49,7 @@ int main()
             glycine_rot += 5;
             glycine_sprite.setRotation(glycine_rot);
           }
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
           {
             auto glycine_rot_degree = glycine_sprite.getRotation() - 30;
             auto glycine_rot_radials = glycine_rot_degree * M_PI / 180;
@@ -58,6 +58,10 @@ int main()
             glycine_pos_x = glycine_pos_x + cos(glycine_rot_radials) * 5;
             glycine_pos_y = glycine_pos_y - sin(-glycine_rot_radials) * 5;
             glycine_sprite.setPosition(glycine_pos_x, glycine_pos_y);
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+          {
+              //pewpewpew
           }
           break;
         }
