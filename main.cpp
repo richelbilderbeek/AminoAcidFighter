@@ -1,6 +1,8 @@
 #include <cmath>
 #include <iostream>
+#include <vector>
 #include <SFML/Graphics.hpp>
+#include "bullet.h"
 
 int main()
 {
@@ -23,6 +25,8 @@ int main()
   glycine_sprite.setScale(sf::Vector2f(0.1, 0.1));
   glycine_sprite.setOrigin(sf::Vector2f(x * x_ratio, y * y_ratio));
   glycine_sprite.setPosition(sf::Vector2f(200, 200));
+
+  std::vector<bullet> bullets;
 
   while(window.isOpen())
   {
@@ -61,6 +65,18 @@ int main()
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
           {
+
+              auto glycine_rot_degree = glycine_sprite.getRotation() - 30;
+              auto glycine_rot_radials = glycine_rot_degree * M_PI / 180;
+              auto glycine_pos_x = glycine_sprite.getPosition().x;
+              auto glycine_pos_y = glycine_sprite.getPosition().y;
+              double x_ratio_gun{0.9924242};
+              double y_ratio_gun{0.6075388};
+              double x_shooter{x_ratio_gun * x};
+              double y_shooter{y_ratio_gun * y};
+              sf::Vector2f position = {10.0,10.0};
+              bullet bull = create_bullet(position);
+              bullets.push_back(bull);
               //pewpewpew
           }
           break;
@@ -69,8 +85,14 @@ int main()
           break;
       }
     }
+
+
     window.clear(sf::Color::Cyan);
     window.draw(glycine_sprite);
+    for(auto& bullet : bullets)
+    {
+      window.draw(get_shape(bullet));
+    }
     window.display();
   }
 }
