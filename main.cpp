@@ -66,15 +66,17 @@ int main()
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
           {
 
-              auto glycine_rot_degree = glycine_sprite.getRotation() - 30;
+              auto glycine_rot_degree = glycine_sprite.getRotation() + 30;
               auto glycine_rot_radials = glycine_rot_degree * M_PI / 180;
               auto glycine_pos_x = glycine_sprite.getPosition().x;
               auto glycine_pos_y = glycine_sprite.getPosition().y;
-              double x_ratio_gun{0.9924242};
-              double y_ratio_gun{0.6075388};
-              double x_shooter{x_ratio_gun * x};
-              double y_shooter{y_ratio_gun * y};
-              sf::Vector2f position = {10.0,10.0};
+              double x_shooter{glycine_pos_x + 450.0/10};
+              double x_bullet = x_shooter + cos(glycine_rot_radials);
+              double y_shooter{glycine_pos_y - 102/10};
+              double y_bullet = y_shooter - sin(-glycine_rot_radials);
+              std::cout << x_shooter << ", " << y_shooter;
+              float bullet_x;
+              sf::Vector2f position = {x_bullet, y_bullet};
               bullet bull = create_bullet(position);
               bullets.push_back(bull);
               //pewpewpew
