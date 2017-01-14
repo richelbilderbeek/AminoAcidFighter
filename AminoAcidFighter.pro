@@ -6,7 +6,8 @@ CONFIG -= qt
 SOURCES += main.cpp \
     amino_acid.cpp \
     amino_acids.cpp \
-    bullet.cpp
+    bullet.cpp \
+    player.cpp
 
 CONFIG += c++14
 QMAKE_CXX = g++-5
@@ -40,4 +41,5 @@ CONFIG(debug, debug|release) {
 HEADERS += \
     amino_acid.h \
     amino_acids.h \
-    bullet.h
+    bullet.h \
+    player.h
