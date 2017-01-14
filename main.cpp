@@ -59,7 +59,7 @@ int main()
               float y_bullet = y_shooter - sin(-glycine_rot_radials);
               std::cout << x_shooter << ", " << y_shooter;
               sf::Vector2f position = { x_bullet, y_bullet};
-              bullet bull = create_bullet(position);
+              bullet bull(10.0, position, 1.0);
               bullets.push_back(bull);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
@@ -74,7 +74,7 @@ int main()
     }
     player1.move();
 
-    window.clear(sf::Color::Cyan);
+    window.clear(sf::Color(128,128,128));
     {
       sf::Sprite s = player1.get_sprite();
       //Must we draw the 'shadow' player left or right?
@@ -96,7 +96,7 @@ int main()
     }
     for(auto& bullet : bullets)
     {
-      window.draw(get_shape(bullet));
+      window.draw(bullet.get_sprite());
     }
     window.display();
   }

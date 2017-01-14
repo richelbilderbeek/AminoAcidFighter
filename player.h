@@ -9,9 +9,9 @@ public:
   player(const int any_window_size);
   void accellerate();
   void deccellerate();
-  const auto& get_sprite() const noexcept { return sprite; }
   auto getRotation() const noexcept { return sprite.getRotation(); }
   auto getPosition() const noexcept { return sprite.getPosition(); }
+  const auto& get_sprite() const noexcept { return sprite; }
 
   void move();
   void setPosition(const float x, const float y) noexcept { sprite.setPosition(x, y); }
