@@ -14,7 +14,7 @@ int main()
     "AminoAcidFighter",
     sf::Style::Titlebar | sf::Style::Close);
 
-  player glycine_sprite;
+  player player1(window_size);
 
   std::vector<bullet> bullets;
 
@@ -33,23 +33,26 @@ int main()
         {
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
           {
-            glycine_sprite.turn_left();
+            player1.turn_left();
           }
           else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
           {
-            glycine_sprite.turn_right();
+            player1.turn_right();
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
           {
-            glycine_sprite.accellerate();
+            player1.accellerate();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+          {
+            player1.deccellerate();
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
           {
-
-              auto glycine_rot_degree = glycine_sprite.getRotation() + 30;
+              auto glycine_rot_degree = player1.getRotation() + 30;
               auto glycine_rot_radials = glycine_rot_degree * M_PI / 180;
-              auto glycine_pos_x = glycine_sprite.getPosition().x;
-              auto glycine_pos_y = glycine_sprite.getPosition().y;
+              auto glycine_pos_x = player1.getPosition().x;
+              auto glycine_pos_y = player1.getPosition().y;
               double x_shooter{glycine_pos_x + 450.0/10};
               float x_bullet = x_shooter + cos(glycine_rot_radials);
               double y_shooter{glycine_pos_y - 102/10};
@@ -59,16 +62,38 @@ int main()
               bullet bull = create_bullet(position);
               bullets.push_back(bull);
           }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+          {
+            player1.stop();
+          }
           break;
         }
         default:
           break;
       }
     }
-    glycine_sprite.move();
+    player1.move();
 
     window.clear(sf::Color::Cyan);
-    window.draw(glycine_sprite.get_sprite());
+    {
+      sf::Sprite s = player1.get_sprite();
+      //Must we draw the 'shadow' player left or right?
+      const bool must_right{s.getPosition().x < window_size / 2};
+      const int dx = must_right ? window_size : -window_size;
+      const bool must_down{s.getPosition().y < window_size / 2};
+      const int dy = must_down ? window_size : -window_size;
+      //Real position
+      window.draw(s);
+      //Horizontal of player
+      s.setPosition(s.getPosition() + sf::Vector2f(dx, 0));
+      window.draw(s);
+      //Down-Right of player
+      s.setPosition(s.getPosition() + sf::Vector2f(0, dy));
+      window.draw(s);
+      //Bacl Below player
+      s.setPosition(s.getPosition() + sf::Vector2f(-dx, 0));
+      window.draw(s);
+    }
     for(auto& bullet : bullets)
     {
       window.draw(get_shape(bullet));
