@@ -12,9 +12,11 @@ player::player(const int any_window_size)
   texture.loadFromFile("Glycine.png");
   auto x = texture.getSize().x;
   auto y = texture.getSize().y;
+  //std::cout << x << ", " << y;
+  //total size picture in pixels = 792;451
+  //origin of molecule in pixels = 336;172
   double x_ratio = 0.4242424;
   double y_ratio = 0.3813747;
-  std::cout << x << ", " << y;
   sprite.setTexture(texture);
   sprite.setScale(sf::Vector2f(0.1, 0.1));
 

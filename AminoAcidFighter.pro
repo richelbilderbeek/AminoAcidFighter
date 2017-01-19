@@ -5,7 +5,6 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     amino_acid.cpp \
-    amino_acids.cpp \
     bullet.cpp \
     player.cpp
 
@@ -40,6 +39,5 @@ CONFIG(debug, debug|release) {
 
 HEADERS += \
     amino_acid.h \
-    amino_acids.h \
     bullet.h \
     player.h

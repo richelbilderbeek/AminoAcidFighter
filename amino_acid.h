@@ -1,5 +1,5 @@
-#ifndef AMINO_ACIDS_H
-#define AMINO_ACIDS_H
+#ifndef AMINO_ACID_H
+#define AMINO_ACID_H
 
 enum class amino_acid
 {
@@ -26,4 +26,4 @@ enum class amino_acid
 };
 
 
-#endif // AMINO_ACIDS_H
+#endif // AMINO_ACID_H
