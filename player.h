@@ -9,24 +9,27 @@ public:
   player(const int any_window_size);
   void accellerate();
   void deccellerate();
-  auto getRotation() const noexcept { return sprite.getRotation(); }
-  auto getPosition() const noexcept { return sprite.getPosition(); }
-  const auto& get_sprite() const noexcept { return sprite; }
+  auto getRotation() const noexcept { return m_sprite.getRotation(); }
+  auto getPosition() const noexcept { return m_sprite.getPosition(); }
+  const auto& get_sprite() const noexcept { return m_sprite; }
 
   void move();
-  void setPosition(const float x, const float y) noexcept { sprite.setPosition(x, y); }
-  void setPosition(const sf::Vector2f p) noexcept { sprite.setPosition(p); }
-  void setRotation(const float r) noexcept { sprite.setRotation(r); }
+  void setPosition(const float x, const float y) noexcept { m_sprite.setPosition(x, y); }
+  void setPosition(const sf::Vector2f p) noexcept { m_sprite.setPosition(p); }
+  void setRotation(const float r) noexcept { m_sprite.setRotation(r); }
   void stop();
   void turn_left();
   void turn_right();
 
 private:
-  double speed_x;
-  double speed_y;
-  sf::Sprite sprite;
-  sf::Texture texture;
-  int window_size;
+  double m_speed_x;
+  double m_speed_y;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
+
+  ///How fast the sprite is rotating per tick
+  double m_turn_speed;
+  int m_window_size;
 };
 
 #endif // PLAYER_H
