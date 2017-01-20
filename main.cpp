@@ -23,7 +23,7 @@ int main()
   while(window.isOpen())
   {
     sf::Event event;
-    std::set<sf::Keyboard::Key> keys;
+    std::set<sf::Keyboard::Key> active_keys; //Keys that are pressed
     while(window.pollEvent(event))
     {
       switch(event.type)
@@ -31,125 +31,37 @@ int main()
         case sf::Event::Closed:
           window.close();
           break;
-        case sf::Event::KeyPressed:
-        {  
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-          {
-            keys.insert(sf::Keyboard::Left);
-            //player1.turn_left();
-          }
-          else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-          {
-            keys.insert(sf::Keyboard::Right);
-            //player1.turn_right();
-          }
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-          {
-            keys.insert(sf::Keyboard::Up);
-            //player1.accellerate();
-          }
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-          {
-            keys.insert(sf::Keyboard::Down);
-            //player1.deccellerate();
-          }
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-          {
-              keys.insert(sf::Keyboard::Space);
-              /*
-              auto glycine_rot_degree = player1.getRotation() + 10.7389;
-              //10.7389 = angle from turn origin to shooter origin
-              auto glycine_rot_radians = glycine_rot_degree * M_PI / 180;
-              auto glycine_pos_x = player1.getPosition().x;
-              auto glycine_pos_y = player1.getPosition().y;
-
-              float x_shooter = glycine_pos_x + (std::cos(glycine_rot_radians) * 42.034985);
-              float y_shooter = glycine_pos_y - (-std::sin(glycine_rot_radians) * 42.034985);
-              //42.034985 = length from turn origin to shooter origin
-              std::cout << x_shooter << ", " << y_shooter << std::endl;
-              sf::Vector2f position = { x_shooter, y_shooter};
-              double angle_deg = glycine_rot_degree + 110.0;
-              double angle_rad = angle_deg * M_PI / 180;
-              const double speed_x{ std::sin(angle_rad) * 0.05};
-              const double speed_y{-std::cos(angle_rad) * 0.05};
-              bullet bull(10, position, speed_x, speed_y, window_size);
-              bullets.push_back(bull);
-              */
-          }
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
-          {
-            keys.insert(sf::Keyboard::B);
-            //player1.stop();
-          }
-          break;
-        }
-        case sf::Event::KeyReleased:
-        {
-          if(event.key.code == sf::Keyboard::Up) keys.erase(sf::Keyboard::Up);
-          else if(event.key.code == sf::Keyboard::Right) keys.erase(sf::Keyboard::Right);
-          else if(event.key.code == sf::Keyboard::Down) keys.erase(sf::Keyboard::Down);
-          else if(event.key.code == sf::Keyboard::Left) keys.erase(sf::Keyboard::Left);
-          else if(event.key.code == sf::Keyboard::Space) keys.erase(sf::Keyboard::Space);
-          else if(event.key.code == sf::Keyboard::B) keys.erase(sf::Keyboard::B);
-          break;
-        }
+        case sf::Event::KeyPressed : active_keys.insert(event.key.code); break;
+        case sf::Event::KeyReleased: active_keys.erase (event.key.code); break;
         default:
           break;
       }
     }
     //Respond to pressed keys
-
-
-
-
-
-
-    if(keys.count(sf::Keyboard::Left))
+    if(active_keys.count(sf::Keyboard::Left))
     {
       player1.turn_left();
     }
-    if(keys.count(sf::Keyboard::Right))
+    if(active_keys.count(sf::Keyboard::Right))
     {
       player1.turn_right();
     }
-    if(keys.count(sf::Keyboard::Up))
+    if(active_keys.count(sf::Keyboard::Up))
     {
       player1.accellerate();
     }
-    if(keys.count(sf::Keyboard::Down))
+    if(active_keys.count(sf::Keyboard::Down))
     {
       player1.deccellerate();
     }
-    if(keys.count(sf::Keyboard::Space))
+    if(active_keys.count(sf::Keyboard::Space))
     {
-        auto glycine_rot_degree = player1.getRotation() + 10.7389;
-        //10.7389 = angle from turn origin to shooter origin
-        auto glycine_rot_radians = glycine_rot_degree * M_PI / 180;
-        auto glycine_pos_x = player1.getPosition().x;
-        auto glycine_pos_y = player1.getPosition().y;
-
-        float x_shooter = glycine_pos_x + (std::cos(glycine_rot_radians) * 42.034985);
-        float y_shooter = glycine_pos_y - (-std::sin(glycine_rot_radians) * 42.034985);
-        //42.034985 = length from turn origin to shooter origin
-        std::cout << x_shooter << ", " << y_shooter << std::endl;
-        sf::Vector2f position = { x_shooter, y_shooter};
-        double angle_deg = glycine_rot_degree + 110.0;
-        double angle_rad = angle_deg * M_PI / 180;
-        const double speed_x{ std::sin(angle_rad) * 0.05};
-        const double speed_y{-std::cos(angle_rad) * 0.05};
-        bullet bull(10, position, speed_x, speed_y, window_size);
-        bullets.push_back(bull);
+      bullets.push_back(shoot(player1, window_size));
     }
-    if(keys.count(sf::Keyboard::B))
+    if(active_keys.count(sf::Keyboard::B))
     {
       player1.stop();
     }
-
-
-
-
-
-
     //Move players and object
     player1.move();
     for(auto& bullet : bullets)

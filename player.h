@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "bullet.h"
 #include <SFML/Graphics.hpp>
 
 class player
@@ -33,5 +34,7 @@ private:
 };
 
 void draw(player p, sf::RenderWindow &window);
+
+bullet shoot(const player& player1, const int window_size);
 
 #endif // PLAYER_H
