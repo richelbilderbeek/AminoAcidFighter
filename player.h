@@ -32,4 +32,6 @@ private:
   int m_window_size;
 };
 
+void draw(player p, sf::RenderWindow &window);
+
 #endif // PLAYER_H

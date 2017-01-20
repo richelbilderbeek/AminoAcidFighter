@@ -16,6 +16,7 @@ int main()
     sf::Style::Titlebar | sf::Style::Close);
 
   player player1(window_size);
+  player player2(window_size);
 
   std::vector<bullet> bullets;
 
@@ -149,29 +150,6 @@ int main()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //Move players and object
     player1.move();
     for(auto& bullet : bullets)
@@ -180,25 +158,7 @@ int main()
     }
 
     window.clear(sf::Color(128,128,128));
-    {
-      sf::Sprite s = player1.get_sprite();
-      //Must we draw the 'shadow' player left or right?
-      const bool must_right{s.getPosition().x < window_size / 2};
-      const int dx = must_right ? window_size : -window_size;
-      const bool must_down{s.getPosition().y < window_size / 2};
-      const int dy = must_down ? window_size : -window_size;
-      //Real position
-      window.draw(s);
-      //Horizontal of player
-      s.setPosition(s.getPosition() + sf::Vector2f(dx, 0));
-      window.draw(s);
-      //Down-Right of player
-      s.setPosition(s.getPosition() + sf::Vector2f(0, dy));
-      window.draw(s);
-      //Bacl Below player
-      s.setPosition(s.getPosition() + sf::Vector2f(-dx, 0));
-      window.draw(s);
-    }
+    draw(player1, window);
     for(auto& bullet : bullets)
     {
       window.draw(bullet.get_sprite());

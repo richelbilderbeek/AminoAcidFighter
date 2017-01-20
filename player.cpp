@@ -41,6 +41,29 @@ void player::deccellerate()
   m_speed_y += std::sin(-angle_radians) * 0.01;
 }
 
+
+void draw(const player p, sf::RenderWindow &window)
+{
+  const int window_size = window.getSize().x;
+  sf::Sprite s = p.get_sprite();
+  //Must we draw the 'shadow' player left or right?
+  const bool must_right{s.getPosition().x < window_size / 2};
+  const int dx = must_right ? window_size : -window_size;
+  const bool must_down{s.getPosition().y < window_size / 2};
+  const int dy = must_down ? window_size : -window_size;
+  //Real position
+  window.draw(s);
+  //Horizontal of player
+  s.setPosition(s.getPosition() + sf::Vector2f(dx, 0));
+  window.draw(s);
+  //Down-Right of player
+  s.setPosition(s.getPosition() + sf::Vector2f(0, dy));
+  window.draw(s);
+  //Bacl Below player
+  s.setPosition(s.getPosition() + sf::Vector2f(-dx, 0));
+  window.draw(s);
+}
+
 void player::move()
 {
   //Move
@@ -62,6 +85,7 @@ void player::stop()
 {
   m_speed_x = 0.0;
   m_speed_y = 0.0;
+  m_turn_speed = 0.0;
 }
 
 void player::turn_left()
