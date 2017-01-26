@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -15,9 +16,10 @@ int main()
     "AminoAcidFighter",
     sf::Style::Titlebar | sf::Style::Close);
 
-  player player1(window_size);
-  player player2(window_size);
-
+  sf::Vector2f start_pos_p1 { 150, 150 };
+  sf::Vector2f start_pos_p2 { 400, 150 };
+  player player1(window_size, start_pos_p1);
+  player player2(window_size, start_pos_p2);
   std::vector<bullet> bullets;
 
   while(window.isOpen())
@@ -62,15 +64,54 @@ int main()
     {
       player1.stop();
     }
+    if(active_keys.count(sf::Keyboard::W))
+    {
+      player2.accellerate();
+    }
+    if(active_keys.count(sf::Keyboard::D))
+    {
+      player2.turn_right();
+    }
+    if(active_keys.count(sf::Keyboard::S))
+    {
+      player2.deccellerate();
+    }
+    if(active_keys.count(sf::Keyboard::A))
+    {
+      player2.turn_left();
+    }
+    if(active_keys.count(sf::Keyboard::Tab))
+    {
+      bullets.push_back(shoot(player2, window_size));
+    }
     //Move players and object
     player1.move();
+    player2.move();
+    //Move all bullets
     for(auto& bullet : bullets)
     {
       bullet.move();
     }
 
+    //Remove all bullets that are out of the screen
+
+    for(int i=0; i < bullets.size(); ++i)
+    {
+      sf::Sprite bullet_sprite = bullets[i].get_sprite();
+
+      if(bullet_sprite.getPosition().x < 0 ||
+         bullet_sprite.getPosition().x > window_size ||
+         bullet_sprite.getPosition().y < 0 ||
+         bullet_sprite.getPosition().y > window_size)
+      {
+        bullets[i] = bullets.back();
+        bullets.pop_back();
+        --i;
+      }
+    }
     window.clear(sf::Color(128,128,128));
     draw(player1, window);
+    draw(player2, window);
     for(auto& bullet : bullets)
     {
       window.draw(bullet.get_sprite());

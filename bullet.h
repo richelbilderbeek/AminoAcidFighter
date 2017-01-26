@@ -12,6 +12,7 @@ public:
     const double speed_x,
     const double speed_y,
     const int any_window_size);
+
   double get_damage() const noexcept { return m_damage; }
   sf::Vector2f get_position() const noexcept { return m_position; }
   double get_speed_x() const noexcept { return m_speed_x; }

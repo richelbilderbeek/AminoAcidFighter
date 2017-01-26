@@ -2,8 +2,9 @@
 
 #include <iostream>
 
-player::player(const int any_window_size)
-  : m_speed_x{0.0},
+player::player(const int any_window_size, sf::Vector2f position)
+  : m_position{position},
+    m_speed_x{0.0},
     m_speed_y{0.0},
     m_sprite{},
     m_texture{},
@@ -22,7 +23,7 @@ player::player(const int any_window_size)
   m_sprite.setScale(sf::Vector2f(0.1, 0.1));
 
   m_sprite.setOrigin(sf::Vector2f(x * x_ratio, y * y_ratio));
-  m_sprite.setPosition(sf::Vector2f(200, 200));
+  m_sprite.setPosition(m_position);
 }
 
 void player::accellerate()
@@ -92,7 +93,7 @@ bullet shoot(const player& player1, const int window_size)
   float x_shooter = glycine_pos_x + (std::cos(glycine_rot_radians) * 42.034985);
   float y_shooter = glycine_pos_y - (-std::sin(glycine_rot_radians) * 42.034985);
   //42.034985 = length from turn origin to shooter origin
-  std::cout << x_shooter << ", " << y_shooter << std::endl;
+  //std::cout << x_shooter << ", " << y_shooter << std::endl;
   sf::Vector2f position = { x_shooter, y_shooter};
   double angle_deg = glycine_rot_degree + 110.0;
   double angle_rad = angle_deg * M_PI / 180;

@@ -7,7 +7,7 @@
 class player
 {
 public:
-  player(const int any_window_size);
+  player(const int any_window_size, sf::Vector2f position);
   void accellerate();
   void deccellerate();
   auto getRotation() const noexcept { return m_sprite.getRotation(); }
@@ -27,6 +27,7 @@ private:
   double m_speed_y;
   sf::Sprite m_sprite;
   sf::Texture m_texture;
+  sf::Vector2f m_position;
 
   ///How fast the sprite is rotating per tick
   double m_turn_speed;
