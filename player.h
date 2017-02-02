@@ -1,8 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "bullet.h"
+#include <cmath>
+
 #include <SFML/Graphics.hpp>
+
+#include "bullet.h"
 
 class player
 {
