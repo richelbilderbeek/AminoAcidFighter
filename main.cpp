@@ -6,9 +6,11 @@
 #include <SFML/Graphics.hpp>
 #include "bullet.h"
 #include "player.h"
+#include "menu.h"
 
 int main()
 {
+  open_menu();
   const int window_size = 600;
 
   sf::RenderWindow window(
