@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <cstdlib>
 
 void open_menu();
 void press_key(sf::Keyboard key);

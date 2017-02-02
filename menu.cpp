@@ -37,8 +37,12 @@ sf::Text Amino_acid_choice;
 
 while (window.isOpen())
     {
+        sf::Music game_jam;
+        if (!game_jame.OpenFromFile("music.ogg"))
+        {
+            //error
+        }
         sf::Event event;
-        sf::Keyboard key;
         while (window.pollEvent(event))
         {
             switch(event.type)
