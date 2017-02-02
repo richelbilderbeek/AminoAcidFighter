@@ -1,13 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "amino_acid.h"
 #include "bullet.h"
 #include <SFML/Graphics.hpp>
 
 class player
 {
 public:
-  player(const int any_window_size, sf::Vector2f position);
+  player(const int any_window_size, sf::Vector2f position, amino_acid aminoacid);
   void accellerate();
   void deccellerate();
   auto getRotation() const noexcept { return m_sprite.getRotation(); }

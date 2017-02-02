@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <SFML/Graphics.hpp>
+#include "amino_acid.h"
 #include "bullet.h"
 #include "player.h"
 
@@ -18,8 +19,11 @@ int main()
 
   sf::Vector2f start_pos_p1 { 150, 150 };
   sf::Vector2f start_pos_p2 { 400, 150 };
-  player player1(window_size, start_pos_p1);
-  player player2(window_size, start_pos_p2);
+
+  amino_acid aminoacid1 = amino_acid::alanine;
+  amino_acid aminoacid2 = amino_acid::glycine;
+  player player1(window_size, start_pos_p1, aminoacid1);
+  player player2(window_size, start_pos_p2, aminoacid2);
   std::vector<bullet> bullets;
 
   while(window.isOpen())
@@ -94,7 +98,7 @@ int main()
     }
 
     //Remove all bullets that are out of the screen
-    for(int i=0; i < bullets.size(); ++i)
+    for(unsigned int i=0; i < bullets.size(); ++i)
     {
       sf::Sprite bullet_sprite = bullets[i].get_sprite();
 

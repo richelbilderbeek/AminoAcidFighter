@@ -2,7 +2,7 @@
 #include "player.h"
 
 
-player::player(const int any_window_size, sf::Vector2f position)
+player::player(const int any_window_size, sf::Vector2f position, amino_acid aminoacid)
   : m_position{position},
     m_speed_x{0.0},
     m_speed_y{0.0},
@@ -11,19 +11,48 @@ player::player(const int any_window_size, sf::Vector2f position)
     m_turn_speed{0.0},
     m_window_size{any_window_size}
 {
-  m_texture.loadFromFile("Glycine.png");
-  auto x = m_texture.getSize().x;
-  auto y = m_texture.getSize().y;
+  switch(aminoacid)
+  {
+    case amino_acid::alanine:
+    {
+        m_texture.loadFromFile("Alanine.png");
+        auto x = m_texture.getSize().x;
+        auto y = m_texture.getSize().y;
 
-  //total size picture in pixels = 792;451 (check in picture)
-  //origin of molecule in pixels = 336;172 (check in picture)
-  //origin is set 336/792;172/451
-  const double x_ratio_origin = 0.4242424;
-  const double y_ratio_origin = 0.3813747;
-  m_sprite.setTexture(m_texture);
-  m_sprite.setScale(sf::Vector2f(0.1, 0.1));
-  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite.setPosition(m_position);
+        //total size picture in pixels = 744;672 (check in picture)
+        //origin of molecule in pixels = 315;409 (check in picture)
+        //origin is set 315/744;409/672
+        const double x_ratio_origin = 315.0/744.0;
+        const double y_ratio_origin = 409.0/672.0;
+        m_sprite.setTexture(m_texture);
+        m_sprite.setScale(sf::Vector2f(0.1, 0.1));
+        m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+        m_sprite.setPosition(m_position);
+        break;
+    }
+    case amino_acid::glycine:
+    {
+      m_texture.loadFromFile("Glycine.png");
+      auto x = m_texture.getSize().x;
+      auto y = m_texture.getSize().y;
+
+      //total size picture in pixels = 792;451 (check in picture)
+      //origin of molecule in pixels = 336;172 (check in picture)
+      //origin is set 336/792;172/451
+      const double x_ratio_origin = 336.0/792.0;
+      const double y_ratio_origin = 172.0/451.0;
+      m_sprite.setTexture(m_texture);
+      m_sprite.setScale(sf::Vector2f(0.1, 0.1));
+      m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+      m_sprite.setPosition(m_position);
+      break;
+    }
+    default:
+    {
+      std::cout << "No aminoacid!!!!";
+      break;
+    }
+  }
 }
 
 void player::accellerate()
