@@ -20,7 +20,7 @@ int main()
   sf::Vector2f start_pos_p1 { 150, 150 };
   sf::Vector2f start_pos_p2 { 400, 150 };
 
-  amino_acid aminoacid1 = amino_acid::alanine;
+  amino_acid aminoacid1 = amino_acid::valine;
   amino_acid aminoacid2 = amino_acid::glycine;
   player player1(window_size, start_pos_p1, aminoacid1);
   player player2(window_size, start_pos_p2, aminoacid2);
