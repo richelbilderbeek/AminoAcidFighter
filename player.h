@@ -23,12 +23,11 @@ public:
   void turn_right();
 
 private:
+  sf::Vector2f m_position;
   double m_speed_x;
   double m_speed_y;
   sf::Sprite m_sprite;
   sf::Texture m_texture;
-  sf::Vector2f m_position;
-
   ///How fast the sprite is rotating per tick
   double m_turn_speed;
   int m_window_size;

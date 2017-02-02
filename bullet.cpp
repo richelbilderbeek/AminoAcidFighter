@@ -1,7 +1,5 @@
 #include "bullet.h"
 
-
-
 bullet::bullet(
   const double damage,
   const sf::Vector2f position,

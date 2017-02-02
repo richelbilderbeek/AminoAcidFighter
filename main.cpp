@@ -94,7 +94,6 @@ int main()
     }
 
     //Remove all bullets that are out of the screen
-
     for(int i=0; i < bullets.size(); ++i)
     {
       sf::Sprite bullet_sprite = bullets[i].get_sprite();
@@ -109,6 +108,7 @@ int main()
         --i;
       }
     }
+
     window.clear(sf::Color(128,128,128));
     draw(player1, window);
     draw(player2, window);

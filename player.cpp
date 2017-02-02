@@ -1,6 +1,6 @@
+#include <iostream>
 #include "player.h"
 
-#include <iostream>
 
 player::player(const int any_window_size, sf::Vector2f position)
   : m_position{position},
@@ -14,15 +14,15 @@ player::player(const int any_window_size, sf::Vector2f position)
   m_texture.loadFromFile("Glycine.png");
   auto x = m_texture.getSize().x;
   auto y = m_texture.getSize().y;
-  //std::cout << x << ", " << y;
-  //total size picture in pixels = 792;451
-  //origin of molecule in pixels = 336;172
-  const double x_ratio = 0.4242424;
-  const double y_ratio = 0.3813747;
+
+  //total size picture in pixels = 792;451 (check in picture)
+  //origin of molecule in pixels = 336;172 (check in picture)
+  //origin is set 336/792;172/451
+  const double x_ratio_origin = 0.4242424;
+  const double y_ratio_origin = 0.3813747;
   m_sprite.setTexture(m_texture);
   m_sprite.setScale(sf::Vector2f(0.1, 0.1));
-
-  m_sprite.setOrigin(sf::Vector2f(x * x_ratio, y * y_ratio));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite.setPosition(m_position);
 }
 
