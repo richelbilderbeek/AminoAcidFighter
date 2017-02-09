@@ -10,14 +10,14 @@
 #include "menu.h"
 
 void show_game(sf::RenderWindow &window, const int window_size);
-void show_menu_players(sf::RenderWindow &window);
-void show_menu_amino_acids(sf::RenderWindow &window);
+void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids);
+void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen);
 
 int main()
 {
-  bool menu_players = 0;
+  bool menu_players = 1;
   bool menu_amino_acids = 0;
-  bool game_screen = 1;
+  bool game_screen = 0;
 
   const int window_size = 600;
 
@@ -39,19 +39,18 @@ int main()
   {
     if(menu_players)
     {
-      show_menu_players(window);
+      show_menu_players(window, menu_players, menu_amino_acids);
     }
-    else if(game_screen)
+    if(game_screen)
     {
       show_game(window, window_size);
     }
-    else if(menu_amino_acids)
+    if(menu_amino_acids)
     {
-      show_menu_amino_acids(window);
+      show_menu_amino_acids(window, menu_amino_acids, game_screen);
     }
   }
 }
-
 
 void show_game(sf::RenderWindow &window, const int window_size)
 {
@@ -162,7 +161,7 @@ void show_game(sf::RenderWindow &window, const int window_size)
   }
 }
 
-void show_menu_players(sf::RenderWindow &window)
+void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids)
 {
   sf::Text start;
   sf::Font font;
@@ -214,7 +213,7 @@ void show_menu_players(sf::RenderWindow &window)
 
    int player_amount{2};
 
-    while (window.isOpen())
+    while (menu_players)
     {
         sf::Event event;
         while (window.pollEvent(event))
@@ -242,8 +241,12 @@ void show_menu_players(sf::RenderWindow &window)
                  {press_right();}
                  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
                  {press_left();}
-                 break;
-             default: break;
+                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                 {
+                     menu_players = 0;
+                     menu_amino_acids = 1;
+                 }
+                 default: break;
             }
         }
         window.clear();
@@ -267,7 +270,7 @@ void show_menu_players(sf::RenderWindow &window)
 }
 
 
-void show_menu_amino_acids(sf::RenderWindow &window)
+void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen)
 {
   sf::Text start;
   sf::Font font;
@@ -285,28 +288,53 @@ void show_menu_amino_acids(sf::RenderWindow &window)
   player_one.setPosition(10,5);
   player_one.setColor(sf::Color::Magenta);
   player_one.setString("Player 1");
-  player_one.setCharacterSize(50);
+  player_one.setCharacterSize(35);
+  sf::Text player_one_AA;
+  player_one_AA.setFont(font);
+  player_one_AA.setPosition(10,50);
+  player_one_AA.setColor(sf::Color::Magenta);
+  player_one_AA.setString("Alanine");
+  player_one_AA.setCharacterSize(35);
 
   sf::Text player_two;
   player_two.setFont(font);
-  player_two.setPosition(400,5);
+  player_two.setPosition(450,5);
   player_two.setColor(sf::Color::Yellow);
   player_two.setString("Player 2");
-  player_two.setCharacterSize(50);
+  player_two.setCharacterSize(35);
+  sf::Text player_two_AA;
+  player_two_AA.setFont(font);
+  player_two_AA.setPosition(450,50);
+  player_two_AA.setColor(sf::Color::Yellow);
+  player_two_AA.setString("Glycine");
+  player_two_AA.setCharacterSize(35);
 
   sf::Text player_three;
   player_three.setFont(font);
-  player_three.setPosition(10,530);
+  player_three.setPosition(10,545);
   player_three.setColor(sf::Color::Green);
   player_three.setString("Player 3");
-  player_three.setCharacterSize(50);
+  player_three.setCharacterSize(35);
+  sf::Text player_three_AA;
+  player_three_AA.setFont(font);
+  player_three_AA.setPosition(10,500);
+  player_three_AA.setColor(sf::Color::Green);
+  player_three_AA.setString("Leucine");
+  player_three_AA.setCharacterSize(35);
 
   sf::Text player_four;
   player_four.setFont(font);
-  player_four.setPosition(400,530);
+  player_four.setPosition(450,545);
   player_four.setColor(sf::Color::Red);
   player_four.setString("Player 4");
-  player_four.setCharacterSize(50);
+  player_four.setCharacterSize(35);
+  sf::Text player_four_AA;
+  player_four_AA.setFont(font);
+  player_four_AA.setPosition(450,500);
+  player_four_AA.setColor(sf::Color::Red);
+  player_four_AA.setString("Valine");
+  player_four_AA.setCharacterSize(35);
+
 
 
   sf::Text Amino_acid_choice;
@@ -327,7 +355,7 @@ void show_menu_amino_acids(sf::RenderWindow &window)
 
    int player_amount{2};
 
-    while (window.isOpen())
+    while (menu_amino_acids)
     {
         sf::Event event;
         while (window.pollEvent(event))
@@ -355,6 +383,11 @@ void show_menu_amino_acids(sf::RenderWindow &window)
                  {press_right();}
                  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
                  {press_left();}
+                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                 {
+                   menu_amino_acids = 0;
+                   game_screen = 1;
+                 }
                  break;
              default: break;
             }
@@ -362,9 +395,13 @@ void show_menu_amino_acids(sf::RenderWindow &window)
         window.clear();
         window.draw(start);
         window.draw(player_one);
+        window.draw(player_one_AA);
         window.draw(player_two);
+        window.draw(player_two_AA);
         window.draw(player_three);
+        window.draw(player_three_AA);
         window.draw(player_four);
+        window.draw(player_four_AA);
         assert(player_amount <= 4);
         //window.draw(Amino_acid_choice);
         window.display();

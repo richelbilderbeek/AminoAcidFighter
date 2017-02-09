@@ -154,11 +154,6 @@ void press_right()
     std::cout<< "Right";
 }
 
-void open_menu_amino_acids(sf::RenderWindow &window)
-{
-
-}
-
 /*void open_game_screen(sf::RenderWindow &window, const int window_size)
 {
   sf::Vector2f start_pos_p1 { 150, 150 };
