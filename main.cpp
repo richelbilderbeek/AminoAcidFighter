@@ -98,7 +98,7 @@ int main()
     }
 
     //Remove all bullets that are out of the screen
-    for(unsigned int i=0; i < bullets.size(); ++i)
+    for(int i=0; i < static_cast<int>(bullets.size()); ++i)
     {
       sf::Sprite bullet_sprite = bullets[i].get_sprite();
 
