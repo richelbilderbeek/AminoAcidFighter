@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <cassert>
 #include <cmath>
 #include <iostream>
