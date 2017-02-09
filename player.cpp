@@ -20,11 +20,11 @@ player::player(const int any_window_size, sf::Vector2f position, amino_acid amin
         auto x = m_texture.getSize().x;
         auto y = m_texture.getSize().y;
 
-        //total size picture in pixels = 744;672 (check in picture)
-        //origin of molecule in pixels = 315;409 (check in picture)
-        //origin is set 315/744;409/672
-        const double x_ratio_origin = 315.0/744.0;
-        const double y_ratio_origin = 409.0/672.0;
+        //total size picture in pixels = 781;640 (check in picture)
+        //origin of molecule in pixels = 326;362 (check in picture)
+        //origin is set 326/781;362/640
+        const double x_ratio_origin = 326.0/781.0;
+        const double y_ratio_origin = 362.0/640.0;
         m_sprite.setTexture(m_texture);
         m_sprite.setScale(sf::Vector2f(0.1, 0.1));
         m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
