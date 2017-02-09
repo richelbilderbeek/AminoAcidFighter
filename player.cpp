@@ -1,5 +1,6 @@
 #include <iostream>
 #include "player.h"
+#include <cmath>
 
 
 player::player(const int any_window_size, sf::Vector2f position, amino_acid aminoacid)
