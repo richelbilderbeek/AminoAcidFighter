@@ -12,9 +12,9 @@
 void open_menu();
 void press_key(sf::Keyboard key);
 
-void press_up();
+void press_up(int &player_amount);
 
-void press_down();
+void press_down(int &player_amount);
 
 void press_left();
 
