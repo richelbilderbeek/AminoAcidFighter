@@ -12,6 +12,7 @@
 void show_game(sf::RenderWindow &window, const int window_size);
 void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids);
 void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen);
+void change_amino_name(amino_acid aminoacid_player, sf::Text &player_AA);
 
 int main()
 {
@@ -76,12 +77,14 @@ void show_game(sf::RenderWindow &window, const int window_size)
   amino_acid aminoacid_player3 = amino_acid::alanine;
   amino_acid aminoacid_player4 = amino_acid::alanine;
 
-  choose_aminoacid(aminoacid_player1, aminoacid_player2, aminoacid_player3, aminoacid_player4);
+            choose_aminoacid(aminoacid_player1, aminoacid_player2, aminoacid_player3, aminoacid_player4);
 
   player player1(window_size, start_pos_p1, aminoacid_player1);
   player player2(window_size, start_pos_p2, aminoacid_player2);
   player player3(window_size, start_pos_p3, aminoacid_player3);
   player player4(window_size, start_pos_p4, aminoacid_player4);
+
+
   std::vector<bullet> bullets;
 
   while(window.isOpen())
@@ -185,7 +188,7 @@ void show_game(sf::RenderWindow &window, const int window_size)
 }
 
 void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids)
-{
+{  
   sf::Text start;
   sf::Font font;
   font.loadFromFile("arial.ttf");
@@ -294,6 +297,11 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
 
 void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen)
 {
+  amino_acid aminoacid_player1 = amino_acid::alanine;
+  amino_acid aminoacid_player2 = amino_acid::alanine;
+  amino_acid aminoacid_player3 = amino_acid::alanine;
+  amino_acid aminoacid_player4 = amino_acid::alanine;
+
   sf::Text start;
   sf::Font font;
   font.loadFromFile("arial.ttf");
@@ -320,15 +328,15 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
 
   sf::Text player_two;
   player_two.setFont(font);
-  player_two.setPosition(450,5);
+  player_two.setPosition(350,5);
   player_two.setColor(sf::Color::Yellow);
   player_two.setString("Player 2");
   player_two.setCharacterSize(35);
   sf::Text player_two_AA;
   player_two_AA.setFont(font);
-  player_two_AA.setPosition(450,50);
+  player_two_AA.setPosition(350,50);
   player_two_AA.setColor(sf::Color::Yellow);
-  player_two_AA.setString("Glycine");
+  player_two_AA.setString("Alanine");
   player_two_AA.setCharacterSize(35);
 
   sf::Text player_three;
@@ -346,18 +354,16 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
 
   sf::Text player_four;
   player_four.setFont(font);
-  player_four.setPosition(450,545);
+  player_four.setPosition(350,545);
   player_four.setColor(sf::Color::Red);
   player_four.setString("Player 4");
   player_four.setCharacterSize(35);
   sf::Text player_four_AA;
   player_four_AA.setFont(font);
-  player_four_AA.setPosition(450,500);
+  player_four_AA.setPosition(350,500);
   player_four_AA.setColor(sf::Color::Red);
   player_four_AA.setString("Valine");
   player_four_AA.setCharacterSize(35);
-
-
 
   sf::Text Amino_acid_choice;
   Amino_acid_choice.setFont(font);
@@ -389,22 +395,44 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
 
                  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
                  {
-                   if(player_amount < 4)
-                   {
-                     press_up(player_amount);
-                   }
+                    int player_1 = static_cast<int>(aminoacid_player1);
+                    if(player_1 > 0)
+                    {
+                      player_1 -= 1;
+                      aminoacid_player1 = static_cast<amino_acid>(player_1);
+                      change_amino_name(aminoacid_player1, player_one_AA);
+                    }
                  }
                  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
                  {
-                    if(player_amount > 2)
-                      {
-                        press_down(player_amount);
-                      }
+                   int player_1 = static_cast<int>(aminoacid_player1);
+                   if(player_1 < 19)
+                   {
+                     player_1 += 1;
+                     aminoacid_player1 = static_cast<amino_acid>(player_1);
+                     change_amino_name(aminoacid_player1, player_one_AA);
+                   }
                  }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                 {press_right();}
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                 {press_left();}
+                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+                   {
+                     int player_2 = static_cast<int>(aminoacid_player2);
+                     if(player_2 < 19)
+                     {
+                       player_2 += 1;
+                       aminoacid_player2 = static_cast<amino_acid>(player_2);
+                       change_amino_name(aminoacid_player2, player_two_AA);
+                     }
+                   }
+                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+                   {
+                     int player_2 = static_cast<int>(aminoacid_player2);
+                     if(player_2 > 0)
+                     {
+                       player_2 -= 1;
+                       aminoacid_player2 = static_cast<amino_acid>(player_2);
+                       change_amino_name(aminoacid_player2, player_two_AA);
+                     }
+                   }
                  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
                  {
                    menu_amino_acids = 0;
@@ -427,5 +455,89 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
         assert(player_amount <= 4);
         //window.draw(Amino_acid_choice);
         window.display();
+  }
+}
+
+void change_amino_name(amino_acid aminoacid_player, sf::Text &player_AA)
+{
+  if(aminoacid_player == amino_acid::alanine)
+  {
+     player_AA.setString("Alanine");
+  }
+  if(aminoacid_player == amino_acid::arginine)
+  {
+      player_AA.setString("Arginine");
+  }
+  if(aminoacid_player == amino_acid::asparagine)
+  {
+      player_AA.setString("Asparagine");
+  }
+  if(aminoacid_player == amino_acid::aspartic_acid)
+  {
+      player_AA.setString("Aspartic_acid");
+  }
+  if(aminoacid_player == amino_acid::cysteine)
+  {
+      player_AA.setString("Cysteine");
+  }
+  if(aminoacid_player == amino_acid::glutamic_acid)
+  {
+      player_AA.setString("Glutamic_acid");
+  }
+  if(aminoacid_player == amino_acid::glutamine)
+  {
+      player_AA.setString("Glutamine");
+  }
+  if(aminoacid_player == amino_acid::glycine)
+  {
+      player_AA.setString("Glycine");
+  }
+  if(aminoacid_player == amino_acid::histidine)
+  {
+      player_AA.setString("Histidine");
+  }
+  if(aminoacid_player == amino_acid::isoleucine)
+  {
+      player_AA.setString("Isoleucine");
+  }
+  if(aminoacid_player == amino_acid::leucine)
+  {
+      player_AA.setString("Leucine");
+  }
+  if(aminoacid_player == amino_acid::lysine)
+  {
+      player_AA.setString("Lyine");
+  }
+  if(aminoacid_player == amino_acid::methionine)
+  {
+      player_AA.setString("Methionine");
+  }
+  if(aminoacid_player == amino_acid::phenylalanine)
+  {
+      player_AA.setString("Phenylalanine");
+  }
+  if(aminoacid_player == amino_acid::proline)
+  {
+      player_AA.setString("Proline");
+  }
+  if(aminoacid_player == amino_acid::serine)
+  {
+      player_AA.setString("Serine");
+  }
+  if(aminoacid_player == amino_acid::threonine)
+  {
+      player_AA.setString("Threonine");
+  }
+  if(aminoacid_player == amino_acid::tryptophan)
+  {
+      player_AA.setString("Tryptophan");
+  }
+  if(aminoacid_player == amino_acid::tyrosine)
+  {
+      player_AA.setString("Tyrosine");
+  }
+  if(aminoacid_player == amino_acid::valine)
+  {
+      player_AA.setString("Valine");
   }
 }
