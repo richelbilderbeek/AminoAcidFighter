@@ -4,6 +4,7 @@
 #include <vector>
 #include <set>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 #include "amino_acid.h"
 #include "bullet.h"
 #include "player.h"
@@ -84,6 +85,10 @@ void show_game(sf::RenderWindow &window, const int window_size)
   player player4(window_size, start_pos_p4, aminoacid_player4);
   std::vector<bullet> bullets;
 
+  if(sf::Joystick::isConnected(0)){
+      std::cout<< "controller connected" << '\n';
+  }
+
   while(window.isOpen())
   {
     sf::Event event;
@@ -97,11 +102,13 @@ void show_game(sf::RenderWindow &window, const int window_size)
           break;
         case sf::Event::KeyPressed : active_keys.insert(event.key.code); break;
         case sf::Event::KeyReleased: active_keys.erase (event.key.code); break;
+        //case sf::Event::JoystickButtonPressed: something happens ; break;
         default:
           break;
       }
     }
     //Respond to pressed keys
+
     if(active_keys.count(sf::Keyboard::Left))
     {
       player1.turn_left();
@@ -145,7 +152,62 @@ void show_game(sf::RenderWindow &window, const int window_size)
     if(active_keys.count(sf::Keyboard::Tab))
     {
       bullets.push_back(shoot(player2, window_size));
+    }}
+
+
+    //checking the buttons
+    if(sf::Joystick::isButtonPressed(0, 0)){
+        std::cout<< " 0 " << '\n';
     }
+    //A button
+    if(sf::Joystick::isButtonPressed(0, 1)){
+        std::cout<< " 1 " << '\n';
+    }
+    //B button
+    if(sf::Joystick::isButtonPressed(0, 2)){
+        std::cout<< " 2 " << '\n';
+    }
+    //X button
+    if(sf::Joystick::isButtonPressed(0, 3)){
+        std::cout<< " 3 " << '\n';
+    }
+    //Y button
+    if(sf::Joystick::isButtonPressed(0, 4)){
+        std::cout<< " 4 " << '\n';
+    }
+    //LB button
+    if(sf::Joystick::isButtonPressed(0, 5)){
+        std::cout<< " 5 " << '\n';
+    }
+    //RB button
+    if(sf::Joystick::isButtonPressed(0, 6)){
+        std::cout<< " 6 " << '\n';
+    }
+    //select
+    if(sf::Joystick::isButtonPressed(0, 7)){
+        std::cout << " 7 " << '\n';
+    }
+    //start
+    if(sf::Joystick::isButtonPressed(0, 8)){
+        std::cout<< " 8 " << '\n';
+    }
+    //Xbox
+    if(sf::Joystick::isButtonPressed(0, 9)){
+        std::cout << " 9 " << '\n';
+    }
+    //left stick click
+    if(sf::Joystick::isButtonPressed(0, 10)){
+        std::cout<< " 10 " << '\n';
+    }
+    //right stick click
+    if(sf::Joystick::isButtonPressed(0, 11)){
+        std::cout << " 11 " << '\n';
+    }
+    if(sf::Joystick::isButtonPressed(0, 12)){
+        std::cout<< " 12 " << '\n';
+    }
+    //idk
+
     //Move players and object
     player1.move();
     player2.move();
@@ -182,7 +244,7 @@ void show_game(sf::RenderWindow &window, const int window_size)
     }
     window.display();
   }
-}
+
 
 void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids)
 {
