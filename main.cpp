@@ -52,15 +52,36 @@ int main()
   }
 }
 
+void choose_aminoacid(amino_acid &aminoacid_player1, amino_acid &aminoacid_player2, amino_acid &aminoacid_player3,
+                      amino_acid &aminoacid_player4)
+{
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+  {
+    int player_1 = static_cast<int>(aminoacid_player1);
+    player_1 += 1;
+    aminoacid_player1 = static_cast<amino_acid>(player_1);
+    std::cout << player_1;
+  }
+}
+
 void show_game(sf::RenderWindow &window, const int window_size)
 {
-  sf::Vector2f start_pos_p1 { 150, 150 };
-  sf::Vector2f start_pos_p2 { 400, 150 };
+  sf::Vector2f start_pos_p1 { 175, 175 };
+  sf::Vector2f start_pos_p2 { 425, 175 };
+  sf::Vector2f start_pos_p3 { 175, 425 };
+  sf::Vector2f start_pos_p4 { 425, 425 };
 
-  amino_acid aminoacid1 = amino_acid::valine;
-  amino_acid aminoacid2 = amino_acid::alanine;
-  player player1(window_size, start_pos_p1, aminoacid1);
-  player player2(window_size, start_pos_p2, aminoacid2);
+  amino_acid aminoacid_player1 = amino_acid::alanine;
+  amino_acid aminoacid_player2 = amino_acid::alanine;
+  amino_acid aminoacid_player3 = amino_acid::alanine;
+  amino_acid aminoacid_player4 = amino_acid::alanine;
+
+  choose_aminoacid(aminoacid_player1, aminoacid_player2, aminoacid_player3, aminoacid_player4);
+
+  player player1(window_size, start_pos_p1, aminoacid_player1);
+  player player2(window_size, start_pos_p2, aminoacid_player2);
+  player player3(window_size, start_pos_p3, aminoacid_player3);
+  player player4(window_size, start_pos_p4, aminoacid_player4);
   std::vector<bullet> bullets;
 
   while(window.isOpen())
@@ -97,7 +118,7 @@ void show_game(sf::RenderWindow &window, const int window_size)
     {
       player1.deccellerate();
     }
-    if(active_keys.count(sf::Keyboard::Space))
+    if(active_keys.count(sf::Keyboard::RControl))
     {
       bullets.push_back(shoot(player1, window_size));
     }
@@ -153,6 +174,8 @@ void show_game(sf::RenderWindow &window, const int window_size)
     window.clear(sf::Color(128,128,128));
     draw(player1, window);
     draw(player2, window);
+    draw(player3, window);
+    draw(player4, window);
     for(auto& bullet : bullets)
     {
       window.draw(bullet.get_sprite());
@@ -264,9 +287,8 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
           window.draw(four_players);
         }
         assert(player_amount <= 4);
-        //window.draw(Amino_acid_choice);
         window.display();
-}
+  }
 }
 
 
@@ -405,5 +427,5 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
         assert(player_amount <= 4);
         //window.draw(Amino_acid_choice);
         window.display();
-}
+  }
 }
