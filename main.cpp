@@ -85,10 +85,10 @@ void show_game(sf::RenderWindow &window, const int window_size)
   player player3(window_size, start_pos_p3, aminoacid_player3);
   player player4(window_size, start_pos_p4, aminoacid_player4);
 
-
   std::vector<bullet> bullets;
 
-  if(sf::Joystick::isConnected(0)){
+  if(sf::Joystick::isConnected(0))
+  {
       std::cout<< "controller connected" << '\n';
   }
 
@@ -155,58 +155,71 @@ void show_game(sf::RenderWindow &window, const int window_size)
     if(active_keys.count(sf::Keyboard::Tab))
     {
       bullets.push_back(shoot(player2, window_size));
-    }}
+    }
 
 
     //checking the buttons
-    if(sf::Joystick::isButtonPressed(0, 0)){
+    if(sf::Joystick::isButtonPressed(0, 0))
+    {
         std::cout<< " 0 " << '\n';
     }
     //A button
-    if(sf::Joystick::isButtonPressed(0, 1)){
+    if(sf::Joystick::isButtonPressed(0, 1))
+    {
         std::cout<< " 1 " << '\n';
     }
     //B button
-    if(sf::Joystick::isButtonPressed(0, 2)){
+    if(sf::Joystick::isButtonPressed(0, 2))
+    {
         std::cout<< " 2 " << '\n';
     }
     //X button
-    if(sf::Joystick::isButtonPressed(0, 3)){
+    if(sf::Joystick::isButtonPressed(0, 3))
+    {
         std::cout<< " 3 " << '\n';
     }
     //Y button
-    if(sf::Joystick::isButtonPressed(0, 4)){
+    if(sf::Joystick::isButtonPressed(0, 4))
+    {
         std::cout<< " 4 " << '\n';
     }
     //LB button
-    if(sf::Joystick::isButtonPressed(0, 5)){
+    if(sf::Joystick::isButtonPressed(0, 5))
+    {
         std::cout<< " 5 " << '\n';
     }
     //RB button
-    if(sf::Joystick::isButtonPressed(0, 6)){
+    if(sf::Joystick::isButtonPressed(0, 6))
+    {
         std::cout<< " 6 " << '\n';
     }
     //select
-    if(sf::Joystick::isButtonPressed(0, 7)){
+    if(sf::Joystick::isButtonPressed(0, 7))
+    {
         std::cout << " 7 " << '\n';
     }
     //start
-    if(sf::Joystick::isButtonPressed(0, 8)){
+    if(sf::Joystick::isButtonPressed(0, 8))
+    {
         std::cout<< " 8 " << '\n';
     }
     //Xbox
-    if(sf::Joystick::isButtonPressed(0, 9)){
+    if(sf::Joystick::isButtonPressed(0, 9))
+    {
         std::cout << " 9 " << '\n';
     }
     //left stick click
-    if(sf::Joystick::isButtonPressed(0, 10)){
+    if(sf::Joystick::isButtonPressed(0, 10))
+    {
         std::cout<< " 10 " << '\n';
     }
     //right stick click
-    if(sf::Joystick::isButtonPressed(0, 11)){
+    if(sf::Joystick::isButtonPressed(0, 11))
+    {
         std::cout << " 11 " << '\n';
     }
-    if(sf::Joystick::isButtonPressed(0, 12)){
+    if(sf::Joystick::isButtonPressed(0, 12))
+    {
         std::cout<< " 12 " << '\n';
     }
     //idk
@@ -247,6 +260,7 @@ void show_game(sf::RenderWindow &window, const int window_size)
     }
     window.display();
   }
+}
 
 
 void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids)
@@ -290,53 +304,54 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
   Amino_acid_choice.setString("Glycine");
   Amino_acid_choice.setCharacterSize(50);
 
-   sf::Music game_jam;
-   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
+  sf::Music game_jam;
+  if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
+  {
+    //error
+  }
+  game_jam.setPlayingOffset(sf::seconds(2));
+  game_jam.setVolume(50);
+  game_jam.play();
+
+  int player_amount{2};
+
+   while (menu_players)
    {
-     //error
-   }
-   game_jam.setPlayingOffset(sf::seconds(2));
-   game_jam.setVolume(50);
-   game_jam.play();
-
-   int player_amount{2};
-
-    while (menu_players)
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            switch(event.type)
-            {
-             case sf::Event::Closed: window.close(); break;
-             case sf::Event::KeyPressed:
-
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                 {
-                   if(player_amount < 4)
-                   {
-                     press_up(player_amount);
-                   }
-                 }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                 {
-                    if(player_amount > 2)
-                      {
-                        press_down(player_amount);
-                      }
-                 }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                 {press_right();}
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                 {press_left();}
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-                 {
-                     menu_players = 0;
-                     menu_amino_acids = 1;
-                 }
-                 default: break;
-            }
+     sf::Event event;
+     while (window.pollEvent(event))
+     {
+       switch(event.type)
+       {
+         case sf::Event::Closed: window.close(); break;
+         case sf::Event::KeyPressed:
+         {
+           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+           {
+             if(player_amount < 4)
+             {
+               press_up(player_amount);
+             }
+           }
+           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+           {
+             if(player_amount > 2)
+             {
+               press_down(player_amount);
+             }
+           }
+           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+           {press_right();}
+           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+           {press_left();}
+           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+           {
+             menu_players = 0;
+             menu_amino_acids = 1;
+           }
+            default: break;
+          }
         }
+
         window.clear();
         window.draw(start);
         if(player_amount == 2)
@@ -353,9 +368,9 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
         }
         assert(player_amount <= 4);
         window.display();
-  }
+      }
+    }
 }
-
 
 void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen)
 {
