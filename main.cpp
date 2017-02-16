@@ -506,7 +506,7 @@ void change_amino_name(amino_acid aminoacid_player, sf::Text &player_AA)
   }
   if(aminoacid_player == amino_acid::lysine)
   {
-      player_AA.setString("Lyine");
+      player_AA.setString("Lysine");
   }
   if(aminoacid_player == amino_acid::methionine)
   {

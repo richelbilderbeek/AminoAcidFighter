@@ -2,7 +2,6 @@
 #include "player.h"
 #include <cmath>
 
-
 player::player(const int any_window_size, sf::Vector2f position, amino_acid aminoacid)
   : m_position{position},
     m_speed_x{0.0},
