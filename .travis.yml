@@ -1,0 +1,40 @@
+sudo: true
+language: cpp
+compiler: gcc
+
+# Boost
+addons: 
+  apt: 
+    packages: libboost-all-dev
+
+before_install:
+  # C++14
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+  # Codecov
+  - sudo pip install codecov
+  # OCLint
+  - ./install_oclint
+
+install: 
+  # C++14
+  - sudo apt-get install -qq g++-5
+  # Codecov
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+
+script: 
+  # Build and run the real program
+  - qmake AminoAcidFighter.pro
+  - make
+  - ./AminoAcidFighter &
+  - sleep 10
+  - sudo killall AminoAcidFighter
+  # Get code coverage
+  - ./get_code_cov
+  - codecov
+  # Call OCLint
+  - ./do_oclint
+
+after_success:
+  # Codecov
+  - bash <(curl -s https://codecov.io/bash)
