@@ -37,6 +37,4 @@ void menu_choose_player_amount(
 void plus_player(
   int &player_amount);
 
-void play_music(int argc);
-
 #endif // MENU_H
