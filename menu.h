@@ -13,10 +13,10 @@ void change_amino_name(
   amino_acid aminoacid_player,
   sf::Text &player_AA);
 
-void press_down(
+void minus_player(
   int &player_amount);
 
-void press_up(
+void plus_player(
   int &player_amount);
 
 void menu_choose_aminoacid(
