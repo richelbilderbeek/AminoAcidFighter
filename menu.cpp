@@ -216,6 +216,7 @@ void menu_choose_aminoacid(
               player_1 -= 1;
               aminoacid_player1 = static_cast<amino_acid>(player_1);
               change_amino_name(aminoacid_player1, player_one_AA_text);
+              player_one_AA = create_player(aminoacid_player1, position_player_one_AA);
             }
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -226,6 +227,7 @@ void menu_choose_aminoacid(
               player_1 += 1;
               aminoacid_player1 = static_cast<amino_acid>(player_1);
               change_amino_name(aminoacid_player1, player_one_AA_text);
+              player_one_AA = create_player(aminoacid_player1, position_player_one_AA);
             }
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
@@ -236,6 +238,7 @@ void menu_choose_aminoacid(
               player_2 += 1;
               aminoacid_player2 = static_cast<amino_acid>(player_2);
               change_amino_name(aminoacid_player2, player_two_AA_text);
+              player_two_AA = create_player(aminoacid_player2, position_player_two_AA);
             }
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
@@ -246,6 +249,7 @@ void menu_choose_aminoacid(
               player_2 -= 1;
               aminoacid_player2 = static_cast<amino_acid>(player_2);
               change_amino_name(aminoacid_player2, player_two_AA_text);
+              player_two_AA = create_player(aminoacid_player2, position_player_two_AA);
             }
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
