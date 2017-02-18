@@ -13,7 +13,6 @@ bullet::bullet(
     m_speed_y{speed_y},
     m_sprite{},
     m_window_size{any_window_size}
-    //m_texture{}
 {
   static sf::Texture m_texture;
   m_texture.loadFromFile("Bullet.png");
@@ -22,7 +21,6 @@ bullet::bullet(
 
   auto x = m_texture.getSize().x;
   auto y = m_texture.getSize().y;
-  //std::cout << x << ", " << y << std::endl;
   double ratio = 0.5;
   m_sprite.setOrigin(sf::Vector2f(x * ratio, y * ratio));
   m_sprite.setPosition(position);

@@ -8,17 +8,21 @@
 class player
 {
 public:
-  player(const int any_window_size, sf::Vector2f position, amino_acid aminoacid);
+  player(
+    const int any_window_size,
+    sf::Vector2f position,
+    amino_acid aminoacid);
+
   void accellerate();
   void deccellerate();
-  auto getRotation() const noexcept { return m_sprite.getRotation(); }
-  auto getPosition() const noexcept { return m_sprite.getPosition(); }
+  auto get_rotation() const noexcept { return m_sprite.getRotation(); }
+  auto get_position() const noexcept { return m_sprite.getPosition(); }
   const auto& get_sprite() const noexcept { return m_sprite; }
 
   void move();
-  void setPosition(const float x, const float y) noexcept { m_sprite.setPosition(x, y); }
-  void setPosition(const sf::Vector2f p) noexcept { m_sprite.setPosition(p); }
-  void setRotation(const float r) noexcept { m_sprite.setRotation(r); }
+  void set_position(const float x, const float y) noexcept { m_sprite.setPosition(x, y); }
+  void set_position(const sf::Vector2f p) noexcept { m_sprite.setPosition(p); }
+  void set_rotation(const float r) noexcept { m_sprite.setRotation(r); }
   void stop();
   void turn_left();
   void turn_right();

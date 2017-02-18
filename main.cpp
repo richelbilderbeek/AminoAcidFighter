@@ -5,18 +5,19 @@
 #include <set>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 #include "amino_acid.h"
 #include "bullet.h"
 #include "player.h"
 #include "menu.h"
 
 void show_game(sf::RenderWindow &window, const int window_size);
-void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids);
-void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen);
+void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids, int argc);
+void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen, int argc);
 void change_amino_name(amino_acid aminoacid_player, sf::Text &player_AA);
 
-int main()
-{
+int main(int argc, char * argv[])
+{  
   bool menu_players = 1;
   bool menu_amino_acids = 0;
   bool game_screen = 0;
@@ -41,7 +42,7 @@ int main()
   {
     if(menu_players)
     {
-      show_menu_players(window, menu_players, menu_amino_acids);
+      show_menu_players(window, menu_players, menu_amino_acids, argc);
     }
     if(game_screen)
     {
@@ -49,13 +50,16 @@ int main()
     }
     if(menu_amino_acids)
     {
-      show_menu_amino_acids(window, menu_amino_acids, game_screen);
+      show_menu_amino_acids(window, menu_amino_acids, game_screen, argc);
     }
   }
 }
 
-void choose_aminoacid(amino_acid &aminoacid_player1, amino_acid &aminoacid_player2, amino_acid &aminoacid_player3,
-                      amino_acid &aminoacid_player4)
+void choose_aminoacid(
+  amino_acid &aminoacid_player1,
+  amino_acid &aminoacid_player2,
+  amino_acid &aminoacid_player3,
+  amino_acid &aminoacid_player4)
 {
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
   {
@@ -66,7 +70,9 @@ void choose_aminoacid(amino_acid &aminoacid_player1, amino_acid &aminoacid_playe
   }
 }
 
-void show_game(sf::RenderWindow &window, const int window_size)
+void show_game(
+  sf::RenderWindow &window,
+  const int window_size)
 {
   sf::Vector2f start_pos_p1 { 175, 175 };
   sf::Vector2f start_pos_p2 { 425, 175 };
@@ -78,7 +84,7 @@ void show_game(sf::RenderWindow &window, const int window_size)
   amino_acid aminoacid_player3 = amino_acid::alanine;
   amino_acid aminoacid_player4 = amino_acid::alanine;
 
-            choose_aminoacid(aminoacid_player1, aminoacid_player2, aminoacid_player3, aminoacid_player4);
+  choose_aminoacid(aminoacid_player1, aminoacid_player2, aminoacid_player3, aminoacid_player4);
 
   player player1(window_size, start_pos_p1, aminoacid_player1);
   player player2(window_size, start_pos_p2, aminoacid_player2);
@@ -262,8 +268,11 @@ void show_game(sf::RenderWindow &window, const int window_size)
   }
 }
 
-
-void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_amino_acids)
+void show_menu_players(
+  sf::RenderWindow &window,
+  bool &menu_players,
+  bool &menu_amino_acids,
+  int argc)
 {  
   sf::Text start;
   sf::Font font;
@@ -311,7 +320,10 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
   }
   game_jam.setPlayingOffset(sf::seconds(2));
   game_jam.setVolume(50);
-  game_jam.play();
+  if(argc == 1)
+  {
+    game_jam.play();
+  }
 
   int player_amount{2};
 
@@ -340,9 +352,9 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
              }
            }
            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-           {press_right();}
+           {}
            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-           {press_left();}
+           {}
            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
            {
              menu_players = 0;
@@ -372,7 +384,11 @@ void show_menu_players(sf::RenderWindow &window, bool &menu_players, bool &menu_
     }
 }
 
-void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, bool &game_screen)
+void show_menu_amino_acids(
+  sf::RenderWindow &window,
+  bool &menu_amino_acids,
+  bool &game_screen,
+  int argc)
 {
   amino_acid aminoacid_player1 = amino_acid::alanine;
   amino_acid aminoacid_player2 = amino_acid::alanine;
@@ -456,7 +472,11 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
    }
    game_jam.setPlayingOffset(sf::seconds(2));
    game_jam.setVolume(50);
-   game_jam.play();
+
+   if(argc == 1)
+   {
+     game_jam.play();
+   }
 
    int player_amount{2};
 
@@ -535,7 +555,9 @@ void show_menu_amino_acids(sf::RenderWindow &window, bool &menu_amino_acids, boo
   }
 }
 
-void change_amino_name(amino_acid aminoacid_player, sf::Text &player_AA)
+void change_amino_name(
+  amino_acid aminoacid_player,
+  sf::Text &player_AA)
 {
   if(aminoacid_player == amino_acid::alanine)
   {

@@ -25,5 +25,4 @@ enum class amino_acid
   valine
 };
 
-
 #endif // AMINO_ACID_H
