@@ -181,93 +181,93 @@ void menu_choose_aminoacid(
   Amino_acid_choice.setString("Glycine");
   Amino_acid_choice.setCharacterSize(50);
 
-   sf::Music game_jam;
-   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
-   {
-     //error
-   }
-   game_jam.setPlayingOffset(sf::seconds(2));
-   game_jam.setVolume(50);
+  sf::Music game_jam;
+  if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
+  {
+    //error
+  }
+  game_jam.setPlayingOffset(sf::seconds(2));
+  game_jam.setVolume(50);
 
-   if(argc == 1)
-   {
-     game_jam.play();
-   }
+  if(argc == 1)
+  {
+    game_jam.play();
+  }
 
-   int player_amount{2};
+  int player_amount{2};
 
-    while (menu_amino_acids)
+  while (menu_amino_acids)
+  {
+    sf::Event event;
+    while (window.pollEvent(event))
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            switch(event.type)
+      switch(event.type)
+      {
+        case sf::Event::Closed: window.close(); break;
+        case sf::Event::KeyPressed:
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+          {
+            int player_1 = static_cast<int>(aminoacid_player1);
+            if(player_1 > 0)
             {
-             case sf::Event::Closed: window.close(); break;
-             case sf::Event::KeyPressed:
-
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                 {
-                    int player_1 = static_cast<int>(aminoacid_player1);
-                    if(player_1 > 0)
-                    {
-                      player_1 -= 1;
-                      aminoacid_player1 = static_cast<amino_acid>(player_1);
-                      change_amino_name(aminoacid_player1, player_one_AA);
-                    }
-                 }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                 {
-                   int player_1 = static_cast<int>(aminoacid_player1);
-                   if(player_1 < 19)
-                   {
-                     player_1 += 1;
-                     aminoacid_player1 = static_cast<amino_acid>(player_1);
-                     change_amino_name(aminoacid_player1, player_one_AA);
-                   }
-                 }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-                   {
-                     int player_2 = static_cast<int>(aminoacid_player2);
-                     if(player_2 < 19)
-                     {
-                       player_2 += 1;
-                       aminoacid_player2 = static_cast<amino_acid>(player_2);
-                       change_amino_name(aminoacid_player2, player_two_AA);
-                     }
-                   }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-                   {
-                     int player_2 = static_cast<int>(aminoacid_player2);
-                     if(player_2 > 0)
-                     {
-                       player_2 -= 1;
-                       aminoacid_player2 = static_cast<amino_acid>(player_2);
-                       change_amino_name(aminoacid_player2, player_two_AA);
-                     }
-                   }
-                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-                 {
-                   menu_amino_acids = 0;
-                   game_screen = 1;
-                 }
-                 break;
-             default: break;
+              player_1 -= 1;
+              aminoacid_player1 = static_cast<amino_acid>(player_1);
+              change_amino_name(aminoacid_player1, player_one_AA);
             }
-        }
-        window.clear();
-        window.draw(start);
-        window.draw(player_one);
-        window.draw(player_one_AA);
-        window.draw(player_two);
-        window.draw(player_two_AA);
-        window.draw(player_three);
-        window.draw(player_three_AA);
-        window.draw(player_four);
-        window.draw(player_four_AA);
-        assert(player_amount <= 4);
-        //window.draw(Amino_acid_choice);
-        window.display();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+          {
+            int player_1 = static_cast<int>(aminoacid_player1);
+            if(player_1 < 19)
+            {
+              player_1 += 1;
+              aminoacid_player1 = static_cast<amino_acid>(player_1);
+              change_amino_name(aminoacid_player1, player_one_AA);
+            }
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+          {
+            int player_2 = static_cast<int>(aminoacid_player2);
+            if(player_2 < 19)
+            {
+              player_2 += 1;
+              aminoacid_player2 = static_cast<amino_acid>(player_2);
+              change_amino_name(aminoacid_player2, player_two_AA);
+            }
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+          {
+            int player_2 = static_cast<int>(aminoacid_player2);
+            if(player_2 > 0)
+            {
+              player_2 -= 1;
+              aminoacid_player2 = static_cast<amino_acid>(player_2);
+              change_amino_name(aminoacid_player2, player_two_AA);
+            }
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+          {
+            menu_amino_acids = 0;
+            game_screen = 1;
+          }
+          break;
+        default: break;
+      }
+    }
+
+    window.clear();
+    window.draw(start);
+    window.draw(player_one);
+    window.draw(player_one_AA);
+    window.draw(player_two);
+    window.draw(player_two_AA);
+    window.draw(player_three);
+    window.draw(player_three_AA);
+    window.draw(player_four);
+    window.draw(player_four_AA);
+    assert(player_amount <= 4);
+    //window.draw(Amino_acid_choice);
+    window.display();
   }
 }
 

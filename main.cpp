@@ -1,8 +1,5 @@
 #include <cassert>
-#include <cmath>
 #include <iostream>
-#include <set>
-#include <vector>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
