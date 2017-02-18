@@ -1,5 +1,23 @@
 #include "menu.h"
 
+void draw_player_text(
+  std::string text,
+  sf::Vector2f position,
+  sf::RenderWindow &window,
+  sf::Color color)
+{
+  sf::Font font;
+  font.loadFromFile("arial.ttf");
+
+  sf::Text player_text;
+  player_text.setFont(font);
+  player_text.setPosition(position);
+  player_text.setColor(color);
+  player_text.setString(text);
+  player_text.setCharacterSize(35);
+  window.draw(player_text);
+}
+
 void change_AA_up(
   amino_acid &aminoacid,
   sf::Text &player_AA_text,
@@ -172,17 +190,9 @@ void menu_choose_aminoacid(
   start.setFont(font);
   start.setPosition(140,280);
   start.setColor(sf::Color::White);
-
-  window.clear(sf::Color::Black);
   start.setString("Choose Your Amino Acid");
   start.setCharacterSize(30);
 
-  sf::Text player_one_text;
-  player_one_text.setFont(font);
-  player_one_text.setPosition(10,5);
-  player_one_text.setColor(sf::Color::Magenta);
-  player_one_text.setString("Player 1");
-  player_one_text.setCharacterSize(35);
   sf::Text player_one_AA_text;
   player_one_AA_text.setFont(font);
   player_one_AA_text.setPosition(10,50);
@@ -192,12 +202,6 @@ void menu_choose_aminoacid(
   sf::Vector2f position_player_one_AA = sf::Vector2f(100, 175);
   player player_one_AA = create_player(aminoacid_player1, position_player_one_AA);
 
-  sf::Text player_two_text;
-  player_two_text.setFont(font);
-  player_two_text.setPosition(350,5);
-  player_two_text.setColor(sf::Color::Yellow);
-  player_two_text.setString("Player 2");
-  player_two_text.setCharacterSize(35);
   sf::Text player_two_AA_text;
   player_two_AA_text.setFont(font);
   player_two_AA_text.setPosition(350,50);
@@ -207,12 +211,6 @@ void menu_choose_aminoacid(
   sf::Vector2f position_player_two_AA = sf::Vector2f(425, 175);
   player player_two_AA = create_player(aminoacid_player2, position_player_two_AA);
 
-  sf::Text player_three_text;
-  player_three_text.setFont(font);
-  player_three_text.setPosition(10,545);
-  player_three_text.setColor(sf::Color::Green);
-  player_three_text.setString("Player 3");
-  player_three_text.setCharacterSize(35);
   sf::Text player_three_AA_text;
   player_three_AA_text.setFont(font);
   player_three_AA_text.setPosition(10,500);
@@ -222,12 +220,6 @@ void menu_choose_aminoacid(
   sf::Vector2f position_player_three_AA = sf::Vector2f(100, 425);
   player player_three_AA = create_player(aminoacid_player3, position_player_three_AA);
 
-  sf::Text player_four_text;
-  player_four_text.setFont(font);
-  player_four_text.setPosition(350,545);
-  player_four_text.setColor(sf::Color::Red);
-  player_four_text.setString("Player 4");
-  player_four_text.setCharacterSize(35);
   sf::Text player_four_AA_text;
   player_four_AA_text.setFont(font);
   player_four_AA_text.setPosition(350,500);
@@ -290,18 +282,22 @@ void menu_choose_aminoacid(
 
     window.clear(sf::Color(128,128,128));
     window.draw(start);
-    draw(player_one_AA, window);
-    window.draw(player_one_text);
+
+    draw_player_text("Player 1", sf::Vector2f(10, 5), window, sf::Color::Magenta);
+    draw_player_text("Player 2", sf::Vector2f(350, 5), window, sf::Color::Yellow);
+    draw_player_text("Player 3", sf::Vector2f(10, 545), window, sf::Color::Green);
+    draw_player_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red);
+
     window.draw(player_one_AA_text);
-    draw(player_two_AA, window);
-    window.draw(player_two_text);
     window.draw(player_two_AA_text);
-    draw(player_three_AA, window);
-    window.draw(player_three_text);
     window.draw(player_three_AA_text);
-    draw(player_four_AA, window);
-    window.draw(player_four_text);
     window.draw(player_four_AA_text);
+
+    draw(player_one_AA, window);
+    draw(player_two_AA, window);
+    draw(player_three_AA, window);
+    draw(player_four_AA, window);
+
     assert(player_amount <= 4);
     //window.draw(Amino_acid_choice);
     window.display();

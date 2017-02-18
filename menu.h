@@ -31,4 +31,11 @@ void menu_choose_player_amount(
   bool &menu_amino_acids,
   int argc);
 
+void draw_player_text(
+  std::string text,
+  sf::Vector2f position,
+  sf::RenderWindow &window,
+  sf::Color color);
+
+
 #endif // MENU_H
