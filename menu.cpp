@@ -4,85 +4,110 @@ void change_amino_name(
   amino_acid aminoacid_player,
   sf::Text &player_AA)
 {
-  if(aminoacid_player == amino_acid::alanine)
+  switch(aminoacid_player)
   {
-     player_AA.setString("Alanine");
-  }
-  if(aminoacid_player == amino_acid::arginine)
-  {
+    case amino_acid::alanine:
+    {
+      player_AA.setString("Alanine");
+      break;
+    }
+    case amino_acid::arginine:
+    {
       player_AA.setString("Arginine");
-  }
-  if(aminoacid_player == amino_acid::asparagine)
-  {
+      break;
+    }
+    case amino_acid::asparagine:
+    {
       player_AA.setString("Asparagine");
-  }
-  if(aminoacid_player == amino_acid::aspartic_acid)
-  {
+      break;
+    }
+    case amino_acid::aspartic_acid:
+    {
       player_AA.setString("Aspartic_acid");
-  }
-  if(aminoacid_player == amino_acid::cysteine)
-  {
+      break;
+    }
+    case amino_acid::cysteine:
+    {
       player_AA.setString("Cysteine");
-  }
-  if(aminoacid_player == amino_acid::glutamic_acid)
-  {
+      break;
+    }
+    case amino_acid::glutamic_acid:
+    {
       player_AA.setString("Glutamic_acid");
-  }
-  if(aminoacid_player == amino_acid::glutamine)
-  {
+      break;
+    }
+    case amino_acid::glutamine:
+    {
       player_AA.setString("Glutamine");
-  }
-  if(aminoacid_player == amino_acid::glycine)
-  {
+      break;
+    }
+    case amino_acid::glycine:
+    {
       player_AA.setString("Glycine");
-  }
-  if(aminoacid_player == amino_acid::histidine)
-  {
+      break;
+    }
+    case amino_acid::histidine:
+    {
       player_AA.setString("Histidine");
-  }
-  if(aminoacid_player == amino_acid::isoleucine)
-  {
+      break;
+    }
+    case amino_acid::isoleucine:
+    {
       player_AA.setString("Isoleucine");
-  }
-  if(aminoacid_player == amino_acid::leucine)
-  {
+      break;
+    }
+    case amino_acid::leucine:
+    {
       player_AA.setString("Leucine");
-  }
-  if(aminoacid_player == amino_acid::lysine)
-  {
+      break;
+    }
+    case amino_acid::lysine:
+    {
       player_AA.setString("Lysine");
-  }
-  if(aminoacid_player == amino_acid::methionine)
-  {
+      break;
+    }
+    case amino_acid::methionine:
+    {
       player_AA.setString("Methionine");
-  }
-  if(aminoacid_player == amino_acid::phenylalanine)
-  {
+      break;
+    }
+    case amino_acid::phenylalanine:
+    {
       player_AA.setString("Phenylalanine");
-  }
-  if(aminoacid_player == amino_acid::proline)
-  {
+      break;
+    }
+    case amino_acid::proline:
+    {
       player_AA.setString("Proline");
-  }
-  if(aminoacid_player == amino_acid::serine)
-  {
+      break;
+    }
+    case amino_acid::serine:
+    {
       player_AA.setString("Serine");
-  }
-  if(aminoacid_player == amino_acid::threonine)
-  {
+      break;
+    }
+    case amino_acid::threonine:
+    {
       player_AA.setString("Threonine");
-  }
-  if(aminoacid_player == amino_acid::tryptophan)
-  {
+      break;
+    }
+    case amino_acid::tryptophan:
+    {
       player_AA.setString("Tryptophan");
-  }
-  if(aminoacid_player == amino_acid::tyrosine)
-  {
+      break;
+    }
+    case amino_acid::tyrosine:
+    {
       player_AA.setString("Tyrosine");
-  }
-  if(aminoacid_player == amino_acid::valine)
-  {
+      break;
+    }
+    case amino_acid::valine:
+    {
       player_AA.setString("Valine");
+      break;
+    }
+    default:
+      assert(!"should not get here");
   }
 }
 
