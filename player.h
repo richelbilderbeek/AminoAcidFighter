@@ -1,9 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <SFML/Graphics.hpp>
+
 #include "amino_acid.h"
 #include "bullet.h"
-#include <SFML/Graphics.hpp>
 
 class player
 {
@@ -15,14 +16,13 @@ public:
 
   void accellerate();
   void deccellerate();
-  auto get_rotation() const noexcept { return m_sprite.getRotation(); }
-  auto get_position() const noexcept { return m_sprite.getPosition(); }
-  const auto& get_sprite() const noexcept { return m_sprite; }
-
+  auto get_rotation()      const noexcept { return m_sprite.getRotation(); }
+  auto get_position()      const noexcept { return m_sprite.getPosition(); }
+  const auto& get_sprite() const noexcept { return m_sprite              ; }
   void move();
   void set_position(const float x, const float y) noexcept { m_sprite.setPosition(x, y); }
-  void set_position(const sf::Vector2f p) noexcept { m_sprite.setPosition(p); }
-  void set_rotation(const float r) noexcept { m_sprite.setRotation(r); }
+  void set_position(const sf::Vector2f p)         noexcept { m_sprite.setPosition(p)   ; }
+  void set_rotation(const float r)                noexcept { m_sprite.setRotation(r)   ; }
   void stop();
   void turn_left();
   void turn_right();

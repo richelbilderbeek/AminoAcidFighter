@@ -1,6 +1,7 @@
-#include <iostream>
-#include "player.h"
 #include <cmath>
+#include <iostream>
+
+#include "player.h"
 
 player::player(
   const int any_window_size,
