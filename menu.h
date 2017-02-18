@@ -22,9 +22,6 @@ void draw_text(std::string text,
 void minus_player(
   int &player_amount);
 
-void plus_player(
-  int &player_amount);
-
 void menu_choose_aminoacid(
   sf::RenderWindow &window,
   bool &menu_amino_acids,
@@ -36,5 +33,10 @@ void menu_choose_player_amount(
   bool &menu_players,
   bool &menu_amino_acids,
   int argc);
+
+void plus_player(
+  int &player_amount);
+
+void play_music(int argc);
 
 #endif // MENU_H

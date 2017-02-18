@@ -168,12 +168,6 @@ void minus_player(
     --player_amount;
 }
 
-void plus_player(
-  int &player_amount)
-{
-    ++player_amount;
-}
-
 void menu_choose_aminoacid(
   sf::RenderWindow &window,
   bool &menu_amino_acids,
@@ -185,14 +179,8 @@ void menu_choose_aminoacid(
   amino_acid aminoacid_player3 = amino_acid::alanine;
   amino_acid aminoacid_player4 = amino_acid::alanine;
 
-  sf::Text start;
   sf::Font font;
   font.loadFromFile("arial.ttf");
-  start.setFont(font);
-  start.setPosition(140,280);
-  start.setColor(sf::Color::White);
-  start.setString("Choose Your Amino Acid");
-  start.setCharacterSize(30);
 
   sf::Text player_one_AA_text;
   player_one_AA_text.setFont(font);
@@ -281,25 +269,24 @@ void menu_choose_aminoacid(
       }
     }
 
-    const int char_size = 35;
-
+    //Draw everything on screen
     window.clear(sf::Color(128,128,128));
-    window.draw(start);
-
-    draw_text("Player 1", sf::Vector2f(10 , 5)  , window, sf::Color::Magenta, char_size);
-    draw_text("Player 2", sf::Vector2f(350, 5)  , window, sf::Color::Yellow , char_size);
-    draw_text("Player 3", sf::Vector2f(10 , 545), window, sf::Color::Green  , char_size);
-    draw_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red    , char_size);
+    draw_text("Choose Your Amino Acid", sf::Vector2f(140, 280), window, sf::Color::White, 30);
+    const int char_size_player = 35;
+    draw_text("Player 1", sf::Vector2f(10 , 5)  , window, sf::Color::Magenta, char_size_player);
+    draw_text("Player 2", sf::Vector2f(350, 5)  , window, sf::Color::Yellow , char_size_player);
+    draw_text("Player 3", sf::Vector2f(10 , 545), window, sf::Color::Green  , char_size_player);
+    draw_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red    , char_size_player);
 
     window.draw(player_one_AA_text);
     window.draw(player_two_AA_text);
     window.draw(player_three_AA_text);
     window.draw(player_four_AA_text);
 
-    draw(player_one_AA, window);
-    draw(player_two_AA, window);
+    draw(player_one_AA  , window);
+    draw(player_two_AA  , window);
     draw(player_three_AA, window);
-    draw(player_four_AA, window);
+    draw(player_four_AA , window);
 
     assert(player_amount <= 4);
     //window.draw(Amino_acid_choice);
@@ -313,16 +300,6 @@ void menu_choose_player_amount(
   bool &menu_amino_acids,
   int argc)
 {
-  sf::Font font;
-  font.loadFromFile("arial.ttf");
-
-  sf::Text start_text;
-  start_text.setFont(font);
-  start_text.setPosition(75,150);
-  start_text.setColor(sf::Color::White);
-  start_text.setString("Start Game With");
-  start_text.setCharacterSize(60);
-
   sf::Music game_jam;
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
   {
@@ -367,7 +344,8 @@ void menu_choose_player_amount(
             menu_players = 0;
             menu_amino_acids = 1;
           }
-           default: break;
+           default:
+           break;
         }
       }
 
@@ -376,7 +354,8 @@ void menu_choose_player_amount(
 
       //Draw everything on screen
       window.clear();
-      window.draw(start_text);
+      draw_text("Start Game With", sf::Vector2f(75, 150), window, sf::Color::White, 60);
+
       if(player_amount == 2)
       {
         draw_text("2 Players", player_amount_position, window, sf::Color::Magenta, char_size);
@@ -390,7 +369,14 @@ void menu_choose_player_amount(
         draw_text("4 Players", player_amount_position, window, sf::Color::Green, char_size);
       }
       assert(player_amount <= 4);
+
       window.display();
     }
   }
+}
+
+void plus_player(
+  int &player_amount)
+{
+    ++player_amount;
 }
