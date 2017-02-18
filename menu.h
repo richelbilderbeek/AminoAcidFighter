@@ -8,8 +8,6 @@
 
 #include "amino_acid.h"
 
-#endif // MENU_H
-
 void change_amino_name(
   amino_acid aminoacid_player,
   sf::Text &player_AA);
@@ -31,3 +29,5 @@ void menu_choose_player_amount(
   bool &menu_players,
   bool &menu_amino_acids,
   int argc);
+
+#endif // MENU_H

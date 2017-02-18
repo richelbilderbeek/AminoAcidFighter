@@ -108,8 +108,8 @@ void menu_choose_aminoacid(
 {
   amino_acid aminoacid_player1 = amino_acid::alanine;
   amino_acid aminoacid_player2 = amino_acid::alanine;
-  amino_acid aminoacid_player3 = amino_acid::alanine;
-  amino_acid aminoacid_player4 = amino_acid::alanine;
+  //amino_acid aminoacid_player3 = amino_acid::alanine;
+  //amino_acid aminoacid_player4 = amino_acid::alanine;
 
   sf::Text start;
   sf::Font font;
