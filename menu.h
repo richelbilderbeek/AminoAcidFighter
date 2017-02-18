@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "amino_acid.h"
+#include "player.h"
 
 void change_amino_name(
   amino_acid aminoacid_player,

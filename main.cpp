@@ -105,7 +105,7 @@ void show_game(
     {
       player1.deccellerate();
     }
-    if(active_keys.count(sf::Keyboard::RControl))
+    if(active_keys.count(sf::Keyboard::Space))
     {
       bullets.push_back(shoot(player1, window_size));
     }
@@ -133,7 +133,6 @@ void show_game(
     {
       bullets.push_back(shoot(player2, window_size));
     }
-
 
     //checking the buttons
     if(sf::Joystick::isButtonPressed(0, 0))
