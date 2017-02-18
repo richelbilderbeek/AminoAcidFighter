@@ -13,6 +13,12 @@ void change_amino_name(
   amino_acid aminoacid_player,
   sf::Text &player_AA);
 
+void draw_text(std::string text,
+  sf::Vector2f position,
+  sf::RenderWindow &window,
+  sf::Color color,
+  int size);
+
 void minus_player(
   int &player_amount);
 
@@ -30,12 +36,5 @@ void menu_choose_player_amount(
   bool &menu_players,
   bool &menu_amino_acids,
   int argc);
-
-void draw_player_text(
-  std::string text,
-  sf::Vector2f position,
-  sf::RenderWindow &window,
-  sf::Color color);
-
 
 #endif // MENU_H

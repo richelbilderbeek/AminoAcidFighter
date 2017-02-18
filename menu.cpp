@@ -1,23 +1,5 @@
 #include "menu.h"
 
-void draw_player_text(
-  std::string text,
-  sf::Vector2f position,
-  sf::RenderWindow &window,
-  sf::Color color)
-{
-  sf::Font font;
-  font.loadFromFile("arial.ttf");
-
-  sf::Text player_text;
-  player_text.setFont(font);
-  player_text.setPosition(position);
-  player_text.setColor(color);
-  player_text.setString(text);
-  player_text.setCharacterSize(35);
-  window.draw(player_text);
-}
-
 void change_AA_up(
   amino_acid &aminoacid,
   sf::Text &player_AA_text,
@@ -161,6 +143,25 @@ void change_amino_name(
   }
 }
 
+void draw_text(
+  std::string text,
+  sf::Vector2f position,
+  sf::RenderWindow &window,
+  sf::Color color,
+  int size)
+{
+  sf::Font font;
+  font.loadFromFile("arial.ttf");
+
+  sf::Text player_text;
+  player_text.setFont(font);
+  player_text.setPosition(position);
+  player_text.setColor(color);
+  player_text.setString(text);
+  player_text.setCharacterSize(size);
+  window.draw(player_text);
+}
+
 void minus_player(
   int &player_amount)
 {
@@ -280,13 +281,15 @@ void menu_choose_aminoacid(
       }
     }
 
+    const int char_size = 35;
+
     window.clear(sf::Color(128,128,128));
     window.draw(start);
 
-    draw_player_text("Player 1", sf::Vector2f(10, 5), window, sf::Color::Magenta);
-    draw_player_text("Player 2", sf::Vector2f(350, 5), window, sf::Color::Yellow);
-    draw_player_text("Player 3", sf::Vector2f(10, 545), window, sf::Color::Green);
-    draw_player_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red);
+    draw_text("Player 1", sf::Vector2f(10 , 5)  , window, sf::Color::Magenta, char_size);
+    draw_text("Player 2", sf::Vector2f(350, 5)  , window, sf::Color::Yellow , char_size);
+    draw_text("Player 3", sf::Vector2f(10 , 545), window, sf::Color::Green  , char_size);
+    draw_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red    , char_size);
 
     window.draw(player_one_AA_text);
     window.draw(player_two_AA_text);
@@ -310,37 +313,15 @@ void menu_choose_player_amount(
   bool &menu_amino_acids,
   int argc)
 {
-  sf::Text start;
   sf::Font font;
   font.loadFromFile("arial.ttf");
-  start.setFont(font);
-  start.setPosition(75,150);
-  start.setColor(sf::Color::White);
 
-  window.clear(sf::Color::Black);
-  start.setString("Start Game With");
-  start.setCharacterSize(60);
-
-  sf::Text two_players;
-  two_players.setFont(font);
-  two_players.setPosition(200,250);
-  two_players.setColor(sf::Color::Magenta);
-  two_players.setString("2 Players");
-  two_players.setCharacterSize(50);
-
-  sf::Text three_players;
-  three_players.setFont(font);
-  three_players.setPosition(200,250);
-  three_players.setColor(sf::Color::Yellow);
-  three_players.setString("3 Players");
-  three_players.setCharacterSize(50);
-
-  sf::Text four_players;
-  four_players.setFont(font);
-  four_players.setPosition(200,250);
-  four_players.setColor(sf::Color::Green);
-  four_players.setString("4 Players");
-  four_players.setCharacterSize(50);
+  sf::Text start_text;
+  start_text.setFont(font);
+  start_text.setPosition(75,150);
+  start_text.setColor(sf::Color::White);
+  start_text.setString("Start Game With");
+  start_text.setCharacterSize(60);
 
   sf::Music game_jam;
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
@@ -390,19 +371,23 @@ void menu_choose_player_amount(
         }
       }
 
+      sf::Vector2f player_amount_position = sf::Vector2f(200, 250);
+      const int char_size = 50;
+
+      //Draw everything on screen
       window.clear();
-      window.draw(start);
+      window.draw(start_text);
       if(player_amount == 2)
       {
-        window.draw(two_players);
+        draw_text("2 Players", player_amount_position, window, sf::Color::Magenta, char_size);
       }
       else if(player_amount == 3)
       {
-        window.draw(three_players);
+        draw_text("3 Players", player_amount_position, window, sf::Color::Yellow, char_size);
       }
       else if(player_amount == 4)
       {
-        window.draw(four_players);
+        draw_text("4 Players", player_amount_position, window, sf::Color::Green, char_size);
       }
       assert(player_amount <= 4);
       window.display();
