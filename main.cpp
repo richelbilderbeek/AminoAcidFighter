@@ -1,4 +1,4 @@
-#include <cassert>
+﻿#include <cassert>
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -9,7 +9,13 @@
 #include "menu.h"
 #include "player.h"
 
-void show_game(sf::RenderWindow &window, const int window_size, amino_acid &aminoacid_player1, amino_acid &aminoacid_player2, amino_acid &aminoacid_player3, amino_acid &aminoacid_player4);
+void show_game(
+  sf::RenderWindow &window,
+  const int window_size,
+  amino_acid &aminoacid_player1,
+  amino_acid &aminoacid_player2,
+  amino_acid &aminoacid_player3,
+  amino_acid &aminoacid_player4);
 
 int main(int argc, char * argv[])
 {  
@@ -102,7 +108,8 @@ void show_game(
           break;
         case sf::Event::KeyPressed : active_keys.insert(event.key.code); break;
         case sf::Event::KeyReleased: active_keys.erase (event.key.code); break;
-        //case sf::Event::JoystickButtonPressed: something happens ; break;
+        case sf::Event::JoystickButtonPressed:
+           break;
         default:
           break;
       }
@@ -154,75 +161,102 @@ void show_game(
       bullets.push_back(shoot(player2, window_size));
     }
 
-    //checking the buttons
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///                                                                                                          ///
+    ///                                                                                                          ///
+    ///                                                                                                          ///
+    ///                                                                                                          ///
+    ///                          4                                                    5                          ///
+    ///                                                                                                          ///
+    ///                    `.-:::::::/-`                                        `-/:::::::-.`                    ///
+    ///                `.:::            //-`                                `-//            :::.`                ///
+    ///              `/+/                 -/:-.                          .-:/-                 /+/`              ///
+    ///             .+/                    `.-:--------------------------:-.`          --.--     /+.             ///
+    ///            .:`  --.-----.--         -.`....------------------....`.           :     :     `:.            ///
+    ///           `:  /             \                                                :   3   :      :`           ///
+    ///          `/  :   //:-:-://:  :                  -:////:-                      :     :        /`          ///
+    ///          /` /   /`       `:o  \               ./+++//+++/.              --.--  --.--  --.--  `/          ///
+    ///         :. :   /           -s  :       -:::--/s+        +s/ -:::-      :     :       :     :  .:         ///
+    ///        .:  |  y`     9      y  |      y     :s/          /s:     y    :   2   :     :   1   :  :.        ///
+    ///        /   \   :           .s  /      y  6  /s/    8     /s/  7  y     :     :       :     :    +        ///
+    ///       :.    \   :         -o  /       `////-.+s/        /s+ -////`      --.--  --.--  --.--     .:       ///
+    ///      `/      :  :+:--:--:+/  :                .++/:--:/++.                    :     :            /`      ///
+    ///      /`       \             /                   `-////-`    .----...----.    :   0   :           `/      ///
+    ///     `/         \--.-----.--    :++////+/                  --             --   :     :             /`     ///
+    ///     /`                         -:`    /`:               .:    ://////+:    :.  --.--              `/     ///
+    ///     /                          -:      :.              .:   /o-       -o/   :.                     /     ///
+    ///    -.                     .h---`        `--/y          /   ++           ++   /                     .-    ///
+    ///    /                      /+                y          /  `y`           `y`  /                      /    ///
+    ///    /                      /+                h          /  `y.    10     .y`  /                      /    ///
+    ///   .-                      `y:--.        ---+s          /   :+           o:   /                      -.   ///
+    ///   /                            `/     `:`               /   -+         +-   :                        /   ///
+    ///   /                            /+-    +:                 :.  `.://///:.`  .:                         /   ///
+    ///   /                            -://////-                  .-             -.                          /   ///
+    ///   /                                                         ``---...---``                            /   ///
+    ///   /                                                                                                  /   ///
+    ///   /                              -..-..----..``````````````..----..-..-                              /   ///
+    ///   /                           -...-.```                          ```.-...-                           /   ///
+    ///   /                         ..-.``                                    ``--..                         /   ///
+    ///   :                       ..-.                                            .-..                      `:   ///
+    ///   `/                    .--`                                                `--.                    /`   ///
+    ///    :.                 .-.`                                                    `--.                 .:    ///
+    ///     :.              --.                                                          .--              .:     ///
+    ///      --          /:.`                                                              `.:/          -.      ///
+    ///        .---.---:.                                                                      .:---.---.        ///
+    ///                                                                                                          ///
+    ///                                                                                                          ///
+    ///                                                                                                          ///
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     if(sf::Joystick::isButtonPressed(0, 0))
     {
-        std::cout<< " 0 " << '\n';
+        player3.deccellerate();
     }
-    //A button
     if(sf::Joystick::isButtonPressed(0, 1))
     {
-        std::cout<< " 1 " << '\n';
+        player3.turn_right();
     }
-    //B button
     if(sf::Joystick::isButtonPressed(0, 2))
     {
-        std::cout<< " 2 " << '\n';
+        player3.turn_left();
     }
-    //X button
     if(sf::Joystick::isButtonPressed(0, 3))
     {
-        std::cout<< " 3 " << '\n';
+        player3.accellerate();
     }
-    //Y button
     if(sf::Joystick::isButtonPressed(0, 4))
     {
-        std::cout<< " 4 " << '\n';
+      bullets.push_back(shoot(player3, window_size));
     }
-    //LB button
-    if(sf::Joystick::isButtonPressed(0, 5))
-    {
-        std::cout<< " 5 " << '\n';
-    }
-    //RB button
-    if(sf::Joystick::isButtonPressed(0, 6))
-    {
-        std::cout<< " 6 " << '\n';
-    }
-    //select
-    if(sf::Joystick::isButtonPressed(0, 7))
-    {
-        std::cout << " 7 " << '\n';
-    }
-    //start
-    if(sf::Joystick::isButtonPressed(0, 8))
-    {
-        std::cout<< " 8 " << '\n';
-    }
-    //Xbox
-    if(sf::Joystick::isButtonPressed(0, 9))
-    {
-        std::cout << " 9 " << '\n';
-    }
-    //left stick click
-    if(sf::Joystick::isButtonPressed(0, 10))
-    {
-        std::cout<< " 10 " << '\n';
-    }
-    //right stick click
-    if(sf::Joystick::isButtonPressed(0, 11))
-    {
-        std::cout << " 11 " << '\n';
-    }
-    if(sf::Joystick::isButtonPressed(0, 12))
-    {
-        std::cout<< " 12 " << '\n';
-    }
-    //idk
 
-    //Move players and object
+
+    if(sf::Joystick::isButtonPressed(1, 0))
+    {
+        player4.deccellerate();
+    }
+    if(sf::Joystick::isButtonPressed(1, 1))
+    {
+        player4.turn_right();
+    }
+    if(sf::Joystick::isButtonPressed(1, 2))
+    {
+        player4.turn_left();
+    }
+    if(sf::Joystick::isButtonPressed(1, 3))
+    {
+        player4.accellerate();
+    }
+    if(sf::Joystick::isButtonPressed(1, 4))
+    {
+      bullets.push_back(shoot(player4, window_size));
+    }
+
+    //Move all players and object
     player1.move(window_size);
     player2.move(window_size);
+    player3.move(window_size);
+    player4.move(window_size);
+
     //Move all bullets
     for(auto& bullet : bullets)
     {
