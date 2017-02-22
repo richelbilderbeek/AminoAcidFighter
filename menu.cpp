@@ -172,13 +172,12 @@ void menu_choose_aminoacid(
   sf::RenderWindow &window,
   bool &menu_amino_acids,
   bool &game_screen,
-  int argc)
+  int argc,
+  amino_acid &aminoacid_player1,
+  amino_acid &aminoacid_player2,
+  amino_acid &aminoacid_player3,
+  amino_acid &aminoacid_player4)
 {
-  amino_acid aminoacid_player1 = amino_acid::alanine;
-  amino_acid aminoacid_player2 = amino_acid::alanine;
-  amino_acid aminoacid_player3 = amino_acid::alanine;
-  amino_acid aminoacid_player4 = amino_acid::alanine;
-
   sf::Font font;
   font.loadFromFile("arial.ttf");
 

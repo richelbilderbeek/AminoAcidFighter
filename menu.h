@@ -26,7 +26,11 @@ void menu_choose_aminoacid(
   sf::RenderWindow &window,
   bool &menu_amino_acids,
   bool &game_screen,
-  int argc);
+  int argc,
+  amino_acid &aminoacid_player1,
+  amino_acid &aminoacid_player2,
+  amino_acid &aminoacid_player3,
+  amino_acid &aminoacid_player4);
 
 void menu_choose_player_amount(
   sf::RenderWindow &window,

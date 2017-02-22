@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "player.h"
 
-void show_game(sf::RenderWindow &window, const int window_size);
+void show_game(sf::RenderWindow &window, const int window_size, amino_acid &aminoacid_player1, amino_acid &aminoacid_player2, amino_acid &aminoacid_player3, amino_acid &aminoacid_player4);
 
 int main(int argc, char * argv[])
 {  
@@ -24,38 +24,58 @@ int main(int argc, char * argv[])
     "AminoAcidFighter",
     sf::Style::Titlebar | sf::Style::Close);
 
+  amino_acid aminoacid_player1 = amino_acid::alanine;
+  amino_acid aminoacid_player2 = amino_acid::alanine;
+  amino_acid aminoacid_player3 = amino_acid::alanine;
+  amino_acid aminoacid_player4 = amino_acid::alanine;
   std::vector<bullet> bullets;
 
   while(window.isOpen())
   {
     if(menu_players)
     {
-      menu_choose_player_amount(window, menu_players, menu_amino_acids, argc);
-    }
-    if(game_screen)
-    {
-      show_game(window, window_size);
+      menu_choose_player_amount(
+        window,
+        menu_players,
+        menu_amino_acids, argc);
     }
     if(menu_amino_acids)
     {
-      menu_choose_aminoacid(window, menu_amino_acids, game_screen, argc);
+      menu_choose_aminoacid(
+        window,
+        menu_amino_acids,
+        game_screen,
+        argc,
+        aminoacid_player1,
+        aminoacid_player2,
+        aminoacid_player3,
+        aminoacid_player4);
+    }
+    if(game_screen)
+    {
+      show_game(
+        window,
+        window_size,
+        aminoacid_player1,
+        aminoacid_player2,
+        aminoacid_player3,
+        aminoacid_player4);
     }
   }
 }
 
 void show_game(
   sf::RenderWindow &window,
-  const int window_size)
+  const int window_size,
+  amino_acid &aminoacid_player1,
+  amino_acid &aminoacid_player2,
+  amino_acid &aminoacid_player3,
+  amino_acid &aminoacid_player4)
 {
   const sf::Vector2f start_pos_p1 { 175, 175 };
   const sf::Vector2f start_pos_p2 { 425, 175 };
   const sf::Vector2f start_pos_p3 { 175, 425 };
   const sf::Vector2f start_pos_p4 { 425, 425 };
-
-  const amino_acid aminoacid_player1 = amino_acid::alanine;
-  const amino_acid aminoacid_player2 = amino_acid::alanine;
-  const amino_acid aminoacid_player3 = amino_acid::alanine;
-  const amino_acid aminoacid_player4 = amino_acid::alanine;
 
   player player1 = create_player(aminoacid_player1, start_pos_p1);
   player player2 = create_player(aminoacid_player2, start_pos_p2);
