@@ -1,4 +1,5 @@
-﻿#include <cassert>
+﻿#include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -260,6 +261,7 @@ void play_game(
     }
 
     //Remove all bullets that are out of the screen
+
     for(int i=0; i < static_cast<int>(bullets.size()); ++i)
     {
       sf::Sprite bullet_sprite = bullets[i].get_sprite();

@@ -138,8 +138,8 @@ void change_amino_name(
       player_AA.setString("Valine");
       break;
     }
-    default:
-      assert(!"should not get here");
+    //default:
+      //assert(!"should not get here");
   }
 }
 
@@ -181,41 +181,41 @@ void menu_choose_aminoacid(
   sf::Font font;
   font.loadFromFile("arial.ttf");
 
-  sf::Text player_one_AA_text;
-  player_one_AA_text.setFont(font);
-  player_one_AA_text.setPosition(10,50);
-  player_one_AA_text.setColor(sf::Color::Magenta);
-  player_one_AA_text.setString("Alanine");
-  player_one_AA_text.setCharacterSize(35);
-  sf::Vector2f position_player_one_AA = sf::Vector2f(100, 175);
-  player player_one_AA = create_player(aminoacid_player1, position_player_one_AA);
+  sf::Text player1_AA_text;
+  player1_AA_text.setFont(font);
+  player1_AA_text.setPosition(10,50);
+  player1_AA_text.setColor(sf::Color::Magenta);
+  player1_AA_text.setString("Alanine");
+  player1_AA_text.setCharacterSize(35);
+  sf::Vector2f position_player1_AA = sf::Vector2f(100, 175);
+  player player1_AA = create_player(aminoacid_player1, position_player1_AA);
 
-  sf::Text player_two_AA_text;
-  player_two_AA_text.setFont(font);
-  player_two_AA_text.setPosition(350,50);
-  player_two_AA_text.setColor(sf::Color::Yellow);
-  player_two_AA_text.setString("Alanine");
-  player_two_AA_text.setCharacterSize(35);
-  sf::Vector2f position_player_two_AA = sf::Vector2f(425, 175);
-  player player_two_AA = create_player(aminoacid_player2, position_player_two_AA);
+  sf::Text player2_AA_text;
+  player2_AA_text.setFont(font);
+  player2_AA_text.setPosition(350,50);
+  player2_AA_text.setColor(sf::Color::Yellow);
+  player2_AA_text.setString("Alanine");
+  player2_AA_text.setCharacterSize(35);
+  sf::Vector2f position_player2_AA = sf::Vector2f(425, 175);
+  player player2_AA = create_player(aminoacid_player2, position_player2_AA);
 
-  sf::Text player_three_AA_text;
-  player_three_AA_text.setFont(font);
-  player_three_AA_text.setPosition(10,500);
-  player_three_AA_text.setColor(sf::Color::Green);
-  player_three_AA_text.setString("Alanine");
-  player_three_AA_text.setCharacterSize(35);
-  sf::Vector2f position_player_three_AA = sf::Vector2f(100, 425);
-  player player_three_AA = create_player(aminoacid_player3, position_player_three_AA);
+  sf::Text player3_AA_text;
+  player3_AA_text.setFont(font);
+  player3_AA_text.setPosition(10,500);
+  player3_AA_text.setColor(sf::Color::Green);
+  player3_AA_text.setString("Alanine");
+  player3_AA_text.setCharacterSize(35);
+  sf::Vector2f position_player3_AA = sf::Vector2f(100, 425);
+  player player3_AA = create_player(aminoacid_player3, position_player3_AA);
 
-  sf::Text player_four_AA_text;
-  player_four_AA_text.setFont(font);
-  player_four_AA_text.setPosition(350,500);
-  player_four_AA_text.setColor(sf::Color::Red);
-  player_four_AA_text.setString("Alanine");
-  player_four_AA_text.setCharacterSize(35);
-  sf::Vector2f position_player_four_AA = sf::Vector2f(425, 425);
-  player player_four_AA = create_player(aminoacid_player4, position_player_four_AA);
+  sf::Text player4_AA_text;
+  player4_AA_text.setFont(font);
+  player4_AA_text.setPosition(350,500);
+  player4_AA_text.setColor(sf::Color::Red);
+  player4_AA_text.setString("Alanine");
+  player4_AA_text.setCharacterSize(35);
+  sf::Vector2f position_player4_AA = sf::Vector2f(425, 425);
+  player player4_AA = create_player(aminoacid_player4, position_player4_AA);
 
   sf::Music game_jam;
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
@@ -245,33 +245,33 @@ void menu_choose_aminoacid(
           {
             change_AA_up(
               aminoacid_player1,
-              player_one_AA_text,
-              player_one_AA,
-              position_player_one_AA);
+              player1_AA_text,
+              player1_AA,
+              position_player1_AA);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
           {
             change_AA_down(
               aminoacid_player1,
-              player_one_AA_text,
-              player_one_AA,
-              position_player_one_AA);
+              player1_AA_text,
+              player1_AA,
+              position_player1_AA);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
           {
             change_AA_down(
               aminoacid_player2,
-              player_two_AA_text,
-              player_two_AA,
-              position_player_two_AA);
+              player2_AA_text,
+              player2_AA,
+              position_player2_AA);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
           {
             change_AA_up(
               aminoacid_player2,
-              player_two_AA_text,
-              player_two_AA,
-              position_player_two_AA);
+              player2_AA_text,
+              player2_AA,
+              position_player2_AA);
           }
           //Go to Game
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -293,15 +293,15 @@ void menu_choose_aminoacid(
     draw_text("Player 3", sf::Vector2f(10 , 545), window, sf::Color::Green  , char_size_player);
     draw_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red    , char_size_player);
 
-    window.draw(player_one_AA_text);
-    window.draw(player_two_AA_text);
-    window.draw(player_three_AA_text);
-    window.draw(player_four_AA_text);
+    window.draw(player1_AA_text);
+    window.draw(player2_AA_text);
+    window.draw(player3_AA_text);
+    window.draw(player4_AA_text);
 
-    draw(player_one_AA  , window);
-    draw(player_two_AA  , window);
-    draw(player_three_AA, window);
-    draw(player_four_AA , window);
+    draw(player1_AA  , window);
+    draw(player2_AA  , window);
+    draw(player3_AA, window);
+    draw(player4_AA , window);
 
     assert(player_amount <= 4);
     //window.draw(Amino_acid_choice);

@@ -71,8 +71,9 @@ player create_player(
       return create_tyrosine(m_position);
     case amino_acid::valine:
       return create_valine(m_position);
-    default:
-      assert(!"should not get here");
+      break;
+    //default:
+      //assert(!"should not get here");
   }
   assert(!"should not get here");
 }
