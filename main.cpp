@@ -9,7 +9,7 @@
 #include "menu.h"
 #include "player.h"
 
-void show_game(
+void play_game(
   sf::RenderWindow &window,
   const int window_size,
   amino_acid &aminoacid_player1,
@@ -34,6 +34,7 @@ int main(int argc, char * argv[])
   amino_acid aminoacid_player2 = amino_acid::alanine;
   amino_acid aminoacid_player3 = amino_acid::alanine;
   amino_acid aminoacid_player4 = amino_acid::alanine;
+
   std::vector<bullet> bullets;
 
   while(window.isOpen())
@@ -59,7 +60,7 @@ int main(int argc, char * argv[])
     }
     if(game_screen)
     {
-      show_game(
+      play_game(
         window,
         window_size,
         aminoacid_player1,
@@ -70,7 +71,7 @@ int main(int argc, char * argv[])
   }
 }
 
-void show_game(
+void play_game(
   sf::RenderWindow &window,
   const int window_size,
   amino_acid &aminoacid_player1,
@@ -106,59 +107,56 @@ void show_game(
         case sf::Event::Closed:
           window.close();
           break;
-        case sf::Event::KeyPressed : active_keys.insert(event.key.code); break;
+        case sf::Event::KeyPressed:
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+          {
+            player1.turn_left();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+          {
+            player1.turn_right();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+          {
+            player1.accellerate();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+          {
+            player1.deccellerate();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+          {
+            bullets.push_back(shoot(player1, window_size));
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
+          {
+            player1.stop();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+          {
+            player2.accellerate();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+          {
+            player2.turn_right();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+          {
+            player2.deccellerate();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+          {
+            player2.turn_left();
+          }
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+          {
+            bullets.push_back(shoot(player2, window_size));
+          }
+          break;
         case sf::Event::KeyReleased: active_keys.erase (event.key.code); break;
-        case sf::Event::JoystickButtonPressed:
-           break;
         default:
           break;
       }
-    }
-    //Respond to pressed keys
-
-    if(active_keys.count(sf::Keyboard::Left))
-    {
-      player1.turn_left();
-    }
-    if(active_keys.count(sf::Keyboard::Right))
-    {
-      player1.turn_right();
-    }
-    if(active_keys.count(sf::Keyboard::Up))
-    {
-      player1.accellerate();
-    }
-    if(active_keys.count(sf::Keyboard::Down))
-    {
-      player1.deccellerate();
-    }
-    if(active_keys.count(sf::Keyboard::Space))
-    {
-      bullets.push_back(shoot(player1, window_size));
-    }
-    if(active_keys.count(sf::Keyboard::B))
-    {
-      player1.stop();
-    }
-    if(active_keys.count(sf::Keyboard::W))
-    {
-      player2.accellerate();
-    }
-    if(active_keys.count(sf::Keyboard::D))
-    {
-      player2.turn_right();
-    }
-    if(active_keys.count(sf::Keyboard::S))
-    {
-      player2.deccellerate();
-    }
-    if(active_keys.count(sf::Keyboard::A))
-    {
-      player2.turn_left();
-    }
-    if(active_keys.count(sf::Keyboard::Tab))
-    {
-      bullets.push_back(shoot(player2, window_size));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,6 +206,7 @@ void show_game(
     ///                                                                                                          ///
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // player 3 controls
     if(sf::Joystick::isButtonPressed(0, 0))
     {
         player3.deccellerate();
@@ -229,7 +228,7 @@ void show_game(
       bullets.push_back(shoot(player3, window_size));
     }
 
-
+    //player 4
     if(sf::Joystick::isButtonPressed(1, 0))
     {
         player4.deccellerate();
