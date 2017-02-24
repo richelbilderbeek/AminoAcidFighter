@@ -21,8 +21,8 @@ void player::accellerate()
 {
   const auto angle_degrees = m_sprite->getRotation() - 30.0;
   const auto angle_radians = angle_degrees * M_PI / 180.0;
-  m_speed_x += std::cos( angle_radians) * 0.01;
-  m_speed_y -= std::sin(-angle_radians) * 0.01;
+  m_speed_x += std::cos( angle_radians) * 0.1;
+  m_speed_y -= std::sin(-angle_radians) * 0.1;
 }
 
 player create_player(
@@ -72,8 +72,6 @@ player create_player(
     case amino_acid::valine:
       return create_valine(m_position);
       break;
-    //default:
-      //assert(!"should not get here");
   }
   assert(!"should not get here");
 }
@@ -522,8 +520,8 @@ void player::deccellerate()
 {
   const auto angle_degrees = m_sprite->getRotation() - 30.0;
   const auto angle_radians = angle_degrees * M_PI / 180.0;
-  m_speed_x -= std::cos( angle_radians) * 0.01;
-  m_speed_y += std::sin(-angle_radians) * 0.01;
+  m_speed_x -= std::cos( angle_radians) * 0.1;
+  m_speed_y += std::sin(-angle_radians) * 0.1;
 }
 
 void draw(
@@ -585,8 +583,8 @@ bullet shoot(
   sf::Vector2f position = { x_shooter, y_shooter};
   double angle_deg = glycine_rot_degree + 110.0;
   double angle_rad = angle_deg * M_PI / 180;
-  const double speed_x{ std::sin(angle_rad) * 0.05};
-  const double speed_y{-std::cos(angle_rad) * 0.05};
+  const double speed_x{ std::sin(angle_rad) * 1.5};
+  const double speed_y{-std::cos(angle_rad) * 1.5};
   return bullet(10, position, speed_x, speed_y, window_size);
 }
 
@@ -599,12 +597,12 @@ void player::stop()
 
 void player::turn_left()
 {
-  m_turn_speed -= 0.01;
+  m_turn_speed -= 0.1;
   //setRotation(getRotation() - 5.0);
 }
 
 void player::turn_right()
 {
-  m_turn_speed += 0.01;
+  m_turn_speed += 0.1;
   //setRotation(getRotation() + 5.0);
 }

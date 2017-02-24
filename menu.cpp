@@ -138,8 +138,6 @@ void change_amino_name(
       player_AA.setString("Valine");
       break;
     }
-    //default:
-      //assert(!"should not get here");
   }
 }
 
@@ -220,7 +218,7 @@ void menu_choose_aminoacid(
   sf::Music game_jam;
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
   {
-    //error
+    std::cout << "Could not find tune";
   }
   game_jam.setPlayingOffset(sf::seconds(2));
   game_jam.setVolume(50);
@@ -318,7 +316,7 @@ void menu_choose_player_amount(
   sf::Music game_jam;
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
   {
-    //error
+    std::cout << "Could not find tune";
   }
   game_jam.setPlayingOffset(sf::seconds(2));
   game_jam.setVolume(50);
@@ -339,19 +337,15 @@ void menu_choose_player_amount(
         case sf::Event::Closed: window.close(); break;
         case sf::Event::KeyPressed:
         {
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
+             player_amount < 4)
           {
-            if(player_amount < 4)
-            {
-              plus_player(player_amount);
-            }
+            plus_player(player_amount);
           }
-          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+          if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
+             player_amount > 2)
           {
-            if(player_amount > 2)
-            {
-              minus_player(player_amount);
-            }
+            minus_player(player_amount);
           }
           //Go to AA choice menu
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
