@@ -573,21 +573,21 @@ void respond_to_joystick(
   int window_size)
 {
   // player 3 controls
-  if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); }
-  if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; }
-  if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; }
-  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accellerate() ; }
-  if(sf::Joystick::isButtonPressed(0, 4))
+  if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); } // A button
+  if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; } // B button
+  if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
+  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accellerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(0, 4)) // LB button
   {
     bullets.push_back(shoot(player3, window_size));
   }
 
   //player 4 controls
-  if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); }
-  if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; }
-  if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; }
-  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accellerate() ; }
-  if(sf::Joystick::isButtonPressed(1, 4))
+  if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); } // A button
+  if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; } // B button
+  if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
+  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accellerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(1, 4)) // LB button
   {
     bullets.push_back(shoot(player4, window_size));
   }
