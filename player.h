@@ -74,6 +74,18 @@ void draw(
   player p,
   sf::RenderWindow &window);
 
+void respond_to_joystick(
+  player &player3,
+  player &player4,
+  std::vector<bullet> &bullets,
+  int window_size);
+
+void respond_to_key(
+  player &player1,
+  player &player2,
+  std::vector<bullet> &bullets,
+  int window_size);
+
 bullet shoot(
   const player& player1,
   const int window_size);
