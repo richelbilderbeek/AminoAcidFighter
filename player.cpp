@@ -31,46 +31,26 @@ player create_player(
 {
   switch(aminoacid)
   {
-    case amino_acid::alanine:
-      return create_alanine(m_position);
-    case amino_acid::arginine:
-      return create_arginine(m_position);
-    case amino_acid::asparagine:
-      return create_asparagine(m_position);
-    case amino_acid::aspartic_acid:
-      return create_aspartic_acid(m_position);
-    case amino_acid::cysteine:
-      return create_cysteine(m_position);
-    case amino_acid::glutamic_acid:
-      return create_glutamic_acid(m_position);
-    case amino_acid::glutamine:
-      return create_glutamine(m_position);
-    case amino_acid::glycine:
-      return create_glycine(m_position);
-    case amino_acid::histidine:
-      return create_histidine(m_position);
-    case amino_acid::isoleucine:
-      return create_isoleucine(m_position);
-    case amino_acid::leucine:
-      return create_leucine(m_position);
-    case amino_acid::lysine:
-      return create_lysine(m_position);
-    case amino_acid::methionine:
-      return create_methionine(m_position);
-    case amino_acid::phenylalanine:
-      return create_phenylalanine(m_position);
-    case amino_acid::proline:
-      return create_proline(m_position);
-    case amino_acid::serine:
-      return create_serine(m_position);
-    case amino_acid::threonine:
-      return create_threonine(m_position);
-    case amino_acid::tryptophan:
-      return create_tryptophan(m_position);
-    case amino_acid::tyrosine:
-      return create_tyrosine(m_position);
-    case amino_acid::valine:
-      return create_valine(m_position);
+    case amino_acid::alanine:       return create_alanine      (m_position);
+    case amino_acid::arginine:      return create_arginine     (m_position);
+    case amino_acid::asparagine:    return create_asparagine   (m_position);
+    case amino_acid::aspartic_acid: return create_aspartic_acid(m_position);
+    case amino_acid::cysteine:      return create_cysteine     (m_position);
+    case amino_acid::glutamic_acid: return create_glutamic_acid(m_position);
+    case amino_acid::glutamine:     return create_glutamine    (m_position);
+    case amino_acid::glycine:       return create_glycine      (m_position);
+    case amino_acid::histidine:     return create_histidine    (m_position);
+    case amino_acid::isoleucine:    return create_isoleucine   (m_position);
+    case amino_acid::leucine:       return create_leucine      (m_position);
+    case amino_acid::lysine:        return create_lysine       (m_position);
+    case amino_acid::methionine:    return create_methionine   (m_position);
+    case amino_acid::phenylalanine: return create_phenylalanine(m_position);
+    case amino_acid::proline:       return create_proline      (m_position);
+    case amino_acid::serine:        return create_serine       (m_position);
+    case amino_acid::threonine:     return create_threonine    (m_position);
+    case amino_acid::tryptophan:    return create_tryptophan   (m_position);
+    case amino_acid::tyrosine:      return create_tyrosine     (m_position);
+    case amino_acid::valine:        return create_valine       (m_position);
       break;
   }
   assert(!"should not get here");
@@ -566,7 +546,7 @@ void player::move(const int m_window_size)
   }
 }
 
-void respond_to_joystick(
+void respond_to_joystick( //!OCLINT cannot simplify this even more
   player &player3,
   player &player4,
   std::vector<bullet> &bullets,
@@ -593,7 +573,7 @@ void respond_to_joystick(
   }
 }
 
-void respond_to_key(
+void respond_to_key( //!OCLINT cannot simplify this even more
   player &player1,
   player &player2,
   std::vector<bullet> &bullets,
@@ -651,11 +631,9 @@ void player::stop()
 void player::turn_left()
 {
   m_turn_speed -= 0.1;
-  //setRotation(getRotation() - 5.0);
 }
 
 void player::turn_right()
 {
   m_turn_speed += 0.1;
-  //setRotation(getRotation() + 5.0);
 }

@@ -10,14 +10,7 @@
 #include "menu.h"
 #include "player.h"
 
-void check_game_state(amino_acid &aminoacid_player1,
-  amino_acid &aminoacid_player2,
-  amino_acid &aminoacid_player3,
-  amino_acid &aminoacid_player4,
-  sf::RenderWindow &window,
-  bool menu_players,
-  bool menu_amino_acids,
-  bool game_screen,
+void check_game_state(sf::RenderWindow &window,
   int window_size,
   int argc);
 
@@ -31,10 +24,6 @@ void play_game(
 
 int main(int argc, char * argv[])
 {  
-  bool menu_players = 1;
-  bool menu_amino_acids = 0;
-  bool game_screen = 0;
-
   const int window_size = 600;
 
   sf::RenderWindow window(
@@ -44,39 +33,29 @@ int main(int argc, char * argv[])
 
   window.setFramerateLimit(60);
 
-  amino_acid aminoacid_player1 = amino_acid::alanine;
-  amino_acid aminoacid_player2 = amino_acid::alanine;
-  amino_acid aminoacid_player3 = amino_acid::alanine;
-  amino_acid aminoacid_player4 = amino_acid::alanine;
-
   while(window.isOpen())
   {
     check_game_state(
-      aminoacid_player1,
-      aminoacid_player2,
-      aminoacid_player3,
-      aminoacid_player4,
       window,
-      menu_players,
-      menu_amino_acids,
-      game_screen,
       window_size,
       argc);
   }
 }
 
 void check_game_state(
-  amino_acid &aminoacid_player1,
-  amino_acid &aminoacid_player2,
-  amino_acid &aminoacid_player3,
-  amino_acid &aminoacid_player4,
   sf::RenderWindow &window,
-  bool menu_players,
-  bool menu_amino_acids,
-  bool game_screen,
   int window_size,
   int argc)
 {
+  bool menu_players = 1;
+  bool menu_amino_acids = 0;
+  bool game_screen = 0;
+
+  amino_acid aminoacid_player1 = amino_acid::alanine;
+  amino_acid aminoacid_player2 = amino_acid::alanine;
+  amino_acid aminoacid_player3 = amino_acid::alanine;
+  amino_acid aminoacid_player4 = amino_acid::alanine;
+
   if(menu_players)
   {
     menu_choose_player_amount(
@@ -150,6 +129,7 @@ void play_game(
             player2,
             bullets,
             window_size);
+          break;
         case sf::Event::JoystickButtonPressed:
           // joystick support for player3 and player4
           respond_to_joystick(
