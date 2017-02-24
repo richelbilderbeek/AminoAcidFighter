@@ -243,19 +243,35 @@ void menu_choose_aminoacid(
         case sf::Event::KeyPressed:
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
           {
-            change_AA_up(aminoacid_player1, player_one_AA_text, player_one_AA, position_player_one_AA);
+            change_AA_up(
+              aminoacid_player1,
+              player_one_AA_text,
+              player_one_AA,
+              position_player_one_AA);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
           {
-            change_AA_down(aminoacid_player1, player_one_AA_text, player_one_AA, position_player_one_AA);
+            change_AA_down(
+              aminoacid_player1,
+              player_one_AA_text,
+              player_one_AA,
+              position_player_one_AA);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
           {
-            change_AA_down(aminoacid_player2, player_two_AA_text, player_two_AA, position_player_two_AA);
+            change_AA_down(
+              aminoacid_player2,
+              player_two_AA_text,
+              player_two_AA,
+              position_player_two_AA);
           }
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
           {
-            change_AA_up(aminoacid_player2, player_two_AA_text, player_two_AA, position_player_two_AA);
+            change_AA_up(
+              aminoacid_player2,
+              player_two_AA_text,
+              player_two_AA,
+              position_player_two_AA);
           }
           //Go to Game
           if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
