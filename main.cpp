@@ -29,6 +29,12 @@ void play_game(
   amino_acid &aminoacid_player3,
   amino_acid &aminoacid_player4);
 
+void respond_to_joystick(
+  player &player3,
+  player &player4,
+  std::vector<bullet> &bullets,
+  int window_size);
+
 void respond_to_key(
   player &player1,
   player &player2,
@@ -54,8 +60,6 @@ int main(int argc, char * argv[])
   amino_acid aminoacid_player2 = amino_acid::alanine;
   amino_acid aminoacid_player3 = amino_acid::alanine;
   amino_acid aminoacid_player4 = amino_acid::alanine;
-
-  std::vector<bullet> bullets;
 
   while(window.isOpen())
   {
@@ -159,13 +163,40 @@ void check_game_state(
   }
 }
 
+void respond_to_joystick(
+  player &player3,
+  player &player4,
+  std::vector<bullet> &bullets,
+  int window_size)
+{
+  // player 3 controls
+  if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); }
+  if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; }
+  if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; }
+  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accellerate() ; }
+  if(sf::Joystick::isButtonPressed(0, 4))
+  {
+    bullets.push_back(shoot(player3, window_size));
+  }
+
+  //player 4 controls
+  if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); }
+  if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; }
+  if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; }
+  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accellerate() ; }
+  if(sf::Joystick::isButtonPressed(1, 4))
+  {
+    bullets.push_back(shoot(player4, window_size));
+  }
+}
+
 void respond_to_key(
   player &player1,
   player &player2,
   std::vector<bullet> &bullets,
   int window_size)
 {
-  // player 1 controls
+  // player1 controls
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { player1.turn_left()   ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { player1.turn_right()  ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accellerate() ; }
@@ -174,7 +205,7 @@ void respond_to_key(
   {
     bullets.push_back(shoot(player1, window_size));
   }
-  // player two controls
+  // player2 controls
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { player2.accellerate() ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { player2.turn_right()  ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { player2.deccellerate(); }
@@ -184,7 +215,6 @@ void respond_to_key(
     bullets.push_back(shoot(player2, window_size));
   }
 }
-
 
 void play_game(
   sf::RenderWindow &window,
@@ -222,9 +252,17 @@ void play_game(
           window.close();
           break;
         case sf::Event::KeyPressed:
+          // key support for player1 and player2
           respond_to_key(
             player1,
             player2,
+            bullets,
+            window_size);
+        case sf::Event::JoystickButtonPressed:
+          // joystick support for player3 and player4
+          respond_to_joystick(
+            player3,
+            player4,
             bullets,
             window_size);
           break;
@@ -233,27 +271,7 @@ void play_game(
       }
     }
 
-    // player 3 controls
-    if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); }
-    if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; }
-    if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; }
-    if(sf::Joystick::isButtonPressed(0, 3)) { player3.accellerate() ; }
-    if(sf::Joystick::isButtonPressed(0, 4))
-    {
-      bullets.push_back(shoot(player3, window_size));
-    }
-
-    //player 4
-    if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); }
-    if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; }
-    if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; }
-    if(sf::Joystick::isButtonPressed(1, 3)) { player4.accellerate() ; }
-    if(sf::Joystick::isButtonPressed(1, 4))
-    {
-      bullets.push_back(shoot(player4, window_size));
-    }
-
-    //Move all players and object
+    //Move all players
     player1.move(window_size);
     player2.move(window_size);
     player3.move(window_size);
