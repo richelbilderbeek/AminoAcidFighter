@@ -10,9 +10,9 @@ SOURCES += main.cpp \
     menu.cpp
 
 CONFIG += c++14
-QMAKE_CXX = g++-5
-QMAKE_LINK = g++-5
-QMAKE_CC = gcc-5
+QMAKE_CXX = g++
+QMAKE_LINK = g++
+QMAKE_CC = gcc
 QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra
 
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
