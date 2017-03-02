@@ -10,17 +10,17 @@
 #include "menu.h"
 #include "player.h"
 
-void check_game_state(sf::RenderWindow &window,
+void check_game_state(
+  sf::RenderWindow &window,
   int window_size,
   int argc);
 
-void play_game(
-  sf::RenderWindow &window,
+void play_game(sf::RenderWindow &window,
   const int window_size,
   amino_acid &aminoacid_player1,
   amino_acid &aminoacid_player2,
   amino_acid &aminoacid_player3,
-  amino_acid &aminoacid_player4);
+  amino_acid &aminoacid_player4, int player_amount);
 
 int main(int argc, char * argv[])
 {  
@@ -51,6 +51,8 @@ void check_game_state(
   bool menu_amino_acids = 0;
   bool game_screen = 0;
 
+  int player_amount = 2;
+
   amino_acid aminoacid_player1 = amino_acid::alanine;
   amino_acid aminoacid_player2 = amino_acid::alanine;
   amino_acid aminoacid_player3 = amino_acid::alanine;
@@ -61,7 +63,9 @@ void check_game_state(
     menu_choose_player_amount(
       window,
       menu_players,
-      menu_amino_acids, argc);
+      menu_amino_acids,
+      argc,
+      player_amount);
   }
   if(menu_amino_acids)
   {
@@ -73,7 +77,8 @@ void check_game_state(
       aminoacid_player1,
       aminoacid_player2,
       aminoacid_player3,
-      aminoacid_player4);
+      aminoacid_player4,
+      player_amount);
   }
   if(game_screen)
   {
@@ -83,7 +88,8 @@ void check_game_state(
       aminoacid_player1,
       aminoacid_player2,
       aminoacid_player3,
-      aminoacid_player4);
+      aminoacid_player4,
+      player_amount);
   }
 }
 
@@ -93,12 +99,25 @@ void play_game(
   amino_acid &aminoacid_player1,
   amino_acid &aminoacid_player2,
   amino_acid &aminoacid_player3,
-  amino_acid &aminoacid_player4)
+  amino_acid &aminoacid_player4,
+  int player_amount)
 {
   const sf::Vector2f start_pos_p1 { 175, 175 };
   const sf::Vector2f start_pos_p2 { 425, 175 };
   const sf::Vector2f start_pos_p3 { 175, 425 };
   const sf::Vector2f start_pos_p4 { 425, 425 };
+
+  bool player3_joins{false};
+  if(player_amount == 3)
+  {
+    player3_joins = true;
+  }
+  bool player4_joins{false};
+  if(player_amount == 4)
+  {
+    player3_joins = true;
+    player4_joins = true;
+  }
 
   player player1 = create_player(aminoacid_player1, start_pos_p1);
   player player2 = create_player(aminoacid_player2, start_pos_p2);
@@ -160,8 +179,14 @@ void play_game(
     window.clear(sf::Color(128,128,128));
     draw(player1, window);
     draw(player2, window);
-    draw(player3, window);
-    draw(player4, window);
+    if(player3_joins)
+    {
+      draw(player3, window);
+    }
+    if(player4_joins)
+    {
+      draw(player4, window);
+    }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();
   }

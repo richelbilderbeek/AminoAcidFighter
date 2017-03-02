@@ -30,13 +30,15 @@ void menu_choose_aminoacid(
   amino_acid &aminoacid_player1,
   amino_acid &aminoacid_player2,
   amino_acid &aminoacid_player3,
-  amino_acid &aminoacid_player4);
+  amino_acid &aminoacid_player4,
+  int player_amount);
 
 void menu_choose_player_amount(
   sf::RenderWindow &window,
   bool &menu_players,
   bool &menu_amino_acids,
-  int argc);
+  int argc,
+  int &player_amount);
 
 void plus_player(
   int &player_amount);

@@ -51,7 +51,6 @@ player create_player(
     case amino_acid::tryptophan:    return create_tryptophan   (m_position);
     case amino_acid::tyrosine:      return create_tyrosine     (m_position);
     case amino_acid::valine:        return create_valine       (m_position);
-      break;
   }
   assert(!"should not get here");
 }
@@ -72,7 +71,8 @@ player create_alanine(
   const double x_ratio_origin = 326.0/781.0;
   const double y_ratio_origin = 362.0/640.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/103.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -94,7 +94,7 @@ player create_arginine(
   const double x_ratio_origin = 231.0/543.0;
   const double y_ratio_origin = 730.0/921.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  m_sprite->setScale(sf::Vector2f(0.12, 0.12));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -116,7 +116,8 @@ player create_asparagine(
   const double x_ratio_origin = 286.0/675.0;
   const double y_ratio_origin = 502.0/740.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/88.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -138,7 +139,8 @@ player create_aspartic_acid(
   const double x_ratio_origin = 314.0/743.0;
   const double y_ratio_origin = 411.0/673.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/97.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -160,7 +162,8 @@ player create_cysteine(
   const double x_ratio_origin = 315.0/743.0;
   const double y_ratio_origin = 412.0/673.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/97.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -182,7 +185,8 @@ player create_glutamic_acid(
   const double x_ratio_origin = 285.0/674.0;
   const double y_ratio_origin = 504.0/741.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/88.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -198,13 +202,14 @@ player create_glutamine(
   auto x = m_texture->getSize().x;
   auto y = m_texture->getSize().y;
 
-  //total size picture in pixels = 548;805 (check in picture)
-  //origin of molecule in pixels = 264;585 (check in picture)
-  //origin is set 264/548;585/805
-  const double x_ratio_origin = 264.0/548.0;
-  const double y_ratio_origin = 585.0/805.0;
+  //total size picture in pixels = 607;805 (check in picture)
+  //origin of molecule in pixels = 249;586 (check in picture)
+  //origin is set 249/607;586/805
+  const double x_ratio_origin = 249.0/607.0;
+  const double y_ratio_origin = 586.0/805.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/81.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -226,7 +231,8 @@ player create_glycine(
   const double x_ratio_origin = 336.0/792.0;
   const double y_ratio_origin = 172.0/451.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/103.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -248,7 +254,8 @@ player create_histidine(
   const double x_ratio_origin = 266.0/624.0;
   const double y_ratio_origin = 580.0/801.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/81.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -270,7 +277,8 @@ player create_isoleucine(
   const double x_ratio_origin = 282.0/669.0;
   const double y_ratio_origin = 512.0/746.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/87.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -292,7 +300,8 @@ player create_leucine(
   const double x_ratio_origin = 272.0/660.0;
   const double y_ratio_origin = 504.0/741.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/88.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -314,7 +323,8 @@ player create_lysine(
   const double x_ratio_origin = 246.0/578.0;
   const double y_ratio_origin = 663.0/865.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/76.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -336,7 +346,8 @@ player create_methionine(
   const double x_ratio_origin = 253.0/597.0;
   const double y_ratio_origin = 628.0/838.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/78.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -358,7 +369,8 @@ player create_phenylalanine(
   const double x_ratio_origin = 243.0/587.0;
   const double y_ratio_origin = 623.0/832.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/78.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -380,7 +392,8 @@ player create_proline(
   const double x_ratio_origin = 384.0/805.0;
   const double y_ratio_origin = 364.0/621.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/95.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -402,7 +415,8 @@ player create_serine(
   const double x_ratio_origin = 315.0/742.0;
   const double y_ratio_origin = 412.0/673.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/97.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -424,7 +438,8 @@ player create_threonine(
   const double x_ratio_origin = 315.0/745.0;
   const double y_ratio_origin = 408.0/670.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/97.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -446,7 +461,8 @@ player create_tryptophan(
   const double x_ratio_origin = 377.0/673.0;
   const double y_ratio_origin = 560.0/742.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/67.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -468,7 +484,8 @@ player create_tyrosine(
   const double x_ratio_origin = 235.0/568.0;
   const double y_ratio_origin = 657.0/862.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/76.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -490,7 +507,8 @@ player create_valine(
   const double x_ratio_origin = 315.0/745.0;
   const double y_ratio_origin = 409.0/670.0;
   m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.1, 0.1));
+  double scale = 0.12*(70.0/97.0);
+  m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(m_position);
   return player(m_position, m_sprite, m_texture);
@@ -589,10 +607,10 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     bullets.push_back(shoot(player1, window_size));
   }
   // player2 controls
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { player2.accellerate() ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { player2.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { player2.deccellerate(); }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { player2.turn_left()   ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accellerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { player2.turn_right()  ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.deccellerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { player2.turn_left()   ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
   {
     bullets.push_back(shoot(player2, window_size));
