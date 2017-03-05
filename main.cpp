@@ -5,14 +5,15 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "game_state.h"
+#include "program_state.h"
 #include "amino_acid.h"
 #include "bullet.h"
 #include "menu.h"
 #include "player.h"
 
 int main(int argc, char * argv[])
-{  
+{
+
   const int window_size = 600;
 
   sf::RenderWindow window(

@@ -8,7 +8,7 @@ SOURCES += main.cpp \
     bullet.cpp \
     player.cpp \
     menu.cpp \
-    game_state.cpp
+    program_state.cpp
 
 CONFIG += c++14
 QMAKE_CXX = g++
@@ -44,4 +44,4 @@ HEADERS += \
     bullet.h \
     player.h \
     menu.h \
-    game_state.h
+    program_state.h

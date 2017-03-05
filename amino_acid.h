@@ -1,6 +1,8 @@
 #ifndef AMINO_ACID_H
 #define AMINO_ACID_H
 
+#include <string>
+
 enum class amino_acid
 {
   alanine,
@@ -24,5 +26,7 @@ enum class amino_acid
   tyrosine,
   valine
 };
+
+std::string to_str(const amino_acid a) noexcept;
 
 #endif // AMINO_ACID_H

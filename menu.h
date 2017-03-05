@@ -8,6 +8,7 @@
 
 #include "amino_acid.h"
 #include "player.h"
+#include "program_state.h"
 
 void change_amino_name(
   amino_acid aminoacid_player,
@@ -26,13 +27,14 @@ void minus_player(
 std::vector<amino_acid> menu_choose_aminoacid(
   sf::RenderWindow &window,
   const int argc,
-  const std::vector<amino_acid>& players);
+  std::vector<amino_acid> players);
 
+///Menu for selecting a number of players
 ///Return chosen number of players
-int menu_choose_player_amount(
+int choose_n_players(
   sf::RenderWindow &window,
   const int argc,
-  const int player_amount);
+  int player_amount);
 
 void play_game(
   sf::RenderWindow &window,
@@ -43,7 +45,12 @@ void play_game(
 void plus_player(
   int &player_amount);
 
-void process_event_select_n_players(const sf::Event& event, sf::RenderWindow& window, int& player_amount, bool& menu_players, bool& menu_amino_acids);
+void process_event_select_n_players(
+  const sf::Event &event,
+  sf::RenderWindow& window,
+  int& player_amount,
+  program_state& state
+);
 
 ///Outer game loop: runs the full program, including the menus
 void run(
