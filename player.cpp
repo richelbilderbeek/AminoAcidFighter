@@ -25,7 +25,7 @@ void player::accellerate()
   m_speed_y -= std::sin(-angle_radians) * 0.1;
 }
 
-player create_player(
+player create_player( //!OCLINT cannot simplify
   amino_acid aminoacid,
   sf::Vector2f m_position)
 {
@@ -52,7 +52,7 @@ player create_player(
     case amino_acid::tyrosine:      return create_tyrosine     (m_position);
     case amino_acid::valine:        return create_valine       (m_position);
   }
-  assert(!"should not get here");
+  assert(!"should not get here"); //!OCLINT accepted idiom
 }
 
 player create_alanine(

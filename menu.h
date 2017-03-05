@@ -22,25 +22,34 @@ void draw_text(std::string text,
 void minus_player(
   int &player_amount);
 
-void menu_choose_aminoacid(
+///Return the selected amino acids
+std::vector<amino_acid> menu_choose_aminoacid(
   sf::RenderWindow &window,
-  bool &menu_amino_acids,
-  bool &game_screen,
-  int argc,
-  amino_acid &aminoacid_player1,
-  amino_acid &aminoacid_player2,
-  amino_acid &aminoacid_player3,
-  amino_acid &aminoacid_player4,
-  int player_amount);
+  const int argc,
+  const std::vector<amino_acid>& players);
 
-void menu_choose_player_amount(
+///Return chosen number of players
+int menu_choose_player_amount(
   sf::RenderWindow &window,
-  bool &menu_players,
-  bool &menu_amino_acids,
-  int argc,
-  int &player_amount);
+  const int argc,
+  const int player_amount);
+
+void play_game(
+  sf::RenderWindow &window,
+  const int window_size,
+  const std::vector<amino_acid>& players
+);
 
 void plus_player(
   int &player_amount);
+
+void process_event_select_n_players(const sf::Event& event, sf::RenderWindow& window, int& player_amount, bool& menu_players, bool& menu_amino_acids);
+
+///Outer game loop: runs the full program, including the menus
+void run(
+  sf::RenderWindow &window,
+  const int window_size,
+  const int argc
+);
 
 #endif // MENU_H
