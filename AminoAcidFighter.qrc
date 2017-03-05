@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/fonts">
+        <file>arial.ttf</file>
+    </qresource>
+    <qresource prefix="/sprites">
+        <file>Pictures/Bullet.png</file>
+        <file>Pictures/AminoAcids/Valine.png</file>
+        <file>Pictures/AminoAcids/Alanine.png</file>
+        <file>Pictures/AminoAcids/Arginine.png</file>
+        <file>Pictures/AminoAcids/Asparagine.png</file>
+        <file>Pictures/AminoAcids/AsparticAcid.png</file>
+        <file>Pictures/AminoAcids/Cysteine.png</file>
+        <file>Pictures/AminoAcids/GlutamicAcid.png</file>
+        <file>Pictures/AminoAcids/Glutamine.png</file>
+        <file>Pictures/AminoAcids/Glycine.png</file>
+        <file>Pictures/AminoAcids/Histidine.png</file>
+        <file>Pictures/AminoAcids/Isoleucine.png</file>
+        <file>Pictures/AminoAcids/Leucine.png</file>
+        <file>Pictures/AminoAcids/Lysine.png</file>
+        <file>Pictures/AminoAcids/Methionine.png</file>
+        <file>Pictures/AminoAcids/Phenylalanine.png</file>
+        <file>Pictures/AminoAcids/Proline.png</file>
+        <file>Pictures/AminoAcids/Serine.png</file>
+        <file>Pictures/AminoAcids/Threonine.png</file>
+        <file>Pictures/AminoAcids/Tryptophan.png</file>
+        <file>Pictures/AminoAcids/Tyrosine.png</file>
+    </qresource>
+</RCC>

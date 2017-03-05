@@ -1,8 +1,4 @@
-TEMPLATE = app
-CONFIG += console
-CONFIG -= app_bundle
-CONFIG -= qt
-
+# Files
 SOURCES += main.cpp \
     amino_acid.cpp \
     bullet.cpp \
@@ -10,13 +6,25 @@ SOURCES += main.cpp \
     menu.cpp \
     program_state.cpp
 
+HEADERS += \
+    amino_acid.h \
+    bullet.h \
+    player.h \
+    menu.h \
+    program_state.h
+
+RESOURCES += \
+    AminoAcidFighter.qrc
+
+# C++14
 CONFIG += c++14
 QMAKE_CXX = g++
 QMAKE_LINK = g++
 QMAKE_CC = gcc
-QMAKE_CXXFLAGS += -std=c++14 -Wall -Wextra
+QMAKE_CXXFLAGS += -std=c++14
 
-LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+# High warning levels
+QMAKE_CXXFLAGS += -Wall -Wextra
 
 # Debug and release mode
 CONFIG += debug_and_release
@@ -39,9 +47,9 @@ CONFIG(debug, debug|release) {
   LIBS += -lubsan
 }
 
-HEADERS += \
-    amino_acid.h \
-    bullet.h \
-    player.h \
-    menu.h \
-    program_state.h
+# QT
+QT += core
+
+# SFML
+LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
