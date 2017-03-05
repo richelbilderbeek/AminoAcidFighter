@@ -10,17 +10,7 @@
 #include "bullet.h"
 #include "menu.h"
 #include "player.h"
-
-///Extract the base of a filename:
-/// /home/richel/hello.txt -> hello.txt
-/// /etc/sudoers -> sudoers
-std::string extract_base(const std::string& s)
-{
-  const auto from = s.find_last_of('/');
-  if (from == std::string::npos) return s;
-  return s.substr(from + 1, s.size() - 1);
-
-}
+#include "helper.h"
 
 void create_fonts()
 {
@@ -80,10 +70,6 @@ void create_resources()
 
 int main(int argc, char * argv[])
 {
-  assert(extract_base("/home/richel/hello.txt") == "hello.txt");
-  assert(extract_base("/etc/sudoers") == "sudoers");
-  assert(extract_base("tmp.txt") == "tmp.txt");
-
   create_resources();
   const int window_size = 600;
 
@@ -99,5 +85,4 @@ int main(int argc, char * argv[])
     window_size,
     argc);
 }
-
 

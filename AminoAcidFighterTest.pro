@@ -1,6 +1,5 @@
 # Files
-SOURCES += main.cpp \
-    helper.cpp
+SOURCES += main_test.cpp helper_test.cpp
 include(AminoAcidFighter.pri)
 
 # C++14
@@ -40,3 +39,5 @@ QT += core
 # SFML
 LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
+# Boost.Test
+LIBS += -lboost_unit_test_framework
