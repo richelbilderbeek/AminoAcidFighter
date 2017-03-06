@@ -182,35 +182,39 @@ std::vector<amino_acid> menu_choose_aminoacid(
       sf::Vector2f(425, 425)
   };
   std::vector<sf::Text> texts;
+
+  const std::vector<sf::Color> text_colors =
   {
-    const std::vector<sf::Color> text_colors =
-    { sf::Color::Magenta,
-        sf::Color::Yellow,
-        sf::Color::Green,
-        sf::Color::Red
-    };
-    std::vector<sf::Vector2f> text_positions =
-    {
-        sf::Vector2f(10,  50),
-        sf::Vector2f(350, 50),
-        sf::Vector2f(10 ,500),
-        sf::Vector2f(350,500)
-    };
-    for(auto i = 0u; i != amino_acids.size(); ++i)
-    {
-      sf::Text text;
-      text.setFont(font);
-      text.setPosition(text_positions[i]);
-      text.setColor(text_colors[i]);
-      text.setString(to_str(amino_acids[i]));
-      text.setCharacterSize(35);
-      texts.push_back(text);
-    }
+    sf::Color::Magenta,
+    sf::Color::Yellow,
+    sf::Color::Green,
+    sf::Color::Red
+  };
+  std::vector<sf::Vector2f> text_AA_positions =
+  {
+    sf::Vector2f(10,  50),
+    sf::Vector2f(350, 50),
+    sf::Vector2f(10 ,500),
+    sf::Vector2f(350,500)
+  };
+  for(auto i = 0u; i != amino_acids.size(); ++i)
+  {
+    sf::Text text;
+    text.setFont(font);
+    text.setPosition(text_AA_positions[i]);
+    text.setColor(text_colors[i]);
+    text.setString(to_str(amino_acids[i]));
+    text.setCharacterSize(35);
+    texts.push_back(text);
   }
+
   std::vector<player> players;
   for (int i{0}; i != n_amino_acids; ++i)
   {
-    players.push_back(create_player(amino_acids[i], player_positions[i]));
+    players.push_back(
+      create_player(
+        amino_acids[i],
+        player_positions[i]));
   }
 
   sf::Music game_jam;
@@ -322,29 +326,32 @@ std::vector<amino_acid> menu_choose_aminoacid(
 
     //Draw everything on screen
     window.clear(sf::Color(128,128,128));
-    draw_text("Choose Your Amino Acid", sf::Vector2f(140, 280), window, sf::Color::White, 30);
+    draw_text(
+      "Choose Your Amino Acid",
+      sf::Vector2f(140, 280),
+      window,
+      sf::Color::White,
+      30);
+
+    std::vector<sf::Vector2f> text_player_positions =
+    {
+      sf::Vector2f(10 ,   5),
+      sf::Vector2f(350,   5),
+      sf::Vector2f(10 , 545),
+      sf::Vector2f(350, 545)
+    };
 
     const int char_size_player = 35;
-    draw_text("Player 1", sf::Vector2f(10 , 5)  , window, sf::Color::Magenta, char_size_player);
-    draw(players[0], window);
-    window.draw(texts[0]);
-
-    draw_text("Player 2", sf::Vector2f(350, 5)  , window, sf::Color::Yellow , char_size_player);
-    draw(players[1], window);
-    window.draw(texts[1]);
-
-    if(amino_acids.size() >= 3)
+    for(auto i = 0u; i != players.size(); ++i)
     {
-      draw_text("Player 3", sf::Vector2f(10 , 545), window, sf::Color::Green  , char_size_player);
-      window.draw(texts[2]);
-      draw(players[2], window);
-    }
-
-    if(amino_acids.size() >= 4)
-    {
-      draw_text("Player 4", sf::Vector2f(350, 545), window, sf::Color::Red    , char_size_player);
-      window.draw(texts[3]);
-      draw(players[3], window);
+      draw_text(
+        "Player " + std::to_string(i + 1),
+        text_player_positions[i],
+        window,
+        text_colors[i],
+        char_size_player);
+      draw(players[i], window);
+      window.draw(texts[i]);
     }
 
     window.display();
