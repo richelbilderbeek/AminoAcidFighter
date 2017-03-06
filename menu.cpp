@@ -183,7 +183,12 @@ std::vector<amino_acid> menu_choose_aminoacid(
   };
   std::vector<sf::Text> texts;
   {
-    const std::vector<sf::Color> text_colors = { sf::Color::Magenta, sf::Color::Yellow, sf::Color::Green, sf::Color::Red };
+    const std::vector<sf::Color> text_colors =
+    { sf::Color::Magenta,
+        sf::Color::Yellow,
+        sf::Color::Green,
+        sf::Color::Red
+    };
     std::vector<sf::Vector2f> text_positions =
     {
         sf::Vector2f(10,  50),
@@ -191,7 +196,7 @@ std::vector<amino_acid> menu_choose_aminoacid(
         sf::Vector2f(10 ,500),
         sf::Vector2f(350,500)
     };
-    for (int i{0}; i!=4; ++i)
+    for (int i{0}; i != amino_acids.size(); ++i)
     {
       sf::Text text;
       text.setFont(font);
@@ -203,7 +208,7 @@ std::vector<amino_acid> menu_choose_aminoacid(
     }
   }
   std::vector<player> players;
-  for (int i{0}; i!=n_amino_acids; ++i)
+  for (int i{0}; i != n_amino_acids; ++i)
   {
     players.push_back(create_player(amino_acids[i], player_positions[i]));
   }
