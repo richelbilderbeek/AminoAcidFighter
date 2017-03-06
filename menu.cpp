@@ -196,7 +196,7 @@ std::vector<amino_acid> menu_choose_aminoacid(
         sf::Vector2f(10 ,500),
         sf::Vector2f(350,500)
     };
-    for (int i{0}; i != amino_acids.size(); ++i)
+    for(int i{0}; i != amino_acids.size(); ++i)
     {
       sf::Text text;
       text.setFont(font);
@@ -502,18 +502,22 @@ void play_game(
   const std::vector<amino_acid>& amino_acids
 )
 {
-  const sf::Vector2f start_pos_p1 { 175, 175 };
-  const sf::Vector2f start_pos_p2 { 425, 175 };
-  const sf::Vector2f start_pos_p3 { 175, 425 };
-  const sf::Vector2f start_pos_p4 { 425, 425 };
+  const std::vector<sf::Vector2f> start_positions
+  {
+      sf::Vector2f(175, 175),
+      sf::Vector2f(425, 175),
+      sf::Vector2f(175, 425),
+      sf::Vector2f(425, 425)
+  };
 
   const bool player3_joins{amino_acids.size() >= 3};
   const bool player4_joins{amino_acids.size() >= 4};
 
-  player player1 = create_player(amino_acids[0], start_pos_p1);
-  player player2 = create_player(amino_acids[1], start_pos_p2);
-  player player3 = create_player(amino_acids[2], start_pos_p3);
-  player player4 = create_player(amino_acids[3], start_pos_p4);
+  std::vector<player> players;
+  for(int i{0}; i != amino_acids.size(); ++i)
+  {
+    players.push_back(create_player(amino_acids[i], start_positions[i]));
+  }
 
   std::vector<bullet> bullets;
 
@@ -535,16 +539,16 @@ void play_game(
         case sf::Event::KeyPressed:
           // keyboard support for player1 and player2
           respond_to_key(
-            player1,
-            player2,
+            players[0],
+            players[1],
             bullets,
             window_size);
           break;
         case sf::Event::JoystickButtonPressed:
           // joystick support for player3 and player4
           respond_to_joystick(
-            player3,
-            player4,
+            players[2],
+            players[3],
             bullets,
             window_size);
           break;
@@ -554,10 +558,10 @@ void play_game(
     }
 
     //Move players and bullets
-    player1.move(window_size);
-    player2.move(window_size);
-    player3.move(window_size);
-    player4.move(window_size);
+    for(int i{0}; i != players.size(); ++i)
+    {
+      players[i].move(window_size);
+    }
     for(auto& bullet : bullets) { bullet.move(); }
 
     //Remove all bullets that are out of the screen
@@ -566,10 +570,10 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
-    draw(player1, window);
-    draw(player2, window);
-    if(player3_joins) { draw(player3, window); }
-    if(player4_joins) { draw(player4, window); }
+    draw(players[0], window);
+    draw(players[1], window);
+    if(player3_joins) { draw(players[2], window); }
+    if(player4_joins) { draw(players[3], window); }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();
   }
