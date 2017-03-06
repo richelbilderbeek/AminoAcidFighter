@@ -196,7 +196,7 @@ std::vector<amino_acid> menu_choose_aminoacid(
         sf::Vector2f(10 ,500),
         sf::Vector2f(350,500)
     };
-    for(int i{0}; i != amino_acids.size(); ++i)
+    for(auto i = 0u; i != amino_acids.size(); ++i)
     {
       sf::Text text;
       text.setFont(font);
@@ -459,12 +459,12 @@ void run(
   const int argc)
 {
 
-  program_state s{program_state::choose_n_players};
+  program_state state{program_state::choose_n_players};
   std::vector<amino_acid> players = { amino_acid::alanine, amino_acid::alanine};
 
   while(window.isOpen())
   {
-    switch(s)
+    switch(state)
     {
       case program_state::choose_n_players:
       {
@@ -472,7 +472,7 @@ void run(
           window,
           argc,
           players.size());
-        s = program_state::select_players;
+        state = program_state::select_players;
         players.resize(new_size); //May result in undefined behavior if size is increased
       }
       break;
@@ -482,7 +482,7 @@ void run(
           window,
           argc,
           players);
-        s = program_state::battle;
+        state = program_state::battle;
       }
       break;
       case program_state::battle:
@@ -510,11 +510,8 @@ void play_game(
       sf::Vector2f(425, 425)
   };
 
-  const bool player3_joins{amino_acids.size() >= 3};
-  const bool player4_joins{amino_acids.size() >= 4};
-
   std::vector<player> players;
-  for(int i{0}; i != amino_acids.size(); ++i)
+  for(auto i = 0u; i != amino_acids.size(); ++i)
   {
     players.push_back(create_player(amino_acids[i], start_positions[i]));
   }
@@ -558,7 +555,7 @@ void play_game(
     }
 
     //Move players and bullets
-    for(int i{0}; i != players.size(); ++i)
+    for(auto i = 0u; i != players.size(); ++i)
     {
       players[i].move(window_size);
     }
@@ -570,10 +567,10 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
-    draw(players[0], window);
-    draw(players[1], window);
-    if(player3_joins) { draw(players[2], window); }
-    if(player4_joins) { draw(players[3], window); }
+    for(auto i = 0u; i != players.size(); ++i)
+    {
+      draw(players[i], window);
+    }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();
   }
