@@ -55,6 +55,7 @@ player create_player( //!OCLINT cannot simplify
   assert(!"should not get here"); //!OCLINT accepted idiom
 }
 
+/// all aminoacids have been scaled to the size of arginine
 player create_alanine(
   sf::Vector2f m_position)
 {

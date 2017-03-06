@@ -17,8 +17,9 @@ bullet::bullet(
   static sf::Texture m_texture;
   m_texture.loadFromFile("Bullet.png");
   m_sprite.setTexture(m_texture);
-  m_sprite.setScale(sf::Vector2f(0.1, 0.1));
-
+  /// bullet is scaled to the size of arginine
+  double scale = 0.12*(70.0/96.0);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
   auto x = m_texture.getSize().x;
   auto y = m_texture.getSize().y;
   double ratio = 0.5;

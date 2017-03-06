@@ -1,6 +1,5 @@
 # Files
-SOURCES += main.cpp \
-    helper.cpp
+SOURCES += main.cpp
 include(AminoAcidFighter.pri)
 
 # C++14
