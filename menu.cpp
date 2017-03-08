@@ -389,7 +389,8 @@ void process_event_AA_choice(sf::Event &event,
 {
   switch(event.type)
   {
-    case sf::Event::Closed: window.close(); break;
+    case sf::Event::Closed: window.close();
+      break;
     case sf::Event::KeyPressed:
       //battle
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -426,7 +427,8 @@ void process_event_select_n_players(
 {
   switch(event.type)
   {
-    case sf::Event::Closed: window.close(); break;
+    case sf::Event::Closed: window.close();
+      break;
     case sf::Event::KeyPressed:
     {
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
@@ -444,7 +446,7 @@ void process_event_select_n_players(
       {
         state = program_state::select_players;
       }
-       default:
+     default:
        break;
     }
   }
