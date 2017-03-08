@@ -39,15 +39,13 @@ void remove_bullets(
   std::vector<bullet> &bullets,
   const int window_size)
 {
-  for(int i=0; i < static_cast<int>(bullets.size()); ++i)
-  {
+  for(int i=0; i < static_cast<int>(bullets.size()); ++i) {
     sf::Sprite bullet_sprite = bullets[i].get_sprite();
 
     if(bullet_sprite.getPosition().x < 0 ||
        bullet_sprite.getPosition().x > window_size ||
        bullet_sprite.getPosition().y < 0 ||
-       bullet_sprite.getPosition().y > window_size)
-    {
+       bullet_sprite.getPosition().y > window_size) {
       bullets[i] = bullets.back();
       bullets.pop_back();
       --i;

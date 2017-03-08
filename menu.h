@@ -16,6 +16,12 @@ void change_amino_name(
   sf::Text &player_AA
 );
 
+///Return the selected amino acids
+std::vector<amino_acid> choose_aminoacids(
+  sf::RenderWindow &window,
+  const int argc,
+  std::vector<amino_acid> players);
+
 ///Menu for selecting a number of players
 ///Return chosen number of players
 int choose_n_players(
@@ -38,26 +44,20 @@ void choose_player_keyboard(
   std::array<sf::Vector2f, 4> player_positions
 );
 
-void draw_a_text(std::string text,
+void draw_a_text(
+  std::string text,
   sf::Vector2f position,
   sf::RenderWindow &window,
   sf::Color color,
   int size
 );
 
-void draw_on_screen(
+void draw_AA_choice_screen(
   sf::RenderWindow &window,
   std::vector<player> players,
   std::array<sf::Vector2f, 4> text_player_pos,
   std::array<sf::Color, 4> text_colors,
   std::vector<sf::Text> AA_texts
-);
-
-///Return the selected amino acids
-std::vector<amino_acid> menu_choose_aminoacid(
-  sf::RenderWindow &window,
-  const int argc,
-  std::vector<amino_acid> players
 );
 
 void minus_player(
@@ -72,6 +72,15 @@ void play_game(
 
 void plus_player(
   int &player_amount);
+
+void process_event_AA_choice(
+  sf::Event &event,
+  sf::RenderWindow &window,
+  std::vector<amino_acid> &amino_acids,
+  std::vector<sf::Text> &AA_texts,
+  std::vector<player> &players,
+  std::array<sf::Vector2f, 4> player_positions
+, program_state &state);
 
 void process_event_select_n_players(
   const sf::Event &event,

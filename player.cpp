@@ -29,8 +29,7 @@ player create_player( //!OCLINT cannot simplify
   amino_acid aminoacid,
   sf::Vector2f m_position)
 {
-  switch(aminoacid)
-  {
+  switch(aminoacid) {
     case amino_acid::alanine:       return create_alanine      (m_position);
     case amino_acid::arginine:      return create_arginine     (m_position);
     case amino_acid::asparagine:    return create_asparagine   (m_position);
@@ -576,8 +575,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; } // B button
   if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
   if(sf::Joystick::isButtonPressed(0, 3)) { player3.accellerate() ; } // Y button
-  if(sf::Joystick::isButtonPressed(0, 4)) // LB button
-  {
+  if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
     bullets.push_back(shoot(player3, window_size));
   }
 
@@ -586,8 +584,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; } // B button
   if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
   if(sf::Joystick::isButtonPressed(1, 3)) { player4.accellerate() ; } // Y button
-  if(sf::Joystick::isButtonPressed(1, 4)) // LB button
-  {
+  if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
     bullets.push_back(shoot(player4, window_size));
   }
 }
@@ -603,8 +600,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { player1.turn_right()  ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accellerate() ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.deccellerate(); }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-  {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     bullets.push_back(shoot(player1, window_size));
   }
   // player2 controls
@@ -612,8 +608,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { player2.turn_right()  ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.deccellerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { player2.turn_left()   ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
-  {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
     bullets.push_back(shoot(player2, window_size));
   }
 }

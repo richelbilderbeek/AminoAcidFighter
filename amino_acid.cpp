@@ -3,8 +3,7 @@
 
 std::string to_str(const amino_acid a) noexcept //!OCLINT cannot make this any shorter
 {
-  switch (a)
-  {
+  switch (a) {
     case amino_acid::alanine:       return "Alanine"      ;
     case amino_acid::arginine:      return "Arginine"     ;
     case amino_acid::asparagine:    return "Asparagine"   ;
