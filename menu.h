@@ -79,8 +79,16 @@ void process_event_AA_choice(
   std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &AA_texts,
   std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions
-, program_state &state);
+  std::array<sf::Vector2f, 4> player_positions,
+  program_state &state);
+
+void process_event_game(
+  sf::Event event,
+  sf::RenderWindow &window,
+  std::vector<player> &players,
+  std::vector<bullet> &bullets,
+  const int window_size
+);
 
 void process_event_select_n_players(
   const sf::Event &event,
@@ -108,6 +116,12 @@ std::vector<player> set_players(
   std::array<sf::Vector2f, 4> player_positions
 );
 
+std::vector<player> set_players(
+  std::vector<amino_acid> amino_acids,
+  std::vector<sf::Vector2f> player_positions
+);
+
+std::vector<sf::Vector2f> set_start_positions();
 std::array<sf::Vector2f, 4> set_player_positions     ();
 std::array<sf::Color   , 4> set_text_colors          ();
 std::array<sf::Vector2f, 4> set_text_AA_positions    ();

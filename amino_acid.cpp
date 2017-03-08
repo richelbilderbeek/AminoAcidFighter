@@ -1,7 +1,7 @@
 #include <cassert>
 #include "amino_acid.h"
 
-std::string to_str(const amino_acid a) noexcept //!OCLINT cannot make this any shorter
+std::string to_str( const amino_acid a) noexcept //!OCLINT cannot make this any shorter
 {
   switch (a) {
     case amino_acid::alanine:       return "Alanine"      ;

@@ -30,9 +30,10 @@ void change_AA_down(
   }
 }
 
-void change_amino_name(
+void change_amino_name( //!OCLINT cannot make this any shorter
   amino_acid aminoacid_player,
-  sf::Text &player_AA) {
+  sf::Text &player_AA)
+{
   switch(aminoacid_player) {
     case amino_acid::alanine:       { player_AA.setString("Alanine"      ); break; }
     case amino_acid::arginine:      { player_AA.setString("Arginine"     ); break; }
@@ -299,61 +300,27 @@ void play_game(
   const std::vector<amino_acid>& amino_acids
 )
 {
-  const std::vector<sf::Vector2f> start_positions
-  {
-      sf::Vector2f(175, 175),
-      sf::Vector2f(425, 175),
-      sf::Vector2f(175, 425),
-      sf::Vector2f(425, 425)
-  };
-
-  std::vector<player> players;
-  for(auto i = 0u; i != amino_acids.size(); ++i)
-  {
-    players.push_back(create_player(amino_acids[i], start_positions[i]));
-  }
-
+  const std::vector<sf::Vector2f> start_positions = set_start_positions();
+  std::vector<player> players = set_players(amino_acids, start_positions);
   std::vector<bullet> bullets;
 
-  if(sf::Joystick::isConnected(0))
-  {
+  if(sf::Joystick::isConnected(0)) {
       std::cout << "controller connected" << '\n';
   }
 
-  while(window.isOpen())
-  {
+  while(window.isOpen()) {
     sf::Event event;
-    while(window.pollEvent(event))
-    {
-      switch(event.type)
-      {
-        case sf::Event::Closed:
-          window.close();
-          break;
-        case sf::Event::KeyPressed:
-          // keyboard support for player1 and player2
-          respond_to_key(
-            players[0],
-            players[1],
-            bullets,
-            window_size);
-          break;
-        case sf::Event::JoystickButtonPressed:
-          // joystick support for player3 and player4
-          respond_to_joystick(
-            players[2],
-            players[3],
-            bullets,
-            window_size);
-          break;
-        default:
-          break;
-      }
+    while(window.pollEvent(event)) {
+      process_event_game(
+        event,
+        window,
+        players,
+        bullets,
+        window_size);
     }
 
     //Move players and bullets
-    for(auto i = 0u; i != players.size(); ++i)
-    {
+    for(auto i = 0u; i != players.size(); ++i) {
       players[i].move(window_size);
     }
     for(auto& bullet : bullets) { bullet.move(); }
@@ -364,10 +331,7 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
-    for(auto i = 0u; i != players.size(); ++i)
-    {
-      draw(players[i], window);
-    }
+    for(auto i = 0u; i != players.size(); ++i) { draw(players[i], window); }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();
   }
@@ -387,19 +351,16 @@ void process_event_AA_choice(sf::Event &event,
   std::array<sf::Vector2f, 4> player_positions,
   program_state& state)
 {
-  switch(event.type)
-  {
+  switch(event.type) {
     case sf::Event::Closed: window.close();
       break;
     case sf::Event::KeyPressed:
       //battle
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-      {
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         state = program_state::battle;
       }
       //player 1 and player 2
-      else
-      {
+      else {
         choose_player_keyboard(
         amino_acids,
         AA_texts,
@@ -419,31 +380,57 @@ void process_event_AA_choice(sf::Event &event,
   }
 }
 
+void process_event_game(sf::Event event,
+  sf::RenderWindow &window,
+  std::vector<player> &players,
+  std::vector<bullet> &bullets,
+  const int window_size)
+{
+  switch(event.type) {
+    case sf::Event::Closed:
+      window.close();
+      break;
+    case sf::Event::KeyPressed:
+      // keyboard support for player1 and player2
+      respond_to_key(
+        players[0],
+        players[1],
+        bullets,
+        window_size);
+      break;
+    case sf::Event::JoystickButtonPressed:
+      // joystick support for player3 and player4
+      respond_to_joystick(
+        players[2],
+        players[3],
+        bullets,
+        window_size);
+      break;
+    default:
+      break;
+      }
+}
+
 void process_event_select_n_players(
   const sf::Event &event,
   sf::RenderWindow& window,
   int& player_amount,
   program_state& state)
 {
-  switch(event.type)
-  {
+  switch(event.type) {
     case sf::Event::Closed: window.close();
       break;
-    case sf::Event::KeyPressed:
-    {
+    case sf::Event::KeyPressed: {
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
-         player_amount < 4)
-      {
+         player_amount < 4) {
         plus_player(player_amount);
       }
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
-         player_amount > 2)
-      {
+         player_amount > 2) {
         minus_player(player_amount);
       }
       //Go to AA choice menu
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-      {
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         state = program_state::select_players;
       }
      default:
@@ -461,12 +448,9 @@ void run(
   program_state state{program_state::choose_n_players};
   std::vector<amino_acid> players = { amino_acid::alanine, amino_acid::alanine};
 
-  while(window.isOpen())
-  {
-    switch(state)
-    {
-      case program_state::choose_n_players:
-      {
+  while(window.isOpen()) {
+    switch(state) {
+      case program_state::choose_n_players: {
         const int new_size = choose_n_players(
           window,
           argc,
@@ -475,8 +459,7 @@ void run(
         players.resize(new_size); //May result in undefined behavior if size is increased
       }
       break;
-      case program_state::select_players:
-      {
+      case program_state::select_players: {
         players = choose_aminoacids(
           window,
           argc,
@@ -504,8 +487,7 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<sf::Text> AA_texts;
   const int n_amino_acids = amino_acids.size();
 
-  for(auto i{0}; i != n_amino_acids; ++i)
-  {
+  for(auto i{0}; i != n_amino_acids; ++i) {
     sf::Text text;
     text.setFont(font);
     text.setPosition(text_AA_positions[i]);
@@ -524,8 +506,23 @@ std::vector<player> set_players(
   std::vector<player> players;
   const int n_amino_acids = amino_acids.size();
 
-  for (int i{0}; i != n_amino_acids; ++i)
-  {
+  for (int i{0}; i != n_amino_acids; ++i) {
+    players.push_back(
+      create_player(
+        amino_acids[i],
+        player_positions[i]));
+  }
+  return players;
+}
+
+std::vector<player> set_players(
+  std::vector<amino_acid> amino_acids,
+  std::vector<sf::Vector2f> player_positions)
+{
+  std::vector<player> players;
+  const int n_amino_acids = amino_acids.size();
+
+  for (int i{0}; i != n_amino_acids; ++i) {
     players.push_back(
       create_player(
         amino_acids[i],
@@ -544,6 +541,18 @@ std::array<sf::Vector2f, 4> set_player_positions()
     sf::Vector2f(425, 425)
   };
   return player_positions;
+}
+
+std::vector<sf::Vector2f> set_start_positions()
+{
+  const std::vector<sf::Vector2f> start_positions
+  {
+      sf::Vector2f(175, 175),
+      sf::Vector2f(425, 175),
+      sf::Vector2f(175, 425),
+      sf::Vector2f(425, 425)
+  };
+  return start_positions;
 }
 
 std::array<sf::Vector2f, 4> set_text_AA_positions()
