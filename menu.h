@@ -16,15 +16,41 @@ void change_amino_name(
   sf::Text &player_AA
 );
 
-void draw_text(std::string text,
+///Menu for selecting a number of players
+///Return chosen number of players
+int choose_n_players(
+  sf::RenderWindow &window,
+  const int argc,
+  int player_amount
+);
+
+void choose_player_joystick(
+  std::vector<amino_acid> &amino_acids,
+  std::vector<sf::Text> &texts,
+  std::vector<player> &players,
+  std::array<sf::Vector2f, 4> player_positions
+);
+
+void choose_player_keyboard(
+  std::vector<amino_acid> &amino_acids,
+  std::vector<sf::Text> &texts,
+  std::vector<player> &players,
+  std::array<sf::Vector2f, 4> player_positions
+);
+
+void draw_a_text(std::string text,
   sf::Vector2f position,
   sf::RenderWindow &window,
   sf::Color color,
   int size
 );
 
-void minus_player(
-  int &player_amount
+void draw_on_screen(
+  sf::RenderWindow &window,
+  std::vector<player> players,
+  std::array<sf::Vector2f, 4> text_player_pos,
+  std::array<sf::Color, 4> text_colors,
+  std::vector<sf::Text> AA_texts
 );
 
 ///Return the selected amino acids
@@ -34,12 +60,8 @@ std::vector<amino_acid> menu_choose_aminoacid(
   std::vector<amino_acid> players
 );
 
-///Menu for selecting a number of players
-///Return chosen number of players
-int choose_n_players(
-  sf::RenderWindow &window,
-  const int argc,
-  int player_amount
+void minus_player(
+  int &player_amount
 );
 
 void play_game(
@@ -65,17 +87,15 @@ void run(
   const int argc
 );
 
-void choose_player_joystick(
-  std::vector<amino_acid> &amino_acids,
-  std::vector<sf::Text> &texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions
+std::vector<sf::Text> set_AA_texts(
+  sf::Font &font,
+  std::array<sf::Vector2f, 4> text_AA_positions,
+  std::array<sf::Color, 4> text_colors,
+  std::vector<amino_acid> amino_acids
 );
 
-void choose_player_keyboard(
-  std::vector<amino_acid> &amino_acids,
-  std::vector<sf::Text> &texts,
-  std::vector<player> &players,
+std::vector<player> set_players(
+  std::vector<amino_acid> amino_acids,
   std::array<sf::Vector2f, 4> player_positions
 );
 
