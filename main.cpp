@@ -5,12 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <QFile>
-#include "program_state.h"
+
 #include "amino_acid.h"
 #include "bullet.h"
+#include "helper.h"
 #include "menu.h"
 #include "player.h"
-#include "helper.h"
+#include "program_state.h"
 
 void create_fonts()
 {
