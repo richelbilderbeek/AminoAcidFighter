@@ -321,6 +321,19 @@ void play_game(
     life_bars.push_back(life_bar);
   }
 
+  std::vector<sf::CircleShape> hit_ranges;
+  for(auto i{0u}; i != amino_acids.size(); ++i)
+  {
+    sf::CircleShape hit_range;
+    hit_range.setPosition(start_positions[i]);
+    hit_range.setRadius(35.0);
+    hit_range.setOrigin(sf::Vector2f(35.0, 35.0));
+    hit_range.setOutlineColor(sf::Color::Blue);
+    hit_range.setOutlineThickness(2.0);
+    hit_range.setFillColor(sf::Color::Transparent);
+    hit_ranges.push_back(hit_range);
+  }
+
   if(sf::Joystick::isConnected(0)) {
       std::cout << "controller connected" << '\n';
   }
@@ -341,6 +354,9 @@ void play_game(
       players[i].move(window_size);
     }
     for(auto& bullet : bullets) { bullet.move(); }
+    for(auto i = 0u; i != players.size(); ++i) {
+      hit_ranges[i].setPosition(players[i].get_position() + players[i].get_speed());
+    }
 
     //Remove all bullets that are out of the screen
     remove_bullets(
@@ -349,6 +365,7 @@ void play_game(
 
     window.clear(sf::Color(128,128,128));
     for(auto i{0u}; i != life_bars.size(); ++i) { draw_life_bar(life_bars[i], window); }
+    for(auto i{0u}; i != hit_ranges.size(); ++i) { draw_hit_ranges(hit_ranges[i], window, players[i]); }
     for(auto i{0u}; i != players.size(); ++i) { draw(players[i], window); }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();

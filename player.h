@@ -19,6 +19,7 @@ public:
   auto get_rotation()      const noexcept { return m_sprite->getRotation(); }
   auto get_position()      const noexcept { return m_sprite->getPosition(); }
   const auto& get_sprite() const noexcept { return m_sprite               ; }
+  auto get_speed() { return sf::Vector2f(m_speed_x, m_speed_y); }
   void move(const int m_window_size);
   void set_position(const float x, const float y) noexcept { m_sprite->setPosition(x, y); }
   void set_position(const sf::Vector2f p)         noexcept { m_sprite->setPosition(p)   ; }
@@ -74,6 +75,10 @@ void draw(
   player p,
   sf::RenderWindow &window
 );
+
+void draw_hit_ranges(sf::CircleShape hit_range,
+  sf::RenderWindow &window,
+  player players);
 
 void draw_life_bar(
   sf::RectangleShape life_bars,

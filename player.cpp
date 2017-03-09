@@ -10,7 +10,7 @@ player::player(
     sf::Texture * texture
   )
   : m_HP{},
-    m_hit_range{100},
+    m_hit_range{},
     m_position{position},
     m_speed_x{0.0},
     m_speed_y{0.0},
@@ -155,6 +155,7 @@ player create_cysteine(
   sf::Texture * m_texture = new sf::Texture;
 
   m_texture->loadFromFile("Cysteine.png");
+
   auto x = m_texture->getSize().x;
   auto y = m_texture->getSize().y;
 
@@ -364,7 +365,10 @@ player create_phenylalanine(
   m_texture->loadFromFile("Phenylalanine.png");
   auto x = m_texture->getSize().x;
   auto y = m_texture->getSize().y;
-
+void draw_hit_ranges(
+  sf::CircleShape hit_range,
+  sf::RenderWindow &window
+);
   //total size picture in pixels = 587;832 (check in picture)
   //origin of molecule in pixels = 243;623 (check in picture)
   //origin is set 243;587;623/832
@@ -546,6 +550,31 @@ void draw(
   //Bacl Below player
   s.setPosition(s.getPosition() + sf::Vector2f(-dx, 0));
   window.draw(s);
+}
+
+void draw_hit_ranges(
+  sf::CircleShape hit_range,
+  sf::RenderWindow &window,
+  player players)
+{
+  const int window_size = window.getSize().x;
+
+  //Must we draw the 'shadow' player left or right?
+  const bool must_right{hit_range.getPosition().x < window_size / 2};
+  const int dx = must_right ? window_size : -window_size;
+  const bool must_down{hit_range.getPosition().y < window_size / 2};
+  const int dy = must_down ? window_size : -window_size;
+  //Real position
+  window.draw(hit_range);
+  //Horizontal of player
+  hit_range.setPosition(hit_range.getPosition() + sf::Vector2f(dx, 0));
+  window.draw(hit_range);
+  //Down-Right of player
+  hit_range.setPosition(hit_range.getPosition() + sf::Vector2f(0, dy));
+  window.draw(hit_range);
+  //Bacl Below player
+  hit_range.setPosition(hit_range.getPosition() + sf::Vector2f(-dx, 0));
+  window.draw(hit_range);
 }
 
 void draw_life_bar(
