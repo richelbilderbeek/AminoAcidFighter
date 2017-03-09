@@ -1,12 +1,25 @@
 ﻿#include "menu.h"
 
+/// Get the previous amino acid in the alphabet
+///
+amino_acid change_AA_up(
+  const amino_acid in)
+{
+  const int player = static_cast<int>(in);
+  if (player > 0) {
+    return static_cast<amino_acid>(player - 1);
+  }
+  return in;
+}
+
+/*
 void change_AA_up(
   amino_acid &aminoacid,
   sf::Text &player_AA_text,
   player &player_AA,
   sf::Vector2f position_AA)
 {
-  int player = static_cast<int>(aminoacid);
+  const int player = static_cast<int>(aminoacid);
   if(player > 0) {
     player -= 1;
     aminoacid = static_cast<amino_acid>(player);
@@ -14,6 +27,7 @@ void change_AA_up(
     player_AA = create_player(aminoacid, position_AA);
   }
 }
+*/
 
 void change_AA_down(
   amino_acid &aminoacid,
@@ -170,11 +184,9 @@ void choose_player_keyboard(
 {
   // player 1
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    change_AA_up(
-      amino_acids[0],
-      texts[0],
-      players[0],
-      player_positions[0]);
+    amino_acids[0] = change_AA_up(amino_acids[0]);
+    change_amino_name(amino_acids[0], texts[0]);
+    players[0] = create_player(amino_acids[0], player_positions[0]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
     change_AA_down(
@@ -192,11 +204,9 @@ void choose_player_keyboard(
       player_positions[1]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-    change_AA_up(
-      amino_acids[1],
-      texts[1],
-      players[1],
-      player_positions[1]);
+    amino_acids[1] = change_AA_up(amino_acids[1]);
+    change_amino_name(amino_acids[1], texts[1]);
+    players[1] = create_player(amino_acids[1], player_positions[1]);
   }
 }
 
@@ -209,11 +219,13 @@ void choose_player_joystick(
   // player 3
   if(amino_acids.size() >= 3) {
     if(sf::Joystick::isButtonPressed(0, 3)) { // Y button
+     /* TODO
       change_AA_up(
         amino_acids[2],
         texts[2],
         players[2],
         player_positions[2]);
+      */
     }
     if(sf::Joystick::isButtonPressed(0, 0)) { // A button
       change_AA_down(
@@ -226,11 +238,13 @@ void choose_player_joystick(
   // player 4
   if(amino_acids.size() >= 4) {
     if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
+    /*
       change_AA_up(
         amino_acids[3],
         texts[3],
         players[3],
         player_positions[3]);
+        */
     }
     if(sf::Joystick::isButtonPressed(1, 0)) { // A button
       change_AA_down(
