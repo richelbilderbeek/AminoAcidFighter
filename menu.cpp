@@ -304,6 +304,23 @@ void play_game(
   std::vector<player> players = set_players(amino_acids, start_positions);
   std::vector<bullet> bullets;
 
+  const std::array<sf::Vector2f, 4> life_bar_positions {
+      sf::Vector2f(10 , 10 ),
+      sf::Vector2f(490, 10 ),
+      sf::Vector2f(10 , 580),
+      sf::Vector2f(490, 580)
+  };
+
+  std::vector<sf::RectangleShape> life_bars;
+  for(auto i{0u}; i != amino_acids.size(); ++i)
+  {
+    sf::RectangleShape life_bar;
+    life_bar.setPosition(life_bar_positions[i]);
+    life_bar.setSize(sf::Vector2f(100, 10));
+    life_bar.setFillColor(sf::Color::Red);
+    life_bars.push_back(life_bar);
+  }
+
   if(sf::Joystick::isConnected(0)) {
       std::cout << "controller connected" << '\n';
   }
@@ -319,7 +336,7 @@ void play_game(
         window_size);
     }
 
-    //Move players and bullets
+    //Move players, hit range and bullets
     for(auto i = 0u; i != players.size(); ++i) {
       players[i].move(window_size);
     }
@@ -331,7 +348,8 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
-    for(auto i = 0u; i != players.size(); ++i) { draw(players[i], window); }
+    for(auto i{0u}; i != life_bars.size(); ++i) { draw_life_bar(life_bars[i], window); }
+    for(auto i{0u}; i != players.size(); ++i) { draw(players[i], window); }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();
   }
@@ -349,7 +367,7 @@ void process_event_AA_choice(sf::Event &event,
   std::vector<sf::Text> &AA_texts,
   std::vector<player> &players,
   std::array<sf::Vector2f, 4> player_positions,
-  program_state& state)
+  program_state &state)
 {
   switch(event.type) {
     case sf::Event::Closed: window.close();
@@ -367,6 +385,7 @@ void process_event_AA_choice(sf::Event &event,
         players,
         player_positions);
       }
+      break;
     case sf::Event::JoystickButtonPressed:
       //player 3 and player 4
       choose_player_joystick(
@@ -414,8 +433,8 @@ void process_event_game(sf::Event event,
 void process_event_select_n_players(
   const sf::Event &event,
   sf::RenderWindow& window,
-  int& player_amount,
-  program_state& state)
+  int &player_amount,
+  program_state &state)
 {
   switch(event.type) {
     case sf::Event::Closed: window.close();
@@ -433,9 +452,10 @@ void process_event_select_n_players(
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         state = program_state::select_players;
       }
-     default:
-       break;
+      break;
     }
+    default:
+      break;
   }
 }
 

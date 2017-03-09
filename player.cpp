@@ -9,7 +9,9 @@ player::player(
     sf::Sprite * sprite,
     sf::Texture * texture
   )
-  : m_position{position},
+  : m_HP{},
+    m_hit_range{100},
+    m_position{position},
     m_speed_x{0.0},
     m_speed_y{0.0},
     m_sprite{sprite},
@@ -17,7 +19,7 @@ player::player(
     m_turn_speed{0.0}
 {}
 
-void player::accellerate()
+void player::accelerate()
 {
   const auto angle_degrees = m_sprite->getRotation() - 30.0;
   const auto angle_radians = angle_degrees * M_PI / 180.0;
@@ -546,6 +548,13 @@ void draw(
   window.draw(s);
 }
 
+void draw_life_bar(
+  sf::RectangleShape life_bar,
+  sf::RenderWindow &window)
+{
+  window.draw(life_bar);
+}
+
 void player::move(const int m_window_size)
 {
   assert(m_sprite);
@@ -574,7 +583,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); } // A button
   if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; } // B button
   if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
-  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accellerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
     bullets.push_back(shoot(player3, window_size));
   }
@@ -583,7 +592,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); } // A button
   if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; } // B button
   if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
-  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accellerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
     bullets.push_back(shoot(player4, window_size));
   }
@@ -598,13 +607,13 @@ void respond_to_key( //!OCLINT cannot simplify this even more
   // player1 controls
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { player1.turn_left()   ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { player1.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accellerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accelerate() ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.deccellerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     bullets.push_back(shoot(player1, window_size));
   }
   // player2 controls
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accellerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accelerate() ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { player2.turn_right()  ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.deccellerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { player2.turn_left()   ; }

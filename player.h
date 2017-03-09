@@ -12,10 +12,9 @@ public:
   player(
     sf::Vector2f m_position,
     sf::Sprite * m_sprite,
-    sf::Texture * m_texture
-  );
+    sf::Texture * m_texture);
 
-  void accellerate();
+  void accelerate();
   void deccellerate();
   auto get_rotation()      const noexcept { return m_sprite->getRotation(); }
   auto get_position()      const noexcept { return m_sprite->getPosition(); }
@@ -29,6 +28,8 @@ public:
   void turn_right();
 
 private:
+  sf::RectangleShape m_HP;
+  sf::CircleShape m_hit_range;
   sf::Vector2f m_position;
   double m_speed_x;
   double m_speed_y;
@@ -36,7 +37,6 @@ private:
   sf::Texture * m_texture;
   ///How fast the sprite is rotating per tick
   double m_turn_speed;
-  //int m_window_size;
 };
 
 player create_player(
@@ -72,7 +72,13 @@ player create_valine       (sf::Vector2f m_position);
 
 void draw(
   player p,
-  sf::RenderWindow &window);
+  sf::RenderWindow &window
+);
+
+void draw_life_bar(
+  sf::RectangleShape life_bars,
+  sf::RenderWindow &window
+);
 
 void respond_to_joystick(
   player &player3,
