@@ -52,6 +52,13 @@ void draw_a_text(
   int size
 );
 
+void draw_game(
+  sf::RenderWindow &window,
+  std::vector<sf::RectangleShape> life_bars,
+  std::vector<sf::CircleShape> hit_ranges,
+  std::vector<player> players,
+  std::vector<bullet> bullets);
+
 void draw_AA_choice_screen(
   sf::RenderWindow &window,
   std::vector<player> players,
@@ -73,14 +80,13 @@ void play_game(
 void plus_player(
   int &player_amount);
 
-void process_event_AA_choice(
+program_state process_event_AA_choice(
   sf::Event &event,
   sf::RenderWindow &window,
   std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &AA_texts,
   std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions,
-  program_state &state);
+  std::array<sf::Vector2f, 4> player_positions);
 
 void process_event_game(
   sf::Event event,
@@ -90,12 +96,10 @@ void process_event_game(
   const int window_size
 );
 
-void process_event_select_n_players(
+program_state process_event_select_n_players(
   const sf::Event &event,
   sf::RenderWindow& window,
-  int& player_amount,
-  program_state& state
-);
+  int& player_amount);
 
 ///Outer game loop: runs the full program, including the menus
 void run(
@@ -111,11 +115,17 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<amino_acid> amino_acids
 );
 
+std::vector<sf::CircleShape> set_hit_ranges(
+  std::vector<amino_acid> amino_acids,
+  std::vector<sf::Vector2f> start_positions
+);
+
 std::array<sf::Vector2f, 4> set_life_bar_positions();
 
 std::vector<sf::RectangleShape> set_life_bars(
   std::vector<amino_acid> amino_acids,
-  std::array<sf::Vector2f, 4> life_bar_positions);
+  std::array<sf::Vector2f, 4> life_bar_positions
+);
 
 std::vector<player> set_players(
   std::vector<amino_acid> amino_acids,
