@@ -54,6 +54,7 @@ player create_player( //!OCLINT cannot simplify
     case amino_acid::valine:        return create_valine       (m_position);
   }
   assert(!"should not get here"); //!OCLINT accepted idiom
+  return create_alanine(m_position);
 }
 
 /// all aminoacids have been scaled to the size of arginine

@@ -77,7 +77,7 @@ void create_resources()
   create_sprites();
 }
 
-int main(int argc, char * argv[])
+int main(int argc, char * [])
 {
   create_resources();
   const int window_size = 600;

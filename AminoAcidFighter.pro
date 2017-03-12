@@ -10,7 +10,7 @@ QMAKE_CC = gcc-5
 QMAKE_CXXFLAGS += -std=c++14
 
 # High warning levels
-QMAKE_CXXFLAGS += -Wall -Wextra
+QMAKE_CXXFLAGS += -Wall -Wextra -Werror
 
 # Debug and release mode
 CONFIG += debug_and_release

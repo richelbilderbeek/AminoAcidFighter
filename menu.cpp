@@ -19,6 +19,7 @@ amino_acid change_AA_down(
   if(player < 19) {
     return static_cast<amino_acid>(player + 1);
   }
+  return in;
 }
 
 void change_amino_name( //!OCLINT cannot make this any shorter
