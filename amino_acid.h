@@ -27,6 +27,9 @@ enum class amino_acid
   valine
 };
 
+amino_acid get_prev(const amino_acid a);
+amino_acid get_next(const amino_acid a);
+
 std::string to_str(const amino_acid a) noexcept;
 
 #endif // AMINO_ACID_H

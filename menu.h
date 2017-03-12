@@ -111,6 +111,12 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<amino_acid> amino_acids
 );
 
+std::array<sf::Vector2f, 4> set_life_bar_positions();
+
+std::vector<sf::RectangleShape> set_life_bars(
+  std::vector<amino_acid> amino_acids,
+  std::array<sf::Vector2f, 4> life_bar_positions);
+
 std::vector<player> set_players(
   std::vector<amino_acid> amino_acids,
   std::array<sf::Vector2f, 4> player_positions

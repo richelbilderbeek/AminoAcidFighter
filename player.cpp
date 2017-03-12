@@ -554,8 +554,7 @@ void draw(
 
 void draw_hit_ranges(
   sf::CircleShape hit_range,
-  sf::RenderWindow &window,
-  player players)
+  sf::RenderWindow &window)
 {
   const int window_size = window.getSize().x;
 

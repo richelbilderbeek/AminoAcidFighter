@@ -76,9 +76,9 @@ void draw(
   sf::RenderWindow &window
 );
 
-void draw_hit_ranges(sf::CircleShape hit_range,
-  sf::RenderWindow &window,
-  player players);
+void draw_hit_ranges(
+  sf::CircleShape hit_range,
+  sf::RenderWindow &window);
 
 void draw_life_bar(
   sf::RectangleShape life_bars,

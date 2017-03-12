@@ -12,24 +12,16 @@ amino_acid change_AA_up(
   return in;
 }
 
-/*
-void change_AA_up(
-  amino_acid &aminoacid,
-  sf::Text &player_AA_text,
-  player &player_AA,
-  sf::Vector2f position_AA)
+amino_acid change_AA_down(
+  const amino_acid in)
 {
-  const int player = static_cast<int>(aminoacid);
-  if(player > 0) {
-    player -= 1;
-    aminoacid = static_cast<amino_acid>(player);
-    change_amino_name(aminoacid, player_AA_text);
-    player_AA = create_player(aminoacid, position_AA);
+  const int player = static_cast<int>(in);
+  if(player < 19) {
+    return static_cast<amino_acid>(player + 1);
   }
 }
-*/
 
-void change_AA_down(
+/*void change_AA_down(
   amino_acid &aminoacid,
   sf::Text &player_AA_text,
   player &player_AA,
@@ -42,7 +34,7 @@ void change_AA_down(
     change_amino_name(aminoacid, player_AA_text);
     player_AA = create_player(aminoacid, position_AA);
   }
-}
+}*/
 
 void change_amino_name( //!OCLINT cannot make this any shorter
   amino_acid aminoacid_player,
@@ -189,19 +181,15 @@ void choose_player_keyboard(
     players[0] = create_player(amino_acids[0], player_positions[0]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    change_AA_down(
-      amino_acids[0],
-      texts[0],
-      players[0],
-      player_positions[0]);
+    amino_acids[0] = change_AA_down(amino_acids[0]);
+    change_amino_name(amino_acids[0], texts[0]);
+    players[0] = create_player(amino_acids[0], player_positions[0]);
   }
   // player 2
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-    change_AA_down(
-      amino_acids[1],
-      texts[1],
-      players[1],
-      player_positions[1]);
+    amino_acids[1] = change_AA_down(amino_acids[1]);
+    change_amino_name(amino_acids[1], texts[1]);
+    players[1] = create_player(amino_acids[1], player_positions[1]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
     amino_acids[1] = change_AA_up(amino_acids[1]);
@@ -219,39 +207,27 @@ void choose_player_joystick(
   // player 3
   if(amino_acids.size() >= 3) {
     if(sf::Joystick::isButtonPressed(0, 3)) { // Y button
-     /* TODO
-      change_AA_up(
-        amino_acids[2],
-        texts[2],
-        players[2],
-        player_positions[2]);
-      */
+      amino_acids[2] = change_AA_up(amino_acids[2]);
+      change_amino_name(amino_acids[2], texts[2]);
+      players[2] = create_player(amino_acids[2], player_positions[2]);
     }
     if(sf::Joystick::isButtonPressed(0, 0)) { // A button
-      change_AA_down(
-        amino_acids[2],
-        texts[2],
-        players[2],
-        player_positions[2]);
+      amino_acids[2] = change_AA_down(amino_acids[2]);
+      change_amino_name(amino_acids[2], texts[2]);
+      players[2] = create_player(amino_acids[2], player_positions[2]);
     }
   }
   // player 4
   if(amino_acids.size() >= 4) {
     if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
-    /*
-      change_AA_up(
-        amino_acids[3],
-        texts[3],
-        players[3],
-        player_positions[3]);
-        */
+      amino_acids[3] = change_AA_up(amino_acids[3]);
+      change_amino_name(amino_acids[3], texts[3]);
+      players[3] = create_player(amino_acids[3], player_positions[3]);
     }
     if(sf::Joystick::isButtonPressed(1, 0)) { // A button
-      change_AA_down(
-        amino_acids[3],
-        texts[3],
-        players[3],
-        player_positions[3]);
+      amino_acids[3] = change_AA_down(amino_acids[3]);
+      change_amino_name(amino_acids[3], texts[3]);
+      players[3] = create_player(amino_acids[3], player_positions[3]);
     }
   }
 }
@@ -316,24 +292,9 @@ void play_game(
 {
   const std::vector<sf::Vector2f> start_positions = set_start_positions();
   std::vector<player> players = set_players(amino_acids, start_positions);
+  const std::array<sf::Vector2f, 4> life_bar_positions = set_life_bar_positions();
+  std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids, life_bar_positions);
   std::vector<bullet> bullets;
-
-  const std::array<sf::Vector2f, 4> life_bar_positions {
-      sf::Vector2f(10 , 10 ),
-      sf::Vector2f(490, 10 ),
-      sf::Vector2f(10 , 580),
-      sf::Vector2f(490, 580)
-  };
-
-  std::vector<sf::RectangleShape> life_bars;
-  for(auto i{0u}; i != amino_acids.size(); ++i)
-  {
-    sf::RectangleShape life_bar;
-    life_bar.setPosition(life_bar_positions[i]);
-    life_bar.setSize(sf::Vector2f(100, 10));
-    life_bar.setFillColor(sf::Color::Red);
-    life_bars.push_back(life_bar);
-  }
 
   std::vector<sf::CircleShape> hit_ranges;
   for(auto i{0u}; i != amino_acids.size(); ++i)
@@ -364,9 +325,7 @@ void play_game(
     }
 
     //Move players, hit range and bullets
-    for(auto i = 0u; i != players.size(); ++i) {
-      players[i].move(window_size);
-    }
+    for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
     for(auto& bullet : bullets) { bullet.move(); }
     for(auto i = 0u; i != players.size(); ++i) {
       hit_ranges[i].setPosition(players[i].get_position() + players[i].get_speed());
@@ -379,7 +338,7 @@ void play_game(
 
     window.clear(sf::Color(128,128,128));
     for(auto i{0u}; i != life_bars.size(); ++i) { draw_life_bar(life_bars[i], window); }
-    for(auto i{0u}; i != hit_ranges.size(); ++i) { draw_hit_ranges(hit_ranges[i], window, players[i]); }
+    for(auto i{0u}; i != hit_ranges.size(); ++i) { draw_hit_ranges(hit_ranges[i], window); }
     for(auto i{0u}; i != players.size(); ++i) { draw(players[i], window); }
     for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
     window.display();
@@ -548,6 +507,33 @@ std::vector<sf::Text> set_AA_texts(
     AA_texts.push_back(text);
   }
   return AA_texts;
+}
+
+std::array<sf::Vector2f, 4> set_life_bar_positions()
+{
+    const std::array<sf::Vector2f, 4> life_bar_positions {
+      sf::Vector2f(10 , 10 ),
+      sf::Vector2f(490, 10 ),
+      sf::Vector2f(10 , 580),
+      sf::Vector2f(490, 580)
+  };
+  return life_bar_positions;
+}
+
+std::vector<sf::RectangleShape> set_life_bars(
+  std::vector<amino_acid> amino_acids,
+  std::array<sf::Vector2f, 4> life_bar_positions)
+{
+  std::vector<sf::RectangleShape> life_bars;
+  for(auto i{0u}; i != amino_acids.size(); ++i)
+  {
+    sf::RectangleShape life_bar;
+    life_bar.setPosition(life_bar_positions[i]);
+    life_bar.setSize(sf::Vector2f(100, 10));
+    life_bar.setFillColor(sf::Color::Red);
+    life_bars.push_back(life_bar);
+  }
+  return life_bars;
 }
 
 std::vector<player> set_players(
