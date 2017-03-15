@@ -14,18 +14,20 @@ before_install:
   # SFML
   - sudo apt-add-repository ppa:sonkun/sfml-development -y
   - sudo apt-get update -qq
-  # Codecov
-  - sudo pip install codecov
-  # OCLint
-  - ./install_oclint
 
 install: 
   # C++14
   - sudo apt-get install -qq g++-5
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
   # SFML
   - sudo apt-get install libsfml-dev
+  # cppcheck
+  - sudo apt-get install -qq cppcheck
   # Codecov
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  - sudo pip install codecov
+  # OCLint
+  - ./install_oclint
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -44,6 +46,8 @@ script:
   - ./AminoAcidFighter &
   - sleep 10
   - sudo killall AminoAcidFighter
+  # cppcheck
+  - cppcheck --quiet --error-exitcode=1 . 
   # Get code coverage
   - ./get_code_cov
   - codecov
