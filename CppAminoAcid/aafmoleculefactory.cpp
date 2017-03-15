@@ -14,10 +14,9 @@ boost::shared_ptr<ribi::aaf::Molecule> ribi::aaf::MoleculeFactory::Create(
     case AminoAcid::glycine: return CreateGlycine();
     default:
       assert(!"Should not get here");
-      throw std::logic_error("ribi::aaf::MoleculeFactory::Create: unknown amino acid");
   }
   assert(!"Should not get here");
-  throw std::logic_error("ribi::aaf::MoleculeFactory::Create: unknown amino acid");
+  return {};
 }
 
 boost::shared_ptr<ribi::aaf::Molecule> ribi::aaf::MoleculeFactory::CreateGlycine() const noexcept
