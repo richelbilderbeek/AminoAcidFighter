@@ -57,4 +57,3 @@ void bullet::set_position(sf::Vector2f position)
 {
   m_position = position;
 }
-

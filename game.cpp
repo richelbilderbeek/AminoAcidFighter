@@ -49,6 +49,23 @@ void play_game(
       hit_ranges[i].setPosition(players[i].get_position() + players[i].get_speed());
     }
 
+    //Check if bullet hits player
+    const float hit_range_size{25.0};
+    for(auto i = 0u; i < players.size(); ++i)
+    {
+      for(auto j = 0u; j < bullets.size(); ++j)
+      {
+        float distance = calculate_distance_bullet_player(bullets[j], players[i]);
+        std::cout << distance << std::endl;
+        if(distance <= hit_range_size)
+        {
+          auto new_x = life_bars[i].getSize().x - 5;
+          auto new_y = life_bars[i].getSize().y;
+          life_bars[i].setSize(sf::Vector2f(new_x, new_y));
+        }
+      }
+    }
+
     //Remove all bullets that are out of the screen
     remove_bullets(
       bullets,
@@ -137,10 +154,11 @@ std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<sf::CircleShape> hit_ranges;
   for(auto i{0u}; i != amino_acids.size(); ++i)
   {
+    const float hit_range_size{25.0};
     sf::CircleShape hit_range;
     hit_range.setPosition(start_positions[i]);
-    hit_range.setRadius(35.0);
-    hit_range.setOrigin(sf::Vector2f(35.0, 35.0));
+    hit_range.setRadius(hit_range_size);
+    hit_range.setOrigin(sf::Vector2f(hit_range_size, hit_range_size));
     hit_range.setOutlineColor(sf::Color::Blue);
     hit_range.setOutlineThickness(2.0);
     hit_range.setFillColor(sf::Color::Transparent);
@@ -202,4 +220,39 @@ std::vector<player> set_players(
         player_positions[i]));
   }
   return players;
+}
+
+/*void bullet_hits_player(
+  std::vector<bullet> bullets,
+  std::vector<player> players,
+  std::vector<sf::RectangleShape> &life_bars)
+{
+  const float hit_range_size{25.0};
+  for(auto i = 0u; i < players.size(); ++i)
+  {
+    for(auto j = 0u; j < bullets.size(); ++j)
+    {
+      float distance = calculate_distance_bullet_player(bullets[j], players[i]);
+      std::cout << distance << std::endl;
+      if(distance - hit_range_size <= 0)
+      {
+        life_bars[i].setSize(sf::Vector2f(50, 10));
+      }
+    }
+  }
+}*/
+
+float calculate_distance_bullet_player(bullet bullets, player players)
+{
+  float bullet_position_x = bullets.get_position().x;
+  float bullet_position_y = bullets.get_position().y;
+  float player_position_x = players.get_position().x;
+  float player_position_y = players.get_position().y;
+
+  float length_x = bullet_position_x - player_position_x;
+  float length_y = bullet_position_y - player_position_y;
+  float x2 = length_x * length_x;
+  float y2 = length_y * length_y;
+  float er = x2 + y2;
+  return sqrt(er);
 }

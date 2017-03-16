@@ -7,6 +7,16 @@
 #include "player.h"
 #include "program_state.h"
 
+void bullet_hits_player(
+  std::vector<bullet> bullets,
+  std::vector<player> players,
+  std::vector<sf::RectangleShape> &life_bars
+);
+
+float calculate_distance_bullet_player(
+  bullet bullets,
+  player players
+);
 
 void draw_game(
   sf::RenderWindow &window,
