@@ -62,6 +62,7 @@ void play_game(
           auto new_x = life_bars[i].getSize().x - 5;
           auto new_y = life_bars[i].getSize().y;
           life_bars[i].setSize(sf::Vector2f(new_x, new_y));
+          //TODO remove_bullets_that_hits();
         }
       }
     }
@@ -244,8 +245,9 @@ std::vector<player> set_players(
 
 float calculate_distance_bullet_player(bullet bullets, player players)
 {
-  float bullet_position_x = bullets.get_position().x;
-  float bullet_position_y = bullets.get_position().y;
+  sf::Sprite bullet_sprite = bullets.get_sprite();
+  float bullet_position_x = bullet_sprite.getPosition().x;
+  float bullet_position_y = bullet_sprite.getPosition().y;
   float player_position_x = players.get_position().x;
   float player_position_y = players.get_position().y;
 
