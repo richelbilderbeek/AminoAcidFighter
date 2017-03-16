@@ -194,20 +194,6 @@ void choose_player_joystick(
   }
 }
 
-void draw_game(
-  sf::RenderWindow &window,
-  std::vector<sf::RectangleShape> life_bars,
-  std::vector<sf::CircleShape> hit_ranges,
-  std::vector<player> players,
-  std::vector<bullet> bullets)
-{
-  for(auto i{0u}; i != life_bars.size(); ++i) { draw_life_bar(life_bars[i], window); }
-  for(auto i{0u}; i != hit_ranges.size(); ++i) { draw_hit_ranges(hit_ranges[i], window); }
-  for(auto i{0u}; i != players.size(); ++i) { draw(players[i], window); }
-  for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
-}
-
-
 void draw_a_text(
   std::string text,
   sf::Vector2f position,
@@ -260,52 +246,6 @@ void minus_player(
     --player_amount;
 }
 
-void play_game(
-  sf::RenderWindow &window,
-  const int window_size,
-  const std::vector<amino_acid>& amino_acids
-)
-{
-  const std::vector<sf::Vector2f> start_positions = set_start_positions();
-  std::vector<player> players = set_players(amino_acids, start_positions);
-  const std::array<sf::Vector2f, 4> life_bar_positions = set_life_bar_positions();
-  std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids, life_bar_positions);
-  std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(amino_acids, start_positions);
-  std::vector<bullet> bullets;
-
-  if(sf::Joystick::isConnected(0)) {
-      std::cout << "controller connected" << '\n';
-  }
-
-  while(window.isOpen()) {
-    sf::Event event;
-    while(window.pollEvent(event)) {
-      process_event_game(
-        event,
-        window,
-        players,
-        bullets,
-        window_size);
-    }
-
-    //Move players, hit range and bullets
-    for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
-    for(auto& bullet : bullets) { bullet.move(); }
-    for(auto i = 0u; i != players.size(); ++i) {
-      hit_ranges[i].setPosition(players[i].get_position() + players[i].get_speed());
-    }
-
-    //Remove all bullets that are out of the screen
-    remove_bullets(
-      bullets,
-      window_size);
-
-    window.clear(sf::Color(128,128,128));
-    draw_game(window, life_bars, hit_ranges, players, bullets);
-    window.display();
-  }
-}
-
 void plus_player(
   int &player_amount)
 {
@@ -349,37 +289,6 @@ program_state process_event_AA_choice(
       break;
   }
   return program_state::select_players;
-}
-
-void process_event_game(sf::Event event,
-  sf::RenderWindow &window,
-  std::vector<player> &players,
-  std::vector<bullet> &bullets,
-  const int window_size)
-{
-  switch(event.type) {
-    case sf::Event::Closed:
-      window.close();
-      break;
-    case sf::Event::KeyPressed:
-      // keyboard support for player1 and player2
-      respond_to_key(
-        players[0],
-        players[1],
-        bullets,
-        window_size);
-      break;
-    case sf::Event::JoystickButtonPressed:
-      // joystick support for player3 and player4
-      respond_to_joystick(
-        players[2],
-        players[3],
-        bullets,
-        window_size);
-      break;
-    default:
-      break;
-      }
 }
 
 program_state process_event_select_n_players(
@@ -432,72 +341,9 @@ std::vector<sf::Text> set_AA_texts(
   return AA_texts;
 }
 
-std::vector<sf::CircleShape> set_hit_ranges(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> start_positions)
-{
-  std::vector<sf::CircleShape> hit_ranges;
-  for(auto i{0u}; i != amino_acids.size(); ++i)
-  {
-    sf::CircleShape hit_range;
-    hit_range.setPosition(start_positions[i]);
-    hit_range.setRadius(35.0);
-    hit_range.setOrigin(sf::Vector2f(35.0, 35.0));
-    hit_range.setOutlineColor(sf::Color::Blue);
-    hit_range.setOutlineThickness(2.0);
-    hit_range.setFillColor(sf::Color::Transparent);
-    hit_ranges.push_back(hit_range);
-  }
-  return hit_ranges;
-}
-
-
-std::array<sf::Vector2f, 4> set_life_bar_positions()
-{
-    const std::array<sf::Vector2f, 4> life_bar_positions {
-      sf::Vector2f(10 , 10 ),
-      sf::Vector2f(490, 10 ),
-      sf::Vector2f(10 , 580),
-      sf::Vector2f(490, 580)
-  };
-  return life_bar_positions;
-}
-
-std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<amino_acid> amino_acids,
-  std::array<sf::Vector2f, 4> life_bar_positions)
-{
-  std::vector<sf::RectangleShape> life_bars;
-  for(auto i{0u}; i != amino_acids.size(); ++i)
-  {
-    sf::RectangleShape life_bar;
-    life_bar.setPosition(life_bar_positions[i]);
-    life_bar.setSize(sf::Vector2f(100, 10));
-    life_bar.setFillColor(sf::Color::Red);
-    life_bars.push_back(life_bar);
-  }
-  return life_bars;
-}
-
 std::vector<player> set_players(
   std::vector<amino_acid> amino_acids,
   std::array<sf::Vector2f, 4> player_positions)
-{
-  std::vector<player> players;
-  const int n_amino_acids = amino_acids.size();
-
-  for (int i{0}; i != n_amino_acids; ++i) {
-    players.push_back(
-      create_player(
-        amino_acids[i],
-        player_positions[i]));
-  }
-  return players;
-}
-
-std::vector<player> set_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> player_positions)
 {
   std::vector<player> players;
   const int n_amino_acids = amino_acids.size();
@@ -521,18 +367,6 @@ std::array<sf::Vector2f, 4> set_player_positions()
     sf::Vector2f(425, 425)
   };
   return player_positions;
-}
-
-std::vector<sf::Vector2f> set_start_positions()
-{
-  const std::vector<sf::Vector2f> start_positions
-  {
-      sf::Vector2f(175, 175),
-      sf::Vector2f(425, 175),
-      sf::Vector2f(175, 425),
-      sf::Vector2f(425, 425)
-  };
-  return start_positions;
 }
 
 std::array<sf::Vector2f, 4> set_text_AA_positions()

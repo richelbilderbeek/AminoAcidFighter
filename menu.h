@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "amino_acid.h"
+#include "game.h"
 #include "player.h"
 #include "program_state.h"
 
@@ -52,13 +53,6 @@ void draw_a_text(
   int size
 );
 
-void draw_game(
-  sf::RenderWindow &window,
-  std::vector<sf::RectangleShape> life_bars,
-  std::vector<sf::CircleShape> hit_ranges,
-  std::vector<player> players,
-  std::vector<bullet> bullets);
-
 void draw_AA_choice_screen(
   sf::RenderWindow &window,
   std::vector<player> players,
@@ -71,14 +65,9 @@ void minus_player(
   int &player_amount
 );
 
-void play_game(
-  sf::RenderWindow &window,
-  const int window_size,
-  const std::vector<amino_acid>& players
-);
-
 void plus_player(
-  int &player_amount);
+  int &player_amount
+);
 
 program_state process_event_AA_choice(
   sf::Event &event,
@@ -87,14 +76,6 @@ program_state process_event_AA_choice(
   std::vector<sf::Text> &AA_texts,
   std::vector<player> &players,
   std::array<sf::Vector2f, 4> player_positions);
-
-void process_event_game(
-  sf::Event event,
-  sf::RenderWindow &window,
-  std::vector<player> &players,
-  std::vector<bullet> &bullets,
-  const int window_size
-);
 
 program_state process_event_select_n_players(
   const sf::Event &event,
@@ -108,29 +89,11 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<amino_acid> amino_acids
 );
 
-std::vector<sf::CircleShape> set_hit_ranges(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> start_positions
-);
-
-std::array<sf::Vector2f, 4> set_life_bar_positions();
-
-std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<amino_acid> amino_acids,
-  std::array<sf::Vector2f, 4> life_bar_positions
-);
-
 std::vector<player> set_players(
   std::vector<amino_acid> amino_acids,
   std::array<sf::Vector2f, 4> player_positions
 );
 
-std::vector<player> set_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> player_positions
-);
-
-std::vector<sf::Vector2f> set_start_positions();
 std::array<sf::Vector2f, 4> set_player_positions     ();
 std::array<sf::Color   , 4> set_text_colors          ();
 std::array<sf::Vector2f, 4> set_text_AA_positions    ();
