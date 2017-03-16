@@ -1,27 +1,5 @@
 ﻿#include "menu.h"
 
-/// Get the previous amino acid in the alphabet
-///
-amino_acid change_AA_up(
-  const amino_acid in)
-{
-  const int player = static_cast<int>(in);
-  if (player > 0) {
-    return static_cast<amino_acid>(player - 1);
-  }
-  return in;
-}
-
-amino_acid change_AA_down(
-  const amino_acid in)
-{
-  const int player = static_cast<int>(in);
-  if(player < 19) {
-    return static_cast<amino_acid>(player + 1);
-  }
-  return in;
-}
-
 void change_amino_name( //!OCLINT cannot make this any shorter
   amino_acid aminoacid_player,
   sf::Text &player_AA)
@@ -160,23 +138,23 @@ void choose_player_keyboard(
 {
   // player 1
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    amino_acids[0] = change_AA_up(amino_acids[0]);
+    amino_acids[0] = get_prev(amino_acids[0]);
     change_amino_name(amino_acids[0], texts[0]);
     players[0] = create_player(amino_acids[0], player_positions[0]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    amino_acids[0] = change_AA_down(amino_acids[0]);
+    amino_acids[0] = get_next(amino_acids[0]);
     change_amino_name(amino_acids[0], texts[0]);
     players[0] = create_player(amino_acids[0], player_positions[0]);
   }
   // player 2
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-    amino_acids[1] = change_AA_down(amino_acids[1]);
+    amino_acids[1] = get_next(amino_acids[1]);
     change_amino_name(amino_acids[1], texts[1]);
     players[1] = create_player(amino_acids[1], player_positions[1]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-    amino_acids[1] = change_AA_up(amino_acids[1]);
+    amino_acids[1] = get_prev(amino_acids[1]);
     change_amino_name(amino_acids[1], texts[1]);
     players[1] = create_player(amino_acids[1], player_positions[1]);
   }
@@ -191,12 +169,12 @@ void choose_player_joystick(
   // player 3
   if(amino_acids.size() >= 3) {
     if(sf::Joystick::isButtonPressed(0, 3)) { // Y button
-      amino_acids[2] = change_AA_up(amino_acids[2]);
+      amino_acids[2] = get_prev(amino_acids[2]);
       change_amino_name(amino_acids[2], texts[2]);
       players[2] = create_player(amino_acids[2], player_positions[2]);
     }
     if(sf::Joystick::isButtonPressed(0, 0)) { // A button
-      amino_acids[2] = change_AA_down(amino_acids[2]);
+      amino_acids[2] = get_next(amino_acids[2]);
       change_amino_name(amino_acids[2], texts[2]);
       players[2] = create_player(amino_acids[2], player_positions[2]);
     }
@@ -204,12 +182,12 @@ void choose_player_joystick(
   // player 4
   if(amino_acids.size() >= 4) {
     if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
-      amino_acids[3] = change_AA_up(amino_acids[3]);
+      amino_acids[3] = get_prev(amino_acids[3]);
       change_amino_name(amino_acids[3], texts[3]);
       players[3] = create_player(amino_acids[3], player_positions[3]);
     }
     if(sf::Joystick::isButtonPressed(1, 0)) { // A button
-      amino_acids[3] = change_AA_down(amino_acids[3]);
+      amino_acids[3] = get_next(amino_acids[3]);
       change_amino_name(amino_acids[3], texts[3]);
       players[3] = create_player(amino_acids[3], player_positions[3]);
     }
@@ -431,45 +409,6 @@ program_state process_event_select_n_players(
       break;
   }
   return program_state::choose_n_players;
-}
-
-void run(
-  sf::RenderWindow &window,
-  const int window_size,
-  const int argc)
-{
-
-  program_state state{program_state::choose_n_players};
-  std::vector<amino_acid> players = { amino_acid::alanine, amino_acid::alanine};
-
-  while(window.isOpen()) {
-    switch(state) {
-      case program_state::choose_n_players: {
-        const int new_size = choose_n_players(
-          window,
-          argc,
-          players.size());
-        state = program_state::select_players;
-        players.resize(new_size); //May result in undefined behavior if size is increased
-      }
-      break;
-      case program_state::select_players: {
-        players = choose_aminoacids(
-          window,
-          argc,
-          players);
-        state = program_state::battle;
-      }
-      break;
-      case program_state::battle:
-        play_game(
-          window,
-          window_size,
-          players);
-        assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
-      break;
-    }
-  }
 }
 
 std::vector<sf::Text> set_AA_texts(

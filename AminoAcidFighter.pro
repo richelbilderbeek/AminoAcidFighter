@@ -43,3 +43,4 @@ LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 # qrc_[*].cpp:400:44: error: ‘qInitResources_[*]__init_variable__’ defined but not used
 # [*]: the resource filename
 QMAKE_CXXFLAGS += -Wno-unused-variable
+

@@ -101,13 +101,6 @@ program_state process_event_select_n_players(
   sf::RenderWindow& window,
   int& player_amount);
 
-///Outer game loop: runs the full program, including the menus
-void run(
-  sf::RenderWindow &window,
-  const int window_size,
-  const int argc
-);
-
 std::vector<sf::Text> set_AA_texts(
   sf::Font &font,
   std::array<sf::Vector2f, 4> text_AA_positions,

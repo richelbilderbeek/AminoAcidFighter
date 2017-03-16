@@ -1,6 +1,7 @@
 SOURCES += \
     amino_acid.cpp \
     bullet.cpp \
+    game.cpp \
     helper.cpp \
     player.cpp \
     menu.cpp \
@@ -10,6 +11,7 @@ HEADERS += \
     amino_acid.h \
     bullet.h \
     helper.h \
+    game.h \
     player.h \
     menu.h \
     program_state.h

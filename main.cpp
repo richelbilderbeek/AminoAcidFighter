@@ -8,6 +8,7 @@
 
 #include "amino_acid.h"
 #include "bullet.h"
+#include "game.h"
 #include "helper.h"
 #include "menu.h"
 #include "player.h"
