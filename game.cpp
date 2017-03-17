@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <cmath>
 
 void draw_game(
   sf::RenderWindow &window,
