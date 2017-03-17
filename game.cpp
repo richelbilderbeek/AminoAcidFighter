@@ -1,3 +1,4 @@
+#include <cmath>
 #include "game.h"
 
 
@@ -50,22 +51,7 @@ void play_game(
     }
 
     //Check if bullet hits player
-    const float hit_range_size{25.0};
-    for(auto i = 0u; i < players.size(); ++i)
-    {
-      for(auto j = 0u; j < bullets.size(); ++j)
-      {
-        float distance = calculate_distance_bullet_player(bullets[j], players[i]);
-        std::cout << distance << std::endl;
-        if(distance <= hit_range_size)
-        {
-          auto new_x = life_bars[i].getSize().x - 5;
-          auto new_y = life_bars[i].getSize().y;
-          life_bars[i].setSize(sf::Vector2f(new_x, new_y));
-          //TODO remove_bullets_that_hits();
-        }
-      }
-    }
+    bullet_hits_player(bullets, players, life_bars);
 
     //Remove all bullets that are out of the screen
     remove_bullets(
@@ -223,7 +209,7 @@ std::vector<player> set_players(
   return players;
 }
 
-/*void bullet_hits_player(
+void bullet_hits_player(
   std::vector<bullet> bullets,
   std::vector<player> players,
   std::vector<sf::RectangleShape> &life_bars)
@@ -235,13 +221,16 @@ std::vector<player> set_players(
     {
       float distance = calculate_distance_bullet_player(bullets[j], players[i]);
       std::cout << distance << std::endl;
-      if(distance - hit_range_size <= 0)
+      if(distance <= hit_range_size)
       {
-        life_bars[i].setSize(sf::Vector2f(50, 10));
+        auto new_x = life_bars[i].getSize().x - 5;
+        auto new_y = life_bars[i].getSize().y;
+        life_bars[i].setSize(sf::Vector2f(new_x, new_y));
+        //TODO remove_bullets_that_hits();
       }
     }
   }
-}*/
+}
 
 float calculate_distance_bullet_player(bullet bullets, player players)
 {
