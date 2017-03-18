@@ -42,13 +42,15 @@ private:
 
 player create_player(
   amino_acid aminoacid,
-  sf::Vector2f m_position);
+  sf::Vector2f m_position
+);
 
 player create_player(
   amino_acid aminoacid,
   sf::Sprite m_sprite,
   sf::Texture m_texture,
-  sf::Vector2f m_position);
+  sf::Vector2f m_position
+);
 
 player create_alanine      (sf::Vector2f m_position);
 player create_arginine     (sf::Vector2f m_position);
@@ -78,7 +80,8 @@ void draw(
 
 void draw_hit_ranges(
   sf::CircleShape hit_range,
-  sf::RenderWindow &window);
+  sf::RenderWindow &window
+);
 
 void draw_life_bar(
   sf::RectangleShape life_bars,
@@ -89,16 +92,19 @@ void respond_to_joystick(
   player &player3,
   player &player4,
   std::vector<bullet> &bullets,
-  int window_size);
+  int window_size
+);
 
 void respond_to_key(
   player &player1,
   player &player2,
   std::vector<bullet> &bullets,
-  int window_size);
+  int window_size
+);
 
 bullet shoot(
   const player& player1,
-  const int window_size);
+  const int window_size
+);
 
 #endif // PLAYER_H

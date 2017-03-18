@@ -32,8 +32,9 @@ private:
   int m_window_size;
 };
 
-void remove_bullets(
+void remove_out_of_screen_bullets(
   std::vector<bullet> &bullets,
-  const int window_size);
+  const int window_size
+);
 
 #endif // BULLET_H

@@ -584,7 +584,8 @@ void draw_life_bar(
   window.draw(life_bar);
 }
 
-void player::move(const int m_window_size)
+void player::move(
+  const int m_window_size)
 {
   assert(m_sprite);
   assert(m_window_size >= 1.0);

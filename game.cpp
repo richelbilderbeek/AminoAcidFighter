@@ -1,7 +1,39 @@
 #include <cmath>
 #include "game.h"
 
-#include <cmath>
+void bullet_hits_player(
+  std::vector<bullet> bullets,
+  std::vector<player> players,
+  std::vector<sf::RectangleShape> &life_bars)
+{
+  const float hit_range_size{25.0};
+  for(auto i = 0u; i < players.size(); ++i) {
+    for(auto j = 0u; j < bullets.size(); ++j) {
+      float distance = calculate_distance_bullet_player(bullets[j], players[i]);
+      std::cout << distance << std::endl;
+      if(distance <= hit_range_size) {
+        substract_life(life_bars, i);
+        //TODO remove_bullets_that_hits();
+      }
+    }
+  }
+}
+
+float calculate_distance_bullet_player(bullet bullets, player players)
+{
+  sf::Sprite bullet_sprite = bullets.get_sprite();
+  float bullet_position_x = bullet_sprite.getPosition().x;
+  float bullet_position_y = bullet_sprite.getPosition().y;
+  float player_position_x = players.get_position().x;
+  float player_position_y = players.get_position().y;
+
+  float length_x = bullet_position_x - player_position_x;
+  float length_y = bullet_position_y - player_position_y;
+  float x2 = length_x * length_x;
+  float y2 = length_y * length_y;
+  float a2 = x2 + y2;
+  return sqrt(a2);
+}
 
 void draw_game(
   sf::RenderWindow &window,
@@ -10,10 +42,22 @@ void draw_game(
   std::vector<player> players,
   std::vector<bullet> bullets)
 {
-  for(auto i{0u}; i != life_bars.size(); ++i) { draw_life_bar(life_bars[i], window); }
-  for(auto i{0u}; i != hit_ranges.size(); ++i) { draw_hit_ranges(hit_ranges[i], window); }
-  for(auto i{0u}; i != players.size(); ++i) { draw(players[i], window); }
+  for(auto i{0u}; i != life_bars.size(); ++i) {
+    if(life_bars[i].getSize().x > 0.0) {
+      draw_life_bar(life_bars[i], window);
+    }
+  }
+  for(auto i{0u}; i != hit_ranges.size(); ++i) {
+    if(life_bars[i].getSize().x > 0.0) {
+      draw_hit_ranges(hit_ranges[i], window);
+    }
+  }
   for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
+  for(auto i{0u}; i != players.size(); ++i) {
+    if(life_bars[i].getSize().x > 0.0) {
+      draw(players[i], window);
+    }
+  }
 }
 
 void play_game(
@@ -55,7 +99,7 @@ void play_game(
     bullet_hits_player(bullets, players, life_bars);
 
     //Remove all bullets that are out of the screen
-    remove_bullets(
+    remove_out_of_screen_bullets(
       bullets,
       window_size);
 
@@ -210,41 +254,11 @@ std::vector<player> set_players(
   return players;
 }
 
-void bullet_hits_player(
-  std::vector<bullet> bullets,
-  std::vector<player> players,
-  std::vector<sf::RectangleShape> &life_bars)
+void substract_life(
+  std::vector<sf::RectangleShape> &life_bars,
+  int i)
 {
-  const float hit_range_size{25.0};
-  for(auto i = 0u; i < players.size(); ++i)
-  {
-    for(auto j = 0u; j < bullets.size(); ++j)
-    {
-      float distance = calculate_distance_bullet_player(bullets[j], players[i]);
-      std::cout << distance << std::endl;
-      if(distance <= hit_range_size)
-      {
-        auto new_x = life_bars[i].getSize().x - 5;
-        auto new_y = life_bars[i].getSize().y;
-        life_bars[i].setSize(sf::Vector2f(new_x, new_y));
-        //TODO remove_bullets_that_hits();
-      }
-    }
-  }
-}
-
-float calculate_distance_bullet_player(bullet bullets, player players)
-{
-  sf::Sprite bullet_sprite = bullets.get_sprite();
-  float bullet_position_x = bullet_sprite.getPosition().x;
-  float bullet_position_y = bullet_sprite.getPosition().y;
-  float player_position_x = players.get_position().x;
-  float player_position_y = players.get_position().y;
-
-  float length_x = bullet_position_x - player_position_x;
-  float length_y = bullet_position_y - player_position_y;
-  float x2 = length_x * length_x;
-  float y2 = length_y * length_y;
-  float er = x2 + y2;
-  return sqrt(er);
+  auto new_x = life_bars[i].getSize().x - 0.5;
+  auto new_y = life_bars[i].getSize().y;
+  life_bars[i].setSize(sf::Vector2f(new_x, new_y));
 }

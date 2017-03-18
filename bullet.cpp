@@ -35,7 +35,7 @@ void bullet::move()
   m_sprite.setPosition(p);
 }
 
-void remove_bullets(
+void remove_out_of_screen_bullets(
   std::vector<bullet> &bullets,
   const int window_size)
 {

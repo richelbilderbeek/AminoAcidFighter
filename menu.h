@@ -21,7 +21,8 @@ void change_amino_name(
 std::vector<amino_acid> choose_aminoacids(
   sf::RenderWindow &window,
   const int argc,
-  std::vector<amino_acid> players);
+  std::vector<amino_acid> players
+);
 
 ///Menu for selecting a number of players
 ///Return chosen number of players
@@ -75,12 +76,14 @@ program_state process_event_AA_choice(
   std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &AA_texts,
   std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions);
+  std::array<sf::Vector2f, 4> player_positions
+);
 
 program_state process_event_select_n_players(
   const sf::Event &event,
   sf::RenderWindow& window,
-  int& player_amount);
+  int& player_amount
+);
 
 std::vector<sf::Text> set_AA_texts(
   sf::Font &font,

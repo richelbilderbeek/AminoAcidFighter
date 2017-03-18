@@ -66,4 +66,9 @@ std::vector<player> set_players(
 
 std::vector<sf::Vector2f> set_start_positions();
 
+void substract_life(
+  std::vector<sf::RectangleShape> &life_bars,
+  int i
+);
+
 #endif // GAME_H
