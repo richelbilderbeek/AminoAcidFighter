@@ -8,26 +8,32 @@ BOOST_AUTO_TEST_CASE(bullet_construction)
 {
   create_sprites();
   const double damage{10.0};
-  const sf::Vector2f position{sf::Vector2f(10.0, 10.0)};
+  const sf::Vector2f old_position{sf::Vector2f(10.0, 10.0)};
   const double speed_x{0.8};
   const double speed_y{0.6};
   const int window_size{100};
 
-  const bullet b(damage, position, speed_x, speed_y, window_size);
+  bullet b(damage, old_position, speed_x, speed_y, window_size);
 
   BOOST_CHECK_EQUAL(b.get_damage(), damage);
-  BOOST_CHECK      (b.get_position() == position);
   BOOST_CHECK_EQUAL(b.get_speed_x(), speed_x);
   BOOST_CHECK_EQUAL(b.get_speed_y(), speed_y);
+  BOOST_CHECK(b.get_position() == old_position);
+
+  const sf::Vector2f new_position{sf::Vector2f(50.0, 25.0)};
+  b.set_position(new_position);
+
+  BOOST_CHECK(b.get_position() == new_position);
+
 }
 
 BOOST_AUTO_TEST_CASE(remove_out_of_screen_bullets_test)
 {
   const double damage{10.0};
-  const sf::Vector2f position1{sf::Vector2f(-10.0,  10.0)};
-  const sf::Vector2f position2{sf::Vector2f( 10.0, -10.0)};
-  const sf::Vector2f position3{sf::Vector2f(110.0,  10.0)};
-  const sf::Vector2f position4{sf::Vector2f( 10.0, 110.0)};
+  const sf::Vector2f position1{sf::Vector2f(-10.0,  10.0)}; //Left
+  const sf::Vector2f position2{sf::Vector2f( 10.0, -10.0)}; //Top
+  const sf::Vector2f position3{sf::Vector2f(110.0,  10.0)}; //Right
+  const sf::Vector2f position4{sf::Vector2f( 10.0, 110.0)}; //Bottom
   const double speed_x{0.8};
   const double speed_y{0.6};
   const int window_size{100};
