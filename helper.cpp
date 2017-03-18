@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 #include <QFile>
+#include <vector>
 #include "helper.h"
 
 void create_fonts()
