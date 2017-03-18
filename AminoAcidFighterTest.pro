@@ -1,6 +1,7 @@
 # Files
 SOURCES += main_test.cpp helper_test.cpp \
-    amino_acid_test.cpp
+    amino_acid_test.cpp \
+    bullet_test.cpp
 include(AminoAcidFighter.pri)
 
 # C++14

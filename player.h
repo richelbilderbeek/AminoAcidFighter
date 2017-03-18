@@ -12,7 +12,8 @@ public:
   player(
     sf::Vector2f m_position,
     sf::Sprite * m_sprite,
-    sf::Texture * m_texture);
+    sf::Texture * m_texture
+  );
 
   void accelerate();
   void deccellerate();

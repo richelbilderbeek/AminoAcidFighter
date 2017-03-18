@@ -204,8 +204,7 @@ std::vector<sf::RectangleShape> set_life_bars(
   std::array<sf::Vector2f, 4> life_bar_positions)
 {
   std::vector<sf::RectangleShape> life_bars;
-  for(auto i{0u}; i != amino_acids.size(); ++i)
-  {
+  for(auto i{0u}; i != amino_acids.size(); ++i) {
     sf::RectangleShape life_bar;
     life_bar.setPosition(life_bar_positions[i]);
     life_bar.setSize(sf::Vector2f(100, 10));
@@ -228,8 +227,7 @@ std::array<sf::Vector2f, 4> set_life_bar_positions()
 
 std::vector<sf::Vector2f> set_start_positions()
 {
-  const std::vector<sf::Vector2f> start_positions
-  {
+  const std::vector<sf::Vector2f> start_positions {
       sf::Vector2f(175, 175),
       sf::Vector2f(425, 175),
       sf::Vector2f(175, 425),
