@@ -8,6 +8,7 @@ game::game(
 )
   : m_bullets{},
     m_players{create_players(amino_acids, world_size)},
+    m_state{game_state::running},
     m_world_size{world_size}
 {
 }
@@ -86,10 +87,8 @@ void game::do_action(int i, action any_action)
   }
 }
 
-void game::tick()
+void game::do_damage()
 {
-  for (auto& p: m_players) p.move(m_world_size);
-  for (auto& b: m_bullets) b.move();
   for(auto i{0u}; i < m_players.size(); ++i)
   {
     for(auto j{0u}; j < m_bullets.size(); ++j)
@@ -101,7 +100,20 @@ void game::tick()
       }
     }
   }
+}
 
+void game::tick()
+{
+  if(get_state() == game_state::running)
+  {
+    for (auto& p: m_players) p.move(m_world_size);
+    for (auto& b: m_bullets) b.move();
+    do_damage();
+    if(m_players[0].get_hp() <= 0.0)
+    {
+      m_state = game_state::game_over;
+    }
+  }
 }
 
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept

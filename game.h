@@ -6,6 +6,7 @@
 
 #include "action.h"
 #include "amino_acid.h"
+#include "game_state.h"
 #include "menu.h"
 #include "player.h"
 #include "program_state.h"
@@ -20,6 +21,7 @@ public:
 
   const auto& get_bullets() const noexcept { return m_bullets; }
   auto& get_bullets() noexcept { return m_bullets; }
+  game_state get_state() { return m_state; }
   const auto& get_players() const noexcept { return m_players; }
   auto get_world_size() const noexcept { return m_world_size; }
   void do_action(int i, action any_action);
@@ -30,7 +32,10 @@ public:
 private:
   std::vector<bullet> m_bullets;
   std::vector<player> m_players;
+  game_state m_state;
   double m_world_size;
+
+  void do_damage();
 };
 
 ///Calculates the distance between a bullet and a player

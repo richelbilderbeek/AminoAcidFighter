@@ -212,7 +212,7 @@ BOOST_AUTO_TEST_CASE(check_game_players_rotation_changes_after_turning_right)
 BOOST_AUTO_TEST_CASE(check_game_running_at_start)
 {
   game g = create_test_game_1();
-  BOOST_CHECK(g.get_game_state() == game_state::running);
+  BOOST_CHECK(g.get_state() == game_state::running);
 }
 
 BOOST_AUTO_TEST_CASE(check_game_over_after_player_one_dies)
@@ -227,5 +227,5 @@ BOOST_AUTO_TEST_CASE(check_game_over_after_player_one_dies)
     b.set_position(g.get_players()[0].get_position());
     g.tick();
   }
-  BOOST_CHECK(g.get_game_state() == game_state::over);
+  BOOST_CHECK(g.get_state() == game_state::game_over);
 }
