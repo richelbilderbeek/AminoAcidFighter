@@ -1,6 +1,9 @@
 #ifndef MENU_SFML_H
 #define MENU_SFML_H
 
+/// Functions and/or classes to display the 'menu' class
+/// using SFML
+
 #include <array>
 #include <cassert>
 #include <iostream>
@@ -12,17 +15,16 @@
 #include "player.h"
 #include "program_state.h"
 
-void change_amino_name(
-  amino_acid aminoacid_player,
-  sf::Text &player_AA
-);
 
-///Return the selected amino acids
+/// Displays the menu,
+/// returns the selected amino acids chosen
 std::vector<amino_acid> choose_aminoacids(
   sf::RenderWindow &window,
-  const int argc,
-  std::vector<amino_acid> players
+  std::vector<amino_acid> players,
+  bool play_music = true
 );
+
+
 
 ///Menu for selecting a number of players
 ///Return chosen number of players
@@ -31,6 +33,14 @@ int choose_n_players(
   const int argc,
   int player_amount
 );
+
+
+void change_amino_name(
+  amino_acid aminoacid_player,
+  sf::Text &player_AA
+);
+
+
 
 void choose_player_joystick(
   std::vector<amino_acid> &amino_acids,

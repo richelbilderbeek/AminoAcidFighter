@@ -19,6 +19,9 @@ BOOST_AUTO_TEST_CASE(player_construction)
   BOOST_CHECK_EQUAL(p.get_y(), y);
 }
 
-
-
+BOOST_AUTO_TEST_CASE(tyrosine_has_shield_as_special_power)
+{
+  const player p(amino_acid::tyrosine);
+  BOOST_CHECK(p.get_power() == power::shield);
+}
 

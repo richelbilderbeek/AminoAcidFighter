@@ -229,3 +229,4 @@ BOOST_AUTO_TEST_CASE(check_game_over_after_player_one_dies)
   }
   BOOST_CHECK(g.get_state() == game_state::game_over);
 }
+

@@ -8,7 +8,7 @@ menu create_test_menu_1()
     amino_acid::arginine,
     amino_acid::phenylalanine
   };
-  return menu m{initial_amino_acids};
+  return menu{initial_amino_acids};
 }
 
 void minus_player(

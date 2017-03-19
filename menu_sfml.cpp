@@ -32,8 +32,9 @@ void change_amino_name( //!OCLINT cannot make this any shorter
 
 std::vector<amino_acid> choose_aminoacids(
   sf::RenderWindow &window,
-  const int argc,
-  std::vector<amino_acid> amino_acids)
+  std::vector<amino_acid> amino_acids,
+  const bool play_music
+)
 {
   sf::Music music;
   if (!music.openFromFile("amino_acid_fighter_tune.wav")) { std::cout << "Could not find tune"; }

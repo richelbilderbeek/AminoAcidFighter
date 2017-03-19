@@ -3,14 +3,15 @@
 
 #include "amino_acid.h"
 #include "bullet.h"
+#include "power.h"
 
 class player
 {
 public:
   player(
     amino_acid any_amino_acid,
-    const double x,
-    const double y
+    const double x = 0.0,
+    const double y = 0.0
   );
 
   void accelerate();
@@ -18,6 +19,9 @@ public:
   auto get_amino_acid() const noexcept { return m_amino_acid; }
   auto get_hp() const noexcept { return m_hp; }
   std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; };
+
+  ///Return the special power of the amino acid
+  power get_power() const noexcept { return m_power; }
   auto get_rotation() const noexcept { return m_rotation_deg; }
   std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; };
   auto get_speed_x() const noexcept { return m_speed_x; }
@@ -31,7 +35,6 @@ public:
   void stop();
   void turn_left();
   void turn_right();
-
   void lose_hp();
 
 private:
