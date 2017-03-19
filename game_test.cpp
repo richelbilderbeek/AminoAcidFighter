@@ -22,10 +22,14 @@ BOOST_AUTO_TEST_CASE(check_create_players)
   //  [2]  [3]
   //
   // in the world
+  BOOST_CHECK_EQUAL(players[0].get_x(), players[2].get_x());
+  BOOST_CHECK_EQUAL(players[1].get_x(), players[3].get_x());
 
-  //BOOST_CHECK(players[0].get_x() < players[1].get_x());
-  //BOOST_CHECK(players[2].get_x() < players[3].get_x());
+  BOOST_CHECK_EQUAL(players[0].get_y(), players[1].get_y());
+  BOOST_CHECK_EQUAL(players[2].get_y(), players[3].get_y());
 
+  BOOST_CHECK_NE(players[0].get_x(), players[1].get_x());
+  BOOST_CHECK_NE(players[0].get_y(), players[2].get_y());
 
 }
 
