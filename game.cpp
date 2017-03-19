@@ -90,6 +90,17 @@ void game::tick()
 {
   for (auto& p: m_players) p.move(m_world_size);
   for (auto& b: m_bullets) b.move();
+  for(auto i{0u}; i < m_players.size(); ++i)
+  {
+    for(auto j{0u}; j < m_bullets.size(); ++j)
+    {
+      double distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
+      if(distance < get_hit_range_size())
+      {
+        m_players[i].lose_hp();
+      }
+    }
+  }
 
 }
 
