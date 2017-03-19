@@ -64,6 +64,10 @@ void game::do_action(int i, action any_action)
   {
     throw std::invalid_argument("This player does not exist");
   }
+  if(any_action == action::accelerate)
+  {
+    m_players[i].accelerate();
+  }
   if(any_action == action::shoot)
   {
     m_bullets.push_back(shoot(m_players[i]));

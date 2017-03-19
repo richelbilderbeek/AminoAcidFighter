@@ -3,6 +3,7 @@
 
 enum class action
 {
+  accelerate,
   shoot
 };
 
