@@ -4,7 +4,8 @@ SOURCES += main_test.cpp helper_test.cpp \
     bullet_test.cpp \
     game_test.cpp \
     menu_test.cpp \
-    player_test.cpp
+    player_test.cpp \
+    power_test.cpp
 
 include(AminoAcidFighter.pri)
 

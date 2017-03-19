@@ -230,3 +230,14 @@ BOOST_AUTO_TEST_CASE(check_game_over_after_player_one_dies)
   BOOST_CHECK(g.get_state() == game_state::game_over);
 }
 
+BOOST_AUTO_TEST_CASE(check_game_do_action_use_power)
+{
+  game g = create_test_game_1();
+
+  assert(!g.get_players()[0].uses_power());
+  g.do_action(0, action::use_power);
+  BOOST_CHECK(
+    g.get_players()[0].uses_power()
+  );
+}
+
