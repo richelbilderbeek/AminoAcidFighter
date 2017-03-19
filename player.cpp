@@ -36,7 +36,33 @@ void player::decelerate()
   m_speed_y += std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
 }
 
-
+power get_power(const amino_acid any_amino_acid) noexcept
+{
+  switch (any_amino_acid) {
+    case amino_acid::alanine:       return power::shield;
+    case amino_acid::arginine:      return power::shield;
+    case amino_acid::asparagine:    return power::shield;
+    case amino_acid::aspartic_acid: return power::shield;
+    case amino_acid::cysteine:      return power::shield;
+    case amino_acid::glutamic_acid: return power::shield;
+    case amino_acid::glutamine:     return power::shield;
+    case amino_acid::glycine:       return power::shield;
+    case amino_acid::histidine:     return power::shield;
+    case amino_acid::isoleucine:    return power::shield;
+    case amino_acid::leucine:       return power::shield;
+    case amino_acid::lysine:        return power::shield;
+    case amino_acid::methionine:    return power::shield;
+    case amino_acid::phenylalanine: return power::shield;
+    case amino_acid::proline:       return power::shield;
+    case amino_acid::serine:        return power::shield;
+    case amino_acid::threonine:     return power::shield;
+    case amino_acid::tryptophan:    return power::shield;
+    case amino_acid::tyrosine:      return power::shield;
+    case amino_acid::valine:        return power::shield;
+  }
+  assert(!"Should not get here"); //!OCLINT accepted idiom
+  return power::shield;
+}
 
 void player::move(const double world_size)
 {
