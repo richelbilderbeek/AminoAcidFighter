@@ -30,6 +30,8 @@ private:
   std::vector<amino_acid> m_amino_acids;
 };
 
+
+
 void minus_player(
   int &player_amount
 );
