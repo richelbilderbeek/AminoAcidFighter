@@ -58,6 +58,8 @@ private:
 /// in which is is hit, in pixels
 double get_hit_range_size();
 
+power get_power(const amino_acid any_amino_acid) noexcept;
+
 ///Creat a bullet shot by the player
 bullet shoot(const player& any_player);
 
