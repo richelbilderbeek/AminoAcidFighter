@@ -548,3 +548,51 @@ void draw_life_bar(
 {
   window.draw(life_bar);
 }
+
+
+void respond_to_joystick( //!OCLINT cannot simplify this even more
+  player &player3,
+  player &player4,
+  std::vector<bullet> &bullets)
+{
+  // player 3 controls
+  if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); } // A button
+  if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; } // B button
+  if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
+  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accelerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
+    bullets.push_back(shoot(player3));
+  }
+
+  //player 4 controls
+  if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); } // A button
+  if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; } // B button
+  if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
+  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accelerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
+    bullets.push_back(shoot(player4));
+  }
+}
+
+void respond_to_key( //!OCLINT cannot simplify this even more
+  player &player1,
+  player &player2,
+  std::vector<bullet> &bullets)
+{
+  // player1 controls
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { player1.turn_left()   ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { player1.turn_right()  ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accelerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.deccellerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    bullets.push_back(shoot(player1));
+  }
+  // player2 controls
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accelerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { player2.turn_right()  ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.deccellerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { player2.turn_left()   ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
+    bullets.push_back(shoot(player2));
+  }
+}
