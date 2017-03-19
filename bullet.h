@@ -26,7 +26,6 @@ public:
 
 private:
   double m_damage;
-  //sf::Vector2f m_position;
   double m_speed_x;
   double m_speed_y;
   sf::Sprite m_sprite;

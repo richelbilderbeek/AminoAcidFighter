@@ -8,7 +8,6 @@ bullet::bullet(
   const int any_window_size
 )
   : m_damage{damage},
-    //m_position{position},
     m_speed_x{speed_x},
     m_speed_y{speed_y},
     m_sprite{},

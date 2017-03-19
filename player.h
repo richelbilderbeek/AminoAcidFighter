@@ -9,9 +9,7 @@
 class player
 {
 public:
-  player(
-    sf::Vector2f m_position,
-    sf::Sprite * m_sprite,
+  player(sf::Sprite * m_sprite,
     sf::Texture * m_texture
   );
 
@@ -32,7 +30,7 @@ public:
 private:
   sf::RectangleShape m_HP;
   sf::CircleShape m_hit_range;
-  sf::Vector2f m_position;
+  sf::Vector2f position;
   double m_speed_x;
   double m_speed_y;
   sf::Sprite * m_sprite;
@@ -43,36 +41,36 @@ private:
 
 player create_player(
   amino_acid aminoacid,
-  sf::Vector2f m_position
+  sf::Vector2f position
 );
 
 player create_player(
   amino_acid aminoacid,
   sf::Sprite m_sprite,
   sf::Texture m_texture,
-  sf::Vector2f m_position
+  sf::Vector2f position
 );
 
-player create_alanine      (sf::Vector2f m_position);
-player create_arginine     (sf::Vector2f m_position);
-player create_asparagine   (sf::Vector2f m_position);
-player create_aspartic_acid(sf::Vector2f m_position);
-player create_cysteine     (sf::Vector2f m_position);
-player create_glutamic_acid(sf::Vector2f m_position);
-player create_glutamine    (sf::Vector2f m_position);
-player create_glycine      (sf::Vector2f m_position);
-player create_histidine    (sf::Vector2f m_position);
-player create_isoleucine   (sf::Vector2f m_position);
-player create_leucine      (sf::Vector2f m_position);
-player create_lysine       (sf::Vector2f m_position);
-player create_methionine   (sf::Vector2f m_position);
-player create_phenylalanine(sf::Vector2f m_position);
-player create_proline      (sf::Vector2f m_position);
-player create_serine       (sf::Vector2f m_position);
-player create_threonine    (sf::Vector2f m_position);
-player create_tryptophan   (sf::Vector2f m_position);
-player create_tyrosine     (sf::Vector2f m_position);
-player create_valine       (sf::Vector2f m_position);
+player create_alanine      (sf::Vector2f position);
+player create_arginine     (sf::Vector2f position);
+player create_asparagine   (sf::Vector2f position);
+player create_aspartic_acid(sf::Vector2f position);
+player create_cysteine     (sf::Vector2f position);
+player create_glutamic_acid(sf::Vector2f position);
+player create_glutamine    (sf::Vector2f position);
+player create_glycine      (sf::Vector2f position);
+player create_histidine    (sf::Vector2f position);
+player create_isoleucine   (sf::Vector2f position);
+player create_leucine      (sf::Vector2f position);
+player create_lysine       (sf::Vector2f position);
+player create_methionine   (sf::Vector2f position);
+player create_phenylalanine(sf::Vector2f position);
+player create_proline      (sf::Vector2f position);
+player create_serine       (sf::Vector2f position);
+player create_threonine    (sf::Vector2f position);
+player create_tryptophan   (sf::Vector2f position);
+player create_tyrosine     (sf::Vector2f position);
+player create_valine       (sf::Vector2f position);
 
 void draw(
   player p,
