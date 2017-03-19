@@ -85,6 +85,10 @@ void game::do_action(int i, action any_action)
   {
     m_players[i].turn_right();
   }
+  if(any_action == action::use_power)
+  {
+    m_players[i].start_using_power();
+  }
 }
 
 void game::do_damage()

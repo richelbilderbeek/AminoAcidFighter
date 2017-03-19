@@ -32,9 +32,12 @@ public:
   void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
   void stop();
+  void start_using_power();
+
   void turn_left();
   void turn_right();
   void lose_hp();
+  bool uses_power() const;
 
 private:
   amino_acid m_amino_acid;
@@ -47,6 +50,8 @@ private:
 
   ///How fast the sprite is rotating per tick
   double m_turn_speed_deg_per_tick;
+
+  bool m_uses_power;
 
   double m_x;
   double m_y;
