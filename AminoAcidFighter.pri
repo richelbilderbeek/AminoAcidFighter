@@ -1,4 +1,5 @@
 SOURCES += \
+    action.cpp \
     amino_acid.cpp \
     bullet.cpp \
     game.cpp \
@@ -8,6 +9,7 @@ SOURCES += \
     program_state.cpp
 
 HEADERS += \
+    action.h \
     amino_acid.h \
     bullet.h \
     helper.h \

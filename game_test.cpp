@@ -64,6 +64,8 @@ BOOST_AUTO_TEST_CASE(check_game_do_action)
 {
   const game g = create_test_game_1();
   assert(g.get_bullets().size() == 0);
+
+  //Player 1 (at index 0) shoots one bullet
   g.do_action(0, action::shoot);
   BOOST_CHECK_EQUAL(g.get_bullets().size(), 1);
 }
