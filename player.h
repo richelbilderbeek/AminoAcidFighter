@@ -14,7 +14,7 @@ public:
   );
 
   void accelerate();
-  void deccellerate();
+  void decelerate();
   auto get_amino_acid() const noexcept { return m_amino_acid; }
   auto get_hp() const noexcept { return m_hp; }
   std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; };

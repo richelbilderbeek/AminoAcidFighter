@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE(check_game_do_action_decellerate_undoes_accelerate)
   );
 
   //Player 1 (at index 0) accelerates
-  g.do_action(0, action::deccelerate);
+  g.do_action(0, action::decelerate);
 
   BOOST_CHECK(
     g.get_players().front().get_speed_x() == 0.0 &&
