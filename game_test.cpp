@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(check_create_test_game_1)
   const double world_size{314.159};
   const std::vector<amino_acid> amino_acids =
   {
-    amino_acid::alanine,
+    amino_acid::tyrosine,
     amino_acid::glycine
   };
   const game g(amino_acids, world_size);
