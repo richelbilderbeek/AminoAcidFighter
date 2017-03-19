@@ -8,7 +8,7 @@ bullet::bullet(
   const int any_window_size
 )
   : m_damage{damage},
-    m_position{position},
+    //m_position{position},
     m_speed_x{speed_x},
     m_speed_y{speed_y},
     m_sprite{},
@@ -55,5 +55,5 @@ void remove_out_of_screen_bullets(
 
 void bullet::set_position(sf::Vector2f position)
 {
-  m_position = position;
+  m_sprite.setPosition(position);
 }

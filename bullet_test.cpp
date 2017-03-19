@@ -69,3 +69,21 @@ BOOST_AUTO_TEST_CASE(keep_in_screen_bullets)
   remove_out_of_screen_bullets(bullets, window_size);
   BOOST_CHECK_EQUAL(bullets.size(), 1);
 }
+
+BOOST_AUTO_TEST_CASE(check_move)
+{
+  const double damage{10.0};
+  const sf::Vector2f position{sf::Vector2f(10.0, 10.0)};
+  const double speed_x{0.8};
+  const double speed_y{0.6};
+  const int window_size{100};
+
+  bullet b(damage, position, speed_x, speed_y, window_size);
+  const auto position_before = b.get_position();
+  b.move();
+  const auto position_after = b.get_position();
+  BOOST_CHECK_NE(position_before.x, position_after.x);
+  BOOST_CHECK_NE(position_before.y, position_after.y);
+  BOOST_CHECK_CLOSE(position_after.x, position_before.x + speed_x, 0.0001);
+  BOOST_CHECK_CLOSE(position_after.y, position_before.y + speed_y, 0.0001);
+}
