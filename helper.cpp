@@ -1,4 +1,5 @@
 #include <cassert>
+#include <cmath>
 #include <iostream>
 #include <QFile>
 #include <vector>
@@ -56,6 +57,7 @@ void create_sprites()
     "Pictures/AminoAcids/Tyrosine.png",
     "Pictures/AminoAcids/Valine.png"
   };
+
   for (const std::string s: v) {
     QFile f( (std::string(":/sprites/") + s).c_str());
     const std::string filename{extract_base(s)};
@@ -75,3 +77,7 @@ std::string extract_base(const std::string& s)
   return s.substr(from + 1, s.size() - 1);
 }
 
+double deg_to_rad(const double deg) noexcept
+{
+  return (deg * M_PI / 180.0);
+}

@@ -33,6 +33,19 @@ bullet::bullet(
   */
 }
 
+bool is_out_of_screen(
+  const bullet& any_bullet,
+  const int window_size)
+{
+  if(any_bullet.get_x() < 0 ||
+     any_bullet.get_x() > window_size ||
+     any_bullet.get_y() < 0 ||
+     any_bullet.get_y() > window_size) {
+    return true;
+  }
+  return false;
+}
+
 void bullet::move()
 {
   //sf::Vector2f p = m_sprite.getPosition();
@@ -58,20 +71,6 @@ void remove_out_of_screen_bullets(
     new_end,
     std::end(bullets)
   );
-  /*
-  for(int i=0; i < static_cast<int>(bullets.size()); ++i) {
-    sf::Sprite bullet_sprite = bullets[i].get_sprite();
-
-    if(bullet_sprite.getPosition().x < 0 ||
-       bullet_sprite.getPosition().x > window_size ||
-       bullet_sprite.getPosition().y < 0 ||
-       bullet_sprite.getPosition().y > window_size) {
-      bullets[i] = bullets.back();
-      bullets.pop_back();
-      --i;
-    }
-  }
-  */
 }
 
 void bullet::set_position(const double x, const double y)
