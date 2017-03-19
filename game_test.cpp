@@ -81,4 +81,21 @@ BOOST_AUTO_TEST_CASE(check_game_cannot_shoot_with_absent_player)
   );
 }
 
+BOOST_AUTO_TEST_CASE(check_game_do_action_accelerate)
+{
+  game g = create_test_game_1();
+
+  //Player 1 (at index 0) stands still
+  assert(g.get_players().front().get_speed_x() == 0.0);
+  assert(g.get_players().front().get_speed_y() == 0.0);
+
+  //Player 1 (at index 0) accelerates
+  g.do_action(0, action::accelerate);
+
+  BOOST_CHECK(
+    g.get_players().front().get_speed_x() != 0.0 ||
+    g.get_players().front().get_speed_y() != 0.0
+  );
+
+}
 
