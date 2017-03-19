@@ -3,6 +3,7 @@
 #include "game.h"
 #include "player_sfml.h"
 #include "bullet_sfml.h"
+#include "menu_sfml.h"
 
 void bullet_hits_player(
   std::vector<bullet> bullets,
@@ -83,10 +84,12 @@ void play_game(
     //Move players, hit range and bullets
     for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
     for(auto& bullet : bullets) { bullet.move(); }
+    #ifdef NOT_NOW
     for(auto i = 0u; i != players.size(); ++i) {
       hit_ranges[i].setPosition(players[i].get_position() + players[i].get_speed());
     }
 
+    #endif // NOT_NOW
     //Check if bullet hits player
     bullet_hits_player(bullets, players, life_bars);
 
@@ -229,6 +232,7 @@ std::vector<sf::Vector2f> set_start_positions()
   return start_positions;
 }
 
+#ifdef REALLY_STILL_WANT_THIS
 std::vector<player> set_players(
   std::vector<amino_acid> amino_acids,
   std::vector<sf::Vector2f> player_positions)
@@ -244,6 +248,7 @@ std::vector<player> set_players(
   }
   return players;
 }
+#endif // REALLY_STILL_WANT_THIS
 
 void substract_HP(
   std::vector<sf::RectangleShape> &life_bars,

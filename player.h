@@ -17,7 +17,9 @@ public:
   void deccellerate();
   auto get_amino_acid() const noexcept { return m_amino_acid; }
   auto get_hp() const noexcept { return m_hp; }
+  std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; };
   auto get_rotation() const noexcept { return m_rotation_deg; }
+  std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; };
   auto get_speed_x() const noexcept { return m_speed_x; }
   auto get_speed_y() const noexcept { return m_speed_y; }
   auto get_turn_speed() const noexcept { return m_turn_speed_deg_per_tick; }

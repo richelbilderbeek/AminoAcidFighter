@@ -99,3 +99,14 @@ BOOST_AUTO_TEST_CASE(check_game_do_action_accelerate)
 
 }
 
+BOOST_AUTO_TEST_CASE(check_game_bullets_move)
+{
+  game g = create_test_game_1();
+  g.do_action(1, action::shoot);
+  assert(g.get_bullets().size() == 1);
+  const auto pos_before = g.get_bullets()[0].get_position();
+  g.tick();
+  const auto pos_after = g.get_bullets()[0].get_position();
+  BOOST_CHECK(pos_before != pos_after);
+
+}
