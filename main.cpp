@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "game.h"
+#include "game_sfml.h"
 #include "helper.h"
 
 int main(int argc, char * [])

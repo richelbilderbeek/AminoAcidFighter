@@ -1,5 +1,7 @@
 #include "menu_sfml.h"
 
+#include "player_sfml.h"
+
 void change_amino_name( //!OCLINT cannot make this any shorter
   amino_acid aminoacid_player,
   sf::Text &player_AA)

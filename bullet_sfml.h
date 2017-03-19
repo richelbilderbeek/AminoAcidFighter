@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 
+//May be slow
 sf::Sprite to_sprite(const bullet& b);
 
 #endif // BULLET_SFML_H

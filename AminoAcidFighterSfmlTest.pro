@@ -1,8 +1,10 @@
 # Files
-SOURCES += main_test.cpp
+SOURCES += main_test.cpp \
+    menu_sfml_test.cpp
 
 include(AminoAcidFighter.pri)
 include(AminoAcidFighterSfml.pri)
+
 
 # C++14
 CONFIG += c++14
