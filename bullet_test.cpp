@@ -89,11 +89,11 @@ BOOST_AUTO_TEST_CASE(check_move)
   const int world_size{100};
 
   bullet b(damage, pos.first, pos.second, speed_x, speed_y);
-  const auto position_before = b.get_position();
+  const position pos_before = { b.get_x(), b.get_y() };
   b.move();
-  const auto position_after = b.get_position();
-  BOOST_CHECK_NE(position_before.x, position_after.x);
-  BOOST_CHECK_NE(position_before.y, position_after.y);
-  BOOST_CHECK_CLOSE(position_after.x, position_before.x + speed_x, 0.0001);
-  BOOST_CHECK_CLOSE(position_after.y, position_before.y + speed_y, 0.0001);
+  const position pos_after = { b.get_x(), b.get_y() };
+  BOOST_CHECK_NE(pos_before.first, pos_after.first);
+  BOOST_CHECK_NE(pos_before.second, pos_after.second);
+  BOOST_CHECK_CLOSE(pos_after.first, pos_before.first + speed_x, 0.0001);
+  BOOST_CHECK_CLOSE(pos_after.second, pos_before.second + speed_y, 0.0001);
 }

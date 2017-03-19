@@ -12,7 +12,10 @@
 class game
 {
 public:
-  game(const std::vector<amino_acid>& players);
+  game(
+    const std::vector<amino_acid>& players,
+    const double world_size
+  );
 
   const auto& get_bullets() const noexcept { return m_bullets; }
   const auto& get_players() const noexcept { return m_players; }
@@ -22,8 +25,8 @@ public:
   void tick();
 
 private:
-  std::vector<player> m_players;
   std::vector<bullet> m_bullets;
+  std::vector<player> m_players;
   double m_world_size;
 };
 
@@ -31,6 +34,12 @@ private:
 float calculate_distance_bullet_player(
   bullet any_bullet,
   player any_player
+);
+
+/// Create the 2,3 or 4 players at the right initial positions,
+std::vector<player> create_players(
+  const std::vector<amino_acid>& amino_acids,
+  const double world_size
 );
 
 ///Display the game state

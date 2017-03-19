@@ -15,6 +15,7 @@ public:
 
   void accelerate();
   void deccellerate();
+  auto get_amino_acid() const noexcept { return m_amino_acid; }
   auto get_rotation() const noexcept { return m_rotation_deg; }
   auto get_speed_x() const noexcept { return m_speed_x; }
   auto get_speed_y() const noexcept { return m_speed_y; }

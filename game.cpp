@@ -1,8 +1,13 @@
 #include <cmath>
 #include "game.h"
 
-game::game(const std::vector<amino_acid>& )
-  : m_world_size{22.0}
+game::game(
+  const std::vector<amino_acid>& amino_acids,
+  const double world_size
+)
+  : m_bullets{},
+    m_players{create_players(amino_acids, world_size)},
+    m_world_size{world_size}
 {
 }
 
@@ -19,6 +24,26 @@ float calculate_distance_bullet_player(bullet any_bullet, player any_player)
   const float y2 = length_y * length_y;
   const float a2 = x2 + y2;
   return sqrt(a2);
+}
+
+std::vector<player> create_players(
+  const std::vector<amino_acid>& amino_acids,
+  const double world_size
+)
+{
+  std::vector<player> p;
+  const std::vector<double> xs = {
+    world_size * 0.25, world_size * 0.75, world_size * 0.25, world_size * 0.75
+  };
+  const std::vector<double> ys = {
+    world_size * 0.25, world_size * 0.25, world_size * 0.75, world_size * 0.75
+  };
+  const auto sz = amino_acids.size();
+  for (auto i = 0u; i!=sz; ++i)
+  {
+    p.push_back(player(amino_acids[i], xs[i], ys[i]));
+  }
+  return p;
 }
 
 void game::tick()
