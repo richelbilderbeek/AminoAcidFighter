@@ -30,12 +30,10 @@ BOOST_AUTO_TEST_CASE(check_create_players)
 
   BOOST_CHECK_NE(players[0].get_x(), players[1].get_x());
   BOOST_CHECK_NE(players[0].get_y(), players[2].get_y());
-
 }
 
 BOOST_AUTO_TEST_CASE(check_game_construction)
 {
-  /*
   const double world_size{314.159};
   const std::vector<amino_acid> amino_acids =
   {
@@ -44,7 +42,6 @@ BOOST_AUTO_TEST_CASE(check_game_construction)
   };
   const game g(amino_acids, world_size);
   BOOST_CHECK(g.get_players().size() == amino_acids.size());
-  */
 }
 
 
