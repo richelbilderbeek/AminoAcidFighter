@@ -37,3 +37,44 @@ oclint-0.10.3/
 oclint.log
 *.pro.user
 temp
+Alanine.png: >> .gitignore
+echo Arginine.png:
+Asparagine.png: >> .gitignore
+echo AsparticAcid.png:
+Bullet.png: >> .gitignore
+echo Cysteine.png:
+GlutamicAcid.png: >> .gitignore
+echo Glutamine.png:
+Glycine.png: >> .gitignore
+echo Histidine.png:
+Isoleucine.png: >> .gitignore
+echo Leucine.png:
+Lysine.png: >> .gitignore
+echo Methionine.png:
+Phenylalanine.png: >> .gitignore
+echo Proline.png:
+Serine.png: >> .gitignore
+echo Threonine.png:
+Tryptophan.png: >> .gitignore
+echo Tyrosine.png:
+Alanine.png
+Arginine.png
+Asparagine.png
+AsparticAcid.png
+Bullet.png
+Cysteine.png
+GlutamicAcid.png
+Glutamine.png
+Glycine.png
+Histidine.png
+Isoleucine.png
+Leucine.png
+Lysine.png
+Methionine.png
+Phenylalanine.png
+Proline.png
+Serine.png
+Threonine.png
+Tryptophan.png
+Tyrosine.png
+Valine.png

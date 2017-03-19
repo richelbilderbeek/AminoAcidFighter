@@ -5,15 +5,13 @@
 #include "player.h"
 
 player::player(
-  sf::Sprite * sprite,
-  sf::Texture * texture
+  sf::Sprite * sprite
 )
-  : m_HP{},
+  : m_HP{100.0},
     m_hit_range{},
     m_speed_x{0.0},
     m_speed_y{0.0},
     m_sprite{sprite},
-    m_texture{texture},
     m_turn_speed{0.0}
 {}
 
@@ -76,7 +74,7 @@ player create_alanine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_arginine(
@@ -98,7 +96,7 @@ player create_arginine(
   m_sprite->setScale(sf::Vector2f(0.12, 0.12));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_asparagine(
@@ -121,7 +119,7 @@ player create_asparagine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_aspartic_acid(
@@ -144,7 +142,7 @@ player create_aspartic_acid(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_cysteine(
@@ -168,7 +166,7 @@ player create_cysteine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_glutamic_acid(
@@ -191,7 +189,7 @@ player create_glutamic_acid(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_glutamine(
@@ -214,7 +212,7 @@ player create_glutamine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_glycine(
@@ -237,7 +235,7 @@ player create_glycine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_histidine(
@@ -260,7 +258,7 @@ player create_histidine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_isoleucine(
@@ -283,7 +281,7 @@ player create_isoleucine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_leucine(
@@ -306,7 +304,7 @@ player create_leucine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_lysine(
@@ -329,7 +327,7 @@ player create_lysine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_methionine(
@@ -352,7 +350,7 @@ player create_methionine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_phenylalanine(
@@ -378,7 +376,7 @@ void draw_hit_ranges(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_proline(
@@ -401,7 +399,7 @@ player create_proline(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_serine(
@@ -424,7 +422,7 @@ player create_serine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_threonine(
@@ -447,7 +445,7 @@ player create_threonine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_tryptophan(
@@ -470,7 +468,7 @@ player create_tryptophan(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_tyrosine(
@@ -493,7 +491,7 @@ player create_tyrosine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 player create_valine(
@@ -516,7 +514,7 @@ player create_valine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(position);
-  return player(m_sprite, m_texture);
+  return player(m_sprite);
 }
 
 void player::deccellerate()
@@ -687,4 +685,14 @@ void player::turn_left()
 void player::turn_right()
 {
   m_turn_speed += 0.1;
+}
+
+void player::lose_hp()
+{
+  m_HP -= 0.5;
+}
+
+float get_hit_range_size()
+{
+  return 25.0;
 }

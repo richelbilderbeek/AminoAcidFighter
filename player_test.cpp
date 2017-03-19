@@ -6,8 +6,8 @@
 BOOST_AUTO_TEST_CASE(player_construction)
 {
   create_sprites();
-  sf::Sprite * sprite = new sf::Sprite;
-  sf::Texture * texture = new sf::Texture;
+  sf::Sprite *sprite = new sf::Sprite;
+  sf::Texture *texture = new sf::Texture;
   sf::Vector2f position{sf::Vector2f(10.0, 10.0)};
 
   texture->loadFromFile("Alanine.png");

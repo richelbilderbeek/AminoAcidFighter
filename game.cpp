@@ -6,16 +6,21 @@ void bullet_hits_player(
   std::vector<player> players,
   std::vector<sf::RectangleShape> &life_bars)
 {
-  const float hit_range_size{25.0};
+  const float hit_range_size = get_hit_range_size();
   for(auto i = 0u; i < players.size(); ++i) {
     for(auto j = 0u; j < bullets.size(); ++j) {
       float distance = calculate_distance_bullet_player(bullets[j], players[i]);
       std::cout << distance << std::endl;
       if(distance <= hit_range_size) {
-        substract_life(life_bars, i);
+        //substract_HP(life_bars, i);
+          players[i].lose_hp();
         //TODO remove_bullets_that_hits();
       }
     }
+  }
+  //Show the players' HPs in the bars
+  for(auto i = 0u; i < players.size(); ++i) {
+    life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), life_bars[i].getSize().y));
   }
 }
 
@@ -109,7 +114,8 @@ void play_game(
   }
 }
 
-void process_event_game(sf::Event event,
+void process_event_game(
+  sf::Event event,
   sf::RenderWindow &window,
   std::vector<player> &players,
   std::vector<bullet> &bullets,
@@ -186,7 +192,7 @@ std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<sf::CircleShape> hit_ranges;
   for(auto i{0u}; i != amino_acids.size(); ++i)
   {
-    const float hit_range_size{25.0};
+    const float hit_range_size = get_hit_range_size();
     sf::CircleShape hit_range;
     hit_range.setPosition(start_positions[i]);
     hit_range.setRadius(hit_range_size);
@@ -252,7 +258,7 @@ std::vector<player> set_players(
   return players;
 }
 
-void substract_life(
+void substract_HP(
   std::vector<sf::RectangleShape> &life_bars,
   int i)
 {

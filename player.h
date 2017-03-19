@@ -9,8 +9,8 @@
 class player
 {
 public:
-  player(sf::Sprite * m_sprite,
-    sf::Texture * m_texture
+  player(
+    sf::Sprite * m_sprite
   );
 
   void accelerate();
@@ -27,17 +27,21 @@ public:
   void turn_left();
   void turn_right();
 
+  auto get_hp() { return m_HP; }
+  void lose_hp();
+
 private:
-  sf::RectangleShape m_HP;
+  float m_HP;
   sf::CircleShape m_hit_range;
   sf::Vector2f position;
   double m_speed_x;
   double m_speed_y;
   sf::Sprite * m_sprite;
-  sf::Texture * m_texture;
   ///How fast the sprite is rotating per tick
   double m_turn_speed;
 };
+
+float get_hit_range_size();
 
 player create_player(
   amino_acid aminoacid,
