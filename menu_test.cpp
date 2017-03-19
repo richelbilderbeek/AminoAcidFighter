@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE(menu_choose_next)
   BOOST_CHECK(m.get_current_amino_acids()[0] != amino_acid::threonine);
 }
 
-BOOST_AUTO_TEST_CASE(menu_choose_next)
+BOOST_AUTO_TEST_CASE(menu_choose_previous)
 {
   const std::vector<amino_acid> initial_amino_acids =
   {
@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(menu_choose_next)
   };
   menu m(initial_amino_acids);
   assert(m.get_current_amino_acids()[1] == amino_acid::arginine);
-  m.choose_previous(1)
+  m.choose_previous(1);
   BOOST_CHECK(m.get_current_amino_acids()[1] != amino_acid::arginine);
 }
 
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(menu_construction_with_too_little)
     amino_acid::threonine
   };
   BOOST_CHECK_THROW(
-    menu(initial_amino_acids),
+    menu m(initial_amino_acids),
     std::invalid_argument
   );
 }
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(menu_construction_with_too_many)
     amino_acid::cysteine
   };
   BOOST_CHECK_THROW(
-    menu(initial_amino_acids),
+    menu m(initial_amino_acids),
     std::invalid_argument
   );
 }
