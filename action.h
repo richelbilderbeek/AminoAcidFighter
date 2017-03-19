@@ -7,7 +7,8 @@ enum class action
   decelerate,
   shoot,
   turn_left,
-  turn_right
+  turn_right,
+  use_power
 };
 
 #endif // ACTION_H

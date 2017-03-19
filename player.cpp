@@ -16,6 +16,7 @@ player::player(
     m_speed_x{0.0},
     m_speed_y{0.0},
     m_turn_speed_deg_per_tick{0.0},
+    m_uses_power{false},
     m_x{x},
     m_y{y}
 {}
@@ -109,6 +110,16 @@ void player::turn_left()
 void player::turn_right()
 {
   m_turn_speed_deg_per_tick += 0.1;
+}
+
+bool player::uses_power() const
+{
+  return m_uses_power;
+}
+
+void player::start_using_power()
+{
+  m_uses_power = true;
 }
 
 void player::lose_hp()
