@@ -26,6 +26,7 @@ public:
 
   void move();
   void set_position(const double x, const double y);
+  void set_position(const std::pair<double, double> pos) { set_position(pos.first, pos.second); }
 
 private:
   double m_damage;

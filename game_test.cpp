@@ -155,3 +155,36 @@ BOOST_AUTO_TEST_CASE(check_game_players_turn_right)
   BOOST_CHECK(angle_before != angle_after);
 }
 
+BOOST_AUTO_TEST_CASE(check_game_player_remains_in_screen)
+{
+  game g = create_test_game_1();
+  g.do_action(0, action::accelerate);
+  g.do_action(1, action::accelerate);
+  for (int i=0; i!=1000; ++i)
+  {
+    g.tick();
+  }
+  BOOST_CHECK(g.get_players()[0].get_x() >= 0.0);
+  BOOST_CHECK(g.get_players()[0].get_y() >= 0.0);
+  BOOST_CHECK(g.get_players()[0].get_x() < g.get_world_size());
+  BOOST_CHECK(g.get_players()[0].get_y() < g.get_world_size());
+
+  BOOST_CHECK(g.get_players()[1].get_x() >= 0.0);
+  BOOST_CHECK(g.get_players()[1].get_y() >= 0.0);
+  BOOST_CHECK(g.get_players()[1].get_x() < g.get_world_size());
+  BOOST_CHECK(g.get_players()[1].get_y() < g.get_world_size());
+}
+
+BOOST_AUTO_TEST_CASE(check_game_player_bullets_do_damage)
+{
+  game g = create_test_game_1();
+  const auto hp_before = g.get_players()[0].get_hp();
+
+  g.do_action(0, action::shoot);
+  bullet& b = g.get_bullets()[0];
+  b.set_position(g.get_players()[0].get_position());
+  g.tick();
+  const auto hp_after = g.get_players()[0].get_hp();
+  BOOST_CHECK_LT(hp_after, hp_before);
+}
+

@@ -19,6 +19,7 @@ public:
   );
 
   const auto& get_bullets() const noexcept { return m_bullets; }
+  auto& get_bullets() noexcept { return m_bullets; }
   const auto& get_players() const noexcept { return m_players; }
   auto get_world_size() const noexcept { return m_world_size; }
   void do_action(int i, action any_action);
