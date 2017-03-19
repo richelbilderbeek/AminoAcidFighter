@@ -62,12 +62,23 @@ BOOST_AUTO_TEST_CASE(check_create_test_game_1)
 
 BOOST_AUTO_TEST_CASE(check_game_do_action)
 {
-  const game g = create_test_game_1();
+  game g = create_test_game_1();
   assert(g.get_bullets().size() == 0);
 
   //Player 1 (at index 0) shoots one bullet
   g.do_action(0, action::shoot);
   BOOST_CHECK_EQUAL(g.get_bullets().size(), 1);
+}
+
+BOOST_AUTO_TEST_CASE(check_game_cannot_shoot_with_absent_player)
+{
+  game g = create_test_game_1();
+  const int absent_player_index = g.get_players().size();
+
+  BOOST_CHECK_THROW(
+    g.do_action(absent_player_index, action::shoot),
+    std::invalid_argument
+  );
 }
 
 
