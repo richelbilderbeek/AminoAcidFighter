@@ -140,19 +140,19 @@ BOOST_AUTO_TEST_CASE(check_game_do_action_decellerate_undoes_accelerate)
 BOOST_AUTO_TEST_CASE(check_game_players_turn_left)
 {
   game g = create_test_game_1();
-  const auto angle_before = g.get_players()[0].get_rotation();
+  const auto turn_speed_before = g.get_players()[0].get_turn_speed();
   g.do_action(0, action::turn_left);
-  const auto angle_after = g.get_players()[0].get_rotation();
-  BOOST_CHECK(angle_before != angle_after);
+  const auto turn_speed_after = g.get_players()[0].get_turn_speed();
+  BOOST_CHECK(turn_speed_before != turn_speed_after);
 }
 
 BOOST_AUTO_TEST_CASE(check_game_players_turn_right)
 {
   game g = create_test_game_1();
-  const auto angle_before = g.get_players()[0].get_rotation();
+  const auto turn_speed_before = g.get_players()[0].get_turn_speed();
   g.do_action(0, action::turn_right);
-  const auto angle_after = g.get_players()[0].get_rotation();
-  BOOST_CHECK(angle_before != angle_after);
+  const auto turn_speed_after = g.get_players()[0].get_turn_speed();
+  BOOST_CHECK(turn_speed_before != turn_speed_after);
 }
 
 BOOST_AUTO_TEST_CASE(check_game_player_remains_in_screen)
