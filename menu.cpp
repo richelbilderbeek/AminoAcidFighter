@@ -17,8 +17,16 @@ void menu::choose_previous(const int player_index)
   m_amino_acids[player_index] = get_prev(m_amino_acids[player_index]);
 }
 
-
-
+menu create_test_menu_1()
+{
+  const std::vector<amino_acid> initial_amino_acids =
+  {
+    amino_acid::threonine,
+    amino_acid::arginine,
+    amino_acid::phenylalanine
+  };
+  return menu{initial_amino_acids};
+}
 
 void minus_player(
   int &player_amount)

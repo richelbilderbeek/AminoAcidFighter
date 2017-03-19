@@ -30,7 +30,8 @@ private:
   std::vector<amino_acid> m_amino_acids;
 };
 
-
+///Create a testing menu
+menu create_test_menu_1();
 
 void minus_player(
   int &player_amount
