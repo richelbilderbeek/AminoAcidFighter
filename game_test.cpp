@@ -241,3 +241,16 @@ BOOST_AUTO_TEST_CASE(check_game_do_action_use_power)
   );
 }
 
+BOOST_AUTO_TEST_CASE(check_game_powers_wear_out)
+{
+  game g = create_test_game_1();
+  assert(!g.get_players()[0].uses_power());
+  g.do_action(0, action::use_power);
+  assert(g.get_players()[0].uses_power());
+  for (int i=0; i!=1000; ++i)
+  {
+    g.tick();
+  }
+  BOOST_CHECK(!g.get_players()[0].uses_power());
+}
+
