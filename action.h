@@ -5,7 +5,9 @@ enum class action
 {
   accelerate,
   decelerate,
-  shoot
+  shoot,
+  turn_left,
+  turn_right
 };
 
 #endif // ACTION_H

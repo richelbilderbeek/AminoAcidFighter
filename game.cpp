@@ -76,6 +76,14 @@ void game::do_action(int i, action any_action)
   {
     m_bullets.push_back(shoot(m_players[i]));
   }
+  if(any_action == action::turn_left)
+  {
+    m_players[i].turn_left();
+  }
+  if(any_action == action::turn_right)
+  {
+    m_players[i].turn_right();
+  }
 }
 
 void game::tick()
