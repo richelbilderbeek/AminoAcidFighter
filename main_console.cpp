@@ -1,5 +1,6 @@
 #include <cassert>
 
+#include "action.h"
 #include "amino_acid.h"
 #include "game.h"
 #include "helper.h"

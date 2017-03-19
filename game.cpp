@@ -57,6 +57,14 @@ game create_test_game_1()
   return game{amino_acids, world_size};
 }
 
+void game::do_action(int i, action any_action)
+{
+  if(any_action == action::shoot)
+  {
+    m_bullets.push_back(shoot(m_players[i]));
+  }
+}
+
 void game::tick()
 {
   for (auto& p: m_players) p.move(m_world_size);

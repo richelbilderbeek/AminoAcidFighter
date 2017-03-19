@@ -4,6 +4,7 @@
 /// Functions and/or classes to do the game logic,
 /// without its displayal
 
+#include "action.h"
 #include "amino_acid.h"
 #include "menu.h"
 #include "player.h"
@@ -20,6 +21,7 @@ public:
   const auto& get_bullets() const noexcept { return m_bullets; }
   const auto& get_players() const noexcept { return m_players; }
   auto get_world_size() const noexcept { return m_world_size; }
+  void do_action(int i, action any_action);
 
   ///Do a game 'tick', e.g. do this 60 times per second
   void tick();
