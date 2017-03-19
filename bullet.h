@@ -17,6 +17,7 @@ public:
   );
 
   auto get_damage()         const noexcept { return m_damage  ; }
+  std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; }
   auto get_x() const noexcept { return m_x; }
   auto get_y() const noexcept { return m_y; }
   auto get_speed_x()        const noexcept { return m_speed_x ; }
