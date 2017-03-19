@@ -1,6 +1,9 @@
 #ifndef PLAYER_SFML_H
 #define PLAYER_SFML_H
 
+#include <SFML/System/Vector2.hpp>
+
+
 player create_player(
   amino_acid aminoacid,
   sf::Sprite m_sprite,

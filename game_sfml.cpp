@@ -1,5 +1,9 @@
 #include "game_sfml.h"
 
+#include "game.h"
+#include "player_sfml.h"
+#include "bullet_sfml.h"
+
 void bullet_hits_player(
   std::vector<bullet> bullets,
   std::vector<player> players,
@@ -40,7 +44,7 @@ void draw_game(
       draw_hit_ranges(hit_ranges[i], window);
     }
   }
-  for(auto& bullet : bullets) { window.draw(bullet.get_sprite()); }
+  for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
   for(auto i{0u}; i != players.size(); ++i) {
     if(life_bars[i].getSize().x > 0.0) {
       draw(players[i], window);

@@ -1,10 +1,8 @@
 # Files
-SOURCES += main_test.cpp helper_test.cpp \
-    amino_acid_test.cpp \
-    bullet_test.cpp \
-    game_test.cpp \
-    player_test.cpp
+SOURCES += main_test.cpp
+
 include(AminoAcidFighter.pri)
+include(AminoAcidFighterSfml.pri)
 
 # C++14
 CONFIG += c++14

@@ -4,6 +4,8 @@
 /// Functions and/or classes to display the 'game' class
 /// using SFML
 
+#include "bullet.h"
+#include "player.h"
 #include <SFML/Graphics.hpp>
 
 void bullet_hits_player(
