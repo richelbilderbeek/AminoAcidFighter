@@ -7,7 +7,8 @@ SOURCES += \
     player.cpp \
     menu.cpp \
     program_state.cpp \
-    game_state.cpp
+    game_state.cpp \
+    power.cpp
 
 HEADERS += \
     action.h \
@@ -18,7 +19,8 @@ HEADERS += \
     player.h \
     menu.h \
     program_state.h \
-    game_state.h
+    game_state.h \
+    power.h
 
 RESOURCES += \
     AminoAcidFighter.qrc

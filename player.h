@@ -21,7 +21,6 @@ public:
   std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; };
 
   ///Return the special power of the amino acid
-  power get_power() const noexcept { return m_power; }
   auto get_rotation() const noexcept { return m_rotation_deg; }
   std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; };
   auto get_speed_x() const noexcept { return m_speed_x; }
