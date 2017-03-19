@@ -68,6 +68,10 @@ void game::do_action(int i, action any_action)
   {
     m_players[i].accelerate();
   }
+  if(any_action == action::decelerate)
+  {
+    m_players[i].decelerate();
+  }
   if(any_action == action::shoot)
   {
     m_bullets.push_back(shoot(m_players[i]));
