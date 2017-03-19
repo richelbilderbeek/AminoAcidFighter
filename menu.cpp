@@ -2,7 +2,8 @@
 #include "menu.h"
 
 menu::menu(
-  const std::vector<amino_acid>& initial_amino_acids
+  const std::vector<amino_acid>& initial_amino_acids,
+  bool /* play_music */
 )
   : m_amino_acids{initial_amino_acids}
 {
