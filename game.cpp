@@ -1,4 +1,5 @@
 #include <cmath>
+#include <stdexcept>
 #include "game.h"
 
 game::game(
@@ -59,6 +60,10 @@ game create_test_game_1()
 
 void game::do_action(int i, action any_action)
 {
+  if(i < 0 || i >= static_cast<int>(m_players.size()))
+  {
+    throw std::invalid_argument("This player does not exist");
+  }
   if(any_action == action::shoot)
   {
     m_bullets.push_back(shoot(m_players[i]));
