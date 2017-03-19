@@ -6,9 +6,12 @@
 
 int main()
 {
-  game g( { amino_acid::alanine, amino_acid::alanine } );
+  const double world_size{22.0};
+  game g( { amino_acid::alanine, amino_acid::alanine }, world_size );
   std::cout << g << '\n';
-  g.tick();
+  //g.do_action(0, action::accelerate);
+  g.do_action(0, action::shoot);
+  //g.tick();
   std::cout << g << '\n';
   //g.press_key(0, left
   //g.is_game_over()

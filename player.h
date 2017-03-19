@@ -16,9 +16,11 @@ public:
   void accelerate();
   void deccellerate();
   auto get_amino_acid() const noexcept { return m_amino_acid; }
+  auto get_hp() const noexcept { return m_hp; }
   auto get_rotation() const noexcept { return m_rotation_deg; }
   auto get_speed_x() const noexcept { return m_speed_x; }
   auto get_speed_y() const noexcept { return m_speed_y; }
+  auto get_turn_speed() const noexcept { return m_turn_speed_deg_per_tick; }
   auto get_x()      const noexcept { return m_x; }
   auto get_y()      const noexcept { return m_y; }
   void move(const double world_size);
@@ -28,7 +30,6 @@ public:
   void turn_left();
   void turn_right();
 
-  auto get_hp() const noexcept { return m_hp; }
   void lose_hp();
 
 private:
@@ -54,6 +55,8 @@ double get_hit_range_size();
 
 ///Creat a bullet shot by the player
 bullet shoot(const player& any_player);
+
+bool operator==(const player& lhs, const player& rhs) noexcept;
 
 std::ostream& operator<<(std::ostream& os, const player& any_player) noexcept;
 

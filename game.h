@@ -42,6 +42,9 @@ std::vector<player> create_players(
   const double world_size
 );
 
+/// Create a test game
+game create_test_game_1();
+
 ///Display the game state
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;
 

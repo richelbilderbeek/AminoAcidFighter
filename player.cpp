@@ -95,6 +95,19 @@ double get_hit_range_size()
   return 25.0;
 }
 
+bool operator==(const player& lhs, const player& rhs) noexcept
+{
+  return
+       lhs.get_amino_acid() == rhs.get_amino_acid()
+    && lhs.get_hp() == rhs.get_hp()
+    && lhs.get_rotation() == rhs.get_rotation()
+    && lhs.get_speed_x() == rhs.get_speed_x()
+    && lhs.get_speed_y() == rhs.get_speed_y()
+    && lhs.get_turn_speed() == rhs.get_turn_speed()
+    && lhs.get_x() == rhs.get_x()
+    && lhs.get_y() == rhs.get_y();
+}
+
 std::ostream& operator<<(std::ostream& os, const player& any_player) noexcept
 {
   os

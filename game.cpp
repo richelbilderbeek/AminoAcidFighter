@@ -46,6 +46,17 @@ std::vector<player> create_players(
   return p;
 }
 
+game create_test_game_1()
+{
+  const double world_size{314.159};
+  const std::vector<amino_acid> amino_acids =
+  {
+    amino_acid::alanine,
+    amino_acid::glycine
+  };
+  return game{amino_acids, world_size};
+}
+
 void game::tick()
 {
   for (auto& p: m_players) p.move(m_world_size);
