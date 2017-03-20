@@ -21,6 +21,8 @@ install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
   # SFML
   - sudo apt-get install libsfml-dev
+  # clang-tidy
+  - sudo apt-get install -qq clang
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Codecov
@@ -51,6 +53,8 @@ script:
   # Get code coverage
   - ./get_code_cov
   - codecov
+  # clang-tidy
+  - ./do_clang-tidy
   # Call OCLint
   - ./do_oclint
 
