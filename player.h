@@ -33,6 +33,7 @@ public:
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
   void stop();
   void start_using_power();
+  void stops_using_power();
 
   void turn_left();
   void turn_right();

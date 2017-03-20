@@ -1,6 +1,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "game.h"
+#include "player.h"
 
 game::game(
   const std::vector<amino_acid>& amino_acids,
@@ -112,6 +113,10 @@ void game::tick()
   {
     for (auto& p: m_players) p.move(m_world_size);
     for (auto& b: m_bullets) b.move();
+    for (auto i{0u}; i < m_players.size(); ++i)
+    {
+      m_players[i].stops_using_power();
+    }
     do_damage();
     if(m_players[0].get_hp() <= 0.0)
     {

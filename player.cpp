@@ -122,6 +122,11 @@ void player::start_using_power()
   m_uses_power = true;
 }
 
+void player::stops_using_power()
+{
+  m_uses_power = false;
+}
+
 void player::lose_hp()
 {
   m_hp -= 0.5;
