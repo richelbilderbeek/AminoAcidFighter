@@ -1,2 +1,3 @@
+#!/bin/bash
 files=`ls {*.cpp,*.h}`
 clang-tidy $files -- -std=c++14
