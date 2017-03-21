@@ -53,7 +53,7 @@ script:
   - ./get_code_cov
   - codecov
   # clang-tidy
-  - ./do_clang-tidy
+  #- ./do_clang-tidy
   # Call OCLint
   - ./do_oclint
 
