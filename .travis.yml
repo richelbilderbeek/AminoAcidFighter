@@ -19,7 +19,7 @@ install:
   # SFML
   - sudo apt-get install libsfml-dev
   # clang-tidy
-  - sudo apt-get install -qq clang
+  - sudo apt-get install -qq clang-3.8
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Codecov
