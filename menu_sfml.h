@@ -24,8 +24,6 @@ std::vector<amino_acid> choose_aminoacids(
   bool play_music = true
 );
 
-
-
 ///Menu for selecting a number of players
 ///Return chosen number of players
 int choose_n_players(

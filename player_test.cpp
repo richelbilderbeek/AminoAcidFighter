@@ -1,7 +1,6 @@
+#include <boost/test/unit_test.hpp>
 #include "helper.h"
 #include "player.h"
-
-#include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_CASE(player_construction)
 {

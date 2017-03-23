@@ -1,8 +1,6 @@
+#include <boost/test/unit_test.hpp>
 #include "bullet.h"
 #include "helper.h"
-
-#include <boost/test/unit_test.hpp>
-
 
 BOOST_AUTO_TEST_CASE(bullet_construction)
 {

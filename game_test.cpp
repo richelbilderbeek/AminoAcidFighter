@@ -1,6 +1,5 @@
-#include "game.h"
-
 #include <boost/test/unit_test.hpp>
+#include "game.h"
 
 BOOST_AUTO_TEST_CASE(check_create_players)
 {

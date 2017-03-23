@@ -2,16 +2,20 @@
 #define PLAYER_SFML_H
 
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Graphics.hpp>
+#include "player.h"
 
 
-player create_player(
-  amino_acid aminoacid,
-  sf::Sprite m_sprite,
-  sf::Texture m_texture,
-  sf::Vector2f position
+void draw_player(
+  const player& p,
+  sf::RenderWindow& w
 );
 
-player create_alanine      (sf::Vector2f position);
+void draw_alanine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
 player create_arginine     (sf::Vector2f position);
 player create_asparagine   (sf::Vector2f position);
 player create_aspartic_acid(sf::Vector2f position);
@@ -31,11 +35,6 @@ player create_threonine    (sf::Vector2f position);
 player create_tryptophan   (sf::Vector2f position);
 player create_tyrosine     (sf::Vector2f position);
 player create_valine       (sf::Vector2f position);
-
-void draw(
-  player p,
-  sf::RenderWindow &window
-);
 
 void draw_hit_ranges(
   sf::CircleShape hit_range,

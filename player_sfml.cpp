@@ -1,11 +1,14 @@
 #include "player_sfml.h"
+#include <cassert>
 
-player create_player( //!OCLINT cannot simplify
-  amino_acid aminoacid,
-  sf::Vector2f position)
+void draw_player(
+  const player& p,
+  sf::RenderWindow& w
+)
 {
-  switch(aminoacid) {
-    case amino_acid::alanine:       return create_alanine      (position);
+  switch(p.get_amino_acid()) {
+    case amino_acid::alanine:       return draw_alanine      (p, w);
+    /*
     case amino_acid::arginine:      return create_arginine     (position);
     case amino_acid::asparagine:    return create_asparagine   (position);
     case amino_acid::aspartic_acid: return create_aspartic_acid(position);
@@ -25,21 +28,25 @@ player create_player( //!OCLINT cannot simplify
     case amino_acid::tryptophan:    return create_tryptophan   (position);
     case amino_acid::tyrosine:      return create_tyrosine     (position);
     case amino_acid::valine:        return create_valine       (position);
+    */
+    default: assert(!"TODO");
   }
   assert(!"should not get here"); //!OCLINT accepted idiom
-  return create_alanine(position);
 }
 
 /// all aminoacids have been scaled to the size of arginine
-player create_alanine(
-  sf::Vector2f position)
+void draw_alanine(
+  const player& p,
+  sf::RenderWindow& w
+)
 {
+  assert(p.get_amino_acid() == amino_acid::alanine);
   sf::Sprite * m_sprite = new sf::Sprite;
   sf::Texture * m_texture = new sf::Texture;
 
   m_texture->loadFromFile("Alanine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  auto width = m_texture->getSize().x;
+  auto height = m_texture->getSize().y;
 
   //total size picture in pixels = 781;640 (check in picture)
   //origin of molecule in pixels = 326;362 (check in picture)
@@ -49,11 +56,12 @@ player create_alanine(
   m_sprite->setTexture(*m_texture);
   double scale = 0.12*(70.0/103.0);
   m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(position);
-  return player(m_sprite);
+  m_sprite->setOrigin(sf::Vector2f(width * x_ratio_origin, height * y_ratio_origin));
+  m_sprite->setPosition(p.get_x(), p.get_y());
+  w.draw(*m_sprite);
 }
 
+/*
 player create_arginine(
   sf::Vector2f position)
 {
@@ -596,3 +604,4 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     bullets.push_back(shoot(player2));
   }
 }
+*/

@@ -40,7 +40,7 @@ std::vector<amino_acid> choose_aminoacids(
   if (!music.openFromFile("amino_acid_fighter_tune.wav")) { std::cout << "Could not find tune"; }
   music.setPlayingOffset(sf::seconds(2));
   music.setVolume(50);
-  if(argc == 1) { music.play(); }
+  if(play_music) { music.play(); }
   sf::Font font;
   font.loadFromFile("arial.ttf");
 
@@ -53,9 +53,10 @@ std::vector<amino_acid> choose_aminoacids(
                                      text_AA_positions,
                                      text_colors,
                                      amino_acids);
-  std::vector<player> players    = set_players(
-                                     amino_acids,
-                                     player_positions);
+  std::vector<player> players; //TODO
+                               //    = set_players(
+                               //      amino_acids,
+                               //      player_positions);
   program_state state = program_state::select_players;
 
   while (1) {
@@ -133,6 +134,7 @@ int choose_n_players(
   }
 }
 
+/*
 void choose_player_keyboard(
   std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &texts,
@@ -196,7 +198,7 @@ void choose_player_joystick(
     }
   }
 }
-
+*/
 void draw_a_text(
   std::string text,
   sf::Vector2f position,
@@ -238,7 +240,7 @@ void draw_AA_choice_screen(
       window,
       text_colors[i],
       char_size_player);
-    draw(players[i], window);
+    draw_player(players[i], window);
     window.draw(AA_texts[i]);
   }
 }
@@ -246,10 +248,10 @@ void draw_AA_choice_screen(
 program_state process_event_AA_choice(
   sf::Event &event,
   sf::RenderWindow &window,
-  std::vector<amino_acid> &amino_acids,
-  std::vector<sf::Text> &AA_texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions)
+  std::vector<amino_acid> & /*amino_acids */,
+  std::vector<sf::Text> & /* AA_texts */,
+  std::vector<player> & /* players */,
+  std::array<sf::Vector2f, 4> /* player_positions */)
 {
   switch(event.type) {
     case sf::Event::Closed: window.close();
@@ -261,20 +263,24 @@ program_state process_event_AA_choice(
       }
       //player 1 and player 2
       {
+        /*
         choose_player_keyboard(
         amino_acids,
         AA_texts,
         players,
         player_positions);
+        */
       }
       break;
     case sf::Event::JoystickButtonPressed:
       //player 3 and player 4
+      /*
       choose_player_joystick(
         amino_acids,
         AA_texts,
         players,
         player_positions);
+      */
       break;
     default:
       break;
@@ -332,6 +338,7 @@ std::vector<sf::Text> set_AA_texts(
   return AA_texts;
 }
 
+/*
 std::vector<player> set_players(
   std::vector<amino_acid> amino_acids,
   std::array<sf::Vector2f, 4> player_positions)
@@ -347,6 +354,7 @@ std::vector<player> set_players(
   }
   return players;
 }
+*/
 
 std::array<sf::Vector2f, 4> set_player_positions()
 {

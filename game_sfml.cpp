@@ -31,10 +31,11 @@ void bullet_hits_player(
 void draw_game(
   sf::RenderWindow &window,
   std::vector<sf::RectangleShape> life_bars,
-  std::vector<sf::CircleShape> hit_ranges,
+  std::vector<sf::CircleShape> /* hit_ranges */,
   std::vector<player> players,
-  std::vector<bullet> bullets)
+  std::vector<bullet> /* bullets */)
 {
+  /*
   for(auto i{0u}; i != life_bars.size(); ++i) {
     if(life_bars[i].getSize().x > 0.0) {
       draw_life_bar(life_bars[i], window);
@@ -46,9 +47,10 @@ void draw_game(
     }
   }
   for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
+  */
   for(auto i{0u}; i != players.size(); ++i) {
     if(life_bars[i].getSize().x > 0.0) {
-      draw(players[i], window);
+      draw_player(players[i], window);
     }
   }
 }
@@ -60,7 +62,7 @@ void play_game(
 )
 {
   const std::vector<sf::Vector2f> start_positions = set_start_positions();
-  std::vector<player> players = set_players(amino_acids, start_positions);
+  //std::vector<player> players = set_players(amino_acids, start_positions);
   const std::array<sf::Vector2f, 4> life_bar_positions = set_life_bar_positions();
   std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids, life_bar_positions);
   std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(amino_acids, start_positions);
@@ -73,16 +75,18 @@ void play_game(
   while(window.isOpen()) {
     sf::Event event;
     while(window.pollEvent(event)) {
+      /*
       process_event_game(
         event,
         window,
         players,
         bullets,
         window_size);
+      */
     }
 
     //Move players, hit range and bullets
-    for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
+    //for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
     for(auto& bullet : bullets) { bullet.move(); }
     #ifdef NOT_NOW
     for(auto i = 0u; i != players.size(); ++i) {
@@ -91,7 +95,7 @@ void play_game(
 
     #endif // NOT_NOW
     //Check if bullet hits player
-    bullet_hits_player(bullets, players, life_bars);
+    //bullet_hits_player(bullets, players, life_bars);
 
     //Remove all bullets that are out of the screen
     remove_out_of_screen_bullets(
@@ -99,7 +103,7 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
-    draw_game(window, life_bars, hit_ranges, players, bullets);
+    //draw_game(window, life_bars, hit_ranges, players, bullets);
     window.display();
   }
 }
@@ -107,9 +111,9 @@ void play_game(
 void process_event_game(
   sf::Event event,
   sf::RenderWindow &window,
-  std::vector<player> &players,
-  std::vector<bullet> &bullets,
-  const int window_size)
+  std::vector<player> & /* players */,
+  std::vector<bullet> &/* bullets */,
+  const int /* window_size */)
 {
   switch(event.type) {
     case sf::Event::Closed:
@@ -117,19 +121,23 @@ void process_event_game(
       break;
     case sf::Event::KeyPressed:
       // keyboard support for player1 and player2
+      /*
       respond_to_key(
         players[0],
         players[1],
         bullets,
         window_size);
+        */
       break;
     case sf::Event::JoystickButtonPressed:
       // joystick support for player3 and player4
+      /*
       respond_to_joystick(
         players[2],
         players[3],
         bullets,
         window_size);
+      */
       break;
     default:
       break;
@@ -156,6 +164,7 @@ void run(
         players.resize(new_size); //May result in undefined behavior if size is increased
       }
       break;
+      /*
       case program_state::select_players: {
         players = choose_aminoacids(
           window,
@@ -164,6 +173,7 @@ void run(
         state = program_state::battle;
       }
       break;
+      */
       case program_state::battle:
         play_game(
           window,
@@ -171,6 +181,7 @@ void run(
           players);
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
+      default: assert(!"TODO");
     }
   }
 }
