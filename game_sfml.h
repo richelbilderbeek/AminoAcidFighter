@@ -55,7 +55,7 @@ std::vector<sf::RectangleShape> set_life_bars(
 
 std::array<sf::Vector2f, 4> set_life_bar_positions();
 
-std::vector<player> set_players(
+std::vector<player> create_menu_players(
   std::vector<amino_acid> amino_acids,
   std::vector<sf::Vector2f> player_positions
 );

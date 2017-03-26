@@ -44,19 +44,19 @@ std::vector<amino_acid> choose_aminoacids(
   sf::Font font;
   font.loadFromFile("arial.ttf");
 
-  const std::array<sf::Vector2f, 4> player_positions  = set_player_positions     ();
-  const std::array<sf::Vector2f, 4> text_AA_positions = set_text_AA_positions    ();
-  const std::array<sf::Color   , 4> text_colors       = set_text_colors          ();
-  const std::array<sf::Vector2f, 4> text_player_pos   = set_text_player_positions();
+  const std::array<sf::Vector2f, 4> text_AA_positions = get_aa_menu_text_positions    ();
+  const std::array<sf::Color   , 4> text_colors       = get_aa_menu_text_colors          ();
+  const std::array<sf::Vector2f, 4> text_player_pos   = get_aa_menu_text_player_positions();
+
   std::vector<sf::Text> AA_texts = set_AA_texts(
                                      font,
                                      text_AA_positions,
                                      text_colors,
                                      amino_acids);
-  std::vector<player> players; //TODO
-                               //    = set_players(
-                               //      amino_acids,
-                               //      player_positions);
+  std::vector<player> players = create_menu_players(amino_acids);
+
+  draw_players(players, window);
+
   program_state state = program_state::select_players;
 
   while (1) {
@@ -67,8 +67,7 @@ std::vector<amino_acid> choose_aminoacids(
         window,
         amino_acids,
         AA_texts,
-        players,
-        player_positions);
+        players);
 
       if (state != program_state::select_players) return amino_acids;
 
@@ -250,8 +249,7 @@ program_state process_event_AA_choice(
   sf::RenderWindow &window,
   std::vector<amino_acid> & /*amino_acids */,
   std::vector<sf::Text> & /* AA_texts */,
-  std::vector<player> & /* players */,
-  std::array<sf::Vector2f, 4> /* player_positions */)
+  std::vector<player> & /* players */)
 {
   switch(event.type) {
     case sf::Event::Closed: window.close();
@@ -338,68 +336,65 @@ std::vector<sf::Text> set_AA_texts(
   return AA_texts;
 }
 
-/*
-std::vector<player> set_players(
-  std::vector<amino_acid> amino_acids,
-  std::array<sf::Vector2f, 4> player_positions)
+std::vector<player> create_menu_players(std::vector<amino_acid> amino_acids)
 {
-  std::vector<player> players;
-  const int n_amino_acids = amino_acids.size();
+  const std::array<sf::Vector2f, 4> player_positions  = get_aa_menu_positions();
 
-  for (int i{0}; i != n_amino_acids; ++i) {
+  std::vector<player> players;
+  const int n_players = amino_acids.size();
+  for (int i{0}; i!=n_players; ++i)
+  {
     players.push_back(
-      create_player(
+      player(
         amino_acids[i],
-        player_positions[i]));
+        player_positions[i].x,
+        player_positions[i].y
+      )
+    );
   }
   return players;
 }
-*/
 
-std::array<sf::Vector2f, 4> set_player_positions()
+std::array<sf::Vector2f, 4> get_aa_menu_positions()
 {
-  const std::array<sf::Vector2f, 4> player_positions =
+  return
   {
     sf::Vector2f(100, 200),
     sf::Vector2f(425, 200),
     sf::Vector2f(100, 425),
     sf::Vector2f(425, 425)
   };
-  return player_positions;
 }
 
-std::array<sf::Vector2f, 4> set_text_AA_positions()
+std::array<sf::Vector2f, 4> get_aa_menu_text_positions()
 {
-  const std::array<sf::Vector2f, 4> text_AA_positions =
+  return
   {
     sf::Vector2f(10,  50),
     sf::Vector2f(350, 50),
     sf::Vector2f(10 ,500),
     sf::Vector2f(350,500)
   };
-  return text_AA_positions;
 }
 
-std::array<sf::Color, 4> set_text_colors()
+std::array<sf::Color, 4> get_aa_menu_text_colors()
 {
-  const std::array<sf::Color, 4> text_colors =
+  return
   {
     sf::Color::Magenta,
     sf::Color::Yellow,
     sf::Color::Green,
     sf::Color::Red
   };
-  return text_colors;
 }
 
-std::array<sf::Vector2f, 4> set_text_player_positions()
+std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions()
 {
-  const std::array<sf::Vector2f, 4> text_player_pos =
+  return
   {
     sf::Vector2f(10 ,   5),
     sf::Vector2f(350,   5),
     sf::Vector2f(10 , 545),
     sf::Vector2f(350, 545)
   };
-  return text_player_pos;
 }

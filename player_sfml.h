@@ -11,30 +11,110 @@ void draw_player(
   sf::RenderWindow& w
 );
 
+void draw_players(
+  const std::vector<player>& p,
+  sf::RenderWindow& w
+);
+
 void draw_alanine(
   const player& p,
   sf::RenderWindow& w
 );
 
-player create_arginine     (sf::Vector2f position);
-player create_asparagine   (sf::Vector2f position);
-player create_aspartic_acid(sf::Vector2f position);
-player create_cysteine     (sf::Vector2f position);
-player create_glutamic_acid(sf::Vector2f position);
-player create_glutamine    (sf::Vector2f position);
-player create_glycine      (sf::Vector2f position);
-player create_histidine    (sf::Vector2f position);
-player create_isoleucine   (sf::Vector2f position);
-player create_leucine      (sf::Vector2f position);
-player create_lysine       (sf::Vector2f position);
-player create_methionine   (sf::Vector2f position);
-player create_phenylalanine(sf::Vector2f position);
-player create_proline      (sf::Vector2f position);
-player create_serine       (sf::Vector2f position);
-player create_threonine    (sf::Vector2f position);
-player create_tryptophan   (sf::Vector2f position);
-player create_tyrosine     (sf::Vector2f position);
-player create_valine       (sf::Vector2f position);
+void draw_arginine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_asparagine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_aspartic_acid(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_cysteine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_glutamic_acid(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_glutamine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_glycine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_histidine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_isoleucine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_leucine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_lysine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_methionine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_phenylalanine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_proline(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_serine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_threonine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_tryptophan(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_tyrosine(
+  const player& p,
+  sf::RenderWindow& w
+);
+
+void draw_valine(
+  const player& p,
+  sf::RenderWindow& w
+);
 
 void draw_hit_ranges(
   sf::CircleShape hit_range,

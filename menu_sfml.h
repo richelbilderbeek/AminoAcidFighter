@@ -20,7 +20,7 @@
 /// returns the selected amino acids chosen
 std::vector<amino_acid> choose_aminoacids(
   sf::RenderWindow &window,
-  std::vector<amino_acid> players,
+  std::vector<amino_acid> amino_acids,
   bool play_music = true
 );
 
@@ -32,26 +32,19 @@ int choose_n_players(
   int player_amount
 );
 
-
 void change_amino_name(
   amino_acid aminoacid_player,
   sf::Text &player_AA
 );
 
-
-
 void choose_player_joystick(
-  std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions
+  std::vector<player> &players
 );
 
 void choose_player_keyboard(
-  std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions
+  std::vector<player> &players
 );
 
 void draw_a_text(
@@ -75,8 +68,7 @@ program_state process_event_AA_choice(
   sf::RenderWindow &window,
   std::vector<amino_acid> &amino_acids,
   std::vector<sf::Text> &AA_texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions
+  std::vector<player> &players
 );
 
 program_state process_event_select_n_players(
@@ -92,14 +84,15 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<amino_acid> amino_acids
 );
 
-std::vector<player> set_players(
-  std::vector<amino_acid> amino_acids,
-  std::array<sf::Vector2f, 4> player_positions
+
+/// Create players to be used in the menu dialog
+std::vector<player> create_menu_players(
+  std::vector<amino_acid> amino_acids
 );
 
-std::array<sf::Vector2f, 4> set_player_positions     ();
-std::array<sf::Color   , 4> set_text_colors          ();
-std::array<sf::Vector2f, 4> set_text_AA_positions    ();
-std::array<sf::Vector2f, 4> set_text_player_positions();
+std::array<sf::Vector2f, 4> get_aa_menu_positions();
+std::array<sf::Color   , 4> get_aa_menu_text_colors();
+std::array<sf::Vector2f, 4> get_aa_menu_text_positions();
+std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions();
 
 #endif // MENU_SFML_H

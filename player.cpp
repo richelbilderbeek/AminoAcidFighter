@@ -28,8 +28,6 @@ void player::accelerate()
   m_speed_y -= std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
 }
 
-
-
 void player::decelerate()
 {
   //const auto angle_degrees = m_sprite->getRotation() - 30.0;
