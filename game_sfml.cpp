@@ -49,11 +49,9 @@ std::vector<player> create_game_players(
 void draw_game(
   sf::RenderWindow &window,
   std::vector<sf::RectangleShape> life_bars,
-  std::vector<sf::CircleShape> /* hit_ranges */,
-  std::vector<player> players,
-  std::vector<bullet> /* bullets */)
+  std::vector<sf::CircleShape> hit_ranges,
+  std::vector<bullet> /*bullets*/)
 {
-  /*
   for(auto i{0u}; i != life_bars.size(); ++i) {
     if(life_bars[i].getSize().x > 0.0) {
       draw_life_bar(life_bars[i], window);
@@ -64,13 +62,7 @@ void draw_game(
       draw_hit_ranges(hit_ranges[i], window);
     }
   }
-  for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
-  */
-  for(auto i{0u}; i != players.size(); ++i) {
-    if(life_bars[i].getSize().x > 0.0) {
-      draw_player(players[i], window);
-    }
-  }
+  //for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
 }
 
 void play_game(
@@ -105,16 +97,14 @@ void play_game(
     }
 
     //Move players, hit range and bullets
-    //for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
+    for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
     for(auto& bullet : bullets) { bullet.move(); }
-    #ifdef NOT_NOW
     for(auto i = 0u; i != players.size(); ++i) {
-      hit_ranges[i].setPosition(players[i].get_position() + players[i].get_speed());
+      hit_ranges[i].setPosition(players[i].get_x() + players[i].get_speed_x(),
+                                players[i].get_y() + players[i].get_speed_y());
     }
-
-    #endif // NOT_NOW
     //Check if bullet hits player
-    //bullet_hits_player(bullets, players, life_bars);
+    bullet_hits_player(bullets, players, life_bars);
 
     //Remove all bullets that are out of the screen
     remove_out_of_screen_bullets(
@@ -123,7 +113,7 @@ void play_game(
 
     window.clear(sf::Color(128,128,128));
     draw_players(players, window);
-    //draw_game(window, life_bars, hit_ranges, players, bullets);
+    draw_game(window, life_bars, hit_ranges, bullets);
     window.display();
   }
 }

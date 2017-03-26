@@ -549,7 +549,7 @@ void draw(
   s.setPosition(s.getPosition() + sf::Vector2f(-dx, 0));
   window.draw(s);
 }
-
+*/
 void draw_hit_ranges(
   sf::CircleShape hit_range,
   sf::RenderWindow &window)
@@ -581,7 +581,7 @@ void draw_life_bar(
   window.draw(life_bar);
 }
 
-
+/*
 void respond_to_joystick( //!OCLINT cannot simplify this even more
   player &player3,
   player &player4,
