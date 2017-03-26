@@ -1,5 +1,4 @@
 #include "game_sfml.h"
-
 #include "game.h"
 #include "player_sfml.h"
 #include "bullet_sfml.h"
@@ -26,6 +25,25 @@ void bullet_hits_player(
   for(auto i = 0u; i < players.size(); ++i) {
     life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), life_bars[i].getSize().y));
   }
+}
+
+std::vector<player> create_game_players(
+  std::vector<amino_acid> amino_acids,
+  std::vector<sf::Vector2f> player_positions)
+{
+  std::vector<player> players;
+  const int n_players = amino_acids.size();
+  for (int i{0}; i!=n_players; ++i)
+  {
+    players.push_back(
+      player(
+        amino_acids[i],
+        player_positions[i].x,
+        player_positions[i].y
+      )
+    );
+  }
+  return players;
 }
 
 void draw_game(
@@ -61,11 +79,12 @@ void play_game(
   const std::vector<amino_acid> amino_acids
 )
 {
-  const std::vector<sf::Vector2f> start_positions = set_start_positions();
+  const std::vector<sf::Vector2f> start_positions = get_start_positions();
   //std::vector<player> players = set_players(amino_acids, start_positions);
-  const std::array<sf::Vector2f, 4> life_bar_positions = set_life_bar_positions();
-  std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids, life_bar_positions);
-  std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(amino_acids, start_positions);
+  const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
+  std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids.size(), life_bar_positions);
+  std::vector<player> players = create_game_players(amino_acids, start_positions);
+  std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(players, start_positions);
   std::vector<bullet> bullets;
 
   if(sf::Joystick::isConnected(0)) {
@@ -103,6 +122,7 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
+    draw_players(players, window);
     //draw_game(window, life_bars, hit_ranges, players, bullets);
     window.display();
   }
@@ -203,11 +223,11 @@ std::vector<sf::CircleShape> set_hit_ranges(
 }
 
 std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<player> players,
+  int player_amount,
   std::array<sf::Vector2f, 4> life_bar_positions)
 {
   std::vector<sf::RectangleShape> life_bars;
-  for(auto i{0u}; i != players.size(); ++i) {
+  for(auto i{0}; i != player_amount; ++i) {
     sf::RectangleShape life_bar;
     life_bar.setPosition(life_bar_positions[i]);
     life_bar.setSize(sf::Vector2f(100, 10));
@@ -217,7 +237,7 @@ std::vector<sf::RectangleShape> set_life_bars(
   return life_bars;
 }
 
-std::array<sf::Vector2f, 4> set_life_bar_positions()
+std::array<sf::Vector2f, 4> get_life_bar_positions()
 {
     const std::array<sf::Vector2f, 4> life_bar_positions {
       sf::Vector2f(10 , 10 ),
@@ -228,7 +248,7 @@ std::array<sf::Vector2f, 4> set_life_bar_positions()
   return life_bar_positions;
 }
 
-std::vector<sf::Vector2f> set_start_positions()
+std::vector<sf::Vector2f> get_start_positions()
 {
   const std::vector<sf::Vector2f> start_positions {
       sf::Vector2f(175, 175),
@@ -238,24 +258,6 @@ std::vector<sf::Vector2f> set_start_positions()
   };
   return start_positions;
 }
-
-#ifdef REALLY_STILL_WANT_THIS
-std::vector<player> set_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> player_positions)
-{
-  std::vector<player> players;
-  const int n_amino_acids = amino_acids.size();
-
-  for (int i{0}; i != n_amino_acids; ++i) {
-    players.push_back(
-      create_player(
-        amino_acids[i],
-        player_positions[i]));
-  }
-  return players;
-}
-#endif // REALLY_STILL_WANT_THIS
 
 void substract_HP(
   std::vector<sf::RectangleShape> &life_bars,

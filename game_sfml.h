@@ -4,14 +4,20 @@
 /// Functions and/or classes to display the 'game' class
 /// using SFML
 
+#include <SFML/Graphics.hpp>
+#include <vector>
 #include "bullet.h"
 #include "player.h"
-#include <SFML/Graphics.hpp>
 
 void bullet_hits_player(
   std::vector<bullet> bullets,
   std::vector<player> players,
   std::vector<sf::RectangleShape> &life_bars
+);
+
+std::vector<player> create_game_players(
+  std::vector<amino_acid> amino_acids,
+  std::vector<sf::Vector2f> player_positions
 );
 
 void draw_game(
@@ -21,6 +27,10 @@ void draw_game(
   std::vector<player> players,
   std::vector<bullet> bullets
 );
+
+std::array<sf::Vector2f, 4> get_life_bar_positions();
+
+std::vector<sf::Vector2f> get_start_positions();
 
 void play_game(sf::RenderWindow &window,
   const int window_size,
@@ -44,22 +54,12 @@ void run(
 
 std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<player> players,
-  std::vector<sf::Vector2f> start_positions
-);
+  std::vector<sf::Vector2f> start_positions);
 
 std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<player> players,
+  int player_amount,
   std::array<sf::Vector2f, 4> life_bar_positions
 );
-
-std::array<sf::Vector2f, 4> set_life_bar_positions();
-
-std::vector<player> create_menu_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> player_positions
-);
-
-std::vector<sf::Vector2f> set_start_positions();
 
 void substract_HP(
   std::vector<sf::RectangleShape> &life_bars,
