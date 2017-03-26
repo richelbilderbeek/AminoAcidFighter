@@ -22,10 +22,9 @@ void draw_game(
   std::vector<bullet> bullets
 );
 
-void play_game(
-  sf::RenderWindow &window,
+void play_game(sf::RenderWindow &window,
   const int window_size,
-  const std::vector<amino_acid>& players
+  const std::vector<player> players
 );
 
 void process_event_game(
@@ -44,12 +43,12 @@ void run(
 );
 
 std::vector<sf::CircleShape> set_hit_ranges(
-  std::vector<amino_acid> amino_acids,
+  std::vector<player> players,
   std::vector<sf::Vector2f> start_positions
 );
 
 std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<amino_acid> amino_acids,
+  std::vector<player> players,
   std::array<sf::Vector2f, 4> life_bar_positions
 );
 

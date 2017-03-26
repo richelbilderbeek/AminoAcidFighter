@@ -58,7 +58,7 @@ void draw_game(
 void play_game(
   sf::RenderWindow &window,
   const int window_size,
-  const std::vector<amino_acid>& amino_acids
+  const std::vector<amino_acid> amino_acids
 )
 {
   const std::vector<sf::Vector2f> start_positions = set_start_positions();
@@ -150,7 +150,7 @@ void run(
   const int argc)
 {
   program_state state{program_state::choose_n_players};
-  std::vector<amino_acid> players = { amino_acid::alanine, amino_acid::alanine};
+  std::vector<amino_acid> amino_acids = { amino_acid::alanine, amino_acid::alanine};
 
   while(window.isOpen()) {
     switch(state) {
@@ -158,15 +158,15 @@ void run(
         const int new_size = choose_n_players(
           window,
           argc,
-          players.size());
+          amino_acids.size());
         state = program_state::select_players;
-        players.resize(new_size); //May result in undefined behavior if size is increased
+        amino_acids.resize(new_size); //May result in undefined behavior if size is increased
       }
       break;
       case program_state::select_players: {
-        players = choose_aminoacids(
+        amino_acids = choose_aminoacids(
           window,
-          players);
+          amino_acids);
         state = program_state::battle;
       }
       break;
@@ -174,7 +174,7 @@ void run(
         play_game(
           window,
           window_size,
-          players);
+          amino_acids);
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
       default: assert(!"TODO");
@@ -183,11 +183,11 @@ void run(
 }
 
 std::vector<sf::CircleShape> set_hit_ranges(
-  std::vector<amino_acid> amino_acids,
+  std::vector<player> players,
   std::vector<sf::Vector2f> start_positions)
 {
   std::vector<sf::CircleShape> hit_ranges;
-  for(auto i{0u}; i != amino_acids.size(); ++i)
+  for(auto i{0u}; i != players.size(); ++i)
   {
     const float hit_range_size = get_hit_range_size();
     sf::CircleShape hit_range;
@@ -203,11 +203,11 @@ std::vector<sf::CircleShape> set_hit_ranges(
 }
 
 std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<amino_acid> amino_acids,
+  std::vector<player> players,
   std::array<sf::Vector2f, 4> life_bar_positions)
 {
   std::vector<sf::RectangleShape> life_bars;
-  for(auto i{0u}; i != amino_acids.size(); ++i) {
+  for(auto i{0u}; i != players.size(); ++i) {
     sf::RectangleShape life_bar;
     life_bar.setPosition(life_bar_positions[i]);
     life_bar.setSize(sf::Vector2f(100, 10));
