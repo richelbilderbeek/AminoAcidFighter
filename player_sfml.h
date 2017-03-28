@@ -128,16 +128,16 @@ void draw_life_bar(
 
 void respond_to_joystick(
   player &player3,
-  player &player4,
+  player &player4/*,
   std::vector<bullet> &bullets,
-  int window_size
+  int window_size*/
 );
 
 void respond_to_key(
   player &player1,
   player &player2,
-  std::vector<bullet> &bullets,
-  int window_size
+  std::vector<bullet> &bullets/*,
+  int window_size*/
 );
 
 #endif // PLAYER_SFML_H

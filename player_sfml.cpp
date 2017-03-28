@@ -6,6 +6,7 @@ void draw_player(
   sf::RenderWindow& w
 )
 {
+
   switch(p.get_amino_acid()) {
     case amino_acid::alanine:       return draw_alanine      (p, w);
     case amino_acid::arginine:      return draw_arginine     (p, w);
@@ -64,6 +65,7 @@ void draw_alanine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(width * x_ratio_origin, height * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -87,6 +89,7 @@ void draw_arginine(
   m_sprite->setScale(sf::Vector2f(0.12, 0.12));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -111,6 +114,7 @@ void draw_asparagine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -135,6 +139,7 @@ void draw_aspartic_acid(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -160,6 +165,7 @@ void draw_cysteine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -184,6 +190,7 @@ void draw_glutamic_acid(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -208,6 +215,7 @@ void draw_glutamine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -232,6 +240,7 @@ void draw_glycine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -256,6 +265,7 @@ void draw_histidine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -280,6 +290,7 @@ void draw_isoleucine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -304,6 +315,7 @@ void draw_leucine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -328,6 +340,7 @@ void draw_lysine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -352,6 +365,7 @@ void draw_methionine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -379,6 +393,7 @@ void draw_hit_ranges(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -403,6 +418,7 @@ void draw_proline(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -427,6 +443,7 @@ void draw_serine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -451,6 +468,7 @@ void draw_threonine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -475,6 +493,7 @@ void draw_tryptophan(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -499,6 +518,7 @@ void draw_tyrosine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 
@@ -523,6 +543,7 @@ void draw_valine(
   m_sprite->setScale(sf::Vector2f(scale, scale));
   m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
   m_sprite->setPosition(p.get_x(), p.get_y());
+  m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
 /*
@@ -556,7 +577,7 @@ void draw_hit_ranges(
 {
   const int window_size = window.getSize().x;
 
-  //Must we draw the 'shadow' player left or right?
+  //Must we draw the 'shadow' hitranges left or right?
   const bool must_right{hit_range.getPosition().x < window_size / 2};
   const int dx = must_right ? window_size : -window_size;
   const bool must_down{hit_range.getPosition().y < window_size / 2};
@@ -581,28 +602,27 @@ void draw_life_bar(
   window.draw(life_bar);
 }
 
-/*
 void respond_to_joystick( //!OCLINT cannot simplify this even more
   player &player3,
-  player &player4,
-  std::vector<bullet> &bullets)
+  player &player4/*,
+  std::vector<bullet> &bullets*/)
 {
   // player 3 controls
-  if(sf::Joystick::isButtonPressed(0, 0)) { player3.deccellerate(); } // A button
+  if(sf::Joystick::isButtonPressed(0, 0)) { player3.decelerate(); } // A button
   if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; } // B button
   if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
   if(sf::Joystick::isButtonPressed(0, 3)) { player3.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
-    bullets.push_back(shoot(player3));
+   // bullets.push_back(shoot(player3));
   }
 
   //player 4 controls
-  if(sf::Joystick::isButtonPressed(1, 0)) { player4.deccellerate(); } // A button
+  if(sf::Joystick::isButtonPressed(1, 0)) { player4.decelerate(); } // A button
   if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; } // B button
   if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
   if(sf::Joystick::isButtonPressed(1, 3)) { player4.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
-    bullets.push_back(shoot(player4));
+   // bullets.push_back(shoot(player4));
   }
 }
 
@@ -615,18 +635,17 @@ void respond_to_key( //!OCLINT cannot simplify this even more
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { player1.turn_left()   ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { player1.turn_right()  ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accelerate() ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.deccellerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.decelerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     bullets.push_back(shoot(player1));
   }
   // player2 controls
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accelerate() ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { player2.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.deccellerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.decelerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { player2.turn_left()   ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
     bullets.push_back(shoot(player2));
   }
 }
 
-*/

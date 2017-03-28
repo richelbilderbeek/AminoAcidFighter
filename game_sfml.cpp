@@ -72,7 +72,6 @@ void play_game(
 )
 {
   const std::vector<sf::Vector2f> start_positions = get_start_positions();
-  //std::vector<player> players = set_players(amino_acids, start_positions);
   const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
   std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids.size(), life_bar_positions);
   std::vector<player> players = create_game_players(amino_acids, start_positions);
@@ -86,14 +85,12 @@ void play_game(
   while(window.isOpen()) {
     sf::Event event;
     while(window.pollEvent(event)) {
-      /*
       process_event_game(
         event,
         window,
         players,
         bullets,
         window_size);
-      */
     }
 
     //Move players, hit range and bullets
@@ -121,8 +118,8 @@ void play_game(
 void process_event_game(
   sf::Event event,
   sf::RenderWindow &window,
-  std::vector<player> & /* players */,
-  std::vector<bullet> &/* bullets */,
+  std::vector<player> &players,
+  std::vector<bullet> &bullets,
   const int /* window_size */)
 {
   switch(event.type) {
@@ -131,23 +128,19 @@ void process_event_game(
       break;
     case sf::Event::KeyPressed:
       // keyboard support for player1 and player2
-      /*
       respond_to_key(
         players[0],
         players[1],
-        bullets,
-        window_size);
-        */
+        bullets/*,
+        window_size*/);
       break;
     case sf::Event::JoystickButtonPressed:
       // joystick support for player3 and player4
-      /*
       respond_to_joystick(
         players[2],
-        players[3],
+        players[3]/*,
         bullets,
-        window_size);
-      */
+        window_size*/);
       break;
     default:
       break;
