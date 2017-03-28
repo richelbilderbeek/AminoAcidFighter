@@ -69,7 +69,11 @@ std::vector<amino_acid> choose_aminoacids(
         AA_texts,
         players);
 
-      if (state != program_state::select_players) return amino_acids;
+      if (state != program_state::select_players)
+      {
+        music.stop();
+        return amino_acids;
+      }
 
       //Draw everything on screen
       window.clear(sf::Color(128,128,128));
@@ -86,16 +90,22 @@ std::vector<amino_acid> choose_aminoacids(
 
 int choose_n_players(
   sf::RenderWindow &window,
-  const int argc,
+  const bool do_play_music,
   int player_amount)
 {
   sf::Music game_jam;
-  if (!game_jam.openFromFile("amino_acid_fighter_tune.wav")) {
-    std::cout << "Could not find tune";
+  if(do_play_music)
+  {
+    if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
+    {
+      std::cout << "Could not find tune\n";
+    }
+    game_jam.setPlayingOffset(sf::seconds(2));
+    game_jam.setVolume(50);
+    game_jam.setLoop(true);
+    game_jam.play();
   }
-  game_jam.setPlayingOffset(sf::seconds(2));
-  game_jam.setVolume(50);
-  if(argc == 1) { game_jam.play(); }
+
 
   program_state state = program_state::choose_n_players;
 
@@ -108,7 +118,16 @@ int choose_n_players(
         window,
         player_amount);
 
-      if (state != program_state::choose_n_players) return player_amount;
+      if (state == program_state::quit)
+      {
+        game_jam.stop();
+        return 0;
+      }
+      if (state != program_state::choose_n_players)
+      {
+        game_jam.stop();
+        return player_amount;
+      }
 
       sf::Vector2f player_amount_pos = sf::Vector2f(200, 250);
       const int char_size = 50;
@@ -292,13 +311,18 @@ program_state process_event_AA_choice(
 
 program_state process_event_select_n_players(
   const sf::Event &event,
-  sf::RenderWindow& window,
+  sf::RenderWindow& /* window */,
   int &player_amount)
 {
   switch(event.type) { //!OCLINT
-    case sf::Event::Closed: window.close();
-      break;
+    case sf::Event::Closed:
+      return program_state::quit;
     case sf::Event::KeyPressed: {
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+      {
+        return program_state::quit;
+      }
+
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
          player_amount < 4) {
         plus_player(player_amount);

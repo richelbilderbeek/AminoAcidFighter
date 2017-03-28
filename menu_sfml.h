@@ -28,7 +28,7 @@ std::vector<amino_acid> choose_aminoacids(
 ///Return chosen number of players
 int choose_n_players(
   sf::RenderWindow &window,
-  const int argc,
+  const bool do_play_music,
   int player_amount
 );
 

@@ -49,7 +49,7 @@ void process_event_game(
 void run(
   sf::RenderWindow &window,
   const int window_size,
-  const int argc
+  const bool do_play_music
 );
 
 std::vector<sf::CircleShape> set_hit_ranges(

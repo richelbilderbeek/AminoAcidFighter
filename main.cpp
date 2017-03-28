@@ -17,9 +17,12 @@ int main(int argc, char * [])
 
   window.setFramerateLimit(60);
 
+  const bool do_play_music{argc == 1};
   run(
     window,
     window_size,
-    argc);
+    do_play_music);
+
+  window.close();
 }
 

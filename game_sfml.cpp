@@ -150,7 +150,7 @@ void process_event_game(
 void run(
   sf::RenderWindow &window,
   const int window_size,
-  const int argc)
+  const bool do_play_music)
 {
   program_state state{program_state::choose_n_players};
   std::vector<amino_acid> amino_acids = { amino_acid::alanine, amino_acid::alanine};
@@ -160,8 +160,9 @@ void run(
       case program_state::choose_n_players: {
         const int new_size = choose_n_players(
           window,
-          argc,
+          do_play_music,
           amino_acids.size());
+        if (new_size < 1) return;
         state = program_state::select_players;
         amino_acids.resize(new_size); //May result in undefined behavior if size is increased
       }
@@ -180,6 +181,8 @@ void run(
           amino_acids);
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
+      case program_state::quit:
+        return;
       default: assert(!"TODO");
     }
   }
