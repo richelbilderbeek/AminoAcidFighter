@@ -18,6 +18,7 @@
 
 /// Displays the menu,
 /// returns the selected amino acids chosen
+/// If no amino acids are returned, the user wants to quit
 std::vector<amino_acid> choose_aminoacids(
   sf::RenderWindow &window,
   std::vector<amino_acid> amino_acids,
@@ -26,6 +27,7 @@ std::vector<amino_acid> choose_aminoacids(
 
 ///Menu for selecting a number of players
 ///Return chosen number of players
+///A return value of zero denotes that the user wants to quit
 int choose_n_players(
   sf::RenderWindow &window,
   const bool do_play_music,

@@ -171,6 +171,7 @@ void run(
         amino_acids = choose_aminoacids(
           window,
           amino_acids);
+        if (amino_acids.empty()) return; //Quit
         state = program_state::battle;
       }
       break;
