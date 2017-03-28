@@ -604,8 +604,8 @@ void draw_life_bar(
 
 void respond_to_joystick( //!OCLINT cannot simplify this even more
   player &player3,
-  player &player4/*,
-  std::vector<bullet> &bullets*/)
+  player &player4,
+  std::vector<bullet> &bullets)
 {
   // player 3 controls
   if(sf::Joystick::isButtonPressed(0, 0)) { player3.decelerate(); } // A button
@@ -613,7 +613,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
   if(sf::Joystick::isButtonPressed(0, 3)) { player3.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
-   // bullets.push_back(shoot(player3));
+    bullets.push_back(shoot(player3));
   }
 
   //player 4 controls
@@ -622,7 +622,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
   if(sf::Joystick::isButtonPressed(1, 3)) { player4.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
-   // bullets.push_back(shoot(player4));
+    bullets.push_back(shoot(player4));
   }
 }
 

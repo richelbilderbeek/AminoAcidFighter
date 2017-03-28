@@ -50,7 +50,7 @@ void draw_game(
   sf::RenderWindow &window,
   std::vector<sf::RectangleShape> life_bars,
   std::vector<sf::CircleShape> hit_ranges,
-  std::vector<bullet> /*bullets*/)
+  std::vector<bullet> bullets)
 {
   for(auto i{0u}; i != life_bars.size(); ++i) {
     if(life_bars[i].getSize().x > 0.0) {
@@ -62,7 +62,7 @@ void draw_game(
       draw_hit_ranges(hit_ranges[i], window);
     }
   }
-  //for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
+  for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
 }
 
 void play_game(
@@ -138,8 +138,8 @@ void process_event_game(
       // joystick support for player3 and player4
       respond_to_joystick(
         players[2],
-        players[3]/*,
-        bullets,
+        players[3],
+        bullets/*,
         window_size*/);
       break;
     default:

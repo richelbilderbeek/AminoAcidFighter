@@ -128,8 +128,8 @@ void draw_life_bar(
 
 void respond_to_joystick(
   player &player3,
-  player &player4/*,
-  std::vector<bullet> &bullets,
+  player &player4,
+  std::vector<bullet> &bullets/*,
   int window_size*/
 );
 
