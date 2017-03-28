@@ -162,6 +162,7 @@ void run(
           window,
           do_play_music,
           amino_acids.size());
+        if (new_size < 1) return;
         state = program_state::select_players;
         amino_acids.resize(new_size); //May result in undefined behavior if size is increased
       }
@@ -180,6 +181,8 @@ void run(
           amino_acids);
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
+      case program_state::quit:
+        return;
       default: assert(!"TODO");
     }
   }

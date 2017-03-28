@@ -22,5 +22,7 @@ int main(int argc, char * [])
     window,
     window_size,
     do_play_music);
+
+  window.close();
 }
 
