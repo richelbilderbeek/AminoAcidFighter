@@ -69,6 +69,12 @@ std::vector<amino_acid> choose_aminoacids(
         AA_texts,
         players);
 
+      if (state == program_state::quit)
+      {
+        music.stop();
+        return {};
+      }
+
       if (state != program_state::select_players)
       {
         music.stop();
@@ -276,11 +282,14 @@ program_state process_event_AA_choice(
 {
   switch(event.type) {
     case sf::Event::Closed: window.close();
-      break;
+      return program_state::quit;
     case sf::Event::KeyPressed:
       //battle
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         return program_state::battle;
+      }
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        return program_state::quit;
       }
       //player 1 and player 2
       {
