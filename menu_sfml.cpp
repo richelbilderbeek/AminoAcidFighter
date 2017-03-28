@@ -86,7 +86,7 @@ std::vector<amino_acid> choose_aminoacids(
 
 int choose_n_players(
   sf::RenderWindow &window,
-  const int argc,
+  const bool do_play_music,
   int player_amount)
 {
   sf::Music game_jam;
@@ -95,7 +95,7 @@ int choose_n_players(
   }
   game_jam.setPlayingOffset(sf::seconds(2));
   game_jam.setVolume(50);
-  if(argc == 1) { game_jam.play(); }
+  if(do_play_music) { game_jam.play(); }
 
   program_state state = program_state::choose_n_players;
 
