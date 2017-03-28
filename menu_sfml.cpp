@@ -211,7 +211,11 @@ void draw_a_text(
   sf::Text player_text;
   player_text.setFont(font);
   player_text.setPosition(position);
+  #if SFML_VERSION_MINOR > 3
   player_text.setFillColor(color);
+  #else
+  player_text.setColor(color);
+  #endif
   player_text.setString(text);
   player_text.setCharacterSize(size);
   window.draw(player_text);
@@ -328,7 +332,11 @@ std::vector<sf::Text> set_AA_texts(
     sf::Text text;
     text.setFont(font);
     text.setPosition(text_AA_positions[i]);
+    #if SFML_VERSION_MINOR > 3
     text.setFillColor(text_colors[i]);
+    #else
+    text.setColor(text_colors[i]);
+    #endif
     text.setString(to_str(amino_acids[i]));
     text.setCharacterSize(35);
     AA_texts.push_back(text);

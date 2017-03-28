@@ -5,6 +5,7 @@
 /// using SFML
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Config.hpp>
 #include "bullet.h"
 
 //May be slow
