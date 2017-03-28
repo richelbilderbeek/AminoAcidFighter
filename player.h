@@ -26,8 +26,8 @@ public:
   auto get_speed_x() const noexcept { return m_speed_x; }
   auto get_speed_y() const noexcept { return m_speed_y; }
   auto get_turn_speed() const noexcept { return m_turn_speed_deg_per_tick; }
-  auto get_x()      const noexcept { return m_x; }
-  auto get_y()      const noexcept { return m_y; }
+  auto get_x() const noexcept { return m_x; }
+  auto get_y() const noexcept { return m_y; }
   void move(const double world_size);
   void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
