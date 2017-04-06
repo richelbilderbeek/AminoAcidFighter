@@ -40,12 +40,10 @@ void change_amino_name(
 );
 
 void choose_player_joystick(
-  std::vector<sf::Text> &texts,
   std::vector<player> &players
 );
 
 void choose_player_keyboard(
-  std::vector<sf::Text> &texts,
   std::vector<player> &players
 );
 

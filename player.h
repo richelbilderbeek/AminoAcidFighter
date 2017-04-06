@@ -29,6 +29,7 @@ public:
   auto get_x() const noexcept { return m_x; }
   auto get_y() const noexcept { return m_y; }
   void move(const double world_size);
+  void set_amino_acid(const amino_acid aminoacid) { m_amino_acid = aminoacid; };
   void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
   void stop();

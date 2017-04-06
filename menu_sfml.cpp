@@ -158,71 +158,73 @@ int choose_n_players(
   }
 }
 
-/*
 void choose_player_keyboard(
-  std::vector<amino_acid> &amino_acids,
-  std::vector<sf::Text> &texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions)
+  std::vector<player> &players
+)
 {
   // player 1
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    amino_acids[0] = get_prev(amino_acids[0]);
-    change_amino_name(amino_acids[0], texts[0]);
-    players[0] = create_player(amino_acids[0], player_positions[0]);
+    amino_acid aminoacid = players[0].get_amino_acid();
+    aminoacid = get_prev(aminoacid);
+    //std::string amino_name = to_str(aminoacid);
+    //change_amino_name(aminoacid, texts[0]);
+    players[0].set_amino_acid(aminoacid);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    amino_acids[0] = get_next(amino_acids[0]);
-    change_amino_name(amino_acids[0], texts[0]);
-    players[0] = create_player(amino_acids[0], player_positions[0]);
+    amino_acid aminoacid = players[0].get_amino_acid();
+    aminoacid = get_next(aminoacid);
+    //change_amino_name(amino_acids[0], texts[0]);
+    players[0].set_amino_acid(aminoacid);
   }
   // player 2
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-    amino_acids[1] = get_next(amino_acids[1]);
-    change_amino_name(amino_acids[1], texts[1]);
-    players[1] = create_player(amino_acids[1], player_positions[1]);
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+    amino_acid aminoacid = players[1].get_amino_acid();
+    aminoacid = get_prev(aminoacid);
+    //std::string amino_name = to_str(aminoacid);
+    //change_amino_name(aminoacid, texts[1]);
+    players[1].set_amino_acid(aminoacid);
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-    amino_acids[1] = get_prev(amino_acids[1]);
-    change_amino_name(amino_acids[1], texts[1]);
-    players[1] = create_player(amino_acids[1], player_positions[1]);
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+    amino_acid aminoacid = players[1].get_amino_acid();
+    aminoacid = get_next(aminoacid);
+    //change_amino_name(amino_acids[0], texts[0]);
+    players[1].set_amino_acid(aminoacid);
   }
 }
 
 void choose_player_joystick(
-  std::vector<amino_acid> &amino_acids,
-  std::vector<sf::Text> &texts,
-  std::vector<player> &players,
-  std::array<sf::Vector2f, 4> player_positions)
+  std::vector<player> &players)
 {
   // player 3
-  if(amino_acids.size() >= 3) {
     if(sf::Joystick::isButtonPressed(0, 3)) { // Y button
-      amino_acids[2] = get_prev(amino_acids[2]);
-      change_amino_name(amino_acids[2], texts[2]);
-      players[2] = create_player(amino_acids[2], player_positions[2]);
-    }
-    if(sf::Joystick::isButtonPressed(0, 0)) { // A button
-      amino_acids[2] = get_next(amino_acids[2]);
-      change_amino_name(amino_acids[2], texts[2]);
-      players[2] = create_player(amino_acids[2], player_positions[2]);
-    }
+    amino_acid aminoacid = players[2].get_amino_acid();
+    aminoacid = get_prev(aminoacid);
+    //std::string amino_name = to_str(aminoacid);
+    //change_amino_name(aminoacid, texts[1]);
+    players[2].set_amino_acid(aminoacid);
+  }
+  if(sf::Joystick::isButtonPressed(0, 0)) { // A button
+    amino_acid aminoacid = players[2].get_amino_acid();
+    aminoacid = get_next(aminoacid);
+    //change_amino_name(amino_acids[0], texts[0]);
+    players[2].set_amino_acid(aminoacid);
   }
   // player 4
-  if(amino_acids.size() >= 4) {
-    if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
-      amino_acids[3] = get_prev(amino_acids[3]);
-      change_amino_name(amino_acids[3], texts[3]);
-      players[3] = create_player(amino_acids[3], player_positions[3]);
-    }
-    if(sf::Joystick::isButtonPressed(1, 0)) { // A button
-      amino_acids[3] = get_next(amino_acids[3]);
-      change_amino_name(amino_acids[3], texts[3]);
-      players[3] = create_player(amino_acids[3], player_positions[3]);
-    }
+  if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
+    amino_acid aminoacid = players[3].get_amino_acid();
+    aminoacid = get_prev(aminoacid);
+    //std::string amino_name = to_str(aminoacid);
+    //change_amino_name(aminoacid, texts[1]);
+    players[3].set_amino_acid(aminoacid);
+  }
+  if(sf::Joystick::isButtonPressed(1, 0)) { // A button
+    amino_acid aminoacid = players[3].get_amino_acid();
+    aminoacid = get_next(aminoacid);
+    //change_amino_name(amino_acids[0], texts[0]);
+    players[3].set_amino_acid(aminoacid);
   }
 }
-*/
+
 void draw_a_text(
   std::string text,
   sf::Vector2f position,
@@ -278,7 +280,7 @@ program_state process_event_AA_choice(
   sf::RenderWindow &window,
   std::vector<amino_acid> & /*amino_acids */,
   std::vector<sf::Text> & /* AA_texts */,
-  std::vector<player> & /* players */)
+  std::vector<player> &players)
 {
   switch(event.type) {
     case sf::Event::Closed: window.close();
@@ -293,24 +295,14 @@ program_state process_event_AA_choice(
       }
       //player 1 and player 2
       {
-        /*
-        choose_player_keyboard(
-        amino_acids,
-        AA_texts,
-        players,
-        player_positions);
-        */
+        choose_player_keyboard(players);
       }
       break;
     case sf::Event::JoystickButtonPressed:
       //player 3 and player 4
-      /*
-      choose_player_joystick(
-        amino_acids,
-        AA_texts,
-        players,
-        player_positions);
-      */
+      {
+        choose_player_joystick(players);
+      }
       break;
     default:
       break;
