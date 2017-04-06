@@ -39,13 +39,19 @@ void change_amino_name(
   sf::Text &player_AA
 );
 
-void choose_player_joystick(
-  std::vector<player> &players
+void change_AA_name(
+  amino_acid aminoacid,
+  sf::Text &AA_text
 );
 
-void choose_player_keyboard(
-  std::vector<player> &players
+void choose_AA_joystick(
+  std::vector<player> &players,
+  std::vector<sf::Text> &AA_texts
 );
+
+void choose_AA_keyboard(
+  std::vector<player> &players,
+  std::vector<sf::Text> &AA_texts);
 
 void draw_a_text(
   std::string text,

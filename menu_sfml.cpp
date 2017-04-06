@@ -30,6 +30,16 @@ void change_amino_name( //!OCLINT cannot make this any shorter
   }
 }
 
+void change_AA_name(
+  amino_acid aminoacid,
+  sf::Text &AA_text
+)
+{
+   std::string amino_name = to_str(aminoacid);
+   AA_text.setString(amino_name);
+   change_amino_name(aminoacid, AA_text);
+}
+
 std::vector<amino_acid> choose_aminoacids(
   sf::RenderWindow &window,
   std::vector<amino_acid> amino_acids,
@@ -80,6 +90,8 @@ std::vector<amino_acid> choose_aminoacids(
         music.stop();
         return amino_acids;
       }
+
+      //set_AA_texts(font, text_AA_positions, text_colors, AA_texts);
 
       //Draw everything on screen
       window.clear(sf::Color(128,128,128));
@@ -158,8 +170,9 @@ int choose_n_players(
   }
 }
 
-void choose_player_keyboard(
-  std::vector<player> &players
+void choose_AA_keyboard(
+  std::vector<player> &players,
+  std::vector<sf::Text> &AA_texts
 )
 {
   // player 1
@@ -169,12 +182,14 @@ void choose_player_keyboard(
     //std::string amino_name = to_str(aminoacid);
     //change_amino_name(aminoacid, texts[0]);
     players[0].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[0]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
     amino_acid aminoacid = players[0].get_amino_acid();
     aminoacid = get_next(aminoacid);
     //change_amino_name(amino_acids[0], texts[0]);
     players[0].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[0]);
   }
   // player 2
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -183,17 +198,21 @@ void choose_player_keyboard(
     //std::string amino_name = to_str(aminoacid);
     //change_amino_name(aminoacid, texts[1]);
     players[1].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[1]);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
     amino_acid aminoacid = players[1].get_amino_acid();
     aminoacid = get_next(aminoacid);
     //change_amino_name(amino_acids[0], texts[0]);
     players[1].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[1]);
   }
 }
 
-void choose_player_joystick(
-  std::vector<player> &players)
+void choose_AA_joystick(
+  std::vector<player> &players,
+  std::vector<sf::Text> &AA_texts
+)
 {
   // player 3
     if(sf::Joystick::isButtonPressed(0, 3)) { // Y button
@@ -202,12 +221,14 @@ void choose_player_joystick(
     //std::string amino_name = to_str(aminoacid);
     //change_amino_name(aminoacid, texts[1]);
     players[2].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[2]);
   }
   if(sf::Joystick::isButtonPressed(0, 0)) { // A button
     amino_acid aminoacid = players[2].get_amino_acid();
     aminoacid = get_next(aminoacid);
     //change_amino_name(amino_acids[0], texts[0]);
     players[2].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[2]);
   }
   // player 4
   if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
@@ -216,12 +237,14 @@ void choose_player_joystick(
     //std::string amino_name = to_str(aminoacid);
     //change_amino_name(aminoacid, texts[1]);
     players[3].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[3]);
   }
   if(sf::Joystick::isButtonPressed(1, 0)) { // A button
     amino_acid aminoacid = players[3].get_amino_acid();
     aminoacid = get_next(aminoacid);
     //change_amino_name(amino_acids[0], texts[0]);
     players[3].set_amino_acid(aminoacid);
+    change_AA_name(aminoacid, AA_texts[3]);
   }
 }
 
@@ -279,7 +302,7 @@ program_state process_event_AA_choice(
   sf::Event &event,
   sf::RenderWindow &window,
   std::vector<amino_acid> & /*amino_acids */,
-  std::vector<sf::Text> & /* AA_texts */,
+  std::vector<sf::Text> &AA_texts,
   std::vector<player> &players)
 {
   switch(event.type) {
@@ -295,13 +318,13 @@ program_state process_event_AA_choice(
       }
       //player 1 and player 2
       {
-        choose_player_keyboard(players);
+        choose_AA_keyboard(players, AA_texts);
       }
       break;
     case sf::Event::JoystickButtonPressed:
       //player 3 and player 4
       {
-        choose_player_joystick(players);
+        choose_AA_joystick(players, AA_texts);
       }
       break;
     default:
