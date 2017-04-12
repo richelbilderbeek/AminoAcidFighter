@@ -15,8 +15,8 @@ void bullet_hits_player(
       float distance = calculate_distance_bullet_player(bullets[j], players[i]);
       std::cout << distance << std::endl;
       if(distance <= hit_range_size) {
-        //substract_HP(life_bars, i);
-          players[i].lose_hp();
+        players[i].lose_hp();
+        life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), life_bars[i].getSize().y));
         //TODO remove_bullets_that_hits();
       }
     }
@@ -68,13 +68,12 @@ void draw_game(
 void play_game(
   sf::RenderWindow &window,
   const int window_size,
-  const std::vector<amino_acid> amino_acids
+  std::vector<player> players
 )
 {
   const std::vector<sf::Vector2f> start_positions = get_start_positions();
   const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
-  std::vector<sf::RectangleShape> life_bars = set_life_bars(amino_acids.size(), life_bar_positions);
-  std::vector<player> players = create_game_players(amino_acids, start_positions);
+  std::vector<sf::RectangleShape> life_bars = set_life_bars(players.size(), life_bar_positions);
   std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(players, start_positions);
   std::vector<bullet> bullets;
 
@@ -109,8 +108,8 @@ void play_game(
       window_size);
 
     window.clear(sf::Color(128,128,128));
-    draw_players(players, window);
     draw_game(window, life_bars, hit_ranges, bullets);
+    draw_players(players, window);
     window.display();
   }
 }
@@ -154,6 +153,7 @@ void run(
 {
   program_state state{program_state::choose_n_players};
   std::vector<amino_acid> amino_acids = { amino_acid::alanine, amino_acid::alanine};
+  std::vector<player> players;
 
   while(window.isOpen()) {
     switch(state) {
@@ -168,7 +168,7 @@ void run(
       }
       break;
       case program_state::select_players: {
-        amino_acids = choose_aminoacids(
+        players = choose_aminoacids(
           window,
           amino_acids);
         if (amino_acids.empty()) return; //Quit
@@ -179,7 +179,7 @@ void run(
         play_game(
           window,
           window_size,
-          amino_acids);
+          players);
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
       case program_state::quit:
@@ -244,13 +244,4 @@ std::vector<sf::Vector2f> get_start_positions()
       sf::Vector2f(425, 425)
   };
   return start_positions;
-}
-
-void substract_HP(
-  std::vector<sf::RectangleShape> &life_bars,
-  int i)
-{
-  auto new_x = life_bars[i].getSize().x - 0.5;
-  auto new_y = life_bars[i].getSize().y;
-  life_bars[i].setSize(sf::Vector2f(new_x, new_y));
 }

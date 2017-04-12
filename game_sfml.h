@@ -32,7 +32,8 @@ std::array<sf::Vector2f, 4> get_life_bar_positions();
 
 std::vector<sf::Vector2f> get_start_positions();
 
-void play_game(sf::RenderWindow &window,
+void play_game(
+  sf::RenderWindow &window,
   const int window_size,
   const std::vector<player> players
 );

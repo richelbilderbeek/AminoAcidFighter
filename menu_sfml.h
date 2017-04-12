@@ -19,7 +19,7 @@
 /// Displays the menu,
 /// returns the selected amino acids chosen
 /// If no amino acids are returned, the user wants to quit
-std::vector<amino_acid> choose_aminoacids(
+std::vector<player> choose_aminoacids(
   sf::RenderWindow &window,
   std::vector<amino_acid> amino_acids,
   bool play_music = true

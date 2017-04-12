@@ -40,7 +40,7 @@ void change_AA_name(
    change_amino_name(aminoacid, AA_text);
 }
 
-std::vector<amino_acid> choose_aminoacids(
+std::vector<player> choose_aminoacids(
   sf::RenderWindow &window,
   std::vector<amino_acid> amino_acids,
   const bool play_music
@@ -88,7 +88,7 @@ std::vector<amino_acid> choose_aminoacids(
       if (state != program_state::select_players)
       {
         music.stop();
-        return amino_acids;
+        return players;
       }
 
       //set_AA_texts(font, text_AA_positions, text_colors, AA_texts);
