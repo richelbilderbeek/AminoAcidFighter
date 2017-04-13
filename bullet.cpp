@@ -1,6 +1,7 @@
 #include "bullet.h"
 
 #include <algorithm>
+#include <cassert>
 
 bullet::bullet(
   const double damage,
@@ -29,13 +30,16 @@ bool is_out_of_screen(
   return false;
 }
 
-void bullet::move()
+void bullet::move(const double world_size)
 {
-  m_x += m_speed_x;
-  m_y += m_speed_y;
+  assert(world_size > 0.0);
+  //Keep m_x in [0, world_size>
+  m_x = std::fmod(m_x + m_speed_x + world_size, world_size);
+  //Keep m_y in [0, world_size>
+  m_y = std::fmod(m_y + m_speed_y + world_size, world_size);
 }
 
-void remove_out_of_screen_bullets(
+/*void remove_out_of_screen_bullets(
   std::vector<bullet> &bullets,
   const int window_size)
 {
@@ -53,7 +57,7 @@ void remove_out_of_screen_bullets(
     std::end(bullets)
   );
 }
-
+*/
 void bullet::set_position(const double x, const double y)
 {
   m_x = x;

@@ -16,7 +16,7 @@ void bullet_hits_player(
       std::cout << distance << std::endl;
       if(distance <= hit_range_size) {
         players[i].lose_hp();
-        life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), life_bars[i].getSize().y));
+        //life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), life_bars[i].getSize().y));
         //TODO remove_bullets_that_hits();
       }
     }
@@ -62,7 +62,26 @@ void draw_game(
       draw_hit_ranges(hit_ranges[i], window);
     }
   }
-  for(auto& bullet : bullets) { window.draw(to_sprite(bullet)); }
+  for(auto& bullet : bullets) {
+    const int window_size = window.getSize().x;
+    //sf::Sprite s = *p.get_sprite();
+    //Must we draw the 'shadow' player left or right?
+    const bool must_right{bullet.get_x() < window_size / 2};
+    const int dx = must_right ? window_size : -window_size;
+    const bool must_down{bullet.get_y() < window_size / 2};
+    const int dy = must_down ? window_size : -window_size;
+    //Real position
+    window.draw(to_sprite(bullet));
+    //Horizontal of player
+    bullet.set_position(bullet.get_x() + dx, bullet.get_y());
+    window.draw(to_sprite(bullet));
+    //Down-Right of player
+    bullet.set_position(bullet.get_x(), bullet.get_y() +  dy);
+    window.draw(to_sprite(bullet));
+    //Below player
+    bullet.set_position(bullet.get_x() - dx, bullet.get_y());
+    window.draw(to_sprite(bullet));
+  }
 }
 
 void play_game(
@@ -91,21 +110,21 @@ void play_game(
         bullets,
         window_size);
     }
-
     //Move players, hit range and bullets
     for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
-    for(auto& bullet : bullets) { bullet.move(); }
+    for(auto& bullet : bullets) { bullet.move(window_size); }
     for(auto i = 0u; i != players.size(); ++i) {
       hit_ranges[i].setPosition(players[i].get_x() + players[i].get_speed_x(),
                                 players[i].get_y() + players[i].get_speed_y());
     }
+
     //Check if bullet hits player
     bullet_hits_player(bullets, players, life_bars);
 
     //Remove all bullets that are out of the screen
-    remove_out_of_screen_bullets(
-      bullets,
-      window_size);
+    //remove_out_of_screen_bullets(
+    //bullets,
+    //window_size);
 
     window.clear(sf::Color(128,128,128));
     draw_game(window, life_bars, hit_ranges, bullets);

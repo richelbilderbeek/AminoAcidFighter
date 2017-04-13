@@ -14,12 +14,14 @@ game::game(
 {
 }
 
-float calculate_distance_bullet_player(bullet any_bullet, player any_player)
+float calculate_distance_bullet_player(bullet any_bullet, const player any_player)
 {
   const float bullet_position_x = any_bullet.get_x();
   const float bullet_position_y = any_bullet.get_y();
+  //std::cout << bullet_position_x << ", " << bullet_position_y << std::endl;
   const float player_position_x = any_player.get_x();
   const float player_position_y = any_player.get_y();
+  //std::cout << player_position_x << ", " << player_position_y << std::endl;
 
   const float length_x = bullet_position_x - player_position_x;
   const float length_y = bullet_position_y - player_position_y;
@@ -112,7 +114,7 @@ void game::tick()
   if(get_state() == game_state::running)
   {
     for (auto& p: m_players) p.move(m_world_size);
-    for (auto& b: m_bullets) b.move();
+    for (auto& b: m_bullets) b.move(m_world_size);
     for (auto i{0u}; i < m_players.size(); ++i)
     {
       m_players[i].stops_using_power();

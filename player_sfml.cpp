@@ -32,13 +32,6 @@ void draw_player(
   assert(!"should not get here"); //!OCLINT accepted idiom
 }
 
-/*void draw_players(
-  const std::vector<player>& ps,
-  sf::RenderWindow& w)
-{
-  for (const auto& p: ps) draw_player(p, w);
-}*/
-
 void draw_players(
   std::vector<player>& ps,
   sf::RenderWindow &window)
@@ -638,6 +631,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.decelerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
     bullets.push_back(shoot(player1));
+    //std::cout << bullets[0].get_x() << ", " << bullets[0].get_y();
   }
   // player2 controls
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accelerate() ; }

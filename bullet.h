@@ -22,7 +22,7 @@ public:
   auto get_speed_x() const noexcept { return m_speed_x ; }
   auto get_speed_y() const noexcept { return m_speed_y ; }
 
-  void move();
+  void move(const double world_size);
   void set_position(const double x, const double y);
   void set_position(const std::pair<double, double> pos) { set_position(pos.first, pos.second); }
 

@@ -24,7 +24,6 @@ void draw_game(
   sf::RenderWindow &window,
   std::vector<sf::RectangleShape> life_bars,
   std::vector<sf::CircleShape> hit_ranges,
-  std::vector<player> players,
   std::vector<bullet> bullets
 );
 

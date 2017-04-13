@@ -7,7 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 
-void draw_players(
+ void draw_players(
   std::vector<player>& ps,
   sf::RenderWindow& w
 );

@@ -81,15 +81,15 @@ bullet shoot(const player& any_player)
   auto rot_radians = rot_degree * M_PI / 180;
   auto pos_x = any_player.get_x();
   auto pos_y = any_player.get_y();
-
   float x_shooter = pos_x + (std::cos(rot_radians)); //TODO
   float y_shooter = pos_y + (std::sin(rot_radians)); //TODO
-  //std::cout << x_shooter << ", " << y_shooter << std::endl;
+  //std::cout << pos_x << ", " << pos_y << std::endl << std::endl;
   double angle_deg = rot_degree + 140.0;
   double angle_rad = angle_deg * M_PI / 180;
   const double speed_x{ std::sin(angle_rad) * 1.5};
   const double speed_y{-std::cos(angle_rad) * 1.5};
   return bullet(10, x_shooter, y_shooter, speed_x, speed_y);
+  //return bullet(10, 10, 10, speed_x, speed_y);
 }
 
 void player::stop()
@@ -126,7 +126,7 @@ void player::stops_using_power()
 
 void player::lose_hp()
 {
-  m_hp -= 0.5;
+  m_hp -= 20; //0.5
 }
 
 double get_hit_range_size()
