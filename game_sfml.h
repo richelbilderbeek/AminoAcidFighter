@@ -11,7 +11,7 @@
 
 void bullet_hits_player(
   std::vector<bullet> bullets,
-  std::vector<player> players,
+  std::vector<player> &players,
   std::vector<sf::RectangleShape> &life_bars
 );
 

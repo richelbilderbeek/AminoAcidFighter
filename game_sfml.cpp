@@ -6,17 +6,14 @@
 
 void bullet_hits_player(
   std::vector<bullet> bullets,
-  std::vector<player> players,
+  std::vector<player> &players,
   std::vector<sf::RectangleShape> &life_bars)
 {
-  const float hit_range_size = get_hit_range_size();
   for(auto i = 0u; i < players.size(); ++i) {
     for(auto j = 0u; j < bullets.size(); ++j) {
       float distance = calculate_distance_bullet_player(bullets[j], players[i]);
-      std::cout << distance << std::endl;
-      if(distance <= hit_range_size) {
+      if(distance <= get_hit_range_size()) {
         players[i].lose_hp();
-        //life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), life_bars[i].getSize().y));
         //TODO remove_bullets_that_hits();
       }
     }
@@ -64,7 +61,6 @@ void draw_game(
   }
   for(auto& bullet : bullets) {
     const int window_size = window.getSize().x;
-    //sf::Sprite s = *p.get_sprite();
     //Must we draw the 'shadow' player left or right?
     const bool must_right{bullet.get_x() < window_size / 2};
     const int dx = must_right ? window_size : -window_size;
@@ -110,6 +106,7 @@ void play_game(
         bullets,
         window_size);
     }
+
     //Move players, hit range and bullets
     for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
     for(auto& bullet : bullets) { bullet.move(window_size); }
@@ -117,7 +114,6 @@ void play_game(
       hit_ranges[i].setPosition(players[i].get_x() + players[i].get_speed_x(),
                                 players[i].get_y() + players[i].get_speed_y());
     }
-
     //Check if bullet hits player
     bullet_hits_player(bullets, players, life_bars);
 
