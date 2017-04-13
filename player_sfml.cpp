@@ -36,26 +36,29 @@ void draw_players(
   std::vector<player>& ps,
   sf::RenderWindow &window)
 {
-  for (auto& p: ps)
+  for(int i{0}; i < static_cast<int>(ps.size()); ++i)
   {
-    const int window_size = window.getSize().x;
-    //sf::Sprite s = *p.get_sprite();
-    //Must we draw the 'shadow' player left or right?
-    const bool must_right{p.get_x() < window_size / 2};
-    const int dx = must_right ? window_size : -window_size;
-    const bool must_down{p.get_y() < window_size / 2};
-    const int dy = must_down ? window_size : -window_size;
-    //Real position
-    draw_player(p, window);
-    //Horizontal of player
-    p.set_position(p.get_x() + dx, p.get_y());
-    draw_player(p, window);
-    //Down-Right of player
-    p.set_position(p.get_x(), p.get_y() +  dy);
-    draw_player(p, window);
-    //Bacl Below player
-    p.set_position(p.get_x() - dx, p.get_y());
-    draw_player(p, window);
+    if(ps[i].get_hp() > 0)
+    {
+      const int window_size = window.getSize().x;
+      //sf::Sprite s = *p.get_sprite();
+      //Must we draw the 'shadow' player left or right?
+      const bool must_right{ps[i].get_x() < window_size / 2};
+      const int dx = must_right ? window_size : -window_size;
+      const bool must_down{ps[i].get_y() < window_size / 2};
+      const int dy = must_down ? window_size : -window_size;
+      //Real position
+      draw_player(ps[i], window);
+      //Horizontal of player
+      ps[i].set_position(ps[i].get_x() + dx, ps[i].get_y());
+      draw_player(ps[i], window);
+      //Down-Right of player
+      ps[i].set_position(ps[i].get_x(), ps[i].get_y() +  dy);
+      draw_player(ps[i], window);
+      //Bacl Below player
+      ps[i].set_position(ps[i].get_x() - dx, ps[i].get_y());
+      draw_player(ps[i], window);
+    }
   }
 }
 
