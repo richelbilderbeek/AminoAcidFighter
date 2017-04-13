@@ -7,14 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 
-
-void draw_player(
-  const player& p,
-  sf::RenderWindow& w
-);
-
 void draw_players(
-  const std::vector<player>& p,
+  std::vector<player>& ps,
   sf::RenderWindow& w
 );
 

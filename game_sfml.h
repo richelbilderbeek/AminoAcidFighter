@@ -62,10 +62,4 @@ std::vector<sf::RectangleShape> set_life_bars(
   std::array<sf::Vector2f, 4> life_bar_positions
 );
 
-void substract_HP(
-  std::vector<sf::RectangleShape> &life_bars,
-  int i
-);
-
-
 #endif // GAME_SFML_H

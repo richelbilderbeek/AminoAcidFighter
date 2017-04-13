@@ -293,7 +293,7 @@ void draw_AA_choice_screen(
       window,
       text_colors[i],
       char_size_player);
-    draw_player(players[i], window);
+    draw_players(players, window);
     window.draw(AA_texts[i]);
   }
 }

@@ -3,8 +3,7 @@
 
 void draw_player(
   const player& p,
-  sf::RenderWindow& w
-)
+  sf::RenderWindow& w)
 {
 
   switch(p.get_amino_acid()) {
@@ -33,19 +32,44 @@ void draw_player(
   assert(!"should not get here"); //!OCLINT accepted idiom
 }
 
-void draw_players(
+/*void draw_players(
   const std::vector<player>& ps,
-  sf::RenderWindow& w
-)
+  sf::RenderWindow& w)
 {
   for (const auto& p: ps) draw_player(p, w);
+}*/
+
+void draw_players(
+  std::vector<player>& ps,
+  sf::RenderWindow &window)
+{
+  for (auto& p: ps)
+  {
+    const int window_size = window.getSize().x;
+    //sf::Sprite s = *p.get_sprite();
+    //Must we draw the 'shadow' player left or right?
+    const bool must_right{p.get_x() < window_size / 2};
+    const int dx = must_right ? window_size : -window_size;
+    const bool must_down{p.get_y() < window_size / 2};
+    const int dy = must_down ? window_size : -window_size;
+    //Real position
+    draw_player(p, window);
+    //Horizontal of player
+    p.set_position(p.get_x() + dx, p.get_y());
+    draw_player(p, window);
+    //Down-Right of player
+    p.set_position(p.get_x(), p.get_y() +  dy);
+    draw_player(p, window);
+    //Bacl Below player
+    p.set_position(p.get_x() - dx, p.get_y());
+    draw_player(p, window);
+  }
 }
 
 /// all aminoacids have been scaled to the size of arginine
 void draw_alanine(
   const player& p,
-  sf::RenderWindow& w
-)
+  sf::RenderWindow& w)
 {
   assert(p.get_amino_acid() == amino_acid::alanine);
   sf::Sprite * m_sprite = new sf::Sprite;
@@ -546,31 +570,7 @@ void draw_valine(
   m_sprite->setRotation(p.get_rotation() + 30);
   w.draw(*m_sprite);
 }
-/*
-void draw(
-  const player p,
-  sf::RenderWindow &window)
-{
-  const int window_size = window.getSize().x;
-  sf::Sprite s = *p.get_sprite();
-  //Must we draw the 'shadow' player left or right?
-  const bool must_right{s.getPosition().x < window_size / 2};
-  const int dx = must_right ? window_size : -window_size;
-  const bool must_down{s.getPosition().y < window_size / 2};
-  const int dy = must_down ? window_size : -window_size;
-  //Real position
-  window.draw(s);
-  //Horizontal of player
-  s.setPosition(s.getPosition() + sf::Vector2f(dx, 0));
-  window.draw(s);
-  //Down-Right of player
-  s.setPosition(s.getPosition() + sf::Vector2f(0, dy));
-  window.draw(s);
-  //Bacl Below player
-  s.setPosition(s.getPosition() + sf::Vector2f(-dx, 0));
-  window.draw(s);
-}
-*/
+
 void draw_hit_ranges(
   sf::CircleShape hit_range,
   sf::RenderWindow &window)
