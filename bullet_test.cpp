@@ -37,7 +37,7 @@ BOOST_AUTO_TEST_CASE(bullet_set_and_get_must_be_symmetrical)
 
 }
 
-BOOST_AUTO_TEST_CASE(remove_out_of_screen_bullets_test)
+BOOST_AUTO_TEST_CASE(remove_bullets_without_speed)
 {
   using position = std::pair<double, double>;
   const double damage{10.0};
@@ -55,12 +55,10 @@ BOOST_AUTO_TEST_CASE(remove_out_of_screen_bullets_test)
   const bullet d(damage, pos4.first, pos4.second, speed_x, speed_y);
   std::vector<bullet> bullets = { a, b, c, d };
 
-  //BOOST_CHECK_EQUAL(bullets.size(), 4);
-  //remove_out_of_screen_bullets(bullets, world_size);
-  //BOOST_CHECK_EQUAL(bullets.size(), 0);
+  //BULLETS WITHOUT SPEED SHOULD BE REMOVED
 }
 
-BOOST_AUTO_TEST_CASE(keep_in_screen_bullets)
+BOOST_AUTO_TEST_CASE(keep_with_speed_bullets)
 {
   using position = std::pair<double, double>;
   const double damage{10.0};
@@ -72,9 +70,7 @@ BOOST_AUTO_TEST_CASE(keep_in_screen_bullets)
   const bullet b(damage, pos.first, pos.second, speed_x, speed_y);
   std::vector<bullet> bullets = { b };
 
-  //BOOST_CHECK_EQUAL(bullets.size(), 1);
-  //remove_out_of_screen_bullets(bullets, world_size);
-  //BOOST_CHECK_EQUAL(bullets.size(), 1);
+  //BULLETS WITH SPEED SHOULD NOT BE REMOVED
 }
 
 BOOST_AUTO_TEST_CASE(check_move)

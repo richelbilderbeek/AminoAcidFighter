@@ -53,6 +53,11 @@ void choose_AA_keyboard(
   std::vector<player> &players,
   std::vector<sf::Text> &AA_texts);
 
+/// Create players to be used in the menu dialog
+std::vector<player> create_menu_players(
+  std::vector<amino_acid> amino_acids
+);
+
 void draw_a_text(
   std::string text,
   sf::Vector2f position,
@@ -69,12 +74,16 @@ void draw_AA_choice_screen(
   std::vector<sf::Text> AA_texts
 );
 
+std::array<sf::Vector2f, 4> get_aa_menu_positions();
+std::array<sf::Color   , 4> get_aa_menu_text_colors();
+std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions();
+std::array<sf::Vector2f, 4> get_aa_menu_text_positions();
+
 program_state process_event_AA_choice(
   sf::Event &event,
-  sf::RenderWindow &window,
-  std::vector<amino_acid> &amino_acids,
-  std::vector<sf::Text> &AA_texts,
-  std::vector<player> &players
+  sf::RenderWindow &w,
+  std::vector<sf::Text> &AA_txt,
+  std::vector<player> &s
 );
 
 program_state process_event_select_n_players(
@@ -90,15 +99,6 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<amino_acid> amino_acids
 );
 
-
-/// Create players to be used in the menu dialog
-std::vector<player> create_menu_players(
-  std::vector<amino_acid> amino_acids
-);
-
-std::array<sf::Vector2f, 4> get_aa_menu_positions();
-std::array<sf::Color   , 4> get_aa_menu_text_colors();
-std::array<sf::Vector2f, 4> get_aa_menu_text_positions();
-std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions();
+void play_music(sf::Music &game_jam);
 
 #endif // MENU_SFML_H

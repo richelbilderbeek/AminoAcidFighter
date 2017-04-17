@@ -39,11 +39,6 @@ bool is_out_of_screen(
   const int window_size
 );
 
-void remove_out_of_screen_bullets(
-  std::vector<bullet> &bullets,
-  const int window_size
-);
-
 std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept;
 
 #endif // BULLET_H

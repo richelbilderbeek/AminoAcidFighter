@@ -1,9 +1,10 @@
 #include "player_sfml.h"
 #include <cassert>
 
-void draw_player(
+void draw_player( //!OCLINT cannot make this any shorter
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
 
   switch(p.get_amino_acid()) {
@@ -27,36 +28,36 @@ void draw_player(
     case amino_acid::tryptophan:    return draw_tryptophan   (p, w);
     case amino_acid::tyrosine:      return draw_tyrosine     (p, w);
     case amino_acid::valine:        return draw_valine       (p, w);
-    default: assert(!"TODO");
   }
   assert(!"should not get here"); //!OCLINT accepted idiom
 }
 
 void draw_players(
   std::vector<player>& ps,
-  sf::RenderWindow &window)
+  sf::RenderWindow &w
+)
 {
   for(int i{0}; i < static_cast<int>(ps.size()); ++i)
   {
     if(ps[i].get_hp() > 0)
     {
-      const int window_size = window.getSize().x;
+      const int window_size = w.getSize().x;
       //Must we draw the 'shadow' player left or right?
       const bool must_right{ps[i].get_x() < window_size / 2};
       const int dx = must_right ? window_size : -window_size;
       const bool must_down{ps[i].get_y() < window_size / 2};
       const int dy = must_down ? window_size : -window_size;
       //Real position
-      draw_player(ps[i], window);
+      draw_player(ps[i], w);
       //Horizontal of player
       ps[i].set_position(ps[i].get_x() + dx, ps[i].get_y());
-      draw_player(ps[i], window);
+      draw_player(ps[i], w);
       //Down-Right of player
       ps[i].set_position(ps[i].get_x(), ps[i].get_y() +  dy);
-      draw_player(ps[i], window);
+      draw_player(ps[i], w);
       //Bacl Below player
       ps[i].set_position(ps[i].get_x() - dx, ps[i].get_y());
-      draw_player(ps[i], window);
+      draw_player(ps[i], w);
     }
   }
 }
@@ -64,7 +65,8 @@ void draw_players(
 /// all aminoacids have been scaled to the size of arginine
 void draw_alanine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   assert(p.get_amino_acid() == amino_acid::alanine);
   sf::Sprite m_sprite;
@@ -90,7 +92,8 @@ void draw_alanine(
 
 void draw_arginine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -114,7 +117,8 @@ void draw_arginine(
 
 void draw_asparagine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -139,7 +143,8 @@ void draw_asparagine(
 
 void draw_aspartic_acid(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -164,7 +169,8 @@ void draw_aspartic_acid(
 
 void draw_cysteine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -190,7 +196,8 @@ void draw_cysteine(
 
 void draw_glutamic_acid(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -215,7 +222,8 @@ void draw_glutamic_acid(
 
 void draw_glutamine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -240,7 +248,8 @@ void draw_glutamine(
 
 void draw_glycine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -265,7 +274,8 @@ void draw_glycine(
 
 void draw_histidine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -290,7 +300,8 @@ void draw_histidine(
 
 void draw_isoleucine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -315,7 +326,8 @@ void draw_isoleucine(
 
 void draw_leucine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -340,7 +352,8 @@ void draw_leucine(
 
 void draw_lysine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -365,7 +378,8 @@ void draw_lysine(
 
 void draw_methionine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -390,7 +404,8 @@ void draw_methionine(
 
 void draw_phenylalanine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -398,10 +413,6 @@ void draw_phenylalanine(
   m_texture.loadFromFile("Phenylalanine.png");
   auto x = m_texture.getSize().x;
   auto y = m_texture.getSize().y;
-void draw_hit_ranges(
-  sf::CircleShape hit_range,
-  sf::RenderWindow &window
-);
   //total size picture in pixels = 587;832 (check in picture)
   //origin of molecule in pixels = 243;623 (check in picture)
   //origin is set 243;587;623/832
@@ -418,7 +429,8 @@ void draw_hit_ranges(
 
 void draw_proline(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -443,7 +455,8 @@ void draw_proline(
 
 void draw_serine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -468,7 +481,8 @@ void draw_serine(
 
 void draw_threonine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -493,7 +507,8 @@ void draw_threonine(
 
 void draw_tryptophan(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -518,7 +533,8 @@ void draw_tryptophan(
 
 void draw_tyrosine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -543,7 +559,8 @@ void draw_tyrosine(
 
 void draw_valine(
   const player& p,
-  sf::RenderWindow& w)
+  sf::RenderWindow& w
+)
 {
   sf::Sprite m_sprite;
   sf::Texture m_texture;
@@ -568,9 +585,10 @@ void draw_valine(
 
 void draw_hit_ranges(
   sf::CircleShape hit_range,
-  sf::RenderWindow &window)
+  sf::RenderWindow &w
+)
 {
-  const int window_size = window.getSize().x;
+  const int window_size = w.getSize().x;
 
   //Must we draw the 'shadow' hitranges left or right?
   const bool must_right{hit_range.getPosition().x < window_size / 2};
@@ -578,70 +596,70 @@ void draw_hit_ranges(
   const bool must_down{hit_range.getPosition().y < window_size / 2};
   const int dy = must_down ? window_size : -window_size;
   //Real position
-  window.draw(hit_range);
+  w.draw(hit_range);
   //Horizontal of player
   hit_range.setPosition(hit_range.getPosition() + sf::Vector2f(dx, 0));
-  window.draw(hit_range);
+  w.draw(hit_range);
   //Down-Right of player
   hit_range.setPosition(hit_range.getPosition() + sf::Vector2f(0, dy));
-  window.draw(hit_range);
+  w.draw(hit_range);
   //Bacl Below player
   hit_range.setPosition(hit_range.getPosition() + sf::Vector2f(-dx, 0));
-  window.draw(hit_range);
+  w.draw(hit_range);
 }
 
 void draw_life_bar(
   sf::RectangleShape life_bar,
-  sf::RenderWindow &window)
+  sf::RenderWindow &w)
 {
-  window.draw(life_bar);
+  w.draw(life_bar);
 }
 
 void respond_to_joystick( //!OCLINT cannot simplify this even more
-  player &player3,
-  player &player4,
+  player &p3,
+  player &p4,
   std::vector<bullet> &bullets)
 {
   // player 3 controls
-  if(sf::Joystick::isButtonPressed(0, 0)) { player3.decelerate(); } // A button
-  if(sf::Joystick::isButtonPressed(0, 1)) { player3.turn_right()  ; } // B button
-  if(sf::Joystick::isButtonPressed(0, 2)) { player3.turn_left()   ; } // x button
-  if(sf::Joystick::isButtonPressed(0, 3)) { player3.accelerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(0, 0)) { p3.decelerate(); } // A button
+  if(sf::Joystick::isButtonPressed(0, 1)) { p3.turn_right()  ; } // B button
+  if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left()   ; } // x button
+  if(sf::Joystick::isButtonPressed(0, 3)) { p3.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
-    bullets.push_back(shoot(player3));
+    bullets.push_back(shoot(p3));
   }
 
   //player 4 controls
-  if(sf::Joystick::isButtonPressed(1, 0)) { player4.decelerate(); } // A button
-  if(sf::Joystick::isButtonPressed(1, 1)) { player4.turn_right()  ; } // B button
-  if(sf::Joystick::isButtonPressed(1, 2)) { player4.turn_left()   ; } // x button
-  if(sf::Joystick::isButtonPressed(1, 3)) { player4.accelerate() ; } // Y button
+  if(sf::Joystick::isButtonPressed(1, 0)) { p4.decelerate(); } // A button
+  if(sf::Joystick::isButtonPressed(1, 1)) { p4.turn_right()  ; } // B button
+  if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left()   ; } // x button
+  if(sf::Joystick::isButtonPressed(1, 3)) { p4.accelerate() ; } // Y button
   if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
-    bullets.push_back(shoot(player4));
+    bullets.push_back(shoot(p4));
   }
 }
 
 void respond_to_key( //!OCLINT cannot simplify this even more
-  player &player1,
-  player &player2,
+  player &p1,
+  player &p2,
   std::vector<bullet> &bullets)
 {
   // player1 controls
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { player1.turn_left()   ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { player1.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { player1.accelerate() ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { player1.decelerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { p1.turn_left()   ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { p1.turn_right()  ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { p1.accelerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { p1.decelerate(); }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-    bullets.push_back(shoot(player1));
+    bullets.push_back(shoot(p1));
     //std::cout << bullets[0].get_x() << ", " << bullets[0].get_y();
   }
   // player2 controls
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { player2.accelerate() ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { player2.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { player2.decelerate(); }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { player2.turn_left()   ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { p2.accelerate() ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { p2.turn_right()  ; }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { p2.decelerate(); }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { p2.turn_left()   ; }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-    bullets.push_back(shoot(player2));
+    bullets.push_back(shoot(p2));
   }
 }
 

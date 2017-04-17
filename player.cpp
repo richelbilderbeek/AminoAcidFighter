@@ -35,9 +35,9 @@ void player::decelerate()
   m_speed_y += std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
 }
 
-power get_power(const amino_acid any_amino_acid) noexcept
+power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any shorter
 {
-  switch (any_amino_acid) {
+  switch (any_aa) {
     case amino_acid::alanine:       return power::shield;
     case amino_acid::arginine:      return power::shield;
     case amino_acid::asparagine:    return power::shield;

@@ -54,19 +54,13 @@ std::vector<player> choose_aminoacids(
   sf::Font font;
   font.loadFromFile("arial.ttf");
 
-  const std::array<sf::Vector2f, 4> text_AA_positions = get_aa_menu_text_positions    ();
-  const std::array<sf::Color   , 4> text_colors       = get_aa_menu_text_colors          ();
+  const std::array<sf::Vector2f, 4> AA_txt_pos = get_aa_menu_text_positions();
+  const std::array<sf::Color   , 4> txt_colors       = get_aa_menu_text_colors();
   const std::array<sf::Vector2f, 4> text_player_pos   = get_aa_menu_text_player_positions();
-
-  std::vector<sf::Text> AA_texts = set_AA_texts(
-                                     font,
-                                     text_AA_positions,
-                                     text_colors,
-                                     amino_acids);
+  std::vector<sf::Text> AA_texts = set_AA_texts(font, AA_txt_pos, txt_colors, amino_acids);
   std::vector<player> players = create_menu_players(amino_acids);
 
   draw_players(players, window);
-
   program_state state = program_state::select_players;
 
   while (1) {
@@ -75,23 +69,18 @@ std::vector<player> choose_aminoacids(
       state = process_event_AA_choice(
         event,
         window,
-        amino_acids,
         AA_texts,
         players);
 
-      if (state == program_state::quit)
-      {
+      if (state == program_state::quit) {
         music.stop();
         return {};
       }
 
-      if (state != program_state::select_players)
-      {
+      if (state != program_state::select_players) {
         music.stop();
         return players;
       }
-
-      //set_AA_texts(font, text_AA_positions, text_colors, AA_texts);
 
       //Draw everything on screen
       window.clear(sf::Color(128,128,128));
@@ -99,72 +88,72 @@ std::vector<player> choose_aminoacids(
         window,
         players,
         text_player_pos,
-        text_colors,
+        txt_colors,
         AA_texts);
       window.display();
     }
   }
 }
 
+void play_music(sf::Music &game_jam)
+{
+  if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
+  {
+    std::cout << "Could not find tune\n";
+  }
+  game_jam.setPlayingOffset(sf::seconds(2));
+  game_jam.setVolume(50);
+  game_jam.setLoop(true);
+  game_jam.play();
+}
+
 int choose_n_players(
   sf::RenderWindow &window,
   const bool do_play_music,
-  int player_amount)
+  int player_amount
+)
 {
   sf::Music game_jam;
   if(do_play_music)
   {
-    if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
-    {
-      std::cout << "Could not find tune\n";
-    }
-    game_jam.setPlayingOffset(sf::seconds(2));
-    game_jam.setVolume(50);
-    game_jam.setLoop(true);
-    game_jam.play();
+    play_music(game_jam);
   }
-
 
   program_state state = program_state::choose_n_players;
 
   while (1) {
     sf::Event event;
-    while (window.pollEvent(event))
-    {
+    while (window.pollEvent(event)) {
       state = process_event_select_n_players(
         event,
         window,
         player_amount);
 
-      if (state == program_state::quit)
-      {
+      if (state == program_state::quit) {
         game_jam.stop();
         return 0;
       }
-      if (state != program_state::choose_n_players)
-      {
+      if (state != program_state::choose_n_players) {
         game_jam.stop();
         return player_amount;
       }
 
-      sf::Vector2f player_amount_pos = sf::Vector2f(200, 250);
+      sf::Vector2f txt_pos_x_players = sf::Vector2f(200, 250);
       const int char_size = 50;
 
       //Draw everything on screen
       window.clear();
       draw_a_text("Start Game With", sf::Vector2f(75, 150), window, sf::Color::White, 60);
-
       if(player_amount == 2) {
-        draw_a_text("2 Players", player_amount_pos, window, sf::Color::Magenta, char_size);
+        draw_a_text("2 Players", txt_pos_x_players, window, sf::Color::Magenta, char_size);
       }
       else if(player_amount == 3) {
-        draw_a_text("3 Players", player_amount_pos, window, sf::Color::Yellow, char_size);
+        draw_a_text("3 Players", txt_pos_x_players, window, sf::Color::Yellow, char_size);
       }
       else if(player_amount == 4) {
-        draw_a_text("4 Players", player_amount_pos, window, sf::Color::Green, char_size);
+        draw_a_text("4 Players", txt_pos_x_players, window, sf::Color::Green, char_size);
       }
       assert(player_amount <= 4);
-
       window.display();
     }
   }
@@ -300,13 +289,12 @@ void draw_AA_choice_screen(
 
 program_state process_event_AA_choice(
   sf::Event &event,
-  sf::RenderWindow &window,
-  std::vector<amino_acid> & /*amino_acids */,
-  std::vector<sf::Text> &AA_texts,
-  std::vector<player> &players)
+  sf::RenderWindow &w,
+  std::vector<sf::Text> &AA_txt,
+  std::vector<player> &s)
 {
   switch(event.type) {
-    case sf::Event::Closed: window.close();
+    case sf::Event::Closed: w.close();
       return program_state::quit;
     case sf::Event::KeyPressed:
       //battle
@@ -318,13 +306,13 @@ program_state process_event_AA_choice(
       }
       //player 1 and player 2
       {
-        choose_AA_keyboard(players, AA_texts);
+        choose_AA_keyboard(s, AA_txt);
       }
       break;
     case sf::Event::JoystickButtonPressed:
       //player 3 and player 4
       {
-        choose_AA_joystick(players, AA_texts);
+        choose_AA_joystick(s, AA_txt);
       }
       break;
     default:

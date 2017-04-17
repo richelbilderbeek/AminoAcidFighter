@@ -40,25 +40,6 @@ void bullet::move(const double world_size)
   m_y = std::fmod(m_y + m_speed_y + world_size, world_size);
 }
 
-/*void remove_out_of_screen_bullets(
-  std::vector<bullet> &bullets,
-  const int window_size)
-{
-  const auto new_end = std::remove_if(
-    std::begin(bullets),
-    std::end(bullets),
-    [window_size](const bullet& b)
-    {
-      return is_out_of_screen(b, window_size);
-    }
-  );
-
-  bullets.erase(
-    new_end,
-    std::end(bullets)
-  );
-}
-*/
 void bullet::set_position(const double x, const double y)
 {
   m_x = x;

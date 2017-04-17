@@ -2,13 +2,13 @@
 #include "menu.h"
 
 menu::menu(
-  const std::vector<amino_acid>& initial_amino_acids,
+  const std::vector<amino_acid>& initial_aas,
   bool /* play_music */
 )
-  : m_amino_acids{initial_amino_acids}
+  : m_amino_acids{initial_aas}
 {
-  if(initial_amino_acids.size() < 2 ||
-     initial_amino_acids.size() > 4)
+  if(initial_aas.size() < 2 ||
+     initial_aas.size() > 4)
   {
     throw std::invalid_argument("Too many or too little amino_acids");
   }
@@ -36,13 +36,13 @@ void menu::choose_previous(const int player_index)
 
 menu create_test_menu_1()
 {
-  const std::vector<amino_acid> initial_amino_acids =
+  const std::vector<amino_acid> initial_aas =
   {
     amino_acid::threonine,
     amino_acid::arginine,
     amino_acid::phenylalanine
   };
-  return menu{initial_amino_acids};
+  return menu{initial_aas};
 }
 
 void minus_player(

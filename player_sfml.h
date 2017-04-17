@@ -114,24 +114,23 @@ void draw_valine(
 
 void draw_hit_ranges(
   sf::CircleShape hit_range,
-  sf::RenderWindow &window
+  sf::RenderWindow &w
 );
 
-void draw_life_bar(
-  sf::RectangleShape life_bars,
-  sf::RenderWindow &window
+void draw_life_bar(sf::RectangleShape life_bars,
+  sf::RenderWindow &w
 );
 
 void respond_to_joystick(
-  player &player3,
-  player &player4,
+  player &p3,
+  player &p4,
   std::vector<bullet> &bullets/*,
   int window_size*/
 );
 
 void respond_to_key(
-  player &player1,
-  player &player2,
+  player &p1,
+  player &p2,
   std::vector<bullet> &bullets/*,
   int window_size*/
 );
