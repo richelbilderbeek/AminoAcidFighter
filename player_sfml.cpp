@@ -41,7 +41,6 @@ void draw_players(
     if(ps[i].get_hp() > 0)
     {
       const int window_size = window.getSize().x;
-      //sf::Sprite s = *p.get_sprite();
       //Must we draw the 'shadow' player left or right?
       const bool must_right{ps[i].get_x() < window_size / 2};
       const int dx = must_right ? window_size : -window_size;
