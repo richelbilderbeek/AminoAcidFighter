@@ -68,337 +68,337 @@ void draw_alanine(
   sf::RenderWindow& w)
 {
   assert(p.get_amino_acid() == amino_acid::alanine);
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Alanine.png");
-  auto width = m_texture->getSize().x;
-  auto height = m_texture->getSize().y;
+  m_texture.loadFromFile("Alanine.png");
+  auto width = m_texture.getSize().x;
+  auto height = m_texture.getSize().y;
 
   //total size picture in pixels = 781;640 (check in picture)
   //origin of molecule in pixels = 326;362 (check in picture)
   //origin is set 326/781;362/640
   const double x_ratio_origin = 326.0/781.0;
   const double y_ratio_origin = 362.0/640.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/103.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(width * x_ratio_origin, height * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(width * x_ratio_origin, height * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_arginine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Arginine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Arginine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 543;921 (check in picture)
   //origin of molecule in pixels = 231;730 (check in picture)
   //origin is set 231/543;730/921
   const double x_ratio_origin = 231.0/543.0;
   const double y_ratio_origin = 730.0/921.0;
-  m_sprite->setTexture(*m_texture);
-  m_sprite->setScale(sf::Vector2f(0.12, 0.12));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setTexture(m_texture);
+  m_sprite.setScale(sf::Vector2f(0.12, 0.12));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_asparagine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Asparagine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Asparagine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 675;740 (check in picture)
   //origin of molecule in pixels = 286;502 (check in picture)
   //origin is set 286/675;502/740
   const double x_ratio_origin = 286.0/675.0;
   const double y_ratio_origin = 502.0/740.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/88.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_aspartic_acid(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("AsparticAcid.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("AsparticAcid.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 743;673 (check in picture)
   //origin of molecule in pixels = 314;411 (check in picture)
   //origin is set 314/743;411/673
   const double x_ratio_origin = 314.0/743.0;
   const double y_ratio_origin = 411.0/673.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/97.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_cysteine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Cysteine.png");
+  m_texture.loadFromFile("Cysteine.png");
 
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 743;673 (check in picture)
   //origin of molecule in pixels = 315;412 (check in picture)
   //origin is set 315/743;412/673
   const double x_ratio_origin = 315.0/743.0;
   const double y_ratio_origin = 412.0/673.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/97.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_glutamic_acid(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("GlutamicAcid.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("GlutamicAcid.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 674;741 (check in picture)
   //origin of molecule in pixels = 285;504 (check in picture)
   //origin is set 285/741;504/674
   const double x_ratio_origin = 285.0/674.0;
   const double y_ratio_origin = 504.0/741.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/88.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_glutamine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Glutamine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Glutamine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 607;805 (check in picture)
   //origin of molecule in pixels = 249;586 (check in picture)
   //origin is set 249/607;586/805
   const double x_ratio_origin = 249.0/607.0;
   const double y_ratio_origin = 586.0/805.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/81.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_glycine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Glycine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Glycine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 792;451 (check in picture)
   //origin of molecule in pixels = 336;172 (check in picture)
   //origin is set 336/792;172/451
   const double x_ratio_origin = 336.0/792.0;
   const double y_ratio_origin = 172.0/451.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/103.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_histidine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Histidine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Histidine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 624;801 (check in picture)
   //origin of molecule in pixels = 266;580 (check in picture)
   //origin is set 266/624;580/801
   const double x_ratio_origin = 266.0/624.0;
   const double y_ratio_origin = 580.0/801.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/81.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_isoleucine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Isoleucine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Isoleucine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 669;746 (check in picture)
   //origin of molecule in pixels = 282;512 (check in picture)
   //origin is set 282;669;512/746
   const double x_ratio_origin = 282.0/669.0;
   const double y_ratio_origin = 512.0/746.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/87.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_leucine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Leucine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Leucine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 660;741 (check in picture)
   //origin of molecule in pixels = 272;504 (check in picture)
   //origin is set 272;660;504/741
   const double x_ratio_origin = 272.0/660.0;
   const double y_ratio_origin = 504.0/741.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/88.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_lysine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Lysine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Lysine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 578;865 (check in picture)
   //origin of molecule in pixels = 246;663 (check in picture)
   //origin is set 246;578;663/865
   const double x_ratio_origin = 246.0/578.0;
   const double y_ratio_origin = 663.0/865.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/76.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_methionine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Methionine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Methionine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 597;838 (check in picture)
   //origin of molecule in pixels = 253;628 (check in picture)
   //origin is set 253;597;628/838
   const double x_ratio_origin = 253.0/597.0;
   const double y_ratio_origin = 628.0/838.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/78.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_phenylalanine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Phenylalanine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Phenylalanine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 void draw_hit_ranges(
   sf::CircleShape hit_range,
   sf::RenderWindow &window
@@ -408,163 +408,163 @@ void draw_hit_ranges(
   //origin is set 243;587;623/832
   const double x_ratio_origin = 243.0/587.0;
   const double y_ratio_origin = 623.0/832.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/78.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_proline(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Proline.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Proline.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 805;621 (check in picture)
   //origin of molecule in pixels = 384;364 (check in picture)
   //origin is set 384/805;364/621
   const double x_ratio_origin = 384.0/805.0;
   const double y_ratio_origin = 364.0/621.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/95.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_serine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Serine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Serine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 742;673 (check in picture)
   //origin of molecule in pixels = 315;412 (check in picture)
   //origin is set 315/742;412/673
   const double x_ratio_origin = 315.0/742.0;
   const double y_ratio_origin = 412.0/673.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/97.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_threonine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Threonine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Threonine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 745;670 (check in picture)
   //origin of molecule in pixels = 315;408 (check in picture)
   //origin is set 315/745;408/670
   const double x_ratio_origin = 315.0/745.0;
   const double y_ratio_origin = 408.0/670.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/97.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_tryptophan(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Tryptophan.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Tryptophan.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 673;742 (check in picture)
   //origin of molecule in pixels = 377;560 (check in picture)
   //origin is set 377/673;560/742
   const double x_ratio_origin = 377.0/673.0;
   const double y_ratio_origin = 560.0/742.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/67.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_tyrosine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Tyrosine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Tyrosine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 568;862 (check in picture)
   //origin of molecule in pixels = 235;657 (check in picture)
   //origin is set 235/568;657/862
   const double x_ratio_origin = 235.0/568.0;
   const double y_ratio_origin = 657.0/862.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/76.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_valine(
   const player& p,
   sf::RenderWindow& w)
 {
-  sf::Sprite * m_sprite = new sf::Sprite;
-  sf::Texture * m_texture = new sf::Texture;
+  sf::Sprite m_sprite;
+  sf::Texture m_texture;
 
-  m_texture->loadFromFile("Valine.png");
-  auto x = m_texture->getSize().x;
-  auto y = m_texture->getSize().y;
+  m_texture.loadFromFile("Valine.png");
+  auto x = m_texture.getSize().x;
+  auto y = m_texture.getSize().y;
 
   //total size picture in pixels = 745;670 (check in picture)
   //origin of molecule in pixels = 315;409 (check in picture)
   //origin is set 315/745;409/670
   const double x_ratio_origin = 315.0/745.0;
   const double y_ratio_origin = 409.0/670.0;
-  m_sprite->setTexture(*m_texture);
+  m_sprite.setTexture(m_texture);
   double scale = 0.12*(70.0/97.0);
-  m_sprite->setScale(sf::Vector2f(scale, scale));
-  m_sprite->setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
-  m_sprite->setPosition(p.get_x(), p.get_y());
-  m_sprite->setRotation(p.get_rotation() + 30);
-  w.draw(*m_sprite);
+  m_sprite.setScale(sf::Vector2f(scale, scale));
+  m_sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
+  m_sprite.setPosition(p.get_x(), p.get_y());
+  m_sprite.setRotation(p.get_rotation() + 30);
+  w.draw(m_sprite);
 }
 
 void draw_hit_ranges(
