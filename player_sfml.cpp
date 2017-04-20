@@ -620,45 +620,56 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   std::vector<bullet> &bullets)
 {
   // player 3 controls
-  if(sf::Joystick::isButtonPressed(0, 0)) { p3.decelerate(); } // A button
-  if(sf::Joystick::isButtonPressed(0, 1)) { p3.turn_right()  ; } // B button
-  if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left()   ; } // x button
-  if(sf::Joystick::isButtonPressed(0, 3)) { p3.accelerate() ; } // Y button
-  if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
-    bullets.push_back(shoot(p3));
+  if(p3.get_hp() > 0)
+  {
+    if(sf::Joystick::isButtonPressed(0, 0)) { p3.decelerate(); } // A button
+    if(sf::Joystick::isButtonPressed(0, 1)) { p3.turn_right()  ; } // B button
+    if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left()   ; } // x button
+    if(sf::Joystick::isButtonPressed(0, 3)) { p3.accelerate() ; } // Y button
+    if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
+      bullets.push_back(shoot(p3));
+    }
   }
 
   //player 4 controls
-  if(sf::Joystick::isButtonPressed(1, 0)) { p4.decelerate(); } // A button
-  if(sf::Joystick::isButtonPressed(1, 1)) { p4.turn_right()  ; } // B button
-  if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left()   ; } // x button
-  if(sf::Joystick::isButtonPressed(1, 3)) { p4.accelerate() ; } // Y button
-  if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
-    bullets.push_back(shoot(p4));
+  if(p4.get_hp() > 0)
+  {
+    if(sf::Joystick::isButtonPressed(1, 0)) { p4.decelerate(); } // A button
+    if(sf::Joystick::isButtonPressed(1, 1)) { p4.turn_right()  ; } // B button
+    if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left()   ; } // x button
+    if(sf::Joystick::isButtonPressed(1, 3)) { p4.accelerate() ; } // Y button
+    if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
+      bullets.push_back(shoot(p4));
+    }
   }
 }
 
 void respond_to_key( //!OCLINT cannot simplify this even more
   player &p1,
   player &p2,
-  std::vector<bullet> &bullets)
+  std::vector<bullet> &bullets
+)
 {
   // player1 controls
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { p1.turn_left()   ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { p1.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { p1.accelerate() ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { p1.decelerate(); }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-    bullets.push_back(shoot(p1));
+  if(p1.get_hp() > 0) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { p1.turn_left(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { p1.turn_right(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { p1.accelerate(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { p1.decelerate(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+      bullets.push_back(shoot(p1));
+  }
     //std::cout << bullets[0].get_x() << ", " << bullets[0].get_y();
   }
   // player2 controls
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { p2.accelerate() ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { p2.turn_right()  ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { p2.decelerate(); }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { p2.turn_left()   ; }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-    bullets.push_back(shoot(p2));
+  if(p2.get_hp() > 0) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { p2.accelerate(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { p2.turn_right(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { p2.decelerate(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { p2.turn_left(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
+      bullets.push_back(shoot(p2));
+    }
   }
 }
 

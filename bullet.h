@@ -21,8 +21,8 @@ public:
   auto get_y() const noexcept { return m_y; }
   auto get_speed_x() const noexcept { return m_speed_x ; }
   auto get_speed_y() const noexcept { return m_speed_y ; }
-  void set_slower_x(auto x_speed) { m_speed_x = x_speed; }
-  void set_slower_y(auto y_speed) { m_speed_y = y_speed; }
+  void set_slower_x(double x_speed) { m_speed_x = x_speed; }
+  void set_slower_y(double y_speed) { m_speed_y = y_speed; }
 
   void move(const double world_size);
   void set_position(const double x, const double y);
@@ -41,6 +41,6 @@ bool is_too_slow(
 );
 
 void remove_slow_bullets(std::vector<bullet> &bullets);
-std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept;
+std::ostream& operator<<(std::ostream &os, const bullet &b) noexcept;
 
 #endif // BULLET_H
