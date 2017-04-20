@@ -4,8 +4,9 @@
 /// Functions and/or classes to display the 'bullet' class
 /// using SFML
 
-#include <SFML/Graphics.hpp>
 #include <SFML/Config.hpp>
+#include <SFML/Graphics.hpp>
+
 #include "bullet.h"
 
 //May be slow

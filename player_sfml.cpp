@@ -1,5 +1,6 @@
-#include "player_sfml.h"
 #include <cassert>
+
+#include "player_sfml.h"
 
 void draw_player( //!OCLINT cannot make this any shorter
   const player& p,
@@ -39,26 +40,24 @@ void draw_players(
 {
   for(int i{0}; i < static_cast<int>(ps.size()); ++i)
   {
-    if(ps[i].get_hp() > 0)
-    {
-      const int window_size = w.getSize().x;
-      //Must we draw the 'shadow' player left or right?
-      const bool must_right{ps[i].get_x() < window_size / 2};
-      const int dx = must_right ? window_size : -window_size;
-      const bool must_down{ps[i].get_y() < window_size / 2};
-      const int dy = must_down ? window_size : -window_size;
-      //Real position
-      draw_player(ps[i], w);
-      //Horizontal of player
-      ps[i].set_position(ps[i].get_x() + dx, ps[i].get_y());
-      draw_player(ps[i], w);
-      //Down-Right of player
-      ps[i].set_position(ps[i].get_x(), ps[i].get_y() +  dy);
-      draw_player(ps[i], w);
-      //Bacl Below player
-      ps[i].set_position(ps[i].get_x() - dx, ps[i].get_y());
-      draw_player(ps[i], w);
-    }
+    if(ps[i].get_hp() <= 0) continue;
+    const int window_size = w.getSize().x;
+    //Must we draw the 'shadow' player left or right?
+    const bool must_right{ps[i].get_x() < window_size / 2};
+    const int dx = must_right ? window_size : -window_size;
+    const bool must_down{ps[i].get_y() < window_size / 2};
+    const int dy = must_down ? window_size : -window_size;
+    //Real position
+    draw_player(ps[i], w);
+    //Horizontal of player
+    ps[i].set_position(ps[i].get_x() + dx, ps[i].get_y());
+    draw_player(ps[i], w);
+    //Down-Right of player
+    ps[i].set_position(ps[i].get_x(), ps[i].get_y() +  dy);
+    draw_player(ps[i], w);
+    //Bacl Below player
+    ps[i].set_position(ps[i].get_x() - dx, ps[i].get_y());
+    draw_player(ps[i], w);
   }
 }
 

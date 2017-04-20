@@ -2,8 +2,6 @@
 #define PLAYER_SFML_H
 
 #include <SFML/Config.hpp>
-
-#include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics.hpp>
 #include "player.h"
 

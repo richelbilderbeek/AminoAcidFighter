@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+
 #include "bullet.h"
 #include "player.h"
 

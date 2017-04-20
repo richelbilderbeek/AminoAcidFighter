@@ -1,5 +1,4 @@
 #include "menu_sfml.h"
-
 #include "player_sfml.h"
 
 void change_amino_name( //!OCLINT cannot make this any shorter
