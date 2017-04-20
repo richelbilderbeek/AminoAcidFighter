@@ -18,17 +18,26 @@ bullet::bullet(
     m_y{y}
 {}
 
-bool is_out_of_screen(
-  const bullet& any_bullet,
-  const int window_size)
+bool is_too_slow(const bullet& any_bullet)
 {
-  if(any_bullet.get_x() < 0 ||
-     any_bullet.get_x() > window_size ||
-     any_bullet.get_y() < 0 ||
-     any_bullet.get_y() > window_size) {
-    return true;
-  }
+  if(any_bullet.get_speed_x() < 0.5 &&
+     any_bullet.get_speed_x() > -0.5 &&
+     any_bullet.get_speed_y() < 0.5 &&
+     any_bullet.get_speed_y() > -0.5)
+  { return true; }
   return false;
+}
+
+void remove_slow_bullets(std::vector<bullet> &bullets)
+{
+  for(int i=0; i < static_cast<int>(bullets.size()); ++i) {
+    //sf::Sprite bullet_sprite = bullets[i].get_sprite();
+    if(is_too_slow(bullets[i])) {
+      bullets[i] = bullets.back();
+      bullets.pop_back();
+      --i;
+    }
+  }
 }
 
 void bullet::move(const double world_size)

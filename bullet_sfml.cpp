@@ -16,3 +16,4 @@ sf::Sprite to_sprite(const bullet& b)
   bullet_sprite.setPosition(sf::Vector2f(b.get_x(), b.get_y()));
   return bullet_sprite;
 }
+

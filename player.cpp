@@ -79,11 +79,11 @@ bullet shoot(const player& any_player)
   auto rot_degree = any_player.get_rotation() + 10.7389;
   //10.7389 = angle from turn origin to shooter origin
   auto rot_radians = rot_degree * M_PI / 180;
+  std::cout << rot_degree << std::endl;
   auto pos_x = any_player.get_x();
   auto pos_y = any_player.get_y();
-  float x_shooter = pos_x + (std::cos(rot_radians)); //TODO
-  float y_shooter = pos_y + (std::sin(rot_radians)); //TODO
-  //std::cout << pos_x << ", " << pos_y << std::endl << std::endl;
+  float x_shooter = pos_x + (32/std::cos(rot_radians)); //TODO
+  float y_shooter = pos_y + (32*std::sin(rot_radians)); //TODO
   double angle_deg = rot_degree + 140.0;
   double angle_rad = angle_deg * M_PI / 180;
   const double speed_x{ std::sin(angle_rad) * 1.5};

@@ -21,6 +21,8 @@ public:
   auto get_y() const noexcept { return m_y; }
   auto get_speed_x() const noexcept { return m_speed_x ; }
   auto get_speed_y() const noexcept { return m_speed_y ; }
+  void set_slower_x(auto x_speed) { m_speed_x = x_speed; }
+  void set_slower_y(auto y_speed) { m_speed_y = y_speed; }
 
   void move(const double world_size);
   void set_position(const double x, const double y);
@@ -34,11 +36,11 @@ private:
   double m_y;
 };
 
-bool is_out_of_screen(
-  const bullet& any_bullet,
-  const int window_size
+bool is_too_slow(
+  const bullet& any_bullet
 );
 
+void remove_slow_bullets(std::vector<bullet> &bullets);
 std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept;
 
 #endif // BULLET_H
