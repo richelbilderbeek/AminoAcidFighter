@@ -5,7 +5,7 @@
 #include "menu_sfml.h"
 
 void bullet_hits_player(
-  std::vector<bullet> bullets,
+  std::vector<bullet> &bullets,
   std::vector<player> &ps,
   std::vector<sf::RectangleShape> &life_bars)
 {
@@ -14,7 +14,7 @@ void bullet_hits_player(
       float distance = calculate_distance_bullet_player(bullets[j], ps[i]);
       if(distance <= get_hit_range_size()) {
         ps[i].lose_hp();
-        //TODO remove_bullets_that_hits();
+        bullets[j].slow_down();
       }
     }
   }
@@ -110,15 +110,8 @@ void play_game(
     //Move players, hit range and bullets
     for(auto i = 0u; i != ps.size(); ++i) { ps[i].move(window_size); }
     for(auto& bullet : bullets) {
-      auto x_speed = bullet.get_speed_x();
-      auto new_x_speed = x_speed * 0.999;
-      bullet.set_slower_x(new_x_speed);
-      auto y_speed = bullet.get_speed_y();
-      auto new_y_speed = y_speed * 0.999;
-      bullet.set_slower_y(new_y_speed);
+      bullet.slow_down();
       bullet.move(window_size);
-      std::cout << new_x_speed << std::endl;
-      std::cout << new_y_speed << std::endl << std::endl;
     }
     for(auto i = 0u; i != ps.size(); ++i) {
       hit_ranges[i].setPosition(ps[i].get_x() + ps[i].get_speed_x(),

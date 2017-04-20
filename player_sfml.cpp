@@ -623,9 +623,9 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(p3.get_hp() > 0)
   {
     if(sf::Joystick::isButtonPressed(0, 0)) { p3.decelerate(); } // A button
-    if(sf::Joystick::isButtonPressed(0, 1)) { p3.turn_right()  ; } // B button
-    if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left()   ; } // x button
-    if(sf::Joystick::isButtonPressed(0, 3)) { p3.accelerate() ; } // Y button
+    if(sf::Joystick::isButtonPressed(0, 1)) { p3.turn_right(); } // B button
+    if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left(); } // x button
+    if(sf::Joystick::isButtonPressed(0, 3)) { p3.accelerate(); } // Y button
     if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
       bullets.push_back(shoot(p3));
     }
@@ -635,8 +635,8 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   if(p4.get_hp() > 0)
   {
     if(sf::Joystick::isButtonPressed(1, 0)) { p4.decelerate(); } // A button
-    if(sf::Joystick::isButtonPressed(1, 1)) { p4.turn_right()  ; } // B button
-    if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left()   ; } // x button
+    if(sf::Joystick::isButtonPressed(1, 1)) { p4.turn_right(); } // B button
+    if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left(); } // x button
     if(sf::Joystick::isButtonPressed(1, 3)) { p4.accelerate() ; } // Y button
     if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
       bullets.push_back(shoot(p4));

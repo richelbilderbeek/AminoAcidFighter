@@ -55,6 +55,12 @@ void bullet::set_position(const double x, const double y)
   m_y = y;
 }
 
+void bullet::slow_down()
+{
+  m_speed_x *= 0.999;
+  m_speed_y *= 0.999;
+}
+
 std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept
 {
   os
