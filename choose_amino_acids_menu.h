@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef CHOOSE_AMINO_ACIDS_MENU_H
+#define CHOOSE_AMINO_ACIDS_MENU_H
 
 #include <vector>
 #include "amino_acid.h"
@@ -7,13 +7,13 @@
 /// Menu in which the amino acids are chosen.
 /// The number of amino acids
 /// cannot be changed in this menu
-class menu
+class choose_amino_acids_menu
 {
 public:
   /// The initial amino acids. The number of amino acids
   /// cannot be changed in this menu
   /// @param play_music do play music when the menu is displayed
-  menu(
+  choose_amino_acids_menu(
     const std::vector<amino_acid>& initial_amino_acids,
     bool play_music = true
   );
@@ -41,15 +41,6 @@ private:
 };
 
 ///Create a testing menu
-menu create_test_menu_1();
+choose_amino_acids_menu create_test_menu_1();
 
-void minus_player(
-  int &player_amount
-);
-
-void plus_player(
-  int &player_amount
-);
-
-
-#endif // MENU_H
+#endif // CHOOSE_AMINO_ACIDS_MENU_H

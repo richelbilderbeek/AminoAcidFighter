@@ -1,5 +1,7 @@
 #include <boost/test/unit_test.hpp>
-#include "menu.h"
+#include "choose_amino_acids_menu.h"
+
+using menu = choose_amino_acids_menu;
 
 BOOST_AUTO_TEST_CASE(menu_construction)
 {

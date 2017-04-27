@@ -336,11 +336,11 @@ program_state process_event_select_n_players(
 
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
          player_amount < 4) {
-        plus_player(player_amount);
+        ++player_amount;
       }
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
          player_amount > 2) {
-        minus_player(player_amount);
+        --player_amount;
       }
       //Go to AA choice menu
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {

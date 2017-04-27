@@ -1,7 +1,7 @@
 ﻿#include <stdexcept>
-#include "menu.h"
+#include "choose_amino_acids_menu.h"
 
-menu::menu(
+choose_amino_acids_menu::choose_amino_acids_menu(
   const std::vector<amino_acid>& initial_aas,
   bool /* play_music */
 )
@@ -14,7 +14,7 @@ menu::menu(
   }
 }
 
-void menu::choose_next(const int player_index)
+void choose_amino_acids_menu::choose_next(const int player_index)
 {
   if(player_index < 0 ||
      player_index >= static_cast<int>(m_amino_acids.size()))
@@ -24,7 +24,7 @@ void menu::choose_next(const int player_index)
   m_amino_acids[player_index] = get_next(m_amino_acids[player_index]);
 }
 
-void menu::choose_previous(const int player_index)
+void choose_amino_acids_menu::choose_previous(const int player_index)
 {
   if(player_index < 0 ||
      player_index >= static_cast<int>(m_amino_acids.size()))
@@ -34,7 +34,7 @@ void menu::choose_previous(const int player_index)
   m_amino_acids[player_index] = get_prev(m_amino_acids[player_index]);
 }
 
-menu create_test_menu_1()
+choose_amino_acids_menu create_test_menu_1()
 {
   const std::vector<amino_acid> initial_aas =
   {
@@ -42,19 +42,5 @@ menu create_test_menu_1()
     amino_acid::arginine,
     amino_acid::phenylalanine
   };
-  return menu{initial_aas};
+  return choose_amino_acids_menu{initial_aas};
 }
-
-void minus_player(
-  int &player_amount)
-{
-    --player_amount;
-}
-
-void plus_player(
-  int &player_amount)
-{
-    ++player_amount;
-}
-
-
