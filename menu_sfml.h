@@ -28,6 +28,7 @@ std::vector<player> choose_aminoacids(
 ///Menu for selecting a number of players
 ///Return chosen number of players
 ///A return value of zero denotes that the user wants to quit
+//[[deprecated]]
 int choose_n_players(
   sf::RenderWindow &window,
   const bool do_play_music,
@@ -99,6 +100,7 @@ std::vector<sf::Text> set_AA_texts(
   std::vector<amino_acid> amino_acids
 );
 
-void play_music(sf::Music &game_jam);
+///Plays music
+void play_music(sf::Music& music);
 
 #endif // MENU_SFML_H

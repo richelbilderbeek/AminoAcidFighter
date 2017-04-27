@@ -94,7 +94,7 @@ std::vector<player> choose_aminoacids(
   }
 }
 
-void play_music(sf::Music &game_jam)
+void start_music(sf::Music& game_jam)
 {
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
   {
@@ -115,7 +115,7 @@ int choose_n_players(
   sf::Music game_jam;
   if(do_play_music)
   {
-    play_music(game_jam);
+    start_music(game_jam);
   }
 
   program_state state = program_state::choose_n_players;
@@ -440,4 +440,16 @@ std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions()
     sf::Vector2f(10 , 545),
     sf::Vector2f(350, 545)
   };
+}
+
+void play_music(sf::Music& game_jam)
+{
+  if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
+  {
+    std::cout << "Could not find tune\n";
+  }
+  game_jam.setPlayingOffset(sf::seconds(2));
+  game_jam.setVolume(50);
+  game_jam.setLoop(true);
+  game_jam.play();
 }
