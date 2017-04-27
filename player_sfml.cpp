@@ -7,7 +7,6 @@ void draw_player( //!OCLINT cannot make this any shorter
   sf::RenderWindow& w
 )
 {
-
   switch(p.get_amino_acid()) {
     case amino_acid::alanine:       return draw_alanine      (p, w);
     case amino_acid::arginine:      return draw_arginine     (p, w);

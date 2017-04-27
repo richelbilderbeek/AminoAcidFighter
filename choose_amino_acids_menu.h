@@ -14,9 +14,7 @@ public:
   /// cannot be changed in this menu
   /// @param play_music do play music when the menu is displayed
   choose_amino_acids_menu(
-    const std::vector<amino_acid>& initial_amino_acids,
-    bool play_music = true
-  );
+    const std::vector<amino_acid>& initial_amino_acids);
 
   /// Player with index 'player_index' chooses the next amino acid
   /// Will throw if that player does not exist
@@ -29,7 +27,7 @@ public:
   bool play_music() const noexcept { return m_play_music; }
 
   ///The amino acids now
-  const auto& get_current_amino_acids() const noexcept { return m_amino_acids; }
+  const auto& get_amino_acids() const noexcept { return m_amino_acids; }
 
 private:
 

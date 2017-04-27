@@ -4,6 +4,7 @@
 #include "bullet_sfml.h"
 #include "menu_sfml.h"
 #include "choose_n_players_menu_sfml.h"
+#include "choose_amino_acids_menu_sfml.h"
 
 void bullet_hits_player(
   std::vector<bullet> &bullets,
@@ -173,21 +174,24 @@ void run(
 
   while(w.isOpen()) {
     switch(state) {
-      case program_state::choose_n_players: {
+      case program_state::choose_n_players:
+      {
         choose_n_players_menu_sfml m(w, do_play_music, amino_acids.size());
         m.execute();
         state = m.get_state();
-        if (state == program_state::quit) return;
+        if(state == program_state::quit) return;
         assert(state == program_state::select_players);
         amino_acids.resize(m.get_n_players());
       }
       break;
-      case program_state::select_players: {
-        players = choose_aminoacids(
-          w,
-          amino_acids);
-        if (amino_acids.empty()) return; //Quit
-        state = program_state::battle;
+      case program_state::select_players:
+      {
+        choose_amino_acids_menu_sfml m(w, do_play_music, amino_acids);
+        m.execute();
+        state = m.get_state();
+        if(state == program_state::quit) return;
+        assert(state == program_state::battle);
+        create_menu_players(amino_acids);
       }
       break;
       case program_state::battle:

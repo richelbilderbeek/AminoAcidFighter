@@ -18,10 +18,10 @@ int main(int argc, char * argv[])
   window.setFramerateLimit(60);
   if (argc == 2 && std::string(argv[1]) == "--profile")
   {
-    run_profile(
+    /*run_profile(
       window,
       window_size
-    );
+    );*/
 
     return 0;
   }

@@ -15,25 +15,14 @@
 #include "player.h"
 #include "program_state.h"
 
-
 /// Displays the menu,
 /// returns the selected amino acids chosen
 /// If no amino acids are returned, the user wants to quit
-std::vector<player> choose_aminoacids(
+/*std::vector<player> choose_aminoacids(
   sf::RenderWindow &window,
   std::vector<amino_acid> amino_acids,
   bool play_music = true
-);
-
-///Menu for selecting a number of players
-///Return chosen number of players
-///A return value of zero denotes that the user wants to quit
-[[deprecated]]
-int choose_n_players(
-  sf::RenderWindow &window,
-  const bool do_play_music,
-  int player_amount
-);
+);*/
 
 void change_amino_name(
   amino_acid aminoacid_player,
@@ -87,14 +76,7 @@ program_state process_event_AA_choice(
   std::vector<player> &s
 );
 
-program_state process_event_select_n_players(
-  const sf::Event &event,
-  sf::RenderWindow& window,
-  int& player_amount
-);
-
 std::vector<sf::Text> set_AA_texts(
-  sf::Font &font,
   std::array<sf::Vector2f, 4> text_AA_positions,
   std::array<sf::Color, 4> text_colors,
   std::vector<amino_acid> amino_acids

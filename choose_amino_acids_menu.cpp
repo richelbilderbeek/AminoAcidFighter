@@ -1,10 +1,7 @@
 ﻿#include <stdexcept>
 #include "choose_amino_acids_menu.h"
 
-choose_amino_acids_menu::choose_amino_acids_menu(
-  const std::vector<amino_acid>& initial_aas,
-  bool /* play_music */
-)
+choose_amino_acids_menu::choose_amino_acids_menu(const std::vector<amino_acid>& initial_aas)
   : m_amino_acids{initial_aas}
 {
   if(initial_aas.size() < 2 ||

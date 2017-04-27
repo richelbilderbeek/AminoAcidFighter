@@ -24,6 +24,31 @@ choose_n_players_menu_sfml::~choose_n_players_menu_sfml()
   m_music.stop();
 }
 
+void choose_n_players_menu_sfml::display()
+{
+  //Clear
+  m_window.clear();
+
+  //Text
+  draw_a_text(
+    "Start Game With",
+    sf::Vector2f(75, 150),
+    m_window,
+    sf::Color::White,
+    60
+  );
+  draw_a_text(
+    std::to_string(m_menu.get_n_player()) + " Players",
+    sf::Vector2f(200, 250),
+    m_window,
+    n_players_to_color(m_menu.get_n_player()),
+    50
+  );
+
+  //Show
+  m_window.display();
+}
+
 void choose_n_players_menu_sfml::execute()
 {
   assert(m_state == program_state::choose_n_players);
@@ -40,14 +65,16 @@ void choose_n_players_menu_sfml::execute()
   }
 }
 
-void choose_n_players_menu_sfml::tick()
+sf::Color n_players_to_color(const int player_amount)
 {
-  sf::Event event;
-  while (m_window.pollEvent(event))
+  switch (player_amount)
   {
-    process_event(event);
-    display(); //Maybe moved down?
+    case 2: return sf::Color::Magenta;
+    case 3: return sf::Color::Yellow;
+    case 4: return sf::Color::Green;
   }
+  assert(!"Should not get here");
+  return sf::Color::Black;
 }
 
 void choose_n_players_menu_sfml::process_event(const sf::Event& event)
@@ -81,39 +108,12 @@ void choose_n_players_menu_sfml::process_event(const sf::Event& event)
   }
 }
 
-void choose_n_players_menu_sfml::display()
+void choose_n_players_menu_sfml::tick()
 {
-  //Clear
-  m_window.clear();
-
-  //Text
-  draw_a_text(
-    "Start Game With",
-    sf::Vector2f(75, 150),
-    m_window,
-    sf::Color::White,
-    60
-  );
-  draw_a_text(
-    std::to_string(m_menu.get_n_player()) + " Players",
-    sf::Vector2f(200, 250),
-    m_window,
-    n_players_to_color(m_menu.get_n_player()),
-    50
-  );
-
-  //Show
-  m_window.display();
-}
-
-sf::Color n_players_to_color(const int player_amount)
-{
-  switch (player_amount)
+  sf::Event event;
+  while (m_window.pollEvent(event))
   {
-    case 2: return sf::Color::Magenta;
-    case 3: return sf::Color::Yellow;
-    case 4: return sf::Color::Green;
+    process_event(event);
+    display(); //Maybe moved down?
   }
-  assert(!"Should not get here");
-  return sf::Color::Black;
 }
