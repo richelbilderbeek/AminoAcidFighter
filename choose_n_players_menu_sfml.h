@@ -40,6 +40,9 @@ private:
   ///Will music be played?
   bool m_do_play_music;
 
+  ///The font for all texts
+  sf::Font m_font;
+
   ///The logic behind this menu
   choose_n_players_menu m_menu;
 

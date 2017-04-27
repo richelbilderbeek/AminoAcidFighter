@@ -10,6 +10,7 @@ choose_amino_acids_menu_sfml::choose_amino_acids_menu_sfml(
   const bool do_play_music,
   const std::vector<amino_acid> initial_amino_acids
 ) : m_do_play_music{do_play_music},
+    m_font{},
     m_menu(choose_amino_acids_menu(initial_amino_acids)),
     m_music{},
     m_state{program_state::select_players},
@@ -19,6 +20,7 @@ choose_amino_acids_menu_sfml::choose_amino_acids_menu_sfml(
   {
     play_music(m_music);
   }
+  m_font.loadFromFile("arial.ttf");
 }
 
 choose_amino_acids_menu_sfml::~choose_amino_acids_menu_sfml()
@@ -44,7 +46,8 @@ void choose_amino_acids_menu_sfml::display()
     create_menu_players(m_menu.get_amino_acids()),
     get_aa_menu_text_player_positions(),
     get_aa_menu_text_colors(),
-    texts
+    texts,
+    m_font
   );
 
   //Show
@@ -58,9 +61,9 @@ void choose_amino_acids_menu_sfml::execute()
   while (1) {
     tick();
     //Quit
-    if ( m_state == program_state::quit) return;
+    if (m_state == program_state::quit) return;
     //Next screen
-    if ( m_state == program_state::battle) return;
+    if (m_state == program_state::battle) return;
     //Stay here
     assert(m_state == program_state::select_players);
   }

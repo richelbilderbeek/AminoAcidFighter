@@ -8,6 +8,7 @@ choose_n_players_menu_sfml::choose_n_players_menu_sfml(
   const bool do_play_music,
   const int n_players
 ) : m_do_play_music{do_play_music},
+    m_font{},
     m_menu(choose_n_players_menu(n_players)),
     m_music{},
     m_state{program_state::choose_n_players},
@@ -17,6 +18,7 @@ choose_n_players_menu_sfml::choose_n_players_menu_sfml(
   {
     play_music(m_music);
   }
+  m_font.loadFromFile("arial.ttf");
 }
 
 choose_n_players_menu_sfml::~choose_n_players_menu_sfml()
@@ -35,14 +37,16 @@ void choose_n_players_menu_sfml::display()
     sf::Vector2f(75, 150),
     m_window,
     sf::Color::White,
-    60
+    60,
+    m_font
   );
   draw_a_text(
     std::to_string(m_menu.get_n_player()) + " Players",
     sf::Vector2f(200, 250),
     m_window,
     n_players_to_color(m_menu.get_n_player()),
-    50
+    50,
+    m_font
   );
 
   //Show

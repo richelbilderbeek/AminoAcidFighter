@@ -140,11 +140,9 @@ void draw_a_text(
   sf::Vector2f position,
   sf::RenderWindow &window,
   sf::Color color,
-  int size)
+  int size,
+  const sf::Font& font)
 {
-  sf::Font font;
-  font.loadFromFile("arial.ttf");
-
   sf::Text player_text;
   player_text.setFont(font);
   player_text.setPosition(position);
@@ -163,7 +161,8 @@ void draw_AA_choice_screen(
   std::vector<player> players,
   std::array<sf::Vector2f, 4> text_player_pos,
   std::array<sf::Color, 4> text_colors,
-  std::vector<sf::Text> AA_texts)
+  std::vector<sf::Text> AA_texts,
+  const sf::Font& font)
 {
   assert(players.size() == AA_texts.size());
   assert(AA_texts.size() <= 4);
@@ -172,7 +171,8 @@ void draw_AA_choice_screen(
     sf::Vector2f(140, 280),
     window,
     sf::Color::White,
-    30);
+    30,
+    font);
 
   for(auto i{0u}; i != players.size(); ++i) {
     draw_a_text(
@@ -180,7 +180,8 @@ void draw_AA_choice_screen(
       text_player_pos[i],
       window,
       text_colors[i],
-      35);
+      35,
+      font);
     draw_players(players, window);
     //assert(i >= 0);
     assert(i < AA_texts.size());

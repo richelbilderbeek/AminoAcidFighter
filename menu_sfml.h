@@ -53,15 +53,16 @@ void draw_a_text(
   sf::Vector2f position,
   sf::RenderWindow &window,
   sf::Color color,
-  int size
-);
+  int size,
+  const sf::Font &font);
 
 void draw_AA_choice_screen(
   sf::RenderWindow &window,
   std::vector<player> players,
   std::array<sf::Vector2f, 4> text_player_pos,
   std::array<sf::Color, 4> text_colors,
-  std::vector<sf::Text> AA_texts
+  std::vector<sf::Text> AA_texts,
+  const sf::Font& font
 );
 
 std::array<sf::Vector2f, 4> get_aa_menu_positions();
