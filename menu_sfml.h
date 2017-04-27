@@ -28,7 +28,7 @@ std::vector<player> choose_aminoacids(
 ///Menu for selecting a number of players
 ///Return chosen number of players
 ///A return value of zero denotes that the user wants to quit
-//[[deprecated]]
+[[deprecated]]
 int choose_n_players(
   sf::RenderWindow &window,
   const bool do_play_music,

@@ -9,6 +9,7 @@
 /// SFML visualization of the choose_n_players_menu
 class choose_n_players_menu_sfml
 {
+public:
   ///Starts the music
   ///@param n_players the initial number of players suggested
   choose_n_players_menu_sfml(
@@ -27,7 +28,10 @@ class choose_n_players_menu_sfml
   void execute();
 
   ///Get the current number of players chosen
-  int get_n_players() const noexcept;
+  int get_n_players() const noexcept { return m_menu.get_n_player(); }
+
+  ///Obtain the current or state after execute
+  program_state get_state() const noexcept { return m_state; }
 
 private:
   ///Will music be played?

@@ -26,6 +26,8 @@ choose_n_players_menu_sfml::~choose_n_players_menu_sfml()
 
 void choose_n_players_menu_sfml::execute()
 {
+  assert(m_state == program_state::choose_n_players);
+
   while (1)
   {
     tick();
