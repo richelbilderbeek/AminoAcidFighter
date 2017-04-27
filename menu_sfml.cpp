@@ -1,6 +1,8 @@
 #include "menu_sfml.h"
 #include "player_sfml.h"
 
+#include <SFML/Graphics/Text.hpp>
+
 void change_amino_name( //!OCLINT cannot make this any shorter
   amino_acid aminoacid_player,
   sf::Text &player_AA)
@@ -186,12 +188,12 @@ void draw_AA_choice_screen(
   }
 }
 
-std::vector<sf::Text> set_AA_texts(
+std::vector<sf::Text> create_select_player_menu_texts(
   std::array<sf::Vector2f, 4> text_AA_positions,
   std::array<sf::Color, 4> text_colors,
   std::vector<amino_acid> amino_acids)
 {
-  sf::Font font;
+  static sf::Font font; //Text cannot be drawn if Font goes out of scope
   font.loadFromFile("arial.ttf");
 
   std::vector<sf::Text> AA_texts;
@@ -211,6 +213,7 @@ std::vector<sf::Text> set_AA_texts(
     AA_texts.push_back(text);
   }
   assert(AA_texts.size() <= 4);
+  assert(AA_texts.size() == amino_acids.size());
   return AA_texts;
 }
 

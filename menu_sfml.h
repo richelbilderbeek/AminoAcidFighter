@@ -76,7 +76,7 @@ program_state process_event_AA_choice(
   std::vector<player> &s
 );
 
-std::vector<sf::Text> set_AA_texts(
+std::vector<sf::Text> create_select_player_menu_texts(
   std::array<sf::Vector2f, 4> text_AA_positions,
   std::array<sf::Color, 4> text_colors,
   std::vector<amino_acid> amino_acids

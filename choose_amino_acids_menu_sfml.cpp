@@ -1,6 +1,7 @@
 #include "choose_amino_acids_menu_sfml.h"
 
 #include <cassert>
+#include <SFML/Graphics/Text.hpp>
 #include "game.h"
 #include "menu_sfml.h"
 
@@ -30,10 +31,11 @@ void choose_amino_acids_menu_sfml::display()
   //Clear
   m_window.clear(sf::Color(128,128,128));
 
-  const auto texts = set_AA_texts(
-      get_aa_menu_text_positions(),
-      get_aa_menu_text_colors(),
-      m_menu.get_amino_acids());
+  const std::vector<sf::Text> texts = create_select_player_menu_texts(
+    get_aa_menu_text_positions(),
+    get_aa_menu_text_colors(),
+    m_menu.get_amino_acids()
+  );
   assert(texts.size() <= 4);
 
   //Text and amino acids

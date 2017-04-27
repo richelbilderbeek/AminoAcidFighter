@@ -191,7 +191,7 @@ void run(
         state = m.get_state();
         if(state == program_state::quit) return;
         assert(state == program_state::battle);
-        create_menu_players(amino_acids);
+        amino_acids = m.get_amino_acids();
       }
       break;
       case program_state::battle:
