@@ -33,6 +33,9 @@ public:
   ///Obtain the current or state after execute
   program_state get_state() const noexcept { return m_state; }
 
+  ///Handle input and show this screen once, to be used in testing only
+  void tick();
+
 private:
   ///Will music be played?
   bool m_do_play_music;
@@ -54,9 +57,6 @@ private:
 
   ///Process a single event
   void process_event(const sf::Event& event);
-
-  ///Handle input and show this screen once
-  void tick();
 };
 
 ///Get the display color of the text showing the number of players
