@@ -9,9 +9,11 @@ choose_n_players_menu_sfml::choose_n_players_menu_sfml(
   const int n_players
 ) : m_do_play_music{do_play_music},
     m_font{},
+    m_lower_text{},
     m_menu(choose_n_players_menu(n_players)),
     m_music{},
     m_state{program_state::choose_n_players},
+    m_top_text{},
     m_window{window}
 {
   if(m_do_play_music)
@@ -19,6 +21,27 @@ choose_n_players_menu_sfml::choose_n_players_menu_sfml(
     play_music(m_music);
   }
   m_font.loadFromFile("arial.ttf");
+
+  //Top text
+  m_top_text.setFont(m_font);
+  m_top_text.setPosition(sf::Vector2f(75, 150));
+  #if SFML_VERSION_MINOR > 3
+  m_top_text.setFillColor(sf::Color::White);
+  #else
+  m_top_text.setColor(sf::Color::White);
+  #endif
+  m_top_text.setCharacterSize(60);
+  m_top_text.setString("Start Game With");
+
+  //Lower text
+  m_lower_text.setFont(m_font);
+  m_lower_text.setPosition(sf::Vector2f(200, 250));
+  #if SFML_VERSION_MINOR > 3
+  m_lower_text.setFillColor(n_players_to_color(m_menu.get_n_player()));
+  #else
+  m_lower_text.setColor(n_players_to_color(m_menu.get_n_player()));
+  #endif
+  m_lower_text.setCharacterSize(50);
 }
 
 choose_n_players_menu_sfml::~choose_n_players_menu_sfml()
@@ -31,23 +54,20 @@ void choose_n_players_menu_sfml::display()
   //Clear
   m_window.clear();
 
-  //Text
-  draw_a_text(
-    "Start Game With",
-    sf::Vector2f(75, 150),
-    m_window,
-    sf::Color::White,
-    60,
-    m_font
-  );
-  draw_a_text(
-    std::to_string(m_menu.get_n_player()) + " Players",
-    sf::Vector2f(200, 250),
-    m_window,
-    n_players_to_color(m_menu.get_n_player()),
-    50,
-    m_font
-  );
+  //Draw top text
+  m_window.draw(m_top_text);
+
+  //Update lower text its text and color
+  const sf::String s = std::to_string(m_menu.get_n_player()) + " Players";
+  m_lower_text.setString(s);
+  #if SFML_VERSION_MINOR > 3
+  m_lower_text.setFillColor(n_players_to_color(m_menu.get_n_player()));
+  #else
+  m_lower_text.setColor(n_players_to_color(m_menu.get_n_player());
+  #endif
+
+  //Draw lower text
+  m_window.draw(m_lower_text);
 
   //Show
   m_window.display();

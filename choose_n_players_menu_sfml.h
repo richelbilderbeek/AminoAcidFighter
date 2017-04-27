@@ -37,11 +37,15 @@ public:
   void tick();
 
 private:
+
   ///Will music be played?
   bool m_do_play_music;
 
   ///The font for all texts
   sf::Font m_font;
+
+  ///The lower text
+  sf::Text m_lower_text;
 
   ///The logic behind this menu
   choose_n_players_menu m_menu;
@@ -51,6 +55,9 @@ private:
 
   ///In which state is the program while and directly after this menu?
   program_state m_state;
+
+  ///The upper text
+  sf::Text m_top_text;
 
   ///Window used for displayal
   sf::RenderWindow& m_window;
