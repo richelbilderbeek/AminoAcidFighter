@@ -163,6 +163,8 @@ void draw_AA_choice_screen(
   std::array<sf::Color, 4> text_colors,
   std::vector<sf::Text> AA_texts)
 {
+  assert(players.size() == AA_texts.size());
+  assert(AA_texts.size() <= 4);
   draw_a_text(
     "Choose Your Amino Acid",
     sf::Vector2f(140, 280),
@@ -178,6 +180,8 @@ void draw_AA_choice_screen(
       text_colors[i],
       35);
     draw_players(players, window);
+    //assert(i >= 0);
+    assert(i < AA_texts.size());
     window.draw(AA_texts[i]);
   }
 }
@@ -206,6 +210,7 @@ std::vector<sf::Text> set_AA_texts(
     text.setCharacterSize(35);
     AA_texts.push_back(text);
   }
+  assert(AA_texts.size() <= 4);
   return AA_texts;
 }
 

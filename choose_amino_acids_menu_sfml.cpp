@@ -30,16 +30,20 @@ void choose_amino_acids_menu_sfml::display()
   //Clear
   m_window.clear(sf::Color(128,128,128));
 
+  const auto texts = set_AA_texts(
+      get_aa_menu_text_positions(),
+      get_aa_menu_text_colors(),
+      m_menu.get_amino_acids());
+  assert(texts.size() <= 4);
+
   //Text and amino acids
   draw_AA_choice_screen(
     m_window,
     create_menu_players(m_menu.get_amino_acids()),
     get_aa_menu_text_player_positions(),
     get_aa_menu_text_colors(),
-    set_AA_texts(
-      get_aa_menu_text_positions(),
-      get_aa_menu_text_colors(),
-      m_menu.get_amino_acids()));
+    texts
+  );
 
   //Show
   m_window.display();
