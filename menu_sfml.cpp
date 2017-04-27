@@ -53,88 +53,6 @@ void start_music(sf::Music& game_jam)
   game_jam.play();
 }
 
-void choose_AA_keyboard(
-  std::vector<player> &players,
-  std::vector<sf::Text> &AA_texts
-)
-{
-  // player 1
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-  {
-    amino_acid aminoacid = players[0].get_amino_acid();
-    aminoacid = get_prev(aminoacid);
-    //std::string amino_name = to_str(aminoacid);
-    //change_amino_name(aminoacid, texts[0]);
-    players[0].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[0]);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-  {
-    amino_acid aminoacid = players[0].get_amino_acid();
-    aminoacid = get_next(aminoacid);
-    //change_amino_name(amino_acids[0], texts[0]);
-    players[0].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[0]);
-  }
-  // player 2
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-  {
-    amino_acid aminoacid = players[1].get_amino_acid();
-    aminoacid = get_prev(aminoacid);
-    //std::string amino_name = to_str(aminoacid);
-    //change_amino_name(aminoacid, texts[1]);
-    players[1].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[1]);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-  {
-    amino_acid aminoacid = players[1].get_amino_acid();
-    aminoacid = get_next(aminoacid);
-    //change_amino_name(amino_acids[0], texts[0]);
-    players[1].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[1]);
-  }
-}
-
-void choose_AA_joystick(
-  std::vector<player> &players,
-  std::vector<sf::Text> &AA_texts
-)
-{
-  // player 3
-    if(sf::Joystick::isButtonPressed(0, 3)) { // Y button
-    amino_acid aminoacid = players[2].get_amino_acid();
-    aminoacid = get_prev(aminoacid);
-    //std::string amino_name = to_str(aminoacid);
-    //change_amino_name(aminoacid, texts[1]);
-    players[2].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[2]);
-  }
-  if(sf::Joystick::isButtonPressed(0, 0)) { // A button
-    amino_acid aminoacid = players[2].get_amino_acid();
-    aminoacid = get_next(aminoacid);
-    //change_amino_name(amino_acids[0], texts[0]);
-    players[2].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[2]);
-  }
-  // player 4
-  if(sf::Joystick::isButtonPressed(1, 3)) { // Y button
-    amino_acid aminoacid = players[3].get_amino_acid();
-    aminoacid = get_prev(aminoacid);
-    //std::string amino_name = to_str(aminoacid);
-    //change_amino_name(aminoacid, texts[1]);
-    players[3].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[3]);
-  }
-  if(sf::Joystick::isButtonPressed(1, 0)) { // A button
-    amino_acid aminoacid = players[3].get_amino_acid();
-    aminoacid = get_next(aminoacid);
-    //change_amino_name(amino_acids[0], texts[0]);
-    players[3].set_amino_acid(aminoacid);
-    change_AA_name(aminoacid, AA_texts[3]);
-  }
-}
-
 void draw_a_text(
   std::string text,
   sf::Vector2f position,
@@ -156,7 +74,7 @@ void draw_a_text(
   window.draw(player_text);
 }
 
-void draw_AA_choice_screen(
+/*void draw_AA_choice_screen(
   sf::RenderWindow &window,
   std::vector<player> players,
   std::array<sf::Vector2f, 4> text_player_pos,
@@ -164,30 +82,16 @@ void draw_AA_choice_screen(
   std::vector<sf::Text> AA_texts,
   const sf::Font& font)
 {
-  assert(players.size() == AA_texts.size());
-  assert(AA_texts.size() <= 4);
-  draw_a_text(
-    "Choose Your Amino Acid",
-    sf::Vector2f(140, 280),
-    window,
-    sf::Color::White,
-    30,
-    font);
+
 
   for(auto i{0u}; i != players.size(); ++i) {
-    draw_a_text(
-      "Player " + std::to_string(i + 1),
-      text_player_pos[i],
-      window,
-      text_colors[i],
-      35,
-      font);
+
     draw_players(players, window);
     //assert(i >= 0);
     assert(i < AA_texts.size());
     window.draw(AA_texts[i]);
   }
-}
+}*/
 
 std::vector<sf::Text> create_select_player_menu_texts(
   std::array<sf::Vector2f, 4> text_AA_positions,

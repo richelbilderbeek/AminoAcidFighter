@@ -63,7 +63,7 @@ void choose_n_players_menu_sfml::display()
   #if SFML_VERSION_MINOR > 3
   m_lower_text.setFillColor(n_players_to_color(m_menu.get_n_player()));
   #else
-  m_lower_text.setColor(n_players_to_color(m_menu.get_n_player());
+  m_lower_text.setColor(n_players_to_color(m_menu.get_n_player()));
   #endif
 
   //Draw lower text

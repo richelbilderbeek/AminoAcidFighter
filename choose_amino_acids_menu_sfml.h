@@ -38,6 +38,12 @@ public:
   void tick();
 
 private:
+  ///The amino acid texts
+  std::vector<sf::Text> m_amino_acid_texts;
+
+  ///The center text
+  sf::Text m_center_text;
+
   ///Will music be played?
   bool m_do_play_music;
 
@@ -49,6 +55,9 @@ private:
 
   ///Music played, starts at constructor, ends at destructor
   sf::Music m_music;
+
+  ///The player texts
+  std::vector<sf::Text> m_player_texts;
 
   ///In which state is the program while and directly after this menu?
   program_state m_state;

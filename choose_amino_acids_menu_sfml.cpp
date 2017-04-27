@@ -9,10 +9,13 @@ choose_amino_acids_menu_sfml::choose_amino_acids_menu_sfml(
   sf::RenderWindow& window,
   const bool do_play_music,
   const std::vector<amino_acid> initial_amino_acids
-) : m_do_play_music{do_play_music},
+) : m_amino_acid_texts{},
+    m_center_text{},
+    m_do_play_music{do_play_music},
     m_font{},
     m_menu(choose_amino_acids_menu(initial_amino_acids)),
     m_music{},
+    m_player_texts(4),
     m_state{program_state::select_players},
     m_window{window}
 {
@@ -21,6 +24,34 @@ choose_amino_acids_menu_sfml::choose_amino_acids_menu_sfml(
     play_music(m_music);
   }
   m_font.loadFromFile("arial.ttf");
+
+  //Center text
+  m_center_text.setFont(m_font);
+  m_center_text.setPosition(sf::Vector2f(140, 280));
+  #if SFML_VERSION_MINOR > 3
+  m_center_text.setFillColor(sf::Color::White);
+  #else
+  m_center_text.setColor(sf::Color::White);
+  #endif
+  m_center_text.setCharacterSize(30);
+  m_center_text.setString("Choose Your Amino Acid");
+
+  //Player texts
+  std::array<sf::Vector2f, 4> positions = get_aa_menu_text_player_positions();
+  std::array<sf::Color, 4> colors = get_aa_menu_text_colors();
+
+  for(auto i{0u}; i != m_menu.get_amino_acids().size(); ++i)
+  {
+    m_player_texts[i].setFont(m_font);
+    m_player_texts[i].setPosition(positions[i]);
+    #if SFML_VERSION_MINOR > 3
+    m_player_texts[i].setFillColor(colors[i]);
+    #else
+    m_player_texts[i].setColor(colors[i]);
+    #endif
+    m_player_texts[i].setCharacterSize(35);
+    m_player_texts[i].setString("Player " + std::to_string(i + 1));
+  }
 }
 
 choose_amino_acids_menu_sfml::~choose_amino_acids_menu_sfml()
@@ -41,15 +72,11 @@ void choose_amino_acids_menu_sfml::display()
   assert(texts.size() <= 4);
 
   //Text and amino acids
-  draw_AA_choice_screen(
-    m_window,
-    create_menu_players(m_menu.get_amino_acids()),
-    get_aa_menu_text_player_positions(),
-    get_aa_menu_text_colors(),
-    texts,
-    m_font
-  );
-
+  m_window.draw(m_center_text);
+  for(auto i{0u}; i != m_menu.get_amino_acids().size(); ++i)
+  {
+    m_window.draw(m_player_texts[i]);
+  }
   //Show
   m_window.display();
 }
@@ -78,15 +105,6 @@ void choose_amino_acids_menu_sfml::tick()
     display(); //Maybe moved down?
   }
 }
-
-/*
-    while (window.pollEvent(event)) {
-      state = process_event_AA_choice(
-        event,
-        window,
-        AA_texts,
-        players);
-*/
 
 void choose_amino_acids_menu_sfml::process_event(const sf::Event& event)
 {
