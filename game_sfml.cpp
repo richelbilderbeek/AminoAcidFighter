@@ -3,6 +3,7 @@
 #include "player_sfml.h"
 #include "bullet_sfml.h"
 #include "menu_sfml.h"
+#include "choose_n_players_menu_sfml.h"
 
 void bullet_hits_player(
   std::vector<bullet> &bullets,
@@ -173,13 +174,12 @@ void run(
   while(w.isOpen()) {
     switch(state) {
       case program_state::choose_n_players: {
-        const int new_size = choose_n_players(
-          w,
-          do_play_music,
-          amino_acids.size());
-        if (new_size < 1) return;
-        state = program_state::select_players;
-        amino_acids.resize(new_size); //May result in undefined behavior if size is increased
+        choose_n_players_menu_sfml m(w, do_play_music, amino_acids.size());
+        m.execute();
+        state = m.get_state();
+        if (state == program_state::quit) return;
+        assert(state == program_state::select_players);
+        amino_acids.resize(m.get_n_players());
       }
       break;
       case program_state::select_players: {
