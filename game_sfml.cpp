@@ -260,3 +260,4 @@ std::vector<sf::Vector2f> get_start_positions()
   };
   return start_positions;
 }
+
