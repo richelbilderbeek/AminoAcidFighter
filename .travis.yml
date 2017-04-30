@@ -28,6 +28,10 @@ install:
   - sudo pip install codecov
   # OCLint
   - ./install_oclint
+  # valgrind, for helgrind and memcheck
+  - sudo apt-get install -qq valgrind
+  # SLOCcount
+  - sudo apt-get install sloccount
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -53,6 +57,8 @@ script:
   - codecov
   # Call OCLint
   - ./do_oclint
+  # SLOCcount
+  - cd ..; sloccount --overhead 1 --personcost 22614 AminoAcidFighter; cd AminoAcidFighter
 
 after_success:
   # Codecov
