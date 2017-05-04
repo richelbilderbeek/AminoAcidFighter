@@ -184,7 +184,7 @@ void run(
 )
 {
   program_state state{program_state::choose_n_players};
-  std::vector<amino_acid> amino_acids = { amino_acid::alanine, amino_acid::alanine};
+  std::vector<amino_acid> amino_acids{amino_acid::alanine, amino_acid::alanine};
 
   while(w.isOpen())
   {
@@ -192,26 +192,23 @@ void run(
     {
       case program_state::choose_n_players:
       {
-        choose_n_players_menu_sfml m(w, do_play_music, amino_acids.size());
-        m.execute();
-        state = m.get_state();
-        if(state == program_state::quit) return;
-        assert(state == program_state::select_players);
-        amino_acids.resize(m.get_n_players());
+        state = run_choose_n_player_menu(
+          w,
+          do_play_music,
+          amino_acids
+        );
       }
       break;
       case program_state::select_players:
       {
-        choose_amino_acids_menu_sfml m(w, do_play_music, amino_acids);
-        m.execute();
-        state = m.get_state();
-        if(state == program_state::quit) return;
-        assert(state == program_state::battle);
-        amino_acids = m.get_amino_acids();
+        state = run_choose_amino_acids_menu(
+          w,
+          do_play_music,
+          amino_acids
+        );
       }
       break;
       case program_state::battle:
-        //assert(players.size() >= 2);
         display(
           w,
           window_size,
@@ -223,6 +220,34 @@ void run(
         return;
     }
   }
+}
+
+program_state run_choose_n_player_menu(
+  sf::RenderWindow& w,
+  bool do_play_music,
+  std::vector<amino_acid> &amino_acids)
+{
+  choose_n_players_menu_sfml m(w, do_play_music, amino_acids.size());
+  m.execute();
+  const program_state state = m.get_state();
+  if(state == program_state::quit) return state;
+  assert(state == program_state::select_players);
+  amino_acids.resize(m.get_n_players());
+  return state;
+}
+
+program_state  run_choose_amino_acids_menu(
+  sf::RenderWindow &w,
+  bool do_play_music,
+  std::vector<amino_acid> &amino_acids)
+{
+  choose_amino_acids_menu_sfml m(w, do_play_music, amino_acids);
+  m.execute();
+  const program_state state = m.get_state();
+  if(state == program_state::quit) return state;
+  assert(state == program_state::battle);
+  amino_acids = m.get_amino_acids();
+  return state;
 }
 
 std::vector<sf::CircleShape> set_hit_ranges(

@@ -128,46 +128,57 @@ void choose_amino_acids_menu_sfml::process_event(const sf::Event& event)
       }
       //player 1 and player 2
       //player 1
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-      {
-        m_menu.choose_previous(0);
-      }
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-      {
-        m_menu.choose_next(0);
-      }
-      // player 2
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-      {
-        m_menu.choose_previous(1);
-      }
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-      {
-        m_menu.choose_next(1);
-      }
+      check_keyboard_press(m_menu);
+
       break;
     case sf::Event::JoystickButtonPressed:
       //player 3 and player 4
       // player 3
-      if(sf::Joystick::isButtonPressed(0, 3)) // Y button
-      {
-        m_menu.choose_previous(2);
-      }
-      if(sf::Joystick::isButtonPressed(0, 0)) // A button
-      {
-        m_menu.choose_next(2);
-      }
-      // player 4
-      if(sf::Joystick::isButtonPressed(1, 3)) // Y button
-      {
-        m_menu.choose_previous(3);
-      }
-      if(sf::Joystick::isButtonPressed(1, 0)) // A button
-      {
-        m_menu.choose_next(3);
-      }
+      check_joystick_press(m_menu);
       break;
     default:
       break;
+  }
+}
+
+void check_joystick_press(choose_amino_acids_menu& m_menu)
+{
+  if(sf::Joystick::isButtonPressed(0, 3)) // Y button
+  {
+    m_menu.choose_previous(2);
+  }
+  if(sf::Joystick::isButtonPressed(0, 0)) // A button
+  {
+    m_menu.choose_next(2);
+  }
+  // player 4
+  if(sf::Joystick::isButtonPressed(1, 3)) // Y button
+  {
+    m_menu.choose_previous(3);
+  }
+  if(sf::Joystick::isButtonPressed(1, 0)) // A button
+  {
+    m_menu.choose_next(3);
+  }
+}
+
+void check_keyboard_press(choose_amino_acids_menu &m_menu)
+{
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+  {
+    m_menu.choose_previous(0);
+  }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+  {
+    m_menu.choose_next(0);
+  }
+  // player 2
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+  {
+    m_menu.choose_previous(1);
+  }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+  {
+    m_menu.choose_next(1);
   }
 }

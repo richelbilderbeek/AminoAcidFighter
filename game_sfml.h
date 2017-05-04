@@ -9,6 +9,7 @@
 
 #include "bullet.h"
 #include "player.h"
+#include "program_state.h"
 
 void bullet_hits_player(
   std::vector<bullet> &bullets,
@@ -67,5 +68,15 @@ std::vector<sf::RectangleShape> set_life_bars(
   int player_amount,
   std::array<sf::Vector2f, 4> life_bar_positions
 );
+
+program_state run_choose_n_player_menu(
+  sf::RenderWindow &w,
+  bool do_play_music,
+  std::vector<amino_acid> &amino_acids);
+
+program_state run_choose_amino_acids_menu(
+  sf::RenderWindow &w,
+  bool do_play_music,
+  std::vector<amino_acid> &amino_acids);
 
 #endif // GAME_SFML_H

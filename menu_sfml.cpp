@@ -74,25 +74,6 @@ void draw_a_text(
   window.draw(player_text);
 }
 
-/*void draw_AA_choice_screen(
-  sf::RenderWindow &window,
-  std::vector<player> players,
-  std::array<sf::Vector2f, 4> text_player_pos,
-  std::array<sf::Color, 4> text_colors,
-  std::vector<sf::Text> AA_texts,
-  const sf::Font& font)
-{
-
-
-  for(auto i{0u}; i != players.size(); ++i) {
-
-    draw_players(players, window);
-    //assert(i >= 0);
-    assert(i < AA_texts.size());
-    window.draw(AA_texts[i]);
-  }
-}*/
-
 std::vector<sf::Text> create_select_player_menu_texts(
   std::array<sf::Vector2f, 4> text_AA_positions,
   std::array<sf::Color, 4> text_colors,
@@ -197,59 +178,3 @@ void play_music(sf::Music& game_jam)
   game_jam.setLoop(true);
   game_jam.play();
 }
-
-/*std::vector<player> choose_aminoacids(
-  sf::RenderWindow &window,
-  std::vector<amino_acid> amino_acids,
-  const bool play_music
-)
-{
-  sf::Music music;
-  if (!music.openFromFile("amino_acid_fighter_tune.wav")) { std::cout << "Could not find tune"; }
-  music.setPlayingOffset(sf::seconds(2));
-  music.setVolume(50);
-  if(play_music) { music.play(); }
-  sf::Font font;
-  font.loadFromFile("arial.ttf");
-
-  const std::array<sf::Vector2f, 4> AA_txt_pos = get_aa_menu_text_positions();
-  const std::array<sf::Color   , 4> txt_colors       = get_aa_menu_text_colors();
-  const std::array<sf::Vector2f, 4> text_player_pos   = get_aa_menu_text_player_positions();
-  std::vector<sf::Text> AA_texts = set_AA_texts(font, AA_txt_pos, txt_colors, amino_acids);
-  std::vector<player> players = create_menu_players(amino_acids);
-
-  draw_players(players, window);
-  program_state state = program_state::select_players;
-
-  while (1) {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-      state = process_event_AA_choice(
-        event,
-        window,
-        AA_texts,
-        players);
-
-      if (state == program_state::quit) {
-        music.stop();
-        return {};
-      }
-
-      if (state != program_state::select_players) {
-        music.stop();
-        return players;
-      }
-
-      //Draw everything on screen
-      window.clear(sf::Color(128,128,128));
-      draw_AA_choice_screen(
-        window,
-        players,
-        text_player_pos,
-        txt_colors,
-        AA_texts);
-      window.display();
-    }
-  }
-}
-*/

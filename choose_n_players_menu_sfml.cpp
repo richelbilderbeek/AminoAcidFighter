@@ -96,14 +96,15 @@ sf::Color n_players_to_color(const int player_amount)
     case 2: return sf::Color::Magenta;
     case 3: return sf::Color::Yellow;
     case 4: return sf::Color::Green;
+    default: break;
   }
-  assert(!"Should not get here");
+  assert(!"Should not get here"); //!OCLINT accepted idiom
   return sf::Color::Black;
 }
 
 void choose_n_players_menu_sfml::process_event(const sf::Event& event)
 {
-  switch(event.type)
+  switch(event.type) //!OCLINT too many cases to list here
   {
     case sf::Event::Closed:
       m_state = program_state::quit;
