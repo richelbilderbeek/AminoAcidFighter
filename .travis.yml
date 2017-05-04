@@ -1,7 +1,7 @@
-sudo: require
+sudo: required
 language: cpp
 compiler: gcc
-# dist: trusty # Qt5, from https://gist.github.com/jreese/6207161#gistcomment-1462109
+dist: trusty
 
 addons: 
   apt: 
@@ -11,9 +11,9 @@ before_install:
   # C++14
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
-  # SFML
-  - sudo apt-add-repository ppa:sonkun/sfml-development -y
-  - sudo apt-get update -qq
+  # SFML, no need on Trusty
+  #- sudo apt-add-repository ppa:sonkun/sfml-development -y
+  #- sudo apt-get update -qq
 
 install: 
   # C++14
@@ -58,6 +58,8 @@ script:
   # Call OCLint
   - ./do_oclint
   # SLOCcount
+  #   remove OCLint otherwise it will be counted as well
+  - rm -rf oclint-0.10.3
   - cd ..; sloccount --overhead 1 --personcost 22614 AminoAcidFighter; cd AminoAcidFighter
 
 after_success:
