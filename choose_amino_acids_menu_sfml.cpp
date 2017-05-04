@@ -76,6 +76,7 @@ void choose_amino_acids_menu_sfml::display()
   for(auto i{0u}; i != m_menu.get_amino_acids().size(); ++i)
   {
     m_window.draw(m_player_texts[i]);
+    m_window.draw(texts[i]);
   }
   //Show
   m_window.display();
