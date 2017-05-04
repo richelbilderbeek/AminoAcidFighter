@@ -1,7 +1,9 @@
 # Files
-SOURCES += main.cpp
+SOURCES += main_console.cpp
+
 include(AminoAcidFighter.pri)
-include(AminoAcidFighterSfml.pri)
+# include(AminoAcidFighterSfml.pri) #NO!
+
 
 # C++14
 CONFIG += c++14
@@ -38,7 +40,8 @@ CONFIG(debug, debug|release) {
 QT += core
 
 # SFML
-LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+# NO SFML in console version!
+# LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Prevent Qt for failing with this error:
 # qrc_[*].cpp:400:44: error: ‘qInitResources_[*]__init_variable__’ defined but not used

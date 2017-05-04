@@ -2,40 +2,46 @@
 #define BULLET_H
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
+#include <vector>
 
 class bullet
 {
 public:
   bullet(
     const double damage,
-    const sf::Vector2f position,
+    const double x,
+    const double y,
     const double speed_x,
-    const double speed_y,
-    const int any_window_size
+    const double speed_y
   );
 
-  double get_damage()         const noexcept { return m_damage  ; }
-  sf::Vector2f get_position() const noexcept { return m_position; }
-  double get_speed_x()        const noexcept { return m_speed_x ; }
-  double get_speed_y()        const noexcept { return m_speed_y ; }
-  const auto& get_sprite()    const noexcept { return m_sprite  ; }
+  auto get_damage() const noexcept { return m_damage  ; }
+  std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; }
+  auto get_x() const noexcept { return m_x; }
+  auto get_y() const noexcept { return m_y; }
+  auto get_speed_x() const noexcept { return m_speed_x ; }
+  auto get_speed_y() const noexcept { return m_speed_y ; }
+  void set_slower_x(double x_speed) { m_speed_x = x_speed; }
+  void set_slower_y(double y_speed) { m_speed_y = y_speed; }
 
-  void move();
-  void set_position(sf::Vector2f position);
+  void move(const double world_size);
+  void set_position(const double x, const double y);
+  void set_position(const std::pair<double, double> pos) { set_position(pos.first, pos.second); }
+  void slow_down();
 
 private:
   double m_damage;
-  sf::Vector2f m_position;
   double m_speed_x;
   double m_speed_y;
-  sf::Sprite m_sprite;
-  int m_window_size;
+  double m_x;
+  double m_y;
 };
 
-void remove_out_of_screen_bullets(
-  std::vector<bullet> &bullets,
-  const int window_size
+bool is_too_slow(
+  const bullet& any_bullet
 );
+
+void remove_slow_bullets(std::vector<bullet> &bullets);
+std::ostream& operator<<(std::ostream &os, const bullet &b) noexcept;
 
 #endif // BULLET_H

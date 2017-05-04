@@ -1,7 +1,12 @@
 # Files
 SOURCES += main_test.cpp helper_test.cpp \
     amino_acid_test.cpp \
-    bullet_test.cpp
+    bullet_test.cpp \
+    game_test.cpp \
+    menu_test.cpp \
+    player_test.cpp \
+    power_test.cpp
+
 include(AminoAcidFighter.pri)
 
 # C++14
@@ -39,7 +44,7 @@ CONFIG(debug, debug|release) {
 QT += core
 
 # SFML
-LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+# LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Boost.Test
 LIBS += -lboost_unit_test_framework

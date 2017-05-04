@@ -1,111 +1,76 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <SFML/Graphics.hpp>
-
 #include "amino_acid.h"
 #include "bullet.h"
+#include "power.h"
 
 class player
 {
 public:
   player(
-    sf::Vector2f m_position,
-    sf::Sprite * m_sprite,
-    sf::Texture * m_texture
+    amino_acid any_amino_acid,
+    const double x = 0.0,
+    const double y = 0.0
   );
 
   void accelerate();
-  void deccellerate();
-  auto get_rotation()      const noexcept { return m_sprite->getRotation(); }
-  auto get_position()      const noexcept { return m_sprite->getPosition(); }
-  const auto& get_sprite() const noexcept { return m_sprite               ; }
-  auto get_speed() { return sf::Vector2f(m_speed_x, m_speed_y); }
-  void move(const int m_window_size);
-  void set_position(const float x, const float y) noexcept { m_sprite->setPosition(x, y); }
-  void set_position(const sf::Vector2f p)         noexcept { m_sprite->setPosition(p)   ; }
-  void set_rotation(const float r)                noexcept { m_sprite->setRotation(r)   ; }
+  void decelerate();
+  auto get_amino_acid() const noexcept { return m_amino_acid; }
+  auto get_hp() const noexcept { return m_hp; }
+  std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; };
+
+  ///Return the special power of the amino acid
+  auto get_rotation() const noexcept { return m_rotation_deg; }
+  std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; };
+  auto get_speed_x() const noexcept { return m_speed_x; }
+  auto get_speed_y() const noexcept { return m_speed_y; }
+  auto get_turn_speed() const noexcept { return m_turn_speed_deg_per_tick; }
+  auto get_x() const noexcept { return m_x; }
+  auto get_y() const noexcept { return m_y; }
+  void move(const double world_size);
+  void set_amino_acid(const amino_acid aminoacid) { m_amino_acid = aminoacid; };
+  void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
+  void set_rotation(const double r) noexcept { m_rotation_deg = r; }
   void stop();
+  void start_using_power();
+  void stops_using_power();
+
   void turn_left();
   void turn_right();
+  void lose_hp();
+  bool uses_power() const;
 
 private:
-  sf::RectangleShape m_HP;
-  sf::CircleShape m_hit_range;
-  sf::Vector2f m_position;
+  amino_acid m_amino_acid;
+  double m_hp;
+
+  /// The angle the player has, in degrees
+  double m_rotation_deg;
   double m_speed_x;
   double m_speed_y;
-  sf::Sprite * m_sprite;
-  sf::Texture * m_texture;
+
   ///How fast the sprite is rotating per tick
-  double m_turn_speed;
+  double m_turn_speed_deg_per_tick;
+
+  bool m_uses_power;
+
+  double m_x;
+  double m_y;
+
 };
 
-player create_player(
-  amino_acid aminoacid,
-  sf::Vector2f m_position
-);
+/// Get the radius that each player has around its center
+/// in which is is hit, in pixels
+double get_hit_range_size();
 
-player create_player(
-  amino_acid aminoacid,
-  sf::Sprite m_sprite,
-  sf::Texture m_texture,
-  sf::Vector2f m_position
-);
+power get_power(const amino_acid any_aa) noexcept;
 
-player create_alanine      (sf::Vector2f m_position);
-player create_arginine     (sf::Vector2f m_position);
-player create_asparagine   (sf::Vector2f m_position);
-player create_aspartic_acid(sf::Vector2f m_position);
-player create_cysteine     (sf::Vector2f m_position);
-player create_glutamic_acid(sf::Vector2f m_position);
-player create_glutamine    (sf::Vector2f m_position);
-player create_glycine      (sf::Vector2f m_position);
-player create_histidine    (sf::Vector2f m_position);
-player create_isoleucine   (sf::Vector2f m_position);
-player create_leucine      (sf::Vector2f m_position);
-player create_lysine       (sf::Vector2f m_position);
-player create_methionine   (sf::Vector2f m_position);
-player create_phenylalanine(sf::Vector2f m_position);
-player create_proline      (sf::Vector2f m_position);
-player create_serine       (sf::Vector2f m_position);
-player create_threonine    (sf::Vector2f m_position);
-player create_tryptophan   (sf::Vector2f m_position);
-player create_tyrosine     (sf::Vector2f m_position);
-player create_valine       (sf::Vector2f m_position);
+///Creat a bullet shot by the player
+bullet shoot(const player& any_player);
 
-void draw(
-  player p,
-  sf::RenderWindow &window
-);
+bool operator==(const player& lhs, const player& rhs) noexcept;
 
-void draw_hit_ranges(
-  sf::CircleShape hit_range,
-  sf::RenderWindow &window
-);
-
-void draw_life_bar(
-  sf::RectangleShape life_bars,
-  sf::RenderWindow &window
-);
-
-void respond_to_joystick(
-  player &player3,
-  player &player4,
-  std::vector<bullet> &bullets,
-  int window_size
-);
-
-void respond_to_key(
-  player &player1,
-  player &player2,
-  std::vector<bullet> &bullets,
-  int window_size
-);
-
-bullet shoot(
-  const player& player1,
-  const int window_size
-);
+std::ostream& operator<<(std::ostream& os, const player& any_player) noexcept;
 
 #endif // PLAYER_H

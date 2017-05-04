@@ -1,6 +1,5 @@
-#include "amino_acid.h"
-
 #include <boost/test/unit_test.hpp>
+#include "amino_acid.h"
 
 BOOST_AUTO_TEST_CASE(get_next_on_valine_does_nothing)
 {

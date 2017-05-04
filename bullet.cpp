@@ -1,51 +1,40 @@
 #include "bullet.h"
 
+#include <algorithm>
+#include <cassert>
+#include <cmath>
+
 bullet::bullet(
   const double damage,
-  const sf::Vector2f position,
+  const double x,
+  const double y,
   const double speed_x,
-  const double speed_y,
-  const int any_window_size
+  const double speed_y
 )
   : m_damage{damage},
-    m_position{position},
     m_speed_x{speed_x},
     m_speed_y{speed_y},
-    m_sprite{},
-    m_window_size{any_window_size}
+    m_x{x},
+    m_y{y}
+{}
+
+bool is_too_slow(const bullet& any_bullet)
 {
-  static sf::Texture m_texture;
-  m_texture.loadFromFile("Bullet.png");
-  m_sprite.setTexture(m_texture);
-  /// bullet is scaled to the size of arginine
-  double scale = 0.12*(70.0/96.0);
-  m_sprite.setScale(sf::Vector2f(scale, scale));
-  auto x = m_texture.getSize().x;
-  auto y = m_texture.getSize().y;
-  double ratio = 0.5;
-  m_sprite.setOrigin(sf::Vector2f(x * ratio, y * ratio));
-  m_sprite.setPosition(position);
+  if(any_bullet.get_speed_x() < 0.5 &&
+     any_bullet.get_speed_x() > -0.5 &&
+     any_bullet.get_speed_y() < 0.5 &&
+     any_bullet.get_speed_y() > -0.5)
+  { return true; }
+  return false;
 }
 
-void bullet::move()
+void remove_slow_bullets(std::vector<bullet> &bullets)
 {
-  sf::Vector2f p = m_sprite.getPosition();
-  p.x += m_speed_x;
-  p.y += m_speed_y;
-  m_sprite.setPosition(p);
-}
-
-void remove_out_of_screen_bullets(
-  std::vector<bullet> &bullets,
-  const int window_size)
-{
-  for(int i=0; i < static_cast<int>(bullets.size()); ++i) {
-    sf::Sprite bullet_sprite = bullets[i].get_sprite();
-
-    if(bullet_sprite.getPosition().x < 0 ||
-       bullet_sprite.getPosition().x > window_size ||
-       bullet_sprite.getPosition().y < 0 ||
-       bullet_sprite.getPosition().y > window_size) {
+  for(int i=0; i < static_cast<int>(bullets.size()); ++i)
+  {
+    //sf::Sprite bullet_sprite = bullets[i].get_sprite();
+    if(is_too_slow(bullets[i]))
+    {
       bullets[i] = bullets.back();
       bullets.pop_back();
       --i;
@@ -53,7 +42,32 @@ void remove_out_of_screen_bullets(
   }
 }
 
-void bullet::set_position(sf::Vector2f position)
+void bullet::move(const double world_size)
 {
-  m_position = position;
+  assert(world_size > 0.0);
+  //Keep m_x in [0, world_size>
+  m_x = std::fmod(m_x + m_speed_x + world_size, world_size);
+  //Keep m_y in [0, world_size>
+  m_y = std::fmod(m_y + m_speed_y + world_size, world_size);
+}
+
+void bullet::set_position(const double x, const double y)
+{
+  m_x = x;
+  m_y = y;
+}
+
+void bullet::slow_down()
+{
+  m_speed_x *= 0.999;
+  m_speed_y *= 0.999;
+}
+
+std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept
+{
+  os
+    << "Speed: " << b.get_speed_x() << ',' << b.get_speed_y() << '\n'
+    << "Position: " << b.get_x() << ',' << b.get_y() << '\n'
+  ;
+  return os;
 }

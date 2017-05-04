@@ -1,74 +1,59 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SFML/Graphics.hpp>
+/// Functions and/or classes to do the game logic,
+/// without its displayal
+
+#include "action.h"
 #include "amino_acid.h"
-#include "menu.h"
+#include "game_state.h"
+#include "choose_amino_acids_menu.h"
 #include "player.h"
 #include "program_state.h"
 
-void bullet_hits_player(
-  std::vector<bullet> bullets,
-  std::vector<player> players,
-  std::vector<sf::RectangleShape> &life_bars
-);
+class game
+{
+public:
+  game(
+    const std::vector<amino_acid>& players,
+    const double world_size
+  );
 
+  const auto& get_bullets() const noexcept { return m_bullets; }
+  auto& get_bullets() noexcept { return m_bullets; }
+  game_state get_state() { return m_state; }
+  const auto& get_players() const noexcept { return m_players; }
+  auto get_world_size() const noexcept { return m_world_size; }
+  void do_action(int i, action any_action);
+
+  ///Do a game 'tick', e.g. do this 60 times per second
+  void tick();
+
+private:
+  std::vector<bullet> m_bullets;
+  std::vector<player> m_players;
+  game_state m_state;
+  double m_world_size;
+
+  void do_damage();
+};
+
+///Calculates the distance between a bullet and a player
 float calculate_distance_bullet_player(
-  bullet bullets,
-  player players
+  bullet any_bullet,
+  player any_player
 );
 
-void draw_game(
-  sf::RenderWindow &window,
-  std::vector<sf::RectangleShape> life_bars,
-  std::vector<sf::CircleShape> hit_ranges,
-  std::vector<player> players,
-  std::vector<bullet> bullets
+/// Create the 2,3 or 4 players at the right initial positions,
+std::vector<player> create_players(
+  const std::vector<amino_acid>& amino_acids,
+  const int world_size
 );
 
-void play_game(
-  sf::RenderWindow &window,
-  const int window_size,
-  const std::vector<amino_acid>& players
-);
+/// Create a test game
+game create_test_game_1();
 
-void process_event_game(
-  sf::Event event,
-  sf::RenderWindow &window,
-  std::vector<player> &players,
-  std::vector<bullet> &bullets,
-  const int window_size
-);
-
-///Outer game loop: runs the full program, including the menus
-void run(
-  sf::RenderWindow &window,
-  const int window_size,
-  const int argc
-);
-
-std::vector<sf::CircleShape> set_hit_ranges(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> start_positions
-);
-
-std::vector<sf::RectangleShape> set_life_bars(
-  std::vector<amino_acid> amino_acids,
-  std::array<sf::Vector2f, 4> life_bar_positions
-);
-
-std::array<sf::Vector2f, 4> set_life_bar_positions();
-
-std::vector<player> set_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> player_positions
-);
-
-std::vector<sf::Vector2f> set_start_positions();
-
-void substract_life(
-  std::vector<sf::RectangleShape> &life_bars,
-  int i
-);
+///Display the game state
+std::ostream& operator<<(std::ostream& os, const game& g) noexcept;
 
 #endif // GAME_H

@@ -1,6 +1,5 @@
-#include "helper.h"
-
 #include <boost/test/unit_test.hpp>
+#include "helper.h"
 
 BOOST_AUTO_TEST_CASE(extract_base_works)
 {
