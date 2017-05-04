@@ -104,7 +104,8 @@ std::vector<sf::Text> create_select_player_menu_texts(
   std::vector<sf::Text> AA_texts;
   const int n_amino_acids = amino_acids.size();
 
-  for(auto i{0}; i != n_amino_acids; ++i) {
+  for(auto i{0}; i != n_amino_acids; ++i)
+  {
     sf::Text text;
     text.setFont(font);
     text.setPosition(text_AA_positions[i]);

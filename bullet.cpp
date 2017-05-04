@@ -30,9 +30,11 @@ bool is_too_slow(const bullet& any_bullet)
 
 void remove_slow_bullets(std::vector<bullet> &bullets)
 {
-  for(int i=0; i < static_cast<int>(bullets.size()); ++i) {
+  for(int i=0; i < static_cast<int>(bullets.size()); ++i)
+  {
     //sf::Sprite bullet_sprite = bullets[i].get_sprite();
-    if(is_too_slow(bullets[i])) {
+    if(is_too_slow(bullets[i]))
+    {
       bullets[i] = bullets.back();
       bullets.pop_back();
       --i;

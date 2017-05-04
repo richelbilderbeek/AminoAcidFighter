@@ -37,10 +37,12 @@ std::vector<player> create_players(
 )
 {
   std::vector<player> p;
-  const std::vector<double> xs = {
+  const std::vector<double> xs =
+  {
     world_size * 0.25, world_size * 0.75, world_size * 0.25, world_size * 0.75
   };
-  const std::vector<double> ys = {
+  const std::vector<double> ys =
+  {
     world_size * 0.25, world_size * 0.25, world_size * 0.75, world_size * 0.75
   };
   const auto sz = amino_acids.size();

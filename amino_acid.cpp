@@ -33,7 +33,8 @@ std::string to_str( const amino_acid a) noexcept //!OCLINT cannot make this any 
 amino_acid get_prev(const amino_acid in)
 {
   const int player = static_cast<int>(in);
-  if (player > 0) {
+  if (player > 0)
+  {
     return static_cast<amino_acid>(player - 1);
   }
   return in;
@@ -42,7 +43,8 @@ amino_acid get_prev(const amino_acid in)
 amino_acid get_next(const amino_acid in)
 {
   const int player = static_cast<int>(in);
-  if(player < 19) {
+  if(player < 19)
+  {
     return static_cast<amino_acid>(player + 1);
   }
   return in;

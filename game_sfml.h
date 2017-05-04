@@ -21,7 +21,7 @@ std::vector<player> create_game_players(
   std::vector<sf::Vector2f> ps_pos
 );
 
-void draw_game(
+void draw_game_components(
   sf::RenderWindow &w,
   std::vector<sf::RectangleShape> life_bars,
   std::vector<sf::CircleShape> hit_ranges,
@@ -32,13 +32,13 @@ std::array<sf::Vector2f, 4> get_life_bar_positions();
 
 std::vector<sf::Vector2f> get_start_positions();
 
-void play_game(
+void display(
   sf::RenderWindow &w,
   const int window_size,
   const std::vector<amino_acid> aas
 );
 
-void play_game(
+void display(
   sf::RenderWindow &w,
   const int window_size,
   const std::vector<player> ps

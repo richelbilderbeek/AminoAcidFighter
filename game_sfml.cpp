@@ -45,7 +45,7 @@ std::vector<player> create_game_players(
   return players;
 }
 
-void draw_game(
+void draw_game_components(
   sf::RenderWindow &w,
   std::vector<sf::RectangleShape> life_bars,
   std::vector<sf::CircleShape> hit_ranges,
@@ -82,17 +82,17 @@ void draw_game(
   }
 }
 
-void play_game(
+void display(
   sf::RenderWindow &w,
   const int window_size,
   std::vector<amino_acid> aas
 )
 {
   const auto players = create_players(aas, window_size);
-  play_game(w, window_size, players);
+  display(w, window_size, players);
 }
 
-void play_game(
+void display(
   sf::RenderWindow &w,
   const int window_size,
   std::vector<player> ps
@@ -104,7 +104,8 @@ void play_game(
   std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(ps, start_positions);
   std::vector<bullet> bullets;
 
-  if(sf::Joystick::isConnected(0)) {
+  if(sf::Joystick::isConnected(0))
+  {
       std::cout << "controller connected" << '\n';
   }
 
@@ -121,11 +122,13 @@ void play_game(
 
     //Move players, hit range and bullets
     for(auto i = 0u; i != ps.size(); ++i) { ps[i].move(window_size); }
-    for(auto& bullet : bullets) {
+    for(auto& bullet : bullets)
+    {
       bullet.slow_down();
       bullet.move(window_size);
     }
-    for(auto i = 0u; i != ps.size(); ++i) {
+    for(auto i = 0u; i != ps.size(); ++i)
+    {
       hit_ranges[i].setPosition(ps[i].get_x() + ps[i].get_speed_x(),
                                 ps[i].get_y() + ps[i].get_speed_y());
     }
@@ -136,7 +139,7 @@ void play_game(
     remove_slow_bullets(bullets);
 
     w.clear(sf::Color(128,128,128));
-    draw_game(w, life_bars, hit_ranges, bullets);
+    draw_game_components(w, life_bars, hit_ranges, bullets);
     draw_players(ps, w);
     w.display();
   }
@@ -149,7 +152,8 @@ void process_event_game(sf::Event event,
   const int /* window_size */
 )
 {
-  switch(event.type) {
+  switch(event.type)
+  {
     case sf::Event::Closed:
       w.close();
       break;
@@ -182,8 +186,10 @@ void run(
   program_state state{program_state::choose_n_players};
   std::vector<amino_acid> amino_acids = { amino_acid::alanine, amino_acid::alanine};
 
-  while(w.isOpen()) {
-    switch(state) {
+  while(w.isOpen())
+  {
+    switch(state)
+    {
       case program_state::choose_n_players:
       {
         choose_n_players_menu_sfml m(w, do_play_music, amino_acids.size());
@@ -206,7 +212,7 @@ void run(
       break;
       case program_state::battle:
         //assert(players.size() >= 2);
-        play_game(
+        display(
           w,
           window_size,
           amino_acids

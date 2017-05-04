@@ -118,10 +118,12 @@ void choose_amino_acids_menu_sfml::process_event(const sf::Event& event)
       break;
     case sf::Event::KeyPressed:
       //battle
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+      {
         m_state = program_state::battle;
       }
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+      {
         m_state = program_state::quit;
       }
       //player 1 and player 2

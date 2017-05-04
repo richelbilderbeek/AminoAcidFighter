@@ -650,23 +650,27 @@ void respond_to_key( //!OCLINT cannot simplify this even more
 )
 {
   // player1 controls
-  if(p1.get_hp() > 0) {
+  if(p1.get_hp() > 0)
+  {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left )) { p1.turn_left(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { p1.turn_right(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { p1.accelerate(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { p1.decelerate(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
       bullets.push_back(shoot(p1));
-  }
+    }
     //std::cout << bullets[0].get_x() << ", " << bullets[0].get_y();
   }
   // player2 controls
-  if(p2.get_hp() > 0) {
+  if(p2.get_hp() > 0)
+  {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { p2.accelerate(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { p2.turn_right(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { p2.decelerate(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { p2.turn_left(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+    {
       bullets.push_back(shoot(p2));
     }
   }
