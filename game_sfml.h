@@ -35,6 +35,12 @@ std::vector<sf::Vector2f> get_start_positions();
 void play_game(
   sf::RenderWindow &w,
   const int window_size,
+  const std::vector<amino_acid> aas
+);
+
+void play_game(
+  sf::RenderWindow &w,
+  const int window_size,
   const std::vector<player> ps
 );
 

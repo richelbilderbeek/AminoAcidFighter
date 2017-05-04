@@ -85,6 +85,16 @@ void draw_game(
 void play_game(
   sf::RenderWindow &w,
   const int window_size,
+  std::vector<amino_acid> aas
+)
+{
+  const auto players = create_players(aas, window_size);
+  play_game(w, window_size, players);
+}
+
+void play_game(
+  sf::RenderWindow &w,
+  const int window_size,
   std::vector<player> ps
 )
 {
@@ -145,6 +155,7 @@ void process_event_game(sf::Event event,
       break;
     case sf::Event::KeyPressed:
       // keyboard support for player1 and player2
+      assert(ps.size() >= 1);
       respond_to_key(
         ps[0],
         ps[1],
@@ -170,7 +181,6 @@ void run(
 {
   program_state state{program_state::choose_n_players};
   std::vector<amino_acid> amino_acids = { amino_acid::alanine, amino_acid::alanine};
-  std::vector<player> players;
 
   while(w.isOpen()) {
     switch(state) {
@@ -195,10 +205,12 @@ void run(
       }
       break;
       case program_state::battle:
+        //assert(players.size() >= 2);
         play_game(
           w,
           window_size,
-          players);
+          amino_acids
+        );
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
       case program_state::quit:
