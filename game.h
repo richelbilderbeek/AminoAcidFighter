@@ -47,7 +47,7 @@ float calculate_distance_bullet_player(
 /// Create the 2,3 or 4 players at the right initial positions,
 std::vector<player> create_players(
   const std::vector<amino_acid>& amino_acids,
-  const double world_size
+  const int world_size
 );
 
 /// Create a test game

@@ -70,6 +70,7 @@ void choose_amino_acids_menu_sfml::display()
     m_menu.get_amino_acids()
   );
   assert(texts.size() <= 4);
+  std::vector<player> players = create_players(m_menu.get_amino_acids(), m_window.getSize().x);
 
   //Text and amino acids
   m_window.draw(m_center_text);
@@ -77,6 +78,7 @@ void choose_amino_acids_menu_sfml::display()
   {
     m_window.draw(m_player_texts[i]);
     m_window.draw(texts[i]);
+    draw_players(players, m_window);
   }
   //Show
   m_window.display();

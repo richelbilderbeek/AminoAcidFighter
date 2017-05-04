@@ -33,7 +33,7 @@ float calculate_distance_bullet_player(bullet any_bullet, const player any_playe
 
 std::vector<player> create_players(
   const std::vector<amino_acid>& amino_acids,
-  const double world_size
+  const int world_size
 )
 {
   std::vector<player> p;
