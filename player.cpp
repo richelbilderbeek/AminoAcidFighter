@@ -129,7 +129,7 @@ void player::stops_using_power()
 
 void player::lose_hp()
 {
-  m_hp -= 0.5;
+  m_hp -= 0.1;
 }
 
 double get_hit_range_size()

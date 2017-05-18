@@ -3,26 +3,34 @@
 
 enum class power
 {
-  freeze_player, // save the current momentum, results in standstill
-  anti_freeze_player, // take the speed of the stored momentum again
-  reverse_speed, // go into the opposite direction (speed_x becomes -speed_x)
+  ceasefire, // no one can shoot except you
+  crash, // player is able to hurt other players by bumping
+  freeze_all, // save the current momentum, results in 5 sec standstill
+  freeze_player, // own player is frozen
+  health, // get health at a certain moment or hit
+  homing_missile, // Choose player that gets certain damage
+  invisible_bullets, // shoot invisible bullets
+  invisibility, // become invisible
+  kamikaze, // everybody gets hit, including the player itself
+  maximize, // maxinize other players
+  mine, // put invisible mine
+  minimize, // become smaller
   mix_speed, // reverse speed_x and speed_y
-  reversed_controls,
+  multi_shot, // shoot 4 bullets at once
+  opposite_switch, // turn 180 degrees
+  power_shot, // more powerfull shot
+  repell, // all bullets within a certain range are repelled (or removed)
+  reverse_speed, // go into the opposite direction
+  reversed_controls, // left becomes right, right becomes left for 5 sec (for the other players)
+  shield, // a temporary (5 sec) shield
+  slowdown, // slow down other players
+  spin, // fast spin other players
+  stop_bullets, // bullets stop moving
   strafe_left, // move sideways to the left
   strafe_right, // move sideways to the right
-  shield, //a temporary shield
-  side_shoot, // shoot sideways
-  turbo_boost,
-  slowdown,
-  homing_missile, // Choose player that gets certain damage
-  power_shot, // more powerfull shot
-  kamikaze, // everybody gets hit, including the player itself
-  freeze_all, // all players are stuck at their position
-  anti_freeze_all,
-  minimize,
-  maximize,
-  switch_players,
-  crash // player is able to hurt other players by bumping
+  switch_players, // switch player locations
+  teleport, // teleport to set location
+  turbo_boost // extra speed
 };
 
 ///How many ticks do the powers last?
