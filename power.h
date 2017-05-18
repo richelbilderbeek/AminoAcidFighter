@@ -9,8 +9,8 @@ enum class power
   freeze_player, // own player is frozen
   health, // get health at a certain moment or hit
   homing_missile, // Choose player that gets certain damage
-  invisible_bullets, // shoot invisible bullets
   invisibility, // become invisible
+  invisible_bullets, // shoot invisible bullets
   kamikaze, // everybody gets hit, including the player itself
   maximize, // maxinize other players
   mine, // put invisible mine
