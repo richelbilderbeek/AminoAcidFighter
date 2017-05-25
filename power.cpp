@@ -36,5 +36,3 @@ int get_duration(const power any_power) //!OCLINT cannot make this any shorter
   //Not implemented yet
   return 0;
 }
-
-

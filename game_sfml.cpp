@@ -106,8 +106,7 @@ void display(
   std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(ps, start_positions);
   std::vector<bullet> bullets;
 
-  if(sf::Joystick::isConnected(0))
-  {
+  if(sf::Joystick::isConnected(0)) {
       std::cout << "controller connected" << '\n';
   }
 
@@ -128,8 +127,7 @@ void display(
 
     //Move players, hit range and bullets
     for(auto i = 0u; i != ps.size(); ++i) { ps[i].move(window_size); }
-    for(auto& bullet : bullets)
-    {
+    for(auto& bullet : bullets) {
       bullet.slow_down();
       bullet.move(window_size);
     }

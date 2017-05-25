@@ -12,7 +12,7 @@ enum class power
   invisibility, // become invisible
   invisible_bullets, // shoot invisible bullets
   kamikaze, // everybody gets hit, including the player itself
-  maximize, // maxinize other players
+  maximize, // maximize other players
   mine, // put invisible mine
   minimize, // become smaller
   mix_speed, // reverse speed_x and speed_y
