@@ -263,8 +263,8 @@ void run_profile(
     amino_acid::valine
   };
   const auto ps = create_players(aas, window_size);
-  // Run 60 fps for 60 seconds (or at least try)
-  for (int i=0; i!= 60 * 60; ++i)
+  // Run 1 fps for 60 seconds (or at least try)
+  for (int i=0; i != 1 * 60; ++i)
   {
     display(w, window_size, ps);
   }
