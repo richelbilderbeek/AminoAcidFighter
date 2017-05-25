@@ -1,0 +1,404 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 50.01      0.01     0.01    74116     0.00     0.00  to_sprite(bullet const&)
+ 25.00      0.02     0.01     7196     0.00     0.00  player::move(double)
+ 25.00      0.02     0.01                             get_power(amino_acid)
+  0.00      0.02     0.00    74144     0.00     0.00  get_hit_range_size()
+  0.00      0.02     0.00    74140     0.00     0.00  calculate_distance_bullet_player(bullet, player)
+  0.00      0.02     0.00    55587     0.00     0.00  bullet::set_position(double, double)
+  0.00      0.02     0.00    28784     0.00     0.00  draw_player(player const&, sf::RenderWindow&)
+  0.00      0.02     0.00    19019     0.00     0.00  bullet::slow_down()
+  0.00      0.02     0.00    18535     0.00     0.00  is_too_slow(bullet const&)
+  0.00      0.02     0.00    18535     0.00     0.00  bullet::move(double)
+  0.00      0.02     0.00     7196     0.00     0.00  draw_valine(player const&, sf::RenderWindow&)
+  0.00      0.02     0.00     7196     0.00     0.00  draw_alanine(player const&, sf::RenderWindow&)
+  0.00      0.02     0.00     7196     0.00     0.00  draw_glycine(player const&, sf::RenderWindow&)
+  0.00      0.02     0.00     7196     0.00     0.00  draw_life_bar(sf::RectangleShape, sf::RenderWindow&)
+  0.00      0.02     0.00     7196     0.00     0.00  draw_hit_ranges(sf::CircleShape, sf::RenderWindow&)
+  0.00      0.02     0.00     7196     0.00     0.00  draw_tryptophan(player const&, sf::RenderWindow&)
+  0.00      0.02     0.00     1799     0.00     0.00  draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&)
+  0.00      0.02     0.00     1799     0.00     0.00  bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&)
+  0.00      0.02     0.00     1799     0.00     0.00  remove_slow_bullets(std::vector<bullet, std::allocator<bullet> >&)
+  0.00      0.02     0.00     1799     0.00     0.01  draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >)
+  0.00      0.02     0.00      484     0.00     0.00  player::lose_hp()
+  0.00      0.02     0.00      236     0.00     0.00  process_event_game(sf::Event, sf::RenderWindow&, std::vector<player, std::allocator<player> >&, std::vector<bullet, std::allocator<bullet> >&, int)
+  0.00      0.02     0.00      117     0.00     0.00  void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&)
+  0.00      0.02     0.00       85     0.00     0.00  respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&)
+  0.00      0.02     0.00       44     0.00     0.00  deg_to_rad(double)
+  0.00      0.02     0.00       31     0.00     0.00  shoot(player const&)
+  0.00      0.02     0.00       31     0.00     0.00  bullet::bullet(double, double, double, double, double)
+  0.00      0.02     0.00       31     0.00     0.00  void std::vector<bullet, std::allocator<bullet> >::emplace_back<bullet>(bullet&&)
+  0.00      0.02     0.00       21     0.00     0.00  extract_base(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      0.02     0.00       17     0.00     0.00  player::decelerate()
+  0.00      0.02     0.00       14     0.00     0.00  player::turn_left()
+  0.00      0.02     0.00       11     0.00     0.00  main
+  0.00      0.02     0.00        6     0.00     0.00  player::turn_right()
+  0.00      0.02     0.00        5     0.00     0.00  player::accelerate()
+  0.00      0.02     0.00        4     0.00     0.00  player::player(amino_acid, double, double)
+  0.00      0.02     0.00        3     0.00     0.00  void std::vector<player, std::allocator<player> >::_M_emplace_back_aux<player>(player&&)
+  0.00      0.02     0.00        3     0.00     0.00  void std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >::_M_emplace_back_aux<sf::CircleShape const&>(sf::CircleShape const&)
+  0.00      0.02     0.00        3     0.00     0.00  void std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >::_M_emplace_back_aux<sf::RectangleShape const&>(sf::RectangleShape const&)
+  0.00      0.02     0.00        2     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  0.00      0.02     0.00        1     0.00     0.00  create_fonts()
+  0.00      0.02     0.00        1     0.00     0.00  create_sounds()
+  0.00      0.02     0.00        1     0.00     0.00  set_life_bars(int, std::array<sf::Vector2<float>, 4ul>)
+  0.00      0.02     0.00        1     0.00     0.00  create_players(std::vector<amino_acid, std::allocator<amino_acid> > const&, int)
+  0.00      0.02     0.00        1     0.00     0.00  set_hit_ranges(std::vector<player, std::allocator<player> >, std::vector<sf::Vector2<float>, std::allocator<sf::Vector2<float> > >)
+  0.00      0.02     0.00        1     0.00     0.00  get_start_positions()
+  0.00      0.02     0.00        1     0.00     0.00  get_life_bar_positions()
+  0.00      0.02     0.00        1     0.00    15.00  display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int)
+  0.00      0.02     0.00        1     0.00     0.00  _init
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 49.99% of 0.02 seconds
+
+index % time    self  children    called     name
+                0.00    0.02       1/1           run_profile(sf::RenderWindow&, int) [2]
+[1]     75.0    0.00    0.02       1         display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+                0.00    0.01    1799/1799        draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [4]
+                0.01    0.00    7196/7196        player::move(double) [5]
+                0.00    0.00   18535/19019       bullet::slow_down() [18]
+                0.00    0.00   18535/18535       bullet::move(double) [20]
+                0.00    0.00    1799/1799        bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [28]
+                0.00    0.00    1799/1799        remove_slow_bullets(std::vector<bullet, std::allocator<bullet> >&) [29]
+                0.00    0.00    1799/1799        draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+                0.00    0.00     236/236         process_event_game(sf::Event, sf::RenderWindow&, std::vector<player, std::allocator<player> >&, std::vector<bullet, std::allocator<bullet> >&, int) [31]
+                0.00    0.00      85/85          respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+                0.00    0.00       1/1           get_start_positions() [53]
+                0.00    0.00       1/1           get_life_bar_positions() [54]
+                0.00    0.00       1/1           set_life_bars(int, std::array<sf::Vector2<float>, 4ul>) [50]
+                0.00    0.00       1/1           set_hit_ranges(std::vector<player, std::allocator<player> >, std::vector<sf::Vector2<float>, std::allocator<sf::Vector2<float> > >) [52]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     75.0    0.00    0.02                 run_profile(sf::RenderWindow&, int) [2]
+                0.00    0.02       1/1           display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+                0.00    0.00       1/1           create_players(std::vector<amino_acid, std::allocator<amino_acid> > const&, int) [51]
+-----------------------------------------------
+                0.01    0.00   74116/74116       draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [4]
+[3]     50.0    0.01    0.00   74116         to_sprite(bullet const&) [3]
+-----------------------------------------------
+                0.00    0.01    1799/1799        display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[4]     50.0    0.00    0.01    1799         draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [4]
+                0.01    0.00   74116/74116       to_sprite(bullet const&) [3]
+                0.00    0.00   55587/55587       bullet::set_position(double, double) [16]
+                0.00    0.00    7196/7196        draw_life_bar(sf::RectangleShape, sf::RenderWindow&) [24]
+                0.00    0.00    7196/7196        draw_hit_ranges(sf::CircleShape, sf::RenderWindow&) [25]
+-----------------------------------------------
+                0.01    0.00    7196/7196        display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[5]     25.0    0.01    0.00    7196         player::move(double) [5]
+-----------------------------------------------
+                                                 <spontaneous>
+[6]     25.0    0.01    0.00                 get_power(amino_acid) [6]
+-----------------------------------------------
+                0.00    0.00      11/11          __libc_csu_init [148]
+[7]      0.0    0.00    0.00      11         main [7]
+-----------------------------------------------
+                0.00    0.00       4/74144       set_hit_ranges(std::vector<player, std::allocator<player> >, std::vector<sf::Vector2<float>, std::allocator<sf::Vector2<float> > >) [52]
+                0.00    0.00   74140/74144       bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [28]
+[14]     0.0    0.00    0.00   74144         get_hit_range_size() [14]
+-----------------------------------------------
+                0.00    0.00   74140/74140       bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [28]
+[15]     0.0    0.00    0.00   74140         calculate_distance_bullet_player(bullet, player) [15]
+-----------------------------------------------
+                0.00    0.00   55587/55587       draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [4]
+[16]     0.0    0.00    0.00   55587         bullet::set_position(double, double) [16]
+-----------------------------------------------
+                0.00    0.00   28784/28784       draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+[17]     0.0    0.00    0.00   28784         draw_player(player const&, sf::RenderWindow&) [17]
+-----------------------------------------------
+                0.00    0.00     484/19019       bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [28]
+                0.00    0.00   18535/19019       display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[18]     0.0    0.00    0.00   19019         bullet::slow_down() [18]
+-----------------------------------------------
+                0.00    0.00   18535/18535       remove_slow_bullets(std::vector<bullet, std::allocator<bullet> >&) [29]
+[19]     0.0    0.00    0.00   18535         is_too_slow(bullet const&) [19]
+-----------------------------------------------
+                0.00    0.00   18535/18535       display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[20]     0.0    0.00    0.00   18535         bullet::move(double) [20]
+-----------------------------------------------
+                0.00    0.00    7196/7196        draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+[21]     0.0    0.00    0.00    7196         draw_valine(player const&, sf::RenderWindow&) [21]
+-----------------------------------------------
+                0.00    0.00    7196/7196        draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+[22]     0.0    0.00    0.00    7196         draw_alanine(player const&, sf::RenderWindow&) [22]
+-----------------------------------------------
+                0.00    0.00    7196/7196        draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+[23]     0.0    0.00    0.00    7196         draw_glycine(player const&, sf::RenderWindow&) [23]
+-----------------------------------------------
+                0.00    0.00    7196/7196        draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [4]
+[24]     0.0    0.00    0.00    7196         draw_life_bar(sf::RectangleShape, sf::RenderWindow&) [24]
+-----------------------------------------------
+                0.00    0.00    7196/7196        draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [4]
+[25]     0.0    0.00    0.00    7196         draw_hit_ranges(sf::CircleShape, sf::RenderWindow&) [25]
+-----------------------------------------------
+                0.00    0.00    7196/7196        draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+[26]     0.0    0.00    0.00    7196         draw_tryptophan(player const&, sf::RenderWindow&) [26]
+-----------------------------------------------
+                0.00    0.00    1799/1799        display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[27]     0.0    0.00    0.00    1799         draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [27]
+                0.00    0.00   28784/28784       draw_player(player const&, sf::RenderWindow&) [17]
+                0.00    0.00    7196/7196        draw_valine(player const&, sf::RenderWindow&) [21]
+                0.00    0.00    7196/7196        draw_tryptophan(player const&, sf::RenderWindow&) [26]
+                0.00    0.00    7196/7196        draw_glycine(player const&, sf::RenderWindow&) [23]
+                0.00    0.00    7196/7196        draw_alanine(player const&, sf::RenderWindow&) [22]
+-----------------------------------------------
+                0.00    0.00    1799/1799        display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[28]     0.0    0.00    0.00    1799         bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [28]
+                0.00    0.00   74140/74144       get_hit_range_size() [14]
+                0.00    0.00   74140/74140       calculate_distance_bullet_player(bullet, player) [15]
+                0.00    0.00     484/484         player::lose_hp() [30]
+                0.00    0.00     484/19019       bullet::slow_down() [18]
+-----------------------------------------------
+                0.00    0.00    1799/1799        display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[29]     0.0    0.00    0.00    1799         remove_slow_bullets(std::vector<bullet, std::allocator<bullet> >&) [29]
+                0.00    0.00   18535/18535       is_too_slow(bullet const&) [19]
+-----------------------------------------------
+                0.00    0.00     484/484         bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [28]
+[30]     0.0    0.00    0.00     484         player::lose_hp() [30]
+-----------------------------------------------
+                0.00    0.00     236/236         display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[31]     0.0    0.00    0.00     236         process_event_game(sf::Event, sf::RenderWindow&, std::vector<player, std::allocator<player> >&, std::vector<bullet, std::allocator<bullet> >&, int) [31]
+-----------------------------------------------
+                0.00    0.00       3/117         create_fonts() [48]
+                0.00    0.00       3/117         create_sounds() [49]
+                0.00    0.00       6/117         respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+                0.00    0.00      21/117         extract_base(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [38]
+                0.00    0.00      84/117         create_sprites() [68]
+[32]     0.0    0.00    0.00     117         void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&) [32]
+-----------------------------------------------
+                0.00    0.00      85/85          display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[33]     0.0    0.00    0.00      85         respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+                0.00    0.00      31/31          shoot(player const&) [35]
+                0.00    0.00      31/31          void std::vector<bullet, std::allocator<bullet> >::emplace_back<bullet>(bullet&&) [37]
+                0.00    0.00      17/17          player::decelerate() [39]
+                0.00    0.00      14/14          player::turn_left() [40]
+                0.00    0.00       6/117         void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&) [32]
+                0.00    0.00       6/6           player::turn_right() [41]
+                0.00    0.00       5/5           player::accelerate() [42]
+-----------------------------------------------
+                0.00    0.00      10/44          player::accelerate() [42]
+                0.00    0.00      34/44          player::decelerate() [39]
+[34]     0.0    0.00    0.00      44         deg_to_rad(double) [34]
+-----------------------------------------------
+                0.00    0.00      31/31          respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+[35]     0.0    0.00    0.00      31         shoot(player const&) [35]
+                0.00    0.00      31/31          bullet::bullet(double, double, double, double, double) [36]
+-----------------------------------------------
+                0.00    0.00      31/31          shoot(player const&) [35]
+[36]     0.0    0.00    0.00      31         bullet::bullet(double, double, double, double, double) [36]
+-----------------------------------------------
+                0.00    0.00      31/31          respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+[37]     0.0    0.00    0.00      31         void std::vector<bullet, std::allocator<bullet> >::emplace_back<bullet>(bullet&&) [37]
+-----------------------------------------------
+                0.00    0.00      21/21          create_sprites() [68]
+[38]     0.0    0.00    0.00      21         extract_base(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [38]
+                0.00    0.00      21/117         void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&) [32]
+-----------------------------------------------
+                0.00    0.00      17/17          respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+[39]     0.0    0.00    0.00      17         player::decelerate() [39]
+                0.00    0.00      34/44          deg_to_rad(double) [34]
+-----------------------------------------------
+                0.00    0.00      14/14          respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+[40]     0.0    0.00    0.00      14         player::turn_left() [40]
+-----------------------------------------------
+                0.00    0.00       6/6           respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+[41]     0.0    0.00    0.00       6         player::turn_right() [41]
+-----------------------------------------------
+                0.00    0.00       5/5           respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [33]
+[42]     0.0    0.00    0.00       5         player::accelerate() [42]
+                0.00    0.00      10/44          deg_to_rad(double) [34]
+-----------------------------------------------
+                0.00    0.00       4/4           create_players(std::vector<amino_acid, std::allocator<amino_acid> > const&, int) [51]
+[43]     0.0    0.00    0.00       4         player::player(amino_acid, double, double) [43]
+-----------------------------------------------
+                0.00    0.00       3/3           create_players(std::vector<amino_acid, std::allocator<amino_acid> > const&, int) [51]
+[44]     0.0    0.00    0.00       3         void std::vector<player, std::allocator<player> >::_M_emplace_back_aux<player>(player&&) [44]
+-----------------------------------------------
+                0.00    0.00       3/3           set_hit_ranges(std::vector<player, std::allocator<player> >, std::vector<sf::Vector2<float>, std::allocator<sf::Vector2<float> > >) [52]
+[45]     0.0    0.00    0.00       3         void std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >::_M_emplace_back_aux<sf::CircleShape const&>(sf::CircleShape const&) [45]
+-----------------------------------------------
+                0.00    0.00       3/3           set_life_bars(int, std::array<sf::Vector2<float>, 4ul>) [50]
+[46]     0.0    0.00    0.00       3         void std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >::_M_emplace_back_aux<sf::RectangleShape const&>(sf::RectangleShape const&) [46]
+-----------------------------------------------
+                0.00    0.00       1/2           create_fonts() [48]
+                0.00    0.00       1/2           create_sounds() [49]
+[47]     0.0    0.00    0.00       2         std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [47]
+-----------------------------------------------
+                0.00    0.00       1/1           create_resources() [75]
+[48]     0.0    0.00    0.00       1         create_fonts() [48]
+                0.00    0.00       3/117         void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&) [32]
+                0.00    0.00       1/2           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [47]
+-----------------------------------------------
+                0.00    0.00       1/1           create_resources() [75]
+[49]     0.0    0.00    0.00       1         create_sounds() [49]
+                0.00    0.00       3/117         void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&) [32]
+                0.00    0.00       1/2           std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [47]
+-----------------------------------------------
+                0.00    0.00       1/1           display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[50]     0.0    0.00    0.00       1         set_life_bars(int, std::array<sf::Vector2<float>, 4ul>) [50]
+                0.00    0.00       3/3           void std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >::_M_emplace_back_aux<sf::RectangleShape const&>(sf::RectangleShape const&) [46]
+-----------------------------------------------
+                0.00    0.00       1/1           run_profile(sf::RenderWindow&, int) [2]
+[51]     0.0    0.00    0.00       1         create_players(std::vector<amino_acid, std::allocator<amino_acid> > const&, int) [51]
+                0.00    0.00       4/4           player::player(amino_acid, double, double) [43]
+                0.00    0.00       3/3           void std::vector<player, std::allocator<player> >::_M_emplace_back_aux<player>(player&&) [44]
+-----------------------------------------------
+                0.00    0.00       1/1           display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[52]     0.0    0.00    0.00       1         set_hit_ranges(std::vector<player, std::allocator<player> >, std::vector<sf::Vector2<float>, std::allocator<sf::Vector2<float> > >) [52]
+                0.00    0.00       4/74144       get_hit_range_size() [14]
+                0.00    0.00       3/3           void std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >::_M_emplace_back_aux<sf::CircleShape const&>(sf::CircleShape const&) [45]
+-----------------------------------------------
+                0.00    0.00       1/1           display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[53]     0.0    0.00    0.00       1         get_start_positions() [53]
+-----------------------------------------------
+                0.00    0.00       1/1           display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [1]
+[54]     0.0    0.00    0.00       1         get_life_bar_positions() [54]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [148]
+[55]     0.0    0.00    0.00       1         _init [55]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2015 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [34] deg_to_rad(double)     [26] draw_tryptophan(player const&, sf::RenderWindow&) [36] bullet::bullet(double, double, double, double, double)
+  [17] draw_player(player const&, sf::RenderWindow&) [28] bullet_hits_player(std::vector<bullet, std::allocator<bullet> >&, std::vector<player, std::allocator<player> >&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >&) [42] player::accelerate()
+  [21] draw_valine(player const&, sf::RenderWindow&) [14] get_hit_range_size() [39] player::decelerate()
+  [19] is_too_slow(bullet const&) [31] process_event_game(sf::Event, sf::RenderWindow&, std::vector<player, std::allocator<player> >&, std::vector<bullet, std::allocator<bullet> >&, int) [41] player::turn_right()
+  [48] create_fonts()         [53] get_start_positions()   [5] player::move(double)
+  [22] draw_alanine(player const&, sf::RenderWindow&) [29] remove_slow_bullets(std::vector<bullet, std::allocator<bullet> >&) [30] player::lose_hp()
+  [23] draw_glycine(player const&, sf::RenderWindow&) [4] draw_game_components(sf::RenderWindow&, std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >, std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >, std::vector<bullet, std::allocator<bullet> >) [40] player::turn_left()
+  [27] draw_players(std::vector<player, std::allocator<player> >&, sf::RenderWindow&) [54] get_life_bar_positions() [43] player::player(amino_acid, double, double)
+  [38] extract_base(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) [15] calculate_distance_bullet_player(bullet, player) [37] void std::vector<bullet, std::allocator<bullet> >::emplace_back<bullet>(bullet&&)
+  [49] create_sounds()        [35] shoot(player const&)   [32] void std::vector<bullet, std::allocator<bullet> >::_M_emplace_back_aux<bullet>(bullet&&)
+  [24] draw_life_bar(sf::RectangleShape, sf::RenderWindow&) [1] display(sf::RenderWindow&, int, std::vector<player, std::allocator<player> >, int) [44] void std::vector<player, std::allocator<player> >::_M_emplace_back_aux<player>(player&&)
+  [50] set_life_bars(int, std::array<sf::Vector2<float>, 4ul>) [6] get_power(amino_acid) [45] void std::vector<sf::CircleShape, std::allocator<sf::CircleShape> >::_M_emplace_back_aux<sf::CircleShape const&>(sf::CircleShape const&)
+  [51] create_players(std::vector<amino_acid, std::allocator<amino_acid> > const&, int) [3] to_sprite(bullet const&) [46] void std::vector<sf::RectangleShape, std::allocator<sf::RectangleShape> >::_M_emplace_back_aux<sf::RectangleShape const&>(sf::RectangleShape const&)
+  [33] respond_to_key(player&, player&, std::vector<bullet, std::allocator<bullet> >&) [16] bullet::set_position(double, double) [47] std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+  [52] set_hit_ranges(std::vector<player, std::allocator<player> >, std::vector<sf::Vector2<float>, std::allocator<sf::Vector2<float> > >) [20] bullet::move(double) [55] _init
+  [25] draw_hit_ranges(sf::CircleShape, sf::RenderWindow&) [18] bullet::slow_down() [7] main
