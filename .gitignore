@@ -83,3 +83,4 @@ gprof.log
 .qmake.stash
 debug/
 release/
+qrc_*\.cpp
