@@ -10,6 +10,7 @@
 #include "bullet.h"
 #include "player.h"
 #include "program_state.h"
+#include "sprites_sfml.h"
 
 void bullet_hits_player(
   std::vector<bullet> &bullets,
@@ -36,8 +37,8 @@ std::vector<sf::Vector2f> get_start_positions();
 void display(
   sf::RenderWindow &w,
   const int window_size,
-  const std::vector<amino_acid> aas
-);
+  const std::vector<amino_acid> aas,
+  Sprites_sfml &sprites);
 
 /// @param kill_frame the frame at which the game will be terminated
 ///   if 'kill_frame' is negative, the game will not be terminated
@@ -45,6 +46,7 @@ void display(
   sf::RenderWindow &w,
   const int window_size,
   const std::vector<player> ps,
+  Sprites_sfml &sprites,
   const int kill_frame = -1
 );
 
@@ -57,15 +59,15 @@ void process_event_game(
 );
 
 ///Outer game loop: runs the full program, including the menus
-void run(
-  sf::RenderWindow &w,
+void run(sf::RenderWindow &w,
   const int window_size,
-  const bool do_play_music
-);
+  const bool do_play_music,
+  Sprites_sfml &sprites);
 
 void run_profile(
   sf::RenderWindow &w,
-  const int window_size
+  const int window_size,
+  Sprites_sfml& sprites
 );
 
 std::vector<sf::CircleShape> set_hit_ranges(
@@ -85,6 +87,7 @@ program_state run_choose_n_player_menu(
 program_state run_choose_amino_acids_menu(
   sf::RenderWindow &w,
   bool do_play_music,
-  std::vector<amino_acid> &amino_acids);
+  std::vector<amino_acid> &amino_acids,
+  Sprites_sfml &sprites);
 
 #endif // GAME_SFML_H

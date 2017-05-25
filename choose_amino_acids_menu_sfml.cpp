@@ -59,7 +59,8 @@ choose_amino_acids_menu_sfml::~choose_amino_acids_menu_sfml()
   m_music.stop();
 }
 
-void choose_amino_acids_menu_sfml::display()
+void choose_amino_acids_menu_sfml::display(
+  Sprites_sfml& sprites)
 {
   //Clear
   m_window.clear(sf::Color(128,128,128));
@@ -78,18 +79,19 @@ void choose_amino_acids_menu_sfml::display()
   {
     m_window.draw(m_player_texts[i]);
     m_window.draw(texts[i]);
-    draw_players(players, m_window);
+    draw_players(players, m_window, sprites);
   }
   //Show
   m_window.display();
 }
 
-void choose_amino_acids_menu_sfml::execute()
+void choose_amino_acids_menu_sfml::execute(
+  Sprites_sfml& sprites)
 {
   assert(m_state == program_state::select_players);
 
   while (1) {
-    tick();
+    tick(sprites);
     //Quit
     if (m_state == program_state::quit) return;
     //Next screen
@@ -99,13 +101,14 @@ void choose_amino_acids_menu_sfml::execute()
   }
 }
 
-void choose_amino_acids_menu_sfml::tick()
+void choose_amino_acids_menu_sfml::tick(
+  Sprites_sfml& sprites)
 {
   sf::Event event;
   while (m_window.pollEvent(event))
   {
     process_event(event);
-    display(); //Maybe moved down?
+    display(sprites); //Maybe moved down?
   }
 }
 

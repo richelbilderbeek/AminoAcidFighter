@@ -85,19 +85,20 @@ void draw_game_components(
 void display(
   sf::RenderWindow &w,
   const int window_size,
-  std::vector<amino_acid> aas
+  std::vector<amino_acid> aas,
+  Sprites_sfml& sprites
 )
 {
   const auto players = create_players(aas, window_size);
-  display(w, window_size, players);
+  display(w, window_size, players, sprites);
 }
 
 void display(
   sf::RenderWindow &w,
   const int window_size,
   std::vector<player> ps,
-  const int kill_frame
-)
+  Sprites_sfml& sprites,
+  const int kill_frame)
 {
   static int frame = 0;
   const std::vector<sf::Vector2f> start_positions = get_start_positions();
@@ -144,7 +145,7 @@ void display(
 
     w.clear(sf::Color(128,128,128));
     draw_game_components(w, life_bars, hit_ranges, bullets);
-    draw_players(ps, w);
+    draw_players(ps, w, sprites);
     w.display();
   }
 }
@@ -184,7 +185,8 @@ void process_event_game(sf::Event event,
 void run(
   sf::RenderWindow &w,
   const int window_size,
-  const bool do_play_music
+  const bool do_play_music,
+  Sprites_sfml& sprites
 )
 {
   program_state state{program_state::choose_n_players};
@@ -208,7 +210,8 @@ void run(
         state = run_choose_amino_acids_menu(
           w,
           do_play_music,
-          amino_acids
+          amino_acids,
+          sprites
         );
       }
       break;
@@ -216,7 +219,8 @@ void run(
         display(
           w,
           window_size,
-          amino_acids
+          amino_acids,
+          sprites
         );
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
@@ -243,10 +247,11 @@ program_state run_choose_n_player_menu(
 program_state  run_choose_amino_acids_menu(
   sf::RenderWindow &w,
   bool do_play_music,
-  std::vector<amino_acid> &amino_acids)
+  std::vector<amino_acid> &amino_acids,
+  Sprites_sfml& sprites)
 {
   choose_amino_acids_menu_sfml m(w, do_play_music, amino_acids);
-  m.execute();
+  m.execute(sprites);
   const program_state state = m.get_state();
   if(state == program_state::quit) return state;
   assert(state == program_state::battle);
@@ -256,7 +261,8 @@ program_state  run_choose_amino_acids_menu(
 
 void run_profile(
   sf::RenderWindow &w,
-  const int window_size
+  const int window_size,
+  Sprites_sfml& sprites
 )
 {
   const std::vector<amino_acid> aas =
@@ -268,7 +274,7 @@ void run_profile(
   };
   const auto ps = create_players(aas, window_size);
   const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
-  display(w, window_size, ps, kill_frame);
+  display(w, window_size, ps, sprites, kill_frame);
 }
 
 std::vector<sf::CircleShape> set_hit_ranges(

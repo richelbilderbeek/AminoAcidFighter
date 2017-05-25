@@ -14,12 +14,13 @@ int main(int argc, char * argv[])
     sf::VideoMode(window_size, window_size),
     "AminoAcidFighter",
     sf::Style::Titlebar | sf::Style::Close);
-
+  Sprites_sfml sprites;
   if (argc == 2 && std::string(argv[1]) == "--profile")
   {
     run_profile(
       window,
-      window_size
+      window_size,
+      sprites
     );
     return 0;
   }
@@ -28,7 +29,8 @@ int main(int argc, char * argv[])
   run(
     window,
     window_size,
-    do_play_music);
+    do_play_music,
+    sprites);
 
   window.close();
 }

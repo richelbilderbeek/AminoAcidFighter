@@ -26,7 +26,7 @@ public:
   ///Closes when the user wants to quit
   ///or continue to the game
   ///This can be obtained with the do_quit member function
-  void execute();
+  void execute(Sprites_sfml &sprites);
 
   ///Get the current amino acids
   std::vector<amino_acid> get_amino_acids() const noexcept { return m_menu.get_amino_acids(); }
@@ -35,7 +35,7 @@ public:
   program_state get_state() const noexcept { return m_state; }
 
   ///Handle input and show this screen once, to be used in testing only
-  void tick();
+  void tick(Sprites_sfml &sprites);
 
 private:
   ///The amino acid texts
@@ -66,7 +66,7 @@ private:
   sf::RenderWindow& m_window;
 
   ///Show this menu on the screen
-  void display();
+  void display(Sprites_sfml &sprites);
 
   ///Process a single event
   void process_event(const sf::Event& event);
