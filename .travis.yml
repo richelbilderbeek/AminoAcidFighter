@@ -46,7 +46,7 @@ script:
   - ./AminoAcidFighterTest
   # Build and run profile run
   - qmake AminoAcidFighter.pro
-  - make
+  - make release
   - time ./AminoAcidFighter --profile
   - gprof AminoAcidFighter > gprof.log
   - head gprof.log -n 1000
