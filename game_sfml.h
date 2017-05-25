@@ -39,10 +39,13 @@ void display(
   const std::vector<amino_acid> aas
 );
 
+/// @param kill_frame the frame at which the game will be terminated
+///   if 'kill_frame' is negative, the game will not be terminated
 void display(
   sf::RenderWindow &w,
   const int window_size,
-  const std::vector<player> ps
+  const std::vector<player> ps,
+  const int kill_frame = -1
 );
 
 void process_event_game(

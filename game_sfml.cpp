@@ -95,9 +95,11 @@ void display(
 void display(
   sf::RenderWindow &w,
   const int window_size,
-  std::vector<player> ps
+  std::vector<player> ps,
+  const int kill_frame
 )
 {
+  static int frame = 0;
   const std::vector<sf::Vector2f> start_positions = get_start_positions();
   const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
   std::vector<sf::RectangleShape> life_bars = set_life_bars(ps.size(), life_bar_positions);
@@ -110,6 +112,10 @@ void display(
   }
 
   while(w.isOpen()) {
+    //Kill in profiling
+    ++frame;
+    if (kill_frame && kill_frame == frame) return ;
+
     sf::Event event;
     while(w.pollEvent(event)) {
       process_event_game(
@@ -263,11 +269,8 @@ void run_profile(
     amino_acid::valine
   };
   const auto ps = create_players(aas, window_size);
-  // Run 1 fps for 60 seconds (or at least try)
-  for (int i=0; i != 1 * 60; ++i)
-  {
-    display(w, window_size, ps);
-  }
+  const int kill_frame{60 * 1}; // 60 fps for 1 second
+  display(w, window_size, ps, kill_frame);
 }
 
 std::vector<sf::CircleShape> set_hit_ranges(
