@@ -15,7 +15,6 @@ int main(int argc, char * argv[])
     "AminoAcidFighter",
     sf::Style::Titlebar | sf::Style::Close);
 
-  window.setFramerateLimit(60);
   if (argc == 2 && std::string(argv[1]) == "--profile")
   {
     run_profile(
@@ -24,6 +23,7 @@ int main(int argc, char * argv[])
     );
     return 0;
   }
+  window.setFramerateLimit(60);
   const bool do_play_music{argc == 1};
   run(
     window,
