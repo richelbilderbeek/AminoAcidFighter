@@ -267,7 +267,7 @@ void run_profile(
     amino_acid::valine
   };
   const auto ps = create_players(aas, window_size);
-  const int kill_frame{60 * 1}; // 60 fps for 1 second
+  const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
   display(w, window_size, ps, kill_frame);
 }
 
