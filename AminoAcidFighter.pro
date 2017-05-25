@@ -17,8 +17,14 @@ QMAKE_CXXFLAGS += -Wall -Wextra -Werror
 CONFIG += debug_and_release
 # Release mode
 CONFIG(release, debug|release) {
+
   DEFINES += NDEBUG
 
+  # gprof
+  QMAKE_CXXFLAGS += -pg
+  QMAKE_LFLAGS += -pg
+
+  # ?Why this?
   QMAKE_CXXFLAGS += -Wno-unused-parameter
 }
 # Debug mode
