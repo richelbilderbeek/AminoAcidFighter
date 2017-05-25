@@ -4,6 +4,11 @@
 #include "amino_acid.h"
 #include "bullet.h"
 #include "power.h"
+#include <cmath>
+
+#include <SFML/Graphics.hpp>
+
+#include "bullet.h"
 
 class player
 {
