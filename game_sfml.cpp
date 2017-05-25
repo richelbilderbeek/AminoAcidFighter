@@ -250,6 +250,26 @@ program_state  run_choose_amino_acids_menu(
   return state;
 }
 
+void run_profile(
+  sf::RenderWindow &w,
+  const int window_size
+)
+{
+  const std::vector<amino_acid> aas =
+  {
+    amino_acid::alanine,
+    amino_acid::glycine,
+    amino_acid::tryptophan,
+    amino_acid::valine
+  };
+  const auto ps = create_players(aas, window_size);
+  // Run 60 fps for 60 seconds (or at least try)
+  for (int i=0; i!= 60 * 60; ++i)
+  {
+    display(w, window_size, ps);
+  }
+}
+
 std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<player> ps,
   std::vector<sf::Vector2f> start_positions

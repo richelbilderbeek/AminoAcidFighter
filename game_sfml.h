@@ -60,6 +60,11 @@ void run(
   const bool do_play_music
 );
 
+void run_profile(
+  sf::RenderWindow &w,
+  const int window_size
+);
+
 std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<player> ps,
   std::vector<sf::Vector2f> start_positions);

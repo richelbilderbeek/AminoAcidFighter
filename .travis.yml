@@ -1,4 +1,3 @@
-sudo: required
 language: cpp
 compiler: gcc
 dist: trusty
@@ -45,12 +44,12 @@ script:
   - qmake AminoAcidFighterTest.pro
   - make debug
   - ./AminoAcidFighterTest
-  # Build and run the real program
+  # Build and run profile run
   - qmake AminoAcidFighter.pro
   - make
-  - ./AminoAcidFighter &
-  - sleep 10
-  - sudo killall AminoAcidFighter
+  - time ./AminoAcidFighter --profile
+  - gprof AminoAcidFighter > gprof.log
+  - head gprof.log -n 1000
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
   # Get code coverage
