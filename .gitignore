@@ -79,3 +79,7 @@ Tryptophan.png
 Tyrosine.png
 Valine.png
 *.autosave
+gprof.log
+.qmake.stash
+debug/
+release/
