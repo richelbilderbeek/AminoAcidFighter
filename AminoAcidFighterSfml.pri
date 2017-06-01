@@ -5,7 +5,8 @@ SOURCES += \
     bullet_sfml.cpp \
     choose_n_players_menu_sfml.cpp \
     choose_amino_acids_menu_sfml.cpp \
-    $$PWD/sprites_sfml.cpp
+    $$PWD/sprites_sfml.cpp \
+    $$PWD/winner_screen_sfml.cpp
 
 HEADERS += \
     game_sfml.h \
@@ -14,5 +15,6 @@ HEADERS += \
     bullet_sfml.h \
     choose_n_players_menu_sfml.h \
     choose_amino_acids_menu_sfml.h \
-    $$PWD/sprites_sfml.h
+    $$PWD/sprites_sfml.h \
+    $$PWD/winner_screen_sfml.h
 

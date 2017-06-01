@@ -11,6 +11,7 @@
 #include "player.h"
 #include "program_state.h"
 #include "sprites_sfml.h"
+#include "winner_screen_sfml.h"
 
 void bullet_hits_player(
   std::vector<bullet> &bullets,
@@ -89,5 +90,9 @@ program_state run_choose_amino_acids_menu(
   bool do_play_music,
   std::vector<amino_acid> &amino_acids,
   Sprites_sfml &sprites);
+
+program_state run_winner_screen(sf::RenderWindow &w,
+  bool do_play_music,
+  std::array<sf::RectangleShape, 4> life_bars);
 
 #endif // GAME_SFML_H

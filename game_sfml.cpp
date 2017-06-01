@@ -114,7 +114,7 @@ void display(
   while(w.isOpen()) {
     //Kill in profiling
     ++frame;
-    if (kill_frame && kill_frame == frame) return ;
+    if (kill_frame && kill_frame == frame) return;
 
     sf::Event event;
     while(w.pollEvent(event)) {
@@ -222,6 +222,9 @@ void run(
           amino_acids,
           sprites
         );
+      break;
+      case program_state::winner:
+
         assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
       break;
       case program_state::quit:
@@ -256,6 +259,20 @@ program_state  run_choose_amino_acids_menu(
   if(state == program_state::quit) return state;
   assert(state == program_state::battle);
   amino_acids = m.get_amino_acids();
+  return state;
+}
+
+program_state run_winner_screen(
+  sf::RenderWindow &w,
+  bool do_play_music,
+  std::array<sf::RectangleShape, 4> life_bars)
+{
+  const sf::Text winner_text = create_winner_text(life_bars);
+  winner_screen_sfml m(w, do_play_music);
+  m.execute(winner_text);
+  const program_state state = m.get_state();
+  if(state == program_state::quit) return state;
+  assert(state == program_state::winner);
   return state;
 }
 

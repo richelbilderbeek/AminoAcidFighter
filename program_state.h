@@ -6,6 +6,7 @@ enum class program_state
   choose_n_players,
   select_players,
   battle,
+  winner,
   quit
 };
 
