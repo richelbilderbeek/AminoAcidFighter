@@ -184,20 +184,6 @@ void process_event_game(sf::Event event,
   }
 }
 
-program_state run_choose_n_player_menu(
-  sf::RenderWindow& w,
-  bool do_play_music,
-  std::vector<amino_acid> &amino_acids)
-{
-  choose_n_players_menu_sfml m(w, do_play_music, amino_acids.size());
-  m.execute();
-  const program_state state = m.get_state();
-  if(state == program_state::quit) return state;
-  assert(state == program_state::select_players);
-  amino_acids.resize(m.get_n_players());
-  return state;
-}
-
 program_state run_winner_screen(
   sf::RenderWindow &w,
   bool do_play_music,

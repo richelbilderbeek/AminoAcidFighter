@@ -67,11 +67,6 @@ std::vector<sf::RectangleShape> set_life_bars(
   std::array<sf::Vector2f, 4> life_bar_positions
 );
 
-program_state run_choose_n_player_menu(
-  sf::RenderWindow &w,
-  bool do_play_music,
-  std::vector<amino_acid> &amino_acids);
-
 program_state run_winner_screen(sf::RenderWindow &w,
   bool do_play_music,
   std::array<sf::RectangleShape, 4> life_bars);

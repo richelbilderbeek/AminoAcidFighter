@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 
 #include "choose_amino_acids_menu_sfml.h"
+#include "choose_n_players_menu_sfml.h"
 #include "game.h"
 #include "game_sfml.h"
 #include "helper.h"
@@ -67,11 +68,12 @@ void program_sfml::run_choose_amino_acids_menu()
 
 void program_sfml::run_choose_n_player_menu()
 {
-  m_state = ::run_choose_n_player_menu(
-    m_window,
-    m_do_play_music,
-    m_amino_acids
-  );
+  choose_n_players_menu_sfml m(m_window, m_do_play_music, m_amino_acids.size());
+  m.execute();
+  m_state = m.get_state();
+  if(m_state == program_state::quit) return;
+  assert(m_state == program_state::select_players);
+  m_amino_acids.resize(m.get_n_players());
 }
 
 void program_sfml::run_normal()
