@@ -3,8 +3,7 @@
 
 /// Functions and/or classes to display the 'menu' class
 /// using SFML
-
-#include <array>
+///
 #include <cassert>
 #include <iostream>
 #include <SFML/Audio.hpp>
@@ -59,16 +58,16 @@ void draw_a_text(
 void draw_AA_choice_screen(
   sf::RenderWindow &window,
   std::vector<player> players,
-  std::array<sf::Vector2f, 4> text_player_pos,
-  std::array<sf::Color, 4> text_colors,
+  std::vector<sf::Vector2f> text_player_pos,
+  std::vector<sf::Color> text_colors,
   std::vector<sf::Text> AA_texts,
   const sf::Font& font
 );
 
-std::array<sf::Vector2f, 4> get_aa_menu_positions();
-std::array<sf::Color   , 4> get_aa_menu_text_colors();
-std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions();
-std::array<sf::Vector2f, 4> get_aa_menu_text_positions();
+std::vector<sf::Vector2f> get_aa_menu_positions();
+std::vector<sf::Color   > get_aa_menu_text_colors();
+std::vector<sf::Vector2f> get_aa_menu_text_player_positions();
+std::vector<sf::Vector2f> get_aa_menu_text_positions();
 
 program_state process_event_AA_choice(
   sf::Event &event,
@@ -78,8 +77,8 @@ program_state process_event_AA_choice(
 );
 
 std::vector<sf::Text> create_select_player_menu_texts(
-  std::array<sf::Vector2f, 4> text_AA_positions,
-  std::array<sf::Color, 4> text_colors,
+  std::vector<sf::Vector2f> text_AA_positions,
+  std::vector<sf::Color> text_colors,
   std::vector<amino_acid> amino_acids
 );
 

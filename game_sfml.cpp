@@ -6,10 +6,15 @@
 #include "choose_n_players_menu_sfml.h"
 #include "choose_amino_acids_menu_sfml.h"
 
-game_sfml::game_sfml(
-  sf::RenderWindow& window,
-  const bool do_play_music
+game_sfml::game_sfml(sf::RenderWindow& window,
+  const bool do_play_music,
+  std::vector<amino_acid> amino_acids,
+  const bool is_profile_run
 ) : m_do_play_music{do_play_music},
+    m_hit_ranges{set_hit_ranges(create_players(amino_acids, window.getSize().x),get_start_positions())},
+    m_is_profile_run{is_profile_run},
+    m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
+    m_players{create_players(amino_acids, window.getSize().x)},
     m_state{program_state::battle},
     m_window{window}
 {
@@ -21,11 +26,11 @@ game_sfml::~game_sfml()
   m_music.stop();
 }
 
-void game_sfml::execute()
+void game_sfml::execute(Sprites_sfml &sprites)
 {
   assert(m_state == program_state::battle);
   while (1) {
-    tick();
+    tick(sprites);
     //Quit
     if (m_state == program_state::quit) return;
     //Next screen
@@ -35,9 +40,87 @@ void game_sfml::execute()
   }
 }
 
-void game_sfml::tick()
+void game_sfml::display(Sprites_sfml &sprites)
 {
+  // 6 fps (current speed on Travis) for 5 minutes
+  const int kill_frame{m_is_profile_run ? 300 : -1};
+  static int frame = 0;
 
+  //Kill in profiling
+  ++frame;
+  if (kill_frame > 0 && frame > kill_frame)
+  {
+    m_window.close();
+    return;
+  }
+
+  m_window.clear(sf::Color(128,128,128));
+  draw_game_components(m_window, m_life_bars, m_hit_ranges, m_bullets);
+  draw_players(m_players, m_window, sprites);
+  m_window.display();
+}
+
+void game_sfml::process_event(
+  sf::Event event,
+  std::vector<bullet> &bullets
+)
+{
+  switch(event.type)
+  {
+    case sf::Event::Closed:
+      m_window.close();
+      break;
+    case sf::Event::KeyPressed:
+      // keyboard support for player1 and player2
+      assert(m_players.size() >= 1);
+      respond_to_key(
+        m_players[0],
+        m_players[1],
+        bullets);
+      break;
+    case sf::Event::JoystickButtonPressed:
+      // joystick support for player3 and player4
+      respond_to_joystick(
+        m_players[2],
+        m_players[3],
+        bullets);
+      break;
+    default:
+      break;
+  }
+}
+
+void game_sfml::tick(Sprites_sfml &sprites)
+{
+  while(m_window.isOpen())
+  {
+    sf::Event event;
+    while(m_window.pollEvent(event)) {
+      process_event(
+        event,
+        m_bullets
+      );
+      display(sprites);
+    }
+
+    //Move players, hit range and bullets
+    assert(m_window.getSize().x == m_window.getSize().y);
+    for(auto i = 0u; i != m_players.size(); ++i) { m_players[i].move(m_window.getSize().x); }
+    for(auto& bullet : m_bullets) {
+      bullet.slow_down();
+      bullet.move(m_window.getSize().x);
+    }
+    for(auto i = 0u; i != m_players.size(); ++i)
+    {
+      m_hit_ranges[i].setPosition(m_players[i].get_x() + m_players[i].get_speed_x(),
+                                m_players[i].get_y() + m_players[i].get_speed_y());
+    }
+    //Check if bullet hits player
+    bullet_hits_player(m_bullets, m_players, m_life_bars);
+
+    //Remove all bullets that have no speed
+    remove_slow_bullets(m_bullets);
+  }
 }
 
 
@@ -120,42 +203,10 @@ void draw_game_components(
   }
 }
 
-void process_event_game(sf::Event event,
-  sf::RenderWindow &w,
-  std::vector<player> &ps,
-  std::vector<bullet> &bullets,
-  const int /* window_size */
-)
-{
-  switch(event.type)
-  {
-    case sf::Event::Closed:
-      w.close();
-      break;
-    case sf::Event::KeyPressed:
-      // keyboard support for player1 and player2
-      assert(ps.size() >= 1);
-      respond_to_key(
-        ps[0],
-        ps[1],
-        bullets);
-      break;
-    case sf::Event::JoystickButtonPressed:
-      // joystick support for player3 and player4
-      respond_to_joystick(
-        ps[2],
-        ps[3],
-        bullets);
-      break;
-    default:
-      break;
-  }
-}
-
 program_state run_winner_screen(
   sf::RenderWindow &w,
   bool do_play_music,
-  std::array<sf::RectangleShape, 4> life_bars)
+  std::vector<sf::RectangleShape> life_bars)
 {
   const sf::Text winner_text = create_winner_text(life_bars);
   winner_screen_sfml m(w, do_play_music);
@@ -189,7 +240,7 @@ std::vector<sf::CircleShape> set_hit_ranges(
 
 std::vector<sf::RectangleShape> set_life_bars(
   int player_amount,
-  std::array<sf::Vector2f, 4> life_bar_positions)
+  std::vector<sf::Vector2f> life_bar_positions)
 {
   std::vector<sf::RectangleShape> life_bars;
   for(auto i{0}; i != player_amount; ++i) {
@@ -202,9 +253,9 @@ std::vector<sf::RectangleShape> set_life_bars(
   return life_bars;
 }
 
-std::array<sf::Vector2f, 4> get_life_bar_positions()
+std::vector<sf::Vector2f> get_life_bar_positions()
 {
-    const std::array<sf::Vector2f, 4> life_bar_positions {
+    const std::vector<sf::Vector2f> life_bar_positions {
       sf::Vector2f(10 , 10 ),
       sf::Vector2f(490, 10 ),
       sf::Vector2f(10 , 580),

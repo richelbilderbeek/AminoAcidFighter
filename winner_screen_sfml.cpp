@@ -25,7 +25,7 @@ void winner_screen_sfml::display(sf::Text winner_text)
 }
 
 sf::Text create_winner_text(
-  std::array<sf::RectangleShape, 4> life_bars)
+  std::vector<sf::RectangleShape> life_bars)
 {
   static sf::Font font; //Text cannot be drawn if Font goes out of scope
   font.loadFromFile("arial.ttf");

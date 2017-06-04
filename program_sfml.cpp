@@ -59,74 +59,18 @@ void program_sfml::run_battle()
 
   assert(m_window.getSize().x == m_window.getSize().y);
   const int window_size = m_window.getSize().x;
-  auto players = create_players(m_amino_acids, window_size);
-  game_sfml m(m_window, do_play_music(m_args));
+  game_sfml m(m_window, do_play_music(m_args), m_amino_acids, is_profile_run(m_args));
 
   assert(m.get_state() == program_state::battle);
-  m.execute();
+  m.execute(m_sprites);
 
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
   assert(m_state == program_state::winner);
 
   /*
-  assert(m_window.getSize().x == m_window.getSize().y);
-  const int window_size = m_window.getSize().x;
-  auto players = create_players(m_amino_acids, window_size);
-  // 6 fps (current speed on Travis) for 5 minutes
-  const int kill_frame{is_profile_run(m_args) ? 300 : -1};
-  static int frame = 0;
-  const std::vector<sf::Vector2f> start_positions = get_start_positions();
-  const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
-  std::vector<sf::RectangleShape> life_bars = set_life_bars(players.size(), life_bar_positions);
-  std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(players, start_positions);
-  std::vector<bullet> bullets;
-
   if(sf::Joystick::isConnected(0)) {
       std::cout << "controller connected" << '\n';
-  }
-
-  while(m_window.isOpen()) {
-    //Kill in profiling
-    ++frame;
-    if (kill_frame > 0 && frame > kill_frame)
-    {
-      m_window.close();
-      return;
-    }
-
-    sf::Event event;
-    while(m_window.pollEvent(event)) {
-      process_event_game(
-        event,
-        m_window,
-        players,
-        bullets,
-        window_size
-      );
-    }
-
-    //Move players, hit range and bullets
-    for(auto i = 0u; i != players.size(); ++i) { players[i].move(window_size); }
-    for(auto& bullet : bullets) {
-      bullet.slow_down();
-      bullet.move(window_size);
-    }
-    for(auto i = 0u; i != players.size(); ++i)
-    {
-      hit_ranges[i].setPosition(players[i].get_x() + players[i].get_speed_x(),
-                                players[i].get_y() + players[i].get_speed_y());
-    }
-    //Check if bullet hits player
-    bullet_hits_player(bullets, players, life_bars);
-
-    //Remove all bullets that have no speed
-    remove_slow_bullets(bullets);
-
-    m_window.clear(sf::Color(128,128,128));
-    draw_game_components(m_window, life_bars, hit_ranges, bullets);
-    draw_players(players, m_window, m_sprites);
-    m_window.display();
   }
   */
 }

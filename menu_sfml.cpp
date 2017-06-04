@@ -75,8 +75,8 @@ void draw_a_text(
 }
 
 std::vector<sf::Text> create_select_player_menu_texts(
-  std::array<sf::Vector2f, 4> text_AA_positions,
-  std::array<sf::Color, 4> text_colors,
+  std::vector<sf::Vector2f> text_AA_positions,
+  std::vector<sf::Color> text_colors,
   std::vector<amino_acid> amino_acids)
 {
   static sf::Font font; //Text cannot be drawn if Font goes out of scope
@@ -106,7 +106,7 @@ std::vector<sf::Text> create_select_player_menu_texts(
 
 std::vector<player> create_menu_players(std::vector<amino_acid> amino_acids)
 {
-  const std::array<sf::Vector2f, 4> player_positions  = get_aa_menu_positions();
+  const std::vector<sf::Vector2f> player_positions  = get_aa_menu_positions();
 
   std::vector<player> players;
   const int n_players = amino_acids.size();
@@ -123,7 +123,7 @@ std::vector<player> create_menu_players(std::vector<amino_acid> amino_acids)
   return players;
 }
 
-std::array<sf::Vector2f, 4> get_aa_menu_positions()
+std::vector<sf::Vector2f> get_aa_menu_positions()
 {
   return
   {
@@ -134,7 +134,7 @@ std::array<sf::Vector2f, 4> get_aa_menu_positions()
   };
 }
 
-std::array<sf::Vector2f, 4> get_aa_menu_text_positions()
+std::vector<sf::Vector2f> get_aa_menu_text_positions()
 {
   return
   {
@@ -145,7 +145,7 @@ std::array<sf::Vector2f, 4> get_aa_menu_text_positions()
   };
 }
 
-std::array<sf::Color, 4> get_aa_menu_text_colors()
+std::vector<sf::Color> get_aa_menu_text_colors()
 {
   return
   {
@@ -156,7 +156,7 @@ std::array<sf::Color, 4> get_aa_menu_text_colors()
   };
 }
 
-std::array<sf::Vector2f, 4> get_aa_menu_text_player_positions()
+std::vector<sf::Vector2f> get_aa_menu_text_player_positions()
 {
   return
   {

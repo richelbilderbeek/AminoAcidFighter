@@ -33,6 +33,6 @@ private:
 };
 
 sf::Text create_winner_text(
-  std::array<sf::RectangleShape, 4> life_bars);
+  std::vector<sf::RectangleShape> life_bars);
 
 #endif // WINNER_SCREEN_SFML_H
