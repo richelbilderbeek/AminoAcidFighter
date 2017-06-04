@@ -22,7 +22,8 @@ public:
     sf::RenderWindow& window,
     const bool do_play_music,
     std::vector<amino_acid> amino_acids,
-    const bool is_profile_run
+    const bool is_profile_run,
+    Sprites_sfml &sprites
   );
 
   ///Stops the music
@@ -35,10 +36,10 @@ public:
   ///Closes when the user wants to quit
   ///or continue to winner screen when a player has won
   ///This can be obtained with the do_quit member function
-  void execute(Sprites_sfml &sprites);
+  void execute();
 
   ///Handle input and show this screen once, to be used in testing only
-  void tick(Sprites_sfml &sprites);
+  void tick();
 
 private:
   ///All bullets currently in the game
@@ -61,6 +62,9 @@ private:
 
   ///Players that join the game
   std::vector<player> m_players;
+
+  ///The sprites, cannot be const as the sprites are modified in-place
+  Sprites_sfml& m_sprites;
 
   ///In which state is the program while and directly after the battle?
   program_state m_state;

@@ -9,12 +9,14 @@
 game_sfml::game_sfml(sf::RenderWindow& window,
   const bool do_play_music,
   std::vector<amino_acid> amino_acids,
-  const bool is_profile_run
+  const bool is_profile_run,
+  Sprites_sfml& sprites
 ) : m_do_play_music{do_play_music},
     m_hit_ranges{set_hit_ranges(create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_is_profile_run{is_profile_run},
     m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
     m_players{create_players(amino_acids, window.getSize().x)},
+    m_sprites(sprites),
     m_state{program_state::battle},
     m_window{window}
 {
@@ -64,11 +66,11 @@ void game_sfml::display(Sprites_sfml &sprites)
   m_window.display();
 }
 
-void game_sfml::execute(Sprites_sfml &sprites)
+void game_sfml::execute()
 {
   assert(m_state == program_state::battle);
   while (1) {
-    tick(sprites);
+    tick();
     //Quit
     if (m_state == program_state::quit) return;
     //Next screen
@@ -108,7 +110,7 @@ void game_sfml::process_event(
   }
 }
 
-void game_sfml::tick(Sprites_sfml &sprites)
+void game_sfml::tick()
 {
   while(m_window.isOpen())
   {
@@ -120,7 +122,7 @@ void game_sfml::tick(Sprites_sfml &sprites)
       );
     }
 
-    display(sprites);
+    display(m_sprites);
 
     //Move players, hit range and bullets
     assert(m_window.getSize().x == m_window.getSize().y);

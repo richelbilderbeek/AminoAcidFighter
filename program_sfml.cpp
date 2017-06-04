@@ -59,10 +59,16 @@ void program_sfml::run_battle()
 
   assert(m_window.getSize().x == m_window.getSize().y);
   const int window_size = m_window.getSize().x;
-  game_sfml m(m_window, do_play_music(m_args), m_amino_acids, is_profile_run(m_args));
+  game_sfml m(
+    m_window,
+    do_play_music(m_args),
+    m_amino_acids,
+    is_profile_run(m_args),
+    m_sprites
+  );
 
   assert(m.get_state() == program_state::battle);
-  m.execute(m_sprites);
+  m.execute();
 
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
