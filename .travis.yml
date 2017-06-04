@@ -53,7 +53,7 @@ script:
   - gprof AminoAcidFighter > gprof.log
   - head gprof.log -n 100
   # cppcheck
-  - cppcheck --quiet --error-exitcode=1 . 
+  - cppcheck --error-exitcode=1 . 
   # Get code coverage
   - ./get_code_cov
   - codecov
