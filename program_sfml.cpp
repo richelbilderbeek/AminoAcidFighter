@@ -137,7 +137,11 @@ void program_sfml::run_battle()
   while(m_window.isOpen()) {
     //Kill in profiling
     ++frame;
-    if (kill_frame && kill_frame == frame) return;
+    if (kill_frame > 0 && frame > kill_frame)
+    {
+      m_window.close();
+      return;
+    }
 
     sf::Event event;
     while(m_window.pollEvent(event)) {
