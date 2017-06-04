@@ -64,12 +64,17 @@ std::vector<amino_acid> create_amino_acids(
 ///and also to let the 'choose number of amino acids' have a valid number
 std::vector<amino_acid> create_first_amino_acids() noexcept;
 
+///Create the amino acids used in profiling
+std::vector<amino_acid> create_profiling_amino_acids() noexcept;
+
+///Derive the first program_state from the command-line arguments. This
+///differs between (1) a normal run, (2) a profile run, (3) a request for
+///the help pages
+program_state create_state(const std::vector<std::string>& args) noexcept;
+
 ///Is there a command-line argument (as passed from the 'main' function),
 ///that indicates that the user wants no music?
 bool do_play_music(const std::vector<std::string>& args) noexcept;
-
-///Create the amino acids used in profiling
-std::vector<amino_acid> create_profiling_amino_acids() noexcept;
 
 ///Is there a command-line argument (as passed from the 'main' function),
 ///that indicates that the user wants a profile run?

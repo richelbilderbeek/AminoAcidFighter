@@ -13,11 +13,7 @@ program_sfml::program_sfml(const std::vector<std::string>& args)
   : m_amino_acids{create_amino_acids(args)},
     m_do_play_music{do_play_music(args)},
     m_do_profile_run{is_profile_run(args)},
-    m_state{
-      is_profile_run(args)
-      ? program_state::battle
-      : program_state::choose_n_players
-    },
+    m_state{create_state(args)},
     m_window{
       sf::VideoMode(600, 600), //Window is 600 x 600 pixels
       "AminoAcidFighter",
@@ -64,6 +60,14 @@ std::vector<amino_acid> create_profiling_amino_acids() noexcept
     amino_acid::tryptophan,
     amino_acid::valine
   };
+}
+
+program_state create_state(const std::vector<std::string>& args) noexcept
+{
+  return is_profile_run(args)
+    ? program_state::battle
+    : program_state::choose_n_players
+  ;
 }
 
 bool do_play_music(const std::vector<std::string>& args) noexcept
