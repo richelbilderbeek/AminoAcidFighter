@@ -2,6 +2,7 @@
 #define AMINO_ACID_H
 
 #include <string>
+#include <vector>
 
 enum class amino_acid
 {
@@ -26,6 +27,8 @@ enum class amino_acid
   tyrosine,
   valine
 };
+
+std::vector<amino_acid> get_all_amino_acids() noexcept;
 
 amino_acid get_prev(const amino_acid in);
 amino_acid get_next(const amino_acid in);

@@ -4,7 +4,12 @@
 
 BOOST_AUTO_TEST_CASE(game_sfml_construction)
 {
-  sf::RenderWindow w;
+  sf::RenderWindow w{
+    sf::VideoMode(600, 600), //Window is 600 x 600 pixels
+    "game_sfml_construction",
+    sf::Style::Titlebar | sf::Style::Close
+  };
+
   const bool do_play_music{false};
   const std::vector<amino_acid> amino_acids =
   {
