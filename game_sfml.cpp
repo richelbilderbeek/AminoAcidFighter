@@ -54,6 +54,7 @@ void game_sfml::display(Sprites_sfml &sprites)
   if (kill_frame > 0 && frame > kill_frame)
   {
     m_window.close();
+    m_state = program_state::quit;
     return;
   }
 
