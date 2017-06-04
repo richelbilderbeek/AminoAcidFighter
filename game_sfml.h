@@ -29,6 +29,9 @@ public:
   ///Stops the music
   ~game_sfml();
 
+  ///Check if the game has a winner
+  void game_sfml::check_for_winner();
+
   ///Obtain the current or state after execute
   program_state get_state() const noexcept { return m_state; }
 
@@ -84,7 +87,7 @@ private:
 
 
 std::vector<player> create_game_players(
-  std::vector<amino_acid> aas,
+  std::vector<amino_acid> amino_acids,
   std::vector<sf::Vector2f> ps_pos
 );
 
@@ -112,10 +115,5 @@ std::vector<sf::RectangleShape> set_life_bars(
   int player_amount,
   std::vector<sf::Vector2f> life_bar_positions
 );
-
-program_state run_winner_screen(
-  sf::RenderWindow &w,
-  bool do_play_music,
-  std::vector<sf::RectangleShape> life_bars);
 
 #endif // GAME_SFML_H

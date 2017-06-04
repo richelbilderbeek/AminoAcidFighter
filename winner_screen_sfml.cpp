@@ -13,11 +13,11 @@ winner_screen_sfml::winner_screen_sfml(
 
 }
 
-void winner_screen_sfml::display(sf::Text winner_text)
+void winner_screen_sfml::display()
 {
+  const sf::Text winner_text = create_winner_text();
   //Clear
   m_window.clear(sf::Color(128,128,128));
-
   //Text
   m_window.draw(winner_text);
   //Show
@@ -57,11 +57,11 @@ sf::Text create_winner_text(
   return winner_text;
 }
 
-void winner_screen_sfml::execute(sf::Text winner_text)
+void winner_screen_sfml::execute()
 {
   assert(m_state == program_state::winner);
   while (1) {
-    display(winner_text);
+    display();
     //Quit
     if (m_state == program_state::quit) return;
     //Next screen

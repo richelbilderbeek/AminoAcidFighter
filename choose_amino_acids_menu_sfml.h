@@ -87,7 +87,7 @@ std::vector<player> choose_aminoacids(
   std::vector<amino_acid> amino_acids
 );
 
-void check_joystick_press(choose_amino_acids_menu &m_menu);
-void check_keyboard_press(choose_amino_acids_menu &m_menu);
+void check_joystick_press(choose_amino_acids_menu& m_menu);
+void check_keyboard_press(choose_amino_acids_menu& m_menu);
 
 #endif // CHOOSE_AMINO_ACIDS_MENU_SFML_H

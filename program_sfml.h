@@ -53,5 +53,4 @@ private:
   void run_winner_screen();
 };
 
-
 #endif // PROGRAM_SFML_H

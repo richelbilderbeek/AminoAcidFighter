@@ -100,5 +100,9 @@ void program_sfml::run_choose_n_player_menu()
 
 void program_sfml::run_winner_screen()
 {
-
+  winner_screen_sfml m(m_window, do_play_music(m_args));
+  m.execute();
+  const program_state state = m.get_state();
+  if(state == program_state::quit) return;
+  assert(state == program_state::winner);
 }

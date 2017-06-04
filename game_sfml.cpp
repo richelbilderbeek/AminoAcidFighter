@@ -29,17 +29,34 @@ game_sfml::~game_sfml()
 
 void game_sfml::bullet_hits_player()
 {
-  for(auto i = 0u; i < m_players.size(); ++i) {
-    for(auto j = 0u; j < m_bullets.size(); ++j) {
+  for(auto i = 0u; i < m_players.size(); ++i)
+  {
+    for(auto j = 0u; j < m_bullets.size(); ++j)
+    {
       float distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
-      if(distance <= get_hit_range_size()) {
+      if(distance <= get_hit_range_size())
+      {
         m_players[i].lose_hp();
         m_bullets[j].slow_down();
       }
     }
   }
+
   //Show the players' HPs in the bars
-  for(auto i = 0u; i < m_players.size(); ++i) {
+  for(auto i = 0u; i < m_players.size(); ++i)
+  {
+    m_life_bars[i].setSize(sf::Vector2f(m_players[i].get_hp(), m_life_bars[i].getSize().y));
+  }
+}
+
+void game_sfml::check_for_winner()
+{
+  for(auto i = 0u; i < m_players.size(); ++i)
+  {
+    if()
+    {
+
+    }
     m_life_bars[i].setSize(sf::Vector2f(m_players[i].get_hp(), m_life_bars[i].getSize().y));
   }
 }
@@ -118,18 +135,23 @@ void game_sfml::tick()
   }
   display();
 
-  //Move players, hit range and bullets
   assert(m_window.getSize().x == m_window.getSize().y);
+  //Move players
   for(auto i = 0u; i != m_players.size(); ++i) { m_players[i].move(m_window.getSize().x); }
+
+  //Move bullets
   for(auto& bullet : m_bullets) {
     bullet.slow_down();
     bullet.move(m_window.getSize().x);
   }
+
+  //Move hit ranges
   for(auto i = 0u; i != m_players.size(); ++i)
   {
     m_hit_ranges[i].setPosition(m_players[i].get_x() + m_players[i].get_speed_x(),
                               m_players[i].get_y() + m_players[i].get_speed_y());
   }
+
   //Check if bullet hits player
   bullet_hits_player();
 
@@ -143,16 +165,16 @@ void game_sfml::tick()
 
 
 std::vector<player> create_game_players(
-  std::vector<amino_acid> aas,
+  std::vector<amino_acid> amino_acids,
   std::vector<sf::Vector2f> ps_pos)
 {
   std::vector<player> players;
-  const int n_players = aas.size();
+  const int n_players = amino_acids.size();
   for (int i{0}; i!=n_players; ++i)
   {
     players.push_back(
       player(
-        aas[i],
+        amino_acids[i],
         ps_pos[i].x,
         ps_pos[i].y
       )
@@ -196,20 +218,6 @@ void draw_game_components(
     bullet.set_position(bullet.get_x() - dx, bullet.get_y());
     w.draw(to_sprite(bullet));
   }
-}
-
-program_state run_winner_screen(
-  sf::RenderWindow &w,
-  bool do_play_music,
-  std::vector<sf::RectangleShape> life_bars)
-{
-  const sf::Text winner_text = create_winner_text(life_bars);
-  winner_screen_sfml m(w, do_play_music);
-  m.execute(winner_text);
-  const program_state state = m.get_state();
-  if(state == program_state::quit) return state;
-  assert(state == program_state::winner);
-  return state;
 }
 
 std::vector<sf::CircleShape> set_hit_ranges(
