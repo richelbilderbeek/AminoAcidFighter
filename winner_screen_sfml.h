@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <cassert>
-#include <winner_screen.h>
+#include "winner_screen.h"
 #include "program_state.h"
 
 class winner_screen_sfml
