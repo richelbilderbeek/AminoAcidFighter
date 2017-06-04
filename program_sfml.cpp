@@ -57,8 +57,6 @@ void program_sfml::run_battle()
 {
   assert(m_state == program_state::battle);
 
-  assert(m_window.getSize().x == m_window.getSize().y);
-  const int window_size = m_window.getSize().x;
   game_sfml m(
     m_window,
     do_play_music(m_args),
@@ -67,18 +65,12 @@ void program_sfml::run_battle()
     m_sprites
   );
 
-  assert(m.get_state() == program_state::battle);
   m.execute();
 
+  //Read the new state from the dialog
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
   assert(m_state == program_state::winner);
-
-  /*
-  if(sf::Joystick::isConnected(0)) {
-      std::cout << "controller connected" << '\n';
-  }
-  */
 }
 
 void program_sfml::run_choose_amino_acids_menu()

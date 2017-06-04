@@ -69,7 +69,8 @@ void game_sfml::display(Sprites_sfml &sprites)
 void game_sfml::execute()
 {
   assert(m_state == program_state::battle);
-  while (1) {
+  while(m_window.isOpen())
+  {
     tick();
     //Quit
     if (m_state == program_state::quit) return;
@@ -112,36 +113,34 @@ void game_sfml::process_event(
 
 void game_sfml::tick()
 {
-  while(m_window.isOpen())
-  {
-    sf::Event event;
-    while(m_window.pollEvent(event)) {
-      process_event(
-        event,
-        m_bullets
-      );
-    }
-
-    display(m_sprites);
-
-    //Move players, hit range and bullets
-    assert(m_window.getSize().x == m_window.getSize().y);
-    for(auto i = 0u; i != m_players.size(); ++i) { m_players[i].move(m_window.getSize().x); }
-    for(auto& bullet : m_bullets) {
-      bullet.slow_down();
-      bullet.move(m_window.getSize().x);
-    }
-    for(auto i = 0u; i != m_players.size(); ++i)
-    {
-      m_hit_ranges[i].setPosition(m_players[i].get_x() + m_players[i].get_speed_x(),
-                                m_players[i].get_y() + m_players[i].get_speed_y());
-    }
-    //Check if bullet hits player
-    bullet_hits_player();
-
-    //Remove all bullets that have no speed
-    remove_slow_bullets(m_bullets);
+  assert(m_window.isOpen());
+  sf::Event event;
+  while(m_window.pollEvent(event)) {
+    process_event(
+      event,
+      m_bullets
+    );
   }
+
+  display(m_sprites);
+
+  //Move players, hit range and bullets
+  assert(m_window.getSize().x == m_window.getSize().y);
+  for(auto i = 0u; i != m_players.size(); ++i) { m_players[i].move(m_window.getSize().x); }
+  for(auto& bullet : m_bullets) {
+    bullet.slow_down();
+    bullet.move(m_window.getSize().x);
+  }
+  for(auto i = 0u; i != m_players.size(); ++i)
+  {
+    m_hit_ranges[i].setPosition(m_players[i].get_x() + m_players[i].get_speed_x(),
+                              m_players[i].get_y() + m_players[i].get_speed_y());
+  }
+  //Check if bullet hits player
+  bullet_hits_player();
+
+  //Remove all bullets that have no speed
+  remove_slow_bullets(m_bullets);
 }
 
 

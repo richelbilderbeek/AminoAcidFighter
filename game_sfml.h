@@ -34,8 +34,8 @@ public:
 
   ///Runs the battle, which is handling input and displayal.
   ///Closes when the user wants to quit
-  ///or continue to winner screen when a player has won
-  ///This can be obtained with the do_quit member function
+  ///or continue to winner screen when a player has won.
+  ///This can be done by using the get_state member function
   void execute();
 
   ///Handle input and show this screen once, to be used in testing only
