@@ -35,8 +35,6 @@ program_sfml::~program_sfml()
   m_window.close();
 }
 
-
-
 void program_sfml::run()
 {
   while(m_window.isOpen())

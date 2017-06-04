@@ -75,9 +75,7 @@ private:
   void display(Sprites_sfml &sprites);
 
   ///Process a single event
-  void process_event(
-    sf::Event event,
-    std::vector<bullet> &bullets);
+  void process_event(sf::Event event);
 };
 
 
