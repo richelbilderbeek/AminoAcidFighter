@@ -45,8 +45,8 @@ void game_sfml::bullet_hits_player()
 
 void game_sfml::display(Sprites_sfml &sprites)
 {
-  // 6 fps (current speed on Travis) for 5 minutes
-  const int kill_frame{m_is_profile_run ? 300 : -1};
+  // 60 fps (current speed on Travis) for 5 minutes
+  const int kill_frame{m_is_profile_run ? 60 * 5 * 50: -1};
   static int frame = 0;
 
   //Kill in profiling
