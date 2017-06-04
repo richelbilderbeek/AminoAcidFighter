@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "sprites_sfml.h"
 
 #define BOOST_TEST_DYN_LINK
@@ -10,7 +11,11 @@ class Fixture
 public:
   Fixture()
   {
-    Sprites_sfml();
+    Sprites_sfml s;
+    if (!s.get(amino_acid::glycine).getTexture())
+    {
+      throw std::runtime_error("Cannot find texture");
+    }
   }
   ~Fixture()
   {

@@ -51,7 +51,7 @@ script:
   - make release
   - time ./AminoAcidFighter --profile --no_music
   - gprof AminoAcidFighter > gprof.log
-  - head gprof.log -n 1000
+  - head gprof.log -n 100
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
   # Get code coverage

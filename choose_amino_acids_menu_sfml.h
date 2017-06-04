@@ -25,6 +25,9 @@ public:
   ///Stops the music
   ~choose_amino_acids_menu_sfml();
 
+  ///Will the music be played?
+  bool do_play_music() const noexcept { return m_do_play_music; }
+
   ///Runs this menu, which is handling input and displayal.
   ///Closes when the user wants to quit
   ///or continue to the game
