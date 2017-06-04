@@ -37,8 +37,8 @@ choose_amino_acids_menu_sfml::choose_amino_acids_menu_sfml(
   m_center_text.setString("Choose Your Amino Acid");
 
   //Player texts
-  std::array<sf::Vector2f, 4> positions = get_aa_menu_text_player_positions();
-  std::array<sf::Color, 4> colors = get_aa_menu_text_colors();
+  std::vector<sf::Vector2f> positions = get_aa_menu_text_player_positions();
+  std::vector<sf::Color> colors = get_aa_menu_text_colors();
 
   for(auto i{0u}; i != m_menu.get_amino_acids().size(); ++i)
   {
