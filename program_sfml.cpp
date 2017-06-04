@@ -10,12 +10,8 @@
 #include "helper.h"
 
 program_sfml::program_sfml(const std::vector<std::string>& args)
-  : m_amino_acids{
-      is_profile_run(args)
-      ? create_profiling_amino_acids()
-      : create_first_amino_acids()
-    },
-    m_do_play_music{args.size() == 1},
+  : m_amino_acids{create_amino_acids(args)},
+    m_do_play_music{do_play_music(args)},
     m_do_profile_run{is_profile_run(args)},
     m_state{
       is_profile_run(args)
@@ -40,6 +36,15 @@ program_sfml::~program_sfml()
   m_window.close();
 }
 
+std::vector<amino_acid> create_amino_acids(
+  const std::vector<std::string>& args) noexcept
+{
+  return is_profile_run(args)
+    ? create_profiling_amino_acids()
+    : create_first_amino_acids()
+  ;
+}
+
 std::vector<amino_acid> create_first_amino_acids() noexcept
 {
   return
@@ -61,6 +66,16 @@ std::vector<amino_acid> create_profiling_amino_acids() noexcept
   };
 }
 
+bool do_play_music(const std::vector<std::string>& args) noexcept
+{
+  //Will always play music, unless the user disables this
+  return std::count(
+    std::begin(args),
+    std::end(args),
+    std::string("--no_music")
+  ) == 0;
+}
+
 bool is_profile_run(const std::vector<std::string>& args) noexcept
 {
   return std::count(
@@ -74,6 +89,7 @@ void program_sfml::run()
 {
   while(m_window.isOpen())
   {
+    //This should one day evolve to the State Design Pattern
     switch(m_state)
     {
       case program_state::choose_n_players: run_choose_n_player_menu(); break;
