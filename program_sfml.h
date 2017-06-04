@@ -27,11 +27,8 @@ private:
   ///The amino acid types chosen by the users;
   std::vector<amino_acid> m_amino_acids;
 
-  ///Play music in the menu dialogs?
-  const bool m_do_play_music;
-
-  ///Is this a profile run? If false, this is a normal program run
-  const bool m_do_profile_run;
+  ///The command line arguments, as obtained in the constructor
+  const std::vector<std::string> m_args;
 
   ///All the AminoAcidFighter sprites
   Sprites_sfml m_sprites;
