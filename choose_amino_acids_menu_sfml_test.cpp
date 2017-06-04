@@ -18,6 +18,7 @@ BOOST_AUTO_TEST_CASE(choose_amino_acids_menu_sfml_construction)
     amino_acids
   );
   BOOST_CHECK(m.get_amino_acids() == amino_acids);
+  BOOST_CHECK_EQUAL(m.do_play_music(), do_play_music);
   m.tick();
 }
 
