@@ -196,21 +196,6 @@ program_state run_choose_n_player_menu(
   return state;
 }
 
-program_state  run_choose_amino_acids_menu(
-  sf::RenderWindow &w,
-  bool do_play_music,
-  std::vector<amino_acid> &amino_acids,
-  Sprites_sfml& sprites)
-{
-  choose_amino_acids_menu_sfml m(w, do_play_music, amino_acids);
-  m.execute(sprites);
-  const program_state state = m.get_state();
-  if(state == program_state::quit) return state;
-  assert(state == program_state::battle);
-  amino_acids = m.get_amino_acids();
-  return state;
-}
-
 program_state run_winner_screen(
   sf::RenderWindow &w,
   bool do_play_music,

@@ -3,11 +3,10 @@
 #include <cassert>
 #include <SFML/System.hpp>
 
+#include "choose_amino_acids_menu_sfml.h"
 #include "game.h"
 #include "game_sfml.h"
 #include "helper.h"
-
-const int window_size = 600;
 
 program_sfml::program_sfml(int argc, char * argv[])
   : m_amino_acids{amino_acid::alanine, amino_acid::alanine},
@@ -15,13 +14,11 @@ program_sfml::program_sfml(int argc, char * argv[])
     m_do_profile_run{argc == 2 && std::string(argv[1]) == "--profile"},
     m_state{program_state::choose_n_players},
     m_window{
-      sf::VideoMode(window_size, window_size),
+      sf::VideoMode(600, 600), //Window is 600 x 600 pixels
       "AminoAcidFighter",
       sf::Style::Titlebar | sf::Style::Close
     }
 {
-  assert(m_window.getSize().x == m_window.getSize().y);
-
   //Create all resources needed: pictures, sounds, etcetera
   create_resources();
 
@@ -50,9 +47,11 @@ void program_sfml::run()
 
 void program_sfml::run_battle()
 {
+  assert(m_window.getSize().x == m_window.getSize().y);
+
   display(
     m_window,
-    window_size,
+    m_window.getSize().x,
     m_amino_acids,
     m_sprites
   );
@@ -60,12 +59,13 @@ void program_sfml::run_battle()
 
 void program_sfml::run_choose_amino_acids_menu()
 {
-  m_state = ::run_choose_amino_acids_menu(
-    m_window,
-    m_do_play_music,
-    m_amino_acids,
-    m_sprites
-  );
+  choose_amino_acids_menu_sfml m(m_window, m_do_play_music, m_amino_acids);
+  m.execute(m_sprites);
+
+  m_state = m.get_state();
+  if(m_state == program_state::quit) return;
+  assert(m_state == program_state::battle);
+  m_amino_acids = m.get_amino_acids();
 }
 
 void program_sfml::run_choose_n_player_menu()
@@ -101,9 +101,12 @@ void program_sfml::run_profile()
     amino_acid::tryptophan,
     amino_acid::valine
   };
-  const auto ps = create_players(aas, window_size);
+
+  assert(m_window.getSize().x == m_window.getSize().y);
+  const auto ps = create_players(aas, m_window.getSize().x);
+
   const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
-  display(m_window, window_size, ps, m_sprites, kill_frame);
+  display(m_window, m_window.getSize().x, ps, m_sprites, kill_frame);
 }
 
 void program_sfml::run_winner_screen()
