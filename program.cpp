@@ -1,6 +1,7 @@
 #include "program.h"
 
 #include <algorithm>
+#include <iostream>
 
 std::vector<amino_acid> create_amino_acids(
   const std::vector<std::string>& args) noexcept

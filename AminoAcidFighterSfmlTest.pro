@@ -1,6 +1,7 @@
 # Files
 SOURCES += main_test.cpp \
-    menu_sfml_test.cpp
+    menu_sfml_test.cpp \
+    bullet_sfml_test.cpp
 
 include(AminoAcidFighter.pri)
 include(AminoAcidFighterSfml.pri)
