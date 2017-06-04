@@ -13,6 +13,46 @@
 #include "sprites_sfml.h"
 #include "winner_screen_sfml.h"
 
+class game_sfml
+{
+public:
+  ///Starts the music
+  ///@param n_players the initial number of players suggested
+  game_sfml(
+    sf::RenderWindow& window,
+    const bool do_play_music
+  );
+
+  ///Stops the music
+  ~game_sfml();
+
+  ///Obtain the current or state after execute
+  program_state get_state() const noexcept { return m_state; }
+
+  ///Runs the battle, which is handling input and displayal.
+  ///Closes when the user wants to quit
+  ///or continue to winner screen when a player has won
+  ///This can be obtained with the do_quit member function
+  void execute();
+
+  ///Handle input and show this screen once, to be used in testing only
+  void tick();
+
+private:
+  ///Will music be played?
+  bool m_do_play_music;
+
+  ///Music played, starts at constructor, ends at destructor
+  sf::Music m_music;
+
+  ///In which state is the program while and directly after the battle?
+  program_state m_state;
+
+  ///Window used for displayal
+  sf::RenderWindow& m_window;
+};
+
+
 void bullet_hits_player(
   std::vector<bullet> &bullets,
   std::vector<player> &ps,
@@ -35,18 +75,6 @@ std::array<sf::Vector2f, 4> get_life_bar_positions();
 
 std::vector<sf::Vector2f> get_start_positions();
 
-
-/// @param kill_frame the frame at which the game will be terminated,
-///   which is useful in profiling.
-///   If 'kill_frame' is negative, the game will not be terminated
-/*
-void display(
-  sf::RenderWindow &w,
-  const std::vector<player> ps,
-  Sprites_sfml &sprites,
-  const int kill_frame = -1
-);
-*/
 void process_event_game(
   sf::Event event,
   sf::RenderWindow &w,

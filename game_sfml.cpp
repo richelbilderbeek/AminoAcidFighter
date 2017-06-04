@@ -6,6 +6,43 @@
 #include "choose_n_players_menu_sfml.h"
 #include "choose_amino_acids_menu_sfml.h"
 
+game_sfml::game_sfml(
+  sf::RenderWindow& window,
+  const bool do_play_music
+) : m_do_play_music{do_play_music},
+    m_window{window}
+{
+
+}
+
+game_sfml::~game_sfml()
+{
+  m_music.stop();
+}
+
+void game_sfml::execute()
+{
+  assert(m_state == program_state::battle);
+  while (1) {
+    tick();
+    //Quit
+    if (m_state == program_state::quit) return;
+    //Next screen
+    if (m_state == program_state::winner) return;
+    //Stay here
+    assert(m_state == program_state::battle);
+  }
+}
+
+void game_sfml::tick()
+{
+
+}
+
+
+
+
+
 void bullet_hits_player(
   std::vector<bullet> &bullets,
   std::vector<player> &ps,
@@ -81,16 +118,6 @@ void draw_game_components(
     w.draw(to_sprite(bullet));
   }
 }
-
-/*
-void display(
-  sf::RenderWindow& w,
-  std::vector<player> ps,
-  Sprites_sfml& sprites,
-  const int kill_frame)
-{
-}
-*/
 
 void process_event_game(sf::Event event,
   sf::RenderWindow &w,

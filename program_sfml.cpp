@@ -90,6 +90,17 @@ void program_sfml::run_battle()
   assert(m_window.getSize().x == m_window.getSize().y);
   const int window_size = m_window.getSize().x;
   auto players = create_players(m_amino_acids, window_size);
+  game_sfml m(m_window, m_do_play_music);
+  m.execute();
+
+  m_state = m.get_state();
+  if(m_state == program_state::quit) return;
+  assert(m_state == program_state::winner);
+
+  /*
+  assert(m_window.getSize().x == m_window.getSize().y);
+  const int window_size = m_window.getSize().x;
+  auto players = create_players(m_amino_acids, window_size);
   // 6 fps (current speed on Travis) for 5 minutes
   const int kill_frame{m_do_profile_run ? 6 * 300 : -1};
   static int frame = 0;
@@ -141,6 +152,7 @@ void program_sfml::run_battle()
     draw_players(players, m_window, m_sprites);
     m_window.display();
   }
+  */
 }
 
 void program_sfml::run_choose_amino_acids_menu()
