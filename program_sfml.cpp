@@ -122,8 +122,7 @@ void program_sfml::run_battle()
   assert(m_window.getSize().x == m_window.getSize().y);
   const int window_size = m_window.getSize().x;
   auto players = create_players(m_amino_acids, window_size);
-<<<<<<< HEAD
-  game_sfml m(m_window, m_do_play_music);
+  game_sfml m(m_window, do_play_music(m_args));
   m.execute();
 
   m_state = m.get_state();
@@ -135,10 +134,7 @@ void program_sfml::run_battle()
   const int window_size = m_window.getSize().x;
   auto players = create_players(m_amino_acids, window_size);
   // 6 fps (current speed on Travis) for 5 minutes
-  const int kill_frame{m_do_profile_run ? 6 * 300 : -1};
-=======
   const int kill_frame{is_profile_run(m_args) ? 300 : -1};
->>>>>>> dde1d9b2ad2a2253cbff9755d7669c11331eb268
   static int frame = 0;
   const std::vector<sf::Vector2f> start_positions = get_start_positions();
   const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
