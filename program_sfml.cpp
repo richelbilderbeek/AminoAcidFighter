@@ -11,7 +11,7 @@ const int window_size = 600;
 
 program_sfml::program_sfml(int argc, char * argv[])
   : m_do_play_music{argc == 1},
-    m_do_profile_run{false},
+    m_do_profile_run{argc == 2 && std::string(argv[1]) == "--profile"},
     m_window{
       sf::VideoMode(window_size, window_size),
       "AminoAcidFighter",
@@ -20,16 +20,10 @@ program_sfml::program_sfml(int argc, char * argv[])
 {
   assert(m_window.getSize().x == m_window.getSize().y);
 
-  //constructor
+  //Create all resources needed: pictures, sounds, etcetera
   create_resources();
 
   m_window.setFramerateLimit(60);
-
-
-  if (argc == 2 && std::string(argv[1]) == "--profile")
-  {
-    m_do_profile_run = true;
-  }
 }
 
 program_sfml::~program_sfml()

@@ -21,10 +21,10 @@ public:
 private:
 
   ///Play music in the menu dialogs?
-  bool m_do_play_music;
+  const bool m_do_play_music;
 
   ///Is this a profile run? If false, this is a normal program run
-  bool m_do_profile_run;
+  const bool m_do_profile_run;
 
   ///All the AminoAcidFighter sprites
   Sprites_sfml m_sprites;
