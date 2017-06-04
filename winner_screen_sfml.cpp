@@ -73,7 +73,7 @@ void winner_screen_sfml::execute(sf::Text winner_text)
 
 void winner_screen_sfml::process_event(const sf::Event& event)
 {
-  switch(event.type)
+  switch(event.type) //!OCLINT will not switch on all cases: there are too many of those
   {
     case sf::Event::Closed:
       m_state = program_state::quit;
