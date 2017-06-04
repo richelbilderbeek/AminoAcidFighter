@@ -10,6 +10,7 @@ game_sfml::game_sfml(
   sf::RenderWindow& window,
   const bool do_play_music
 ) : m_do_play_music{do_play_music},
+    m_state{program_state::battle},
     m_window{window}
 {
 

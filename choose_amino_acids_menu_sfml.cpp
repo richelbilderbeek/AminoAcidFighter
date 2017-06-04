@@ -123,6 +123,7 @@ void choose_amino_acids_menu_sfml::process_event(const sf::Event& event)
       //battle
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       {
+        //Continue to battle
         m_state = program_state::battle;
       }
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))

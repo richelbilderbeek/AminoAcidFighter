@@ -193,8 +193,6 @@ void program_sfml::run_battle()
 
 void program_sfml::run_choose_amino_acids_menu()
 {
-
-
   choose_amino_acids_menu_sfml m(m_window, do_play_music(m_args), m_amino_acids);
   m.execute(m_sprites);
 
