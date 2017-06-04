@@ -52,10 +52,18 @@ private:
   void run_normal();
 
   ///The profiling program loop, stops after some time without user interaction
-  void run_profile();
+  //void run_profile();
 
   ///Show the winner of the last battle
   void run_winner_screen();
 };
+
+///Create the first default amino acids for the 'select amino acids' menu,
+///and also to let the 'choose number of amino acids' have a valid number
+std::vector<amino_acid> create_first_amino_acids() noexcept;
+
+///Create the amino acids used in profiling
+std::vector<amino_acid> create_profiling_amino_acids() noexcept;
+
 
 #endif // PROGRAM_SFML_H

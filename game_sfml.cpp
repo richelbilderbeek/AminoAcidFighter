@@ -82,63 +82,15 @@ void draw_game_components(
   }
 }
 
+/*
 void display(
   sf::RenderWindow& w,
   std::vector<player> ps,
   Sprites_sfml& sprites,
   const int kill_frame)
 {
-  assert(w.getSize().x == w.getSize().y);
-  const int window_size = w.getSize().x;
-  static int frame = 0;
-  const std::vector<sf::Vector2f> start_positions = get_start_positions();
-  const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();
-  std::vector<sf::RectangleShape> life_bars = set_life_bars(ps.size(), life_bar_positions);
-  std::vector<sf::CircleShape> hit_ranges = set_hit_ranges(ps, start_positions);
-  std::vector<bullet> bullets;
-
-  if(sf::Joystick::isConnected(0)) {
-      std::cout << "controller connected" << '\n';
-  }
-
-  while(w.isOpen()) {
-    //Kill in profiling
-    ++frame;
-    if (kill_frame && kill_frame == frame) return;
-
-    sf::Event event;
-    while(w.pollEvent(event)) {
-      process_event_game(
-        event,
-        w,
-        ps,
-        bullets,
-        window_size);
-    }
-
-    //Move players, hit range and bullets
-    for(auto i = 0u; i != ps.size(); ++i) { ps[i].move(window_size); }
-    for(auto& bullet : bullets) {
-      bullet.slow_down();
-      bullet.move(window_size);
-    }
-    for(auto i = 0u; i != ps.size(); ++i)
-    {
-      hit_ranges[i].setPosition(ps[i].get_x() + ps[i].get_speed_x(),
-                                ps[i].get_y() + ps[i].get_speed_y());
-    }
-    //Check if bullet hits player
-    bullet_hits_player(bullets, ps, life_bars);
-
-    //Remove all bullets that have no speed
-    remove_slow_bullets(bullets);
-
-    w.clear(sf::Color(128,128,128));
-    draw_game_components(w, life_bars, hit_ranges, bullets);
-    draw_players(ps, w, sprites);
-    w.display();
-  }
 }
+*/
 
 void process_event_game(sf::Event event,
   sf::RenderWindow &w,
