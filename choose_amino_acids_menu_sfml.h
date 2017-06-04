@@ -6,6 +6,7 @@
 #include "choose_amino_acids_menu.h"
 #include "player.h"
 #include "player_sfml.h"
+#include "program.h"
 #include "program_state.h"
 
 /// SFML visualization of the choose_amino_acids_menu
@@ -15,8 +16,10 @@ public:
   ///Starts the music
   choose_amino_acids_menu_sfml(
     sf::RenderWindow& window,
+    Sprites_sfml& sprites,
     const bool do_play_music = true,
-    const std::vector<amino_acid> initial_amino_acids = { amino_acid::alanine }
+    const std::vector<amino_acid> initial_amino_acids
+      = create_first_amino_acids()
   );
 
   ///Stops the music
@@ -26,7 +29,7 @@ public:
   ///Closes when the user wants to quit
   ///or continue to the game
   ///This can be obtained with the do_quit member function
-  void execute(Sprites_sfml &sprites);
+  void execute();
 
   ///Get the current amino acids
   std::vector<amino_acid> get_amino_acids() const noexcept { return m_menu.get_amino_acids(); }
@@ -35,7 +38,7 @@ public:
   program_state get_state() const noexcept { return m_state; }
 
   ///Handle input and show this screen once, to be used in testing only
-  void tick(Sprites_sfml &sprites);
+  void tick();
 
 private:
   ///The amino acid texts
@@ -59,6 +62,10 @@ private:
   ///The player texts
   std::vector<sf::Text> m_player_texts;
 
+  ///The AminoAcidFighter sprites
+  ///They are non-const, as they are modified before drawing
+  Sprites_sfml& m_sprites;
+
   ///In which state is the program while and directly after this menu?
   program_state m_state;
 
@@ -66,7 +73,7 @@ private:
   sf::RenderWindow& m_window;
 
   ///Show this menu on the screen
-  void display(Sprites_sfml &sprites);
+  void display();
 
   ///Process a single event
   void process_event(const sf::Event& event);

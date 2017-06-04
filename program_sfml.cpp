@@ -13,6 +13,7 @@
 program_sfml::program_sfml(const std::vector<std::string>& args)
   : m_amino_acids{create_amino_acids(args)},
     m_args{args},
+    m_sprites{},
     m_state{create_state(args)},
     m_window{
       sf::VideoMode(600, 600), //Window is 600 x 600 pixels
@@ -24,9 +25,6 @@ program_sfml::program_sfml(const std::vector<std::string>& args)
   {
     show_help();
   }
-
-  //Create all resources needed: pictures, sounds, etcetera
-  create_resources();
 
   m_window.setFramerateLimit(60);
 }
@@ -135,8 +133,13 @@ void program_sfml::run_battle()
 
 void program_sfml::run_choose_amino_acids_menu()
 {
-  choose_amino_acids_menu_sfml m(m_window, do_play_music(m_args), m_amino_acids);
-  m.execute(m_sprites);
+  choose_amino_acids_menu_sfml m(
+    m_window,
+    m_sprites,
+    do_play_music(m_args),
+    m_amino_acids
+  );
+  m.execute();
 
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
