@@ -35,13 +35,9 @@ std::array<sf::Vector2f, 4> get_life_bar_positions();
 
 std::vector<sf::Vector2f> get_start_positions();
 
-void display(
-  sf::RenderWindow &w,
-  const std::vector<amino_acid> aas,
-  Sprites_sfml &sprites);
-
-/// @param kill_frame the frame at which the game will be terminated
-///   if 'kill_frame' is negative, the game will not be terminated
+/// @param kill_frame the frame at which the game will be terminated,
+///   which is useful in profiling.
+///   If 'kill_frame' is negative, the game will not be terminated
 void display(
   sf::RenderWindow &w,
   const std::vector<player> ps,

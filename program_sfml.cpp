@@ -48,11 +48,10 @@ void program_sfml::run()
 
 void program_sfml::run_battle()
 {
-  display(
-    m_window,
-    m_amino_acids,
-    m_sprites
-  );
+  assert(m_window.getSize().x == m_window.getSize().y);
+  const int window_size = m_window.getSize().x;
+  const auto players = create_players(m_amino_acids, window_size);
+  display(m_window, players, m_sprites);
 }
 
 void program_sfml::run_choose_amino_acids_menu()

@@ -83,18 +83,6 @@ void draw_game_components(
 }
 
 void display(
-  sf::RenderWindow &w,
-  std::vector<amino_acid> aas,
-  Sprites_sfml& sprites
-)
-{
-  assert(w.getSize().x == w.getSize().y);
-  const int window_size = w.getSize().x;
-  const auto players = create_players(aas, window_size);
-  display(w, players, sprites);
-}
-
-void display(
   sf::RenderWindow& w,
   std::vector<player> ps,
   Sprites_sfml& sprites,
