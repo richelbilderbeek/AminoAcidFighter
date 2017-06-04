@@ -10,8 +10,10 @@
 const int window_size = 600;
 
 program_sfml::program_sfml(int argc, char * argv[])
-  : m_do_play_music{argc == 1},
+  : m_amino_acids{amino_acid::alanine, amino_acid::alanine},
+    m_do_play_music{argc == 1},
     m_do_profile_run{argc == 2 && std::string(argv[1]) == "--profile"},
+    m_state{program_state::choose_n_players},
     m_window{
       sf::VideoMode(window_size, window_size),
       "AminoAcidFighter",
@@ -46,48 +48,46 @@ void program_sfml::run()
   }
 }
 
+void program_sfml::run_battle()
+{
+  display(
+    m_window,
+    window_size,
+    m_amino_acids,
+    m_sprites
+  );
+}
+
+void program_sfml::run_choose_amino_acids_menu()
+{
+  m_state = ::run_choose_amino_acids_menu(
+    m_window,
+    m_do_play_music,
+    m_amino_acids,
+    m_sprites
+  );
+}
+
+void program_sfml::run_choose_n_player_menu()
+{
+  m_state = ::run_choose_n_player_menu(
+    m_window,
+    m_do_play_music,
+    m_amino_acids
+  );
+}
+
 void program_sfml::run_normal()
 {
-  program_state state{program_state::choose_n_players};
-  std::vector<amino_acid> amino_acids{amino_acid::alanine, amino_acid::alanine};
-
   while(m_window.isOpen())
   {
-    switch(state)
+    switch(m_state)
     {
-      case program_state::choose_n_players:
-      {
-        state = run_choose_n_player_menu(
-          m_window,
-          m_do_play_music,
-          amino_acids
-        );
-      }
-      break;
-      case program_state::select_players:
-      {
-        state = run_choose_amino_acids_menu(
-          m_window,
-          m_do_play_music,
-          amino_acids,
-          m_sprites
-        );
-      }
-      break;
-      case program_state::battle:
-        display(
-          m_window,
-          window_size,
-          amino_acids,
-          m_sprites
-        );
-      break;
-      case program_state::winner:
-
-        assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
-      break;
-      case program_state::quit:
-        return;
+      case program_state::choose_n_players: run_choose_n_player_menu(); break;
+      case program_state::select_players: run_choose_amino_acids_menu(); break;
+      case program_state::battle: run_battle(); break;
+      case program_state::winner: run_winner_screen(); break;
+      case program_state::quit: return;
     }
   }
 }
@@ -104,4 +104,9 @@ void program_sfml::run_profile()
   const auto ps = create_players(aas, window_size);
   const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
   display(m_window, window_size, ps, m_sprites, kill_frame);
+}
+
+void program_sfml::run_winner_screen()
+{
+
 }
