@@ -68,6 +68,9 @@ private:
   ///Window used for displayal
   sf::RenderWindow& m_window;
 
+  ///Check if one of the players is hit by a bullet
+  void bullet_hits_player();
+
   ///Show this menu on the screen
   void display(Sprites_sfml &sprites);
 
@@ -77,12 +80,6 @@ private:
     std::vector<bullet> &bullets);
 };
 
-
-void bullet_hits_player(
-  std::vector<bullet> &bullets,
-  std::vector<player> &ps,
-  std::vector<sf::RectangleShape> &life_bars
-);
 
 std::vector<player> create_game_players(
   std::vector<amino_acid> aas,
@@ -104,7 +101,6 @@ void process_event_game(
   sf::Event event,
   std::vector<bullet> &bullets
 );
-
 
 std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<player> ps,
