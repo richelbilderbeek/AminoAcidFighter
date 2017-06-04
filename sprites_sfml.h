@@ -18,7 +18,6 @@ public:
 
 
   private:
-  //sf::Sprite m_alanine;
   std::map<amino_acid, sf::Sprite> m_aas;
   std::vector<sf::Texture*> m_textures;
   sf::Sprite m_bullet;

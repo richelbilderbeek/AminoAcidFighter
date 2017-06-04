@@ -1,5 +1,6 @@
 # Files
-SOURCES += $$PWD/main_test.cpp
+SOURCES += $$PWD/main_sfml_test.cpp
+
 include(AminoAcidFighter.pri)
 include(AminoAcidFighterSfml.pri)
 include(AminoAcidFighterSfmlTest.pri)

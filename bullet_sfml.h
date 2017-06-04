@@ -9,7 +9,8 @@
 
 #include "bullet.h"
 
-//May be slow
+//May be slow, use Sprite_sfml::get_bullet instead
+//[[deprecated]]
 sf::Sprite& to_sprite(const bullet& b);
 
 #endif // BULLET_SFML_H

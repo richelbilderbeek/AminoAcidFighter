@@ -29,6 +29,33 @@ std::string to_str( const amino_acid a) noexcept //!OCLINT cannot make this any 
   return "";
 }
 
+std::vector<amino_acid> get_all_amino_acids() noexcept
+{
+  return
+  {
+    amino_acid::alanine,
+    amino_acid::arginine,
+    amino_acid::asparagine,
+    amino_acid::aspartic_acid,
+    amino_acid::cysteine,
+    amino_acid::glutamic_acid,
+    amino_acid::glutamine,
+    amino_acid::glycine,
+    amino_acid::histidine,
+    amino_acid::isoleucine,
+    amino_acid::leucine,
+    amino_acid::lysine,
+    amino_acid::methionine,
+    amino_acid::phenylalanine,
+    amino_acid::proline,
+    amino_acid::serine,
+    amino_acid::threonine,
+    amino_acid::tryptophan,
+    amino_acid::tyrosine,
+    amino_acid::valine
+  };
+}
+
 /// Get the previous amino acid in the alphabet
 amino_acid get_prev(const amino_acid in)
 {

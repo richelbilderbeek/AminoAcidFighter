@@ -12,7 +12,8 @@ game_sfml::game_sfml(sf::RenderWindow& window,
   const bool is_profile_run,
   Sprites_sfml& sprites
 ) : m_do_play_music{do_play_music},
-    m_hit_ranges{set_hit_ranges(create_players(amino_acids, window.getSize().x),get_start_positions())},
+    m_hit_ranges{set_hit_ranges(
+      create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_is_profile_run{is_profile_run},
     m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
     m_players{create_players(amino_acids, window.getSize().x)},

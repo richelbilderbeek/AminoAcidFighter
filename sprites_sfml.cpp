@@ -9,7 +9,7 @@ Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)
   //Create all resources needed: pictures, sounds, etcetera
   create_resources();
 
-  //Load the resources
+  //Load the amino acids
   //Alanine
   {
     sf::Sprite sprite;
@@ -347,6 +347,21 @@ Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)
     sprite.setScale(sf::Vector2f(scale, scale));
     sprite.setOrigin(sf::Vector2f(x * x_ratio_origin, y * y_ratio_origin));
     m_aas.insert(std::make_pair(amino_acid::valine, sprite));
+    m_textures.push_back(texture);
+  }
+
+  //Load the bullet
+  {
+    sf::Texture * const texture = new sf::Texture;
+    texture->loadFromFile("Bullet.png");
+    m_bullet.setTexture(*texture);
+    double scale = 0.12*(70.0/96.0);
+    m_bullet.setScale(sf::Vector2f(scale, scale));
+    /// bullet is scaled to the size of arginine
+    auto x = texture->getSize().x;
+    auto y = texture->getSize().y;
+    double ratio = 0.5;
+    m_bullet.setOrigin(sf::Vector2f(x * ratio, y * ratio));
     m_textures.push_back(texture);
   }
 }

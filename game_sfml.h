@@ -23,7 +23,7 @@ public:
     const bool do_play_music,
     std::vector<amino_acid> amino_acids,
     const bool is_profile_run,
-    Sprites_sfml &sprites
+    Sprites_sfml& sprites
   );
 
   ///Stops the music

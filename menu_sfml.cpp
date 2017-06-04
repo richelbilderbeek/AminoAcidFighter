@@ -45,7 +45,7 @@ void start_music(sf::Music& game_jam)
 {
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
   {
-    std::cout << "Could not find tune\n";
+    std::cerr << "Could not find tune\n";
   }
   game_jam.setPlayingOffset(sf::seconds(2));
   game_jam.setVolume(50);
@@ -171,7 +171,7 @@ void play_music(sf::Music& game_jam)
 {
   if (!game_jam.openFromFile("amino_acid_fighter_tune.wav"))
   {
-    std::cout << "Could not find tune\n";
+    std::cerr << "Could not find tune\n";
   }
   game_jam.setPlayingOffset(sf::seconds(2));
   game_jam.setVolume(50);
