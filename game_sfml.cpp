@@ -84,22 +84,24 @@ void draw_game_components(
 
 void display(
   sf::RenderWindow &w,
-  const int window_size,
   std::vector<amino_acid> aas,
   Sprites_sfml& sprites
 )
 {
+  assert(w.getSize().x == w.getSize().y);
+  const int window_size = w.getSize().x;
   const auto players = create_players(aas, window_size);
-  display(w, window_size, players, sprites);
+  display(w, players, sprites);
 }
 
 void display(
-  sf::RenderWindow &w,
-  const int window_size,
+  sf::RenderWindow& w,
   std::vector<player> ps,
   Sprites_sfml& sprites,
   const int kill_frame)
 {
+  assert(w.getSize().x == w.getSize().y);
+  const int window_size = w.getSize().x;
   static int frame = 0;
   const std::vector<sf::Vector2f> start_positions = get_start_positions();
   const std::array<sf::Vector2f, 4> life_bar_positions = get_life_bar_positions();

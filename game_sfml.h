@@ -37,7 +37,6 @@ std::vector<sf::Vector2f> get_start_positions();
 
 void display(
   sf::RenderWindow &w,
-  const int window_size,
   const std::vector<amino_acid> aas,
   Sprites_sfml &sprites);
 
@@ -45,7 +44,6 @@ void display(
 ///   if 'kill_frame' is negative, the game will not be terminated
 void display(
   sf::RenderWindow &w,
-  const int window_size,
   const std::vector<player> ps,
   Sprites_sfml &sprites,
   const int kill_frame = -1

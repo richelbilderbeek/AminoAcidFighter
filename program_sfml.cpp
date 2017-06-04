@@ -47,11 +47,8 @@ void program_sfml::run()
 
 void program_sfml::run_battle()
 {
-  assert(m_window.getSize().x == m_window.getSize().y);
-
   display(
     m_window,
-    m_window.getSize().x,
     m_amino_acids,
     m_sprites
   );
@@ -106,7 +103,7 @@ void program_sfml::run_profile()
   const auto ps = create_players(aas, m_window.getSize().x);
 
   const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
-  display(m_window, m_window.getSize().x, ps, m_sprites, kill_frame);
+  display(m_window, ps, m_sprites, kill_frame);
 }
 
 void program_sfml::run_winner_screen()
