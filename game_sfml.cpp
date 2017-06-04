@@ -26,17 +26,20 @@ game_sfml::~game_sfml()
   m_music.stop();
 }
 
-void game_sfml::execute(Sprites_sfml &sprites)
+void game_sfml::bullet_hits_player()
 {
-  assert(m_state == program_state::battle);
-  while (1) {
-    tick(sprites);
-    //Quit
-    if (m_state == program_state::quit) return;
-    //Next screen
-    if (m_state == program_state::winner) return;
-    //Stay here
-    assert(m_state == program_state::battle);
+  for(auto i = 0u; i < m_players.size(); ++i) {
+    for(auto j = 0u; j < m_bullets.size(); ++j) {
+      float distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
+      if(distance <= get_hit_range_size()) {
+        m_players[i].lose_hp();
+        m_bullets[j].slow_down();
+      }
+    }
+  }
+  //Show the players' HPs in the bars
+  for(auto i = 0u; i < m_players.size(); ++i) {
+    m_life_bars[i].setSize(sf::Vector2f(m_players[i].get_hp(), m_life_bars[i].getSize().y));
   }
 }
 
@@ -58,6 +61,20 @@ void game_sfml::display(Sprites_sfml &sprites)
   draw_game_components(m_window, m_life_bars, m_hit_ranges, m_bullets);
   draw_players(m_players, m_window, sprites);
   m_window.display();
+}
+
+void game_sfml::execute(Sprites_sfml &sprites)
+{
+  assert(m_state == program_state::battle);
+  while (1) {
+    tick(sprites);
+    //Quit
+    if (m_state == program_state::quit) return;
+    //Next screen
+    if (m_state == program_state::winner) return;
+    //Stay here
+    assert(m_state == program_state::battle);
+  }
 }
 
 void game_sfml::process_event(
@@ -100,8 +117,9 @@ void game_sfml::tick(Sprites_sfml &sprites)
         event,
         m_bullets
       );
-      display(sprites);
     }
+
+    display(sprites);
 
     //Move players, hit range and bullets
     assert(m_window.getSize().x == m_window.getSize().y);
@@ -116,7 +134,7 @@ void game_sfml::tick(Sprites_sfml &sprites)
                                 m_players[i].get_y() + m_players[i].get_speed_y());
     }
     //Check if bullet hits player
-    bullet_hits_player(m_bullets, m_players, m_life_bars);
+    bullet_hits_player();
 
     //Remove all bullets that have no speed
     remove_slow_bullets(m_bullets);
@@ -126,26 +144,6 @@ void game_sfml::tick(Sprites_sfml &sprites)
 
 
 
-
-void bullet_hits_player(
-  std::vector<bullet> &bullets,
-  std::vector<player> &ps,
-  std::vector<sf::RectangleShape> &life_bars)
-{
-  for(auto i = 0u; i < ps.size(); ++i) {
-    for(auto j = 0u; j < bullets.size(); ++j) {
-      float distance = calculate_distance_bullet_player(bullets[j], ps[i]);
-      if(distance <= get_hit_range_size()) {
-        ps[i].lose_hp();
-        bullets[j].slow_down();
-      }
-    }
-  }
-  //Show the players' HPs in the bars
-  for(auto i = 0u; i < ps.size(); ++i) {
-    life_bars[i].setSize(sf::Vector2f(ps[i].get_hp(), life_bars[i].getSize().y));
-  }
-}
 
 std::vector<player> create_game_players(
   std::vector<amino_acid> aas,
