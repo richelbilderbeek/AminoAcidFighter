@@ -50,16 +50,36 @@ void game_sfml::bullet_hits_player()
   }
 }
 
-void game_sfml::check_for_winner()
+std::vector<double> collect_hit_points(const game_sfml& g)
 {
-  for(auto i = 0u; i < m_players.size(); ++i)
+  std::vector<double> hps;
+  for (const auto& p: g.get_players())
   {
-    if()
-    {
-
-    }
-    m_life_bars[i].setSize(sf::Vector2f(m_players[i].get_hp(), m_life_bars[i].getSize().y));
+    hps.push_back(p.get_hp());
   }
+  return hps;
+}
+
+int get_winner(const game_sfml& g)
+{
+  //Count the number of players that live
+  const std::vector<double> hps = collect_hit_points(g);
+  const int n_alive = std::count_if(
+    std::begin(hps), std::end(hps),
+    [](const double hp) { return hp > 0.0; }
+  );
+
+  //At least two players live
+  if (n_alive > 1) return 0;
+
+  //We have a winner or everyone died
+  const int n_players = hps.size();
+  for (int i=0; i!=n_players; ++i)
+  {
+    if (hps[i] > 0.0) { return i + 1; }
+  }
+  //Everyone, or the last two players, died at the same time
+  return -1;
 }
 
 void game_sfml::display()

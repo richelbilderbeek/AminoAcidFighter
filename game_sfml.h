@@ -29,8 +29,7 @@ public:
   ///Stops the music
   ~game_sfml();
 
-  ///Check if the game has a winner
-  void game_sfml::check_for_winner();
+  const std::vector<player>& get_players() const noexcept { return m_players; }
 
   ///Obtain the current or state after execute
   program_state get_state() const noexcept { return m_state; }
@@ -85,6 +84,7 @@ private:
   void process_event(sf::Event event);
 };
 
+std::vector<double> collect_hit_points(const game_sfml& g);
 
 std::vector<player> create_game_players(
   std::vector<amino_acid> amino_acids,
@@ -101,6 +101,15 @@ void draw_game_components(
 std::vector<sf::Vector2f> get_life_bar_positions();
 
 std::vector<sf::Vector2f> get_start_positions();
+
+///Get the winner. Returns
+/// * -1: everyone died
+/// *  0: at least two players are alive
+/// *  1: player 1 has won
+/// *  2: player 2 has won
+/// *  3: player 3 has won
+/// *  4: player 4 has won
+int get_winner(const game_sfml& g);
 
 void process_event_game(
   sf::Event event,
