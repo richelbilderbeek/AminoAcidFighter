@@ -13,7 +13,8 @@ public:
   ///Starts either a normal or profile run.
   /// @param args the command-line arguments as passed from the main function.
   ///   as usual, args[0] contains the full path to the executable. If at least
-  ///   one arguments equals '--profile', a profile run is started
+  ///   one arguments equals '--profile', a profile run is started. '--help'
+  ///   shows all options
   program_sfml(const std::vector<std::string>& args);
 
   ~program_sfml();
@@ -27,11 +28,8 @@ private:
   ///The amino acid types chosen by the users;
   std::vector<amino_acid> m_amino_acids;
 
-  ///Play music in the menu dialogs?
-  const bool m_do_play_music;
-
-  ///Is this a profile run? If false, this is a normal program run
-  const bool m_do_profile_run;
+  ///The command line arguments, as obtained in the constructor
+  const std::vector<std::string> m_args;
 
   ///All the AminoAcidFighter sprites
   Sprites_sfml m_sprites;
@@ -55,6 +53,11 @@ private:
   void run_winner_screen();
 };
 
+///Create amino acids depending on the command-line arguments.
+///This differs between a normal and profile run
+std::vector<amino_acid> create_amino_acids(
+  const std::vector<std::string>& args) noexcept;
+
 ///Create the first default amino acids for the 'select amino acids' menu,
 ///and also to let the 'choose number of amino acids' have a valid number
 std::vector<amino_acid> create_first_amino_acids() noexcept;
@@ -62,8 +65,24 @@ std::vector<amino_acid> create_first_amino_acids() noexcept;
 ///Create the amino acids used in profiling
 std::vector<amino_acid> create_profiling_amino_acids() noexcept;
 
+///Derive the first program_state from the command-line arguments. This
+///differs between (1) a normal run, (2) a profile run, (3) a request for
+///the help pages
+program_state create_state(const std::vector<std::string>& args) noexcept;
+
+///Is there a command-line argument (as passed from the 'main' function),
+///that indicates that the user wants no music?
+bool do_play_music(const std::vector<std::string>& args) noexcept;
+
+///Is there a command-line argument (as passed from the 'main' function),
+///that indicates that the user wants to show the help pages?
+bool is_help(const std::vector<std::string>& args) noexcept;
+
 ///Is there a command-line argument (as passed from the 'main' function),
 ///that indicates that the user wants a profile run?
 bool is_profile_run(const std::vector<std::string>& args) noexcept;
+
+///The show the help screen in a terminal
+void show_help();
 
 #endif // PROGRAM_SFML_H

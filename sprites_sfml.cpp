@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-Sprites_sfml::Sprites_sfml()
+Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)
 {
   // Create all sprites
   //Alanine
