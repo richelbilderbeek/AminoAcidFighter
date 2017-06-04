@@ -2,9 +2,14 @@
 
 #include <cassert>
 
+#include "helper.h"
+
 Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)
 {
-  // Create all sprites
+  //Create all resources needed: pictures, sounds, etcetera
+  create_resources();
+
+  //Load the resources
   //Alanine
   {
     sf::Sprite sprite;

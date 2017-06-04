@@ -49,7 +49,7 @@ script:
   # Build and run profile run
   - qmake AminoAcidFighter.pro
   - make release
-  - time ./AminoAcidFighter --profile
+  - time ./AminoAcidFighter --profile --no_music
   - gprof AminoAcidFighter > gprof.log
   - head gprof.log -n 1000
   # cppcheck
