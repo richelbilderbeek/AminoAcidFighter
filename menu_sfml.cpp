@@ -140,7 +140,7 @@ std::vector<sf::Vector2f> get_aa_menu_text_positions()
   {
     sf::Vector2f(10,  50),
     sf::Vector2f(350, 50),
-    sf::Vector2f(10 ,500),
+    sf::Vector2f(10, 500),
     sf::Vector2f(350,500)
   };
 }
@@ -160,9 +160,9 @@ std::vector<sf::Vector2f> get_aa_menu_text_player_positions()
 {
   return
   {
-    sf::Vector2f(10 ,   5),
-    sf::Vector2f(350,   5),
-    sf::Vector2f(10 , 545),
+    sf::Vector2f(10, 5),
+    sf::Vector2f(350, 5),
+    sf::Vector2f(10, 545),
     sf::Vector2f(350, 545)
   };
 }

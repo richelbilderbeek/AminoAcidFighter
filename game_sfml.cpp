@@ -20,7 +20,6 @@ game_sfml::game_sfml(sf::RenderWindow& window,
     m_state{program_state::battle},
     m_window{window}
 {
-
 }
 
 game_sfml::~game_sfml()
@@ -81,14 +80,12 @@ void game_sfml::execute()
   }
 }
 
-void game_sfml::process_event(
-  sf::Event event,
-  std::vector<bullet> &bullets
-)
+void game_sfml::process_event(sf::Event event)
 {
   switch(event.type)
   {
     case sf::Event::Closed:
+      m_state = program_state::quit;
       m_window.close();
       break;
     case sf::Event::KeyPressed:
@@ -97,14 +94,14 @@ void game_sfml::process_event(
       respond_to_key(
         m_players[0],
         m_players[1],
-        bullets);
+        m_bullets);
       break;
     case sf::Event::JoystickButtonPressed:
       // joystick support for player3 and player4
       respond_to_joystick(
         m_players[2],
         m_players[3],
-        bullets);
+        m_bullets);
       break;
     default:
       break;
@@ -115,13 +112,10 @@ void game_sfml::tick()
 {
   assert(m_window.isOpen());
   sf::Event event;
-  while(m_window.pollEvent(event)) {
-    process_event(
-      event,
-      m_bullets
-    );
+  while(m_window.pollEvent(event))
+  {
+    process_event(event);
   }
-
   display(m_sprites);
 
   //Move players, hit range and bullets
@@ -142,6 +136,7 @@ void game_sfml::tick()
   //Remove all bullets that have no speed
   remove_slow_bullets(m_bullets);
 }
+
 
 
 
