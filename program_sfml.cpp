@@ -9,16 +9,16 @@
 #include "game_sfml.h"
 #include "helper.h"
 
-program_sfml::program_sfml(int argc, char * argv[])
+program_sfml::program_sfml(const std::vector<std::string>& args)
   : m_amino_acids{
-      argc == 2 && std::string(argv[1]) == "--profile"
+      is_profile_run(args)
       ? create_profiling_amino_acids()
       : create_first_amino_acids()
     },
-    m_do_play_music{argc == 1},
-    m_do_profile_run{argc == 2 && std::string(argv[1]) == "--profile"},
+    m_do_play_music{args.size() == 1},
+    m_do_profile_run{is_profile_run(args)},
     m_state{
-      argc == 2 && std::string(argv[1]) == "--profile"
+      is_profile_run(args)
       ? program_state::battle
       : program_state::choose_n_players
     },
@@ -61,10 +61,28 @@ std::vector<amino_acid> create_profiling_amino_acids() noexcept
   };
 }
 
+bool is_profile_run(const std::vector<std::string>& args) noexcept
+{
+  return std::count(
+    std::begin(args),
+    std::end(args),
+    std::string("--profile")
+  );
+}
+
 void program_sfml::run()
 {
-  assert(m_window.getSize().x == m_window.getSize().y);
-  run_normal();
+  while(m_window.isOpen())
+  {
+    switch(m_state)
+    {
+      case program_state::choose_n_players: run_choose_n_player_menu(); break;
+      case program_state::select_players: run_choose_amino_acids_menu(); break;
+      case program_state::battle: run_battle(); break;
+      case program_state::winner: run_winner_screen(); break;
+      case program_state::quit: return;
+    }
+  }
 }
 
 void program_sfml::run_battle()
@@ -146,39 +164,6 @@ void program_sfml::run_choose_n_player_menu()
   assert(m_state == program_state::select_players);
   m_amino_acids.resize(m.get_n_players());
 }
-
-void program_sfml::run_normal()
-{
-  while(m_window.isOpen())
-  {
-    switch(m_state)
-    {
-      case program_state::choose_n_players: run_choose_n_player_menu(); break;
-      case program_state::select_players: run_choose_amino_acids_menu(); break;
-      case program_state::battle: run_battle(); break;
-      case program_state::winner: run_winner_screen(); break;
-      case program_state::quit: return;
-    }
-  }
-}
-
-/*
-void program_sfml::run_profile()
-{
-  const std::vector<amino_acid> aas =
-  {
-    amino_acid::alanine,
-    amino_acid::glycine,
-    amino_acid::tryptophan,
-    amino_acid::valine
-  };
-
-  assert(m_window.getSize().x == m_window.getSize().y);
-  const auto ps = create_players(aas, m_window.getSize().x);
-
-  display(m_window, ps, m_sprites, kill_frame);
-}
-*/
 
 void program_sfml::run_winner_screen()
 {

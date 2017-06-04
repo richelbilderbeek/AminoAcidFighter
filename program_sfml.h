@@ -10,13 +10,16 @@
 class program_sfml
 {
 public:
-  //Constructor
-  program_sfml(int argc, char * argv[]);
+  ///Starts either a normal or profile run.
+  /// @param args the command-line arguments as passed from the main function.
+  ///   as usual, args[0] contains the full path to the executable. If at least
+  ///   one arguments equals '--profile', a profile run is started
+  program_sfml(const std::vector<std::string>& args);
 
-  //Destructor
   ~program_sfml();
 
-  ///The main program loop, ends when the user quits the program
+  ///The main program loop, ends when either (1) the user quits the program,
+  /// (2) the profile run hits its kill frame
   void run();
 
 private:
@@ -48,12 +51,6 @@ private:
   ///Run the menu in which the number of players is chosen by the user
   void run_choose_n_player_menu();
 
-  ///The normal main program loop
-  void run_normal();
-
-  ///The profiling program loop, stops after some time without user interaction
-  //void run_profile();
-
   ///Show the winner of the last battle
   void run_winner_screen();
 };
@@ -65,5 +62,8 @@ std::vector<amino_acid> create_first_amino_acids() noexcept;
 ///Create the amino acids used in profiling
 std::vector<amino_acid> create_profiling_amino_acids() noexcept;
 
+///Is there a command-line argument (as passed from the 'main' function),
+///that indicates that the user wants a profile run?
+bool is_profile_run(const std::vector<std::string>& args) noexcept;
 
 #endif // PROGRAM_SFML_H
