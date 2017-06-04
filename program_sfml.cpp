@@ -119,10 +119,14 @@ void program_sfml::run()
 
 void program_sfml::run_battle()
 {
+  assert(m_state == program_state::battle);
+
   assert(m_window.getSize().x == m_window.getSize().y);
   const int window_size = m_window.getSize().x;
   auto players = create_players(m_amino_acids, window_size);
   game_sfml m(m_window, do_play_music(m_args));
+
+  assert(m.get_state() == program_state::battle);
   m.execute();
 
   m_state = m.get_state();
