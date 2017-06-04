@@ -76,7 +76,7 @@ private:
   void bullet_hits_player();
 
   ///Show this menu on the screen
-  void display(Sprites_sfml &sprites);
+  void display();
 
   ///Process a single event
   void process_event(sf::Event event);
