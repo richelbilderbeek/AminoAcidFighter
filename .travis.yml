@@ -42,10 +42,14 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script: 
-  # Build and run tests
+  # Game logic non-SFML tests
   - qmake AminoAcidFighterTest.pro
   - make debug
   - ./AminoAcidFighterTest
+  # Game logic SFML tests
+  - qmake AminoAcidFighterSfmlTest.pro
+  - make debug
+  - ./AminoAcidFighterSfmlTest
   # Build and run profile run
   - qmake AminoAcidFighter.pro
   - make release
