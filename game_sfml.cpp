@@ -182,57 +182,6 @@ void process_event_game(sf::Event event,
   }
 }
 
-void run(
-  sf::RenderWindow &w,
-  const int window_size,
-  const bool do_play_music,
-  Sprites_sfml& sprites
-)
-{
-  program_state state{program_state::choose_n_players};
-  std::vector<amino_acid> amino_acids{amino_acid::alanine, amino_acid::alanine};
-
-  while(w.isOpen())
-  {
-    switch(state)
-    {
-      case program_state::choose_n_players:
-      {
-        state = run_choose_n_player_menu(
-          w,
-          do_play_music,
-          amino_acids
-        );
-      }
-      break;
-      case program_state::select_players:
-      {
-        state = run_choose_amino_acids_menu(
-          w,
-          do_play_music,
-          amino_acids,
-          sprites
-        );
-      }
-      break;
-      case program_state::battle:
-        display(
-          w,
-          window_size,
-          amino_acids,
-          sprites
-        );
-      break;
-      case program_state::winner:
-
-        assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
-      break;
-      case program_state::quit:
-        return;
-    }
-  }
-}
-
 program_state run_choose_n_player_menu(
   sf::RenderWindow& w,
   bool do_play_music,
@@ -274,24 +223,6 @@ program_state run_winner_screen(
   if(state == program_state::quit) return state;
   assert(state == program_state::winner);
   return state;
-}
-
-void run_profile(
-  sf::RenderWindow &w,
-  const int window_size,
-  Sprites_sfml& sprites
-)
-{
-  const std::vector<amino_acid> aas =
-  {
-    amino_acid::alanine,
-    amino_acid::glycine,
-    amino_acid::tryptophan,
-    amino_acid::valine
-  };
-  const auto ps = create_players(aas, window_size);
-  const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
-  display(w, window_size, ps, sprites, kill_frame);
 }
 
 std::vector<sf::CircleShape> set_hit_ranges(

@@ -3,6 +3,7 @@
 #include <cassert>
 #include <SFML/System.hpp>
 
+#include "game.h"
 #include "game_sfml.h"
 #include "helper.h"
 
@@ -53,20 +54,60 @@ void program_sfml::run()
 
 void program_sfml::run_normal()
 {
-  //run member function
-  ::run(
-    m_window,
-    m_window.getSize().x,
-    m_do_play_music,
-    m_sprites
-  );
+  program_state state{program_state::choose_n_players};
+  std::vector<amino_acid> amino_acids{amino_acid::alanine, amino_acid::alanine};
+
+  while(m_window.isOpen())
+  {
+    switch(state)
+    {
+      case program_state::choose_n_players:
+      {
+        state = run_choose_n_player_menu(
+          m_window,
+          m_do_play_music,
+          amino_acids
+        );
+      }
+      break;
+      case program_state::select_players:
+      {
+        state = run_choose_amino_acids_menu(
+          m_window,
+          m_do_play_music,
+          amino_acids,
+          m_sprites
+        );
+      }
+      break;
+      case program_state::battle:
+        display(
+          m_window,
+          window_size,
+          amino_acids,
+          m_sprites
+        );
+      break;
+      case program_state::winner:
+
+        assert(!"something should happen now, e.g. a winner screen"); //!OCLINT need to add more screens
+      break;
+      case program_state::quit:
+        return;
+    }
+  }
 }
 
 void program_sfml::run_profile()
 {
-  ::run_profile(
-    m_window,
-    m_window.getSize().x,
-    m_sprites
-  );
+  const std::vector<amino_acid> aas =
+  {
+    amino_acid::alanine,
+    amino_acid::glycine,
+    amino_acid::tryptophan,
+    amino_acid::valine
+  };
+  const auto ps = create_players(aas, window_size);
+  const int kill_frame{6 * 300}; // 6 fps (current speed on Travis) for 5 minutes
+  display(m_window, window_size, ps, m_sprites, kill_frame);
 }

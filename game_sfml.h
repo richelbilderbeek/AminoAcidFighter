@@ -59,17 +59,6 @@ void process_event_game(
   const int window_size
 );
 
-///Outer game loop: runs the full program, including the menus
-void run(sf::RenderWindow &w,
-  const int window_size,
-  const bool do_play_music,
-  Sprites_sfml &sprites);
-
-void run_profile(
-  sf::RenderWindow &w,
-  const int window_size,
-  Sprites_sfml& sprites
-);
 
 std::vector<sf::CircleShape> set_hit_ranges(
   std::vector<player> ps,
