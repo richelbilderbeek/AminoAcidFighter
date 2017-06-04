@@ -44,7 +44,7 @@ void game_sfml::bullet_hits_player()
   }
 }
 
-void game_sfml::display(Sprites_sfml &sprites)
+void game_sfml::display()
 {
   // 60 fps (current speed on Travis) for 60 seconds
   const int kill_frame{m_is_profile_run ? 60 * 60: -1};
@@ -61,7 +61,7 @@ void game_sfml::display(Sprites_sfml &sprites)
 
   m_window.clear(sf::Color(128,128,128));
   draw_game_components(m_window, m_life_bars, m_hit_ranges, m_bullets);
-  draw_players(m_players, m_window, sprites);
+  draw_players(m_players, m_window, m_sprites);
   m_window.display();
 }
 
@@ -116,7 +116,7 @@ void game_sfml::tick()
   {
     process_event(event);
   }
-  display(m_sprites);
+  display();
 
   //Move players, hit range and bullets
   assert(m_window.getSize().x == m_window.getSize().y);
