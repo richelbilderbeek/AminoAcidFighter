@@ -13,7 +13,8 @@ public:
   ///Starts either a normal or profile run.
   /// @param args the command-line arguments as passed from the main function.
   ///   as usual, args[0] contains the full path to the executable. If at least
-  ///   one arguments equals '--profile', a profile run is started
+  ///   one arguments equals '--profile', a profile run is started. '--help'
+  ///   shows all options
   program_sfml(const std::vector<std::string>& args);
 
   ~program_sfml();
@@ -74,7 +75,14 @@ program_state create_state(const std::vector<std::string>& args) noexcept;
 bool do_play_music(const std::vector<std::string>& args) noexcept;
 
 ///Is there a command-line argument (as passed from the 'main' function),
+///that indicates that the user wants to show the help pages?
+bool is_help(const std::vector<std::string>& args) noexcept;
+
+///Is there a command-line argument (as passed from the 'main' function),
 ///that indicates that the user wants a profile run?
 bool is_profile_run(const std::vector<std::string>& args) noexcept;
+
+///The show the help screen in a terminal
+void show_help();
 
 #endif // PROGRAM_SFML_H

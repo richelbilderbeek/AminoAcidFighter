@@ -19,6 +19,11 @@ program_sfml::program_sfml(const std::vector<std::string>& args)
       sf::Style::Titlebar | sf::Style::Close
     }
 {
+  if (is_help(args))
+  {
+    show_help();
+  }
+
   //Create all resources needed: pictures, sounds, etcetera
   create_resources();
 
@@ -63,10 +68,9 @@ std::vector<amino_acid> create_profiling_amino_acids() noexcept
 
 program_state create_state(const std::vector<std::string>& args) noexcept
 {
-  return is_profile_run(args)
-    ? program_state::battle
-    : program_state::choose_n_players
-  ;
+  if (is_help(args)) return program_state::quit;
+  if (is_profile_run(args)) return program_state::battle;
+  return program_state::choose_n_players;
 }
 
 bool do_play_music(const std::vector<std::string>& args) noexcept
@@ -77,6 +81,15 @@ bool do_play_music(const std::vector<std::string>& args) noexcept
     std::end(args),
     std::string("--no_music")
   ) == 0;
+}
+
+bool is_help(const std::vector<std::string>& args) noexcept
+{
+  return std::count(
+    std::begin(args),
+    std::end(args),
+    std::string("--help")
+  );
 }
 
 bool is_profile_run(const std::vector<std::string>& args) noexcept
@@ -189,4 +202,24 @@ void program_sfml::run_choose_n_player_menu()
 void program_sfml::run_winner_screen()
 {
 
+}
+
+void show_help()
+{
+  std::cout
+    << "AMINO ACID FIGHTER\n"
+    << "------------------\n"
+    << "\n"
+    << "Usage: \n"
+    << "\n"
+    << "  AminoAcidFighter [arguments]\n"
+    << "\n"
+    << "Without arguments, AminoAcidFighter starts with default settings.\n"
+    << "\n"
+    << "Arguments are:\n"
+    << "\n"
+    << "  --help show this menu\n"
+    << "  --profiling do a profiling run\n"
+    << "  --no_music run without music\n"
+  ;
 }
