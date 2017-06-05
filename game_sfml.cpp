@@ -84,8 +84,8 @@ int get_winner(const game_sfml& g)
 
 void game_sfml::display()
 {
-  // 60 fps (current speed on Travis) for 60 seconds
-  const int kill_frame{m_is_profile_run ? 60 * 60: -1};
+  // 600 fps (current speed on Travis) for 60 seconds
+  const int kill_frame{m_is_profile_run ? 600 * 60: -1};
   static int frame = 0;
 
   //Kill in profiling
