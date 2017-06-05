@@ -38,19 +38,20 @@ void create_sounds()
 
 void create_sprites()
 {
-  std::vector<amino_acid>  amino_acids = get_all_amino_acids();
-  std::vector<std::string> amino_acid_names;
-  for(int i = 0; i != static_cast<int>(amino_acids.size()); ++i)
-  {
-    amino_acid_names.push_back(to_str(amino_acids[i]));
-  }
 
+  std::vector<amino_acid>  amino_acids = get_all_amino_acids();
   std::vector<std::string> file_names;
-  for(int i = 0; i != static_cast<int>(amino_acid_names.size()); ++i)
-  {
-    file_names.push_back("Pictures/AminoAcids/" + amino_acid_names[i] + ".png");
-  }
+  std::transform(
+    std::begin(amino_acids),
+    std::end(amino_acids),
+    std::back_inserter(file_names),
+    [](const amino_acid a)
+    {
+      return "Pictures/AminoAcids/" + to_str(a) + ".png";
+    }
+  );
   file_names.push_back("Pictures/Bullet.png");
+
 
   for (const std::string s: file_names)
   {
