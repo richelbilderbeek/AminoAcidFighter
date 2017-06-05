@@ -25,8 +25,6 @@ program_sfml::program_sfml(const std::vector<std::string>& args)
   {
     show_help();
   }
-
-  m_window.setFramerateLimit(60);
 }
 
 program_sfml::~program_sfml()

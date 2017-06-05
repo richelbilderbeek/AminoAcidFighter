@@ -38,7 +38,6 @@ void create_sounds()
 
 void create_sprites()
 {
-
   std::vector<amino_acid>  amino_acids = get_all_amino_acids();
   std::vector<std::string> file_names;
   std::transform(
@@ -51,7 +50,6 @@ void create_sprites()
     }
   );
   file_names.push_back("Pictures/Bullet.png");
-
 
   for (const std::string s: file_names)
   {
