@@ -76,5 +76,5 @@ std::string extract_base(const std::string& s)
 
 double deg_to_rad(const double deg) noexcept
 {
-  return (deg * M_PI / 180.0);
+  return deg * M_PI / 180.0;
 }
