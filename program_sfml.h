@@ -40,6 +40,9 @@ private:
   ///The window used throughout the program
   sf::RenderWindow m_window;
 
+  ///The player that wins the game
+  int m_winner;
+
   ///Run the battle!
   void run_battle();
 

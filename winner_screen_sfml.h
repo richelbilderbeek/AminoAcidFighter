@@ -12,7 +12,9 @@ class winner_screen_sfml
 public:
   winner_screen_sfml(
     sf::RenderWindow& w,
-    const bool do_play_music = true);
+    int winner,
+    const bool do_play_music = true
+  );
 
   ///Get the current state of the program
   program_state get_state() const noexcept { return m_state; }
@@ -36,6 +38,9 @@ private:
 
   ///Window used for displayal
   sf::RenderWindow& m_window;
+
+  ///The winner of the game
+  int m_winner;
 
   ///Text of which player has won
   sf::Text m_winner_text;

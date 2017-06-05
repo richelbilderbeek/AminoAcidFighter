@@ -5,12 +5,13 @@
 
 winner_screen_sfml::winner_screen_sfml(
   sf::RenderWindow& w,
-  const bool do_play_music) :
-  m_do_play_music{do_play_music},
+  int winner,
+  const bool do_play_music)
+: m_do_play_music{do_play_music},
   m_menu(),
   m_state{program_state::winner},
   m_window{w},
-  m_winner_text{create_winner_text(1)}
+  m_winner_text{create_winner_text(winner)}
 {
 }
 

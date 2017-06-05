@@ -69,6 +69,7 @@ void program_sfml::run_battle()
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
   assert(m_state == program_state::winner);
+  m_winner = get_winner(m);
 }
 
 void program_sfml::run_choose_amino_acids_menu()
@@ -100,7 +101,7 @@ void program_sfml::run_choose_n_player_menu()
 
 void program_sfml::run_winner_screen()
 {
-  winner_screen_sfml m(m_window, do_play_music(m_args));
+  winner_screen_sfml m(m_window, m_winner, do_play_music(m_args));
   m.execute();
   const program_state state = m.get_state();
   if(state == program_state::quit) return;
