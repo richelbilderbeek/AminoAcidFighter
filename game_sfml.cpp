@@ -178,6 +178,12 @@ void game_sfml::tick()
 
   //Remove all bullets that have no speed
   remove_slow_bullets(m_bullets);
+
+  //Look for winner
+  if(get_winner(*this) != 0)
+  {
+    m_state = program_state::winner;
+  }
 }
 
 

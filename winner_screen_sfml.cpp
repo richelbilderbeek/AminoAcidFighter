@@ -1,47 +1,35 @@
-
-#include "winner_screen_sfml.h"
 #include <string>
+
+#include "game_sfml.h"
+#include "winner_screen_sfml.h"
 
 winner_screen_sfml::winner_screen_sfml(
   sf::RenderWindow& w,
   const bool do_play_music) :
   m_do_play_music{do_play_music},
   m_menu(),
+  m_state{program_state::winner},
   m_window{w},
-  m_winner_text{}
+  m_winner_text{create_winner_text(1)}
 {
-
 }
 
 void winner_screen_sfml::display()
 {
-  const sf::Text winner_text = create_winner_text();
   //Clear
   m_window.clear(sf::Color(128,128,128));
   //Text
-  m_window.draw(winner_text);
+  m_window.draw(m_winner_text);
   //Show
   m_window.display();
 }
 
-sf::Text create_winner_text(
-  std::vector<sf::RectangleShape> life_bars)
+sf::Text create_winner_text(const int winner)
 {
   static sf::Font font; //Text cannot be drawn if Font goes out of scope
   font.loadFromFile("arial.ttf");
 
   sf::Text winner_text;
-  int winner;
-
-  for(int i = 0; i != static_cast<int>(life_bars.size()); ++i)
-  {
-    double size = life_bars[i].getSize().x;
-    if(size > 0)
-    {
-      winner = i + 1;
-    }
-  }
-
   winner_text.setFont(font);
   winner_text.setPosition(sf::Vector2f(10, 10));
   #if SFML_VERSION_MINOR > 3

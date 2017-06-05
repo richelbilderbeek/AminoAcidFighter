@@ -44,7 +44,6 @@ private:
   void display();
 };
 
-sf::Text create_winner_text(
-  std::vector<sf::RectangleShape> life_bars);
+sf::Text create_winner_text(const int winner);
 
 #endif // WINNER_SCREEN_SFML_H
