@@ -50,7 +50,7 @@ void winner_screen_sfml::execute()
 {
   assert(m_state == program_state::winner);
 
-  while (m_window.isOpen()) {
+  while(m_window.isOpen()) {
     sf::Event event;
     while(m_window.pollEvent(event))
     {
@@ -58,7 +58,9 @@ void winner_screen_sfml::execute()
     }
     display();
     //Quit
-    if (m_state == program_state::quit) return;
+    if(m_state == program_state::quit) return;
+    //Go back to first menu
+    if(m_state == program_state::choose_n_players) return;
     //Stay here
     assert(m_state == program_state::winner);
   }
@@ -74,7 +76,7 @@ void winner_screen_sfml::process_event(const sf::Event& event)
     case sf::Event::KeyPressed:
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       {
-        m_state = program_state::quit;
+        m_state = program_state::choose_n_players;
       }
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
       {

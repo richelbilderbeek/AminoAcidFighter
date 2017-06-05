@@ -110,5 +110,5 @@ void program_sfml::run_winner_screen()
   //Read the new state from the dialog
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
-  assert(m_state == program_state::winner);
+  assert(m_state == program_state::choose_n_players);
 }

@@ -81,9 +81,9 @@ void choose_n_players_menu_sfml::execute()
   {
     tick();
     //Quit
-    if ( m_state == program_state::quit) return;
+    if (m_state == program_state::quit) return;
     //Next screen
-    if ( m_state == program_state::select_players) return;
+    if (m_state == program_state::select_players) return;
     //Stay here
     assert(m_state == program_state::choose_n_players);
   }
