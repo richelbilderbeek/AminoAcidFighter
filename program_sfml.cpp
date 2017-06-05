@@ -82,6 +82,7 @@ void program_sfml::run_choose_amino_acids_menu()
   );
   m.execute();
 
+  //Read the new state from the dialog
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
   assert(m_state == program_state::battle);
@@ -93,6 +94,8 @@ void program_sfml::run_choose_n_player_menu()
   const int n_players = m_amino_acids.size();
   choose_n_players_menu_sfml m(m_window, do_play_music(m_args), n_players);
   m.execute();
+
+  //Read the new state from the dialog
   m_state = m.get_state();
   if(m_state == program_state::quit) return;
   assert(m_state == program_state::select_players);
@@ -103,7 +106,9 @@ void program_sfml::run_winner_screen()
 {
   winner_screen_sfml m(m_window, m_winner, do_play_music(m_args));
   m.execute();
-  const program_state state = m.get_state();
-  if(state == program_state::quit) return;
-  assert(state == program_state::winner);
+
+  //Read the new state from the dialog
+  m_state = m.get_state();
+  if(m_state == program_state::quit) return;
+  assert(m_state == program_state::winner);
 }

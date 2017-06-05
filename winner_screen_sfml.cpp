@@ -49,11 +49,15 @@ sf::Text create_winner_text(const int winner)
 void winner_screen_sfml::execute()
 {
   assert(m_state == program_state::winner);
-  while (1) {
+
+  while (m_window.isOpen()) {
+    sf::Event event;
+    while(m_window.pollEvent(event))
+    {
+      process_event(event);
+    }
     display();
     //Quit
-    if (m_state == program_state::quit) return;
-    //Next screen
     if (m_state == program_state::quit) return;
     //Stay here
     assert(m_state == program_state::winner);
@@ -68,7 +72,6 @@ void winner_screen_sfml::process_event(const sf::Event& event)
       m_state = program_state::quit;
       break;
     case sf::Event::KeyPressed:
-      //battle
       if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       {
         m_state = program_state::quit;

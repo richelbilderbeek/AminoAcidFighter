@@ -21,8 +21,6 @@ public:
 
   void execute();
 
-  void process_event(const sf::Event& event);
-
 private:
   ///Will music be played?
   bool m_do_play_music;
@@ -47,6 +45,9 @@ private:
 
   ///Show this menu on the screen
   void display();
+
+  ///Process a single event
+  void process_event(const sf::Event& event);
 };
 
 sf::Text create_winner_text(const int winner);
