@@ -64,7 +64,7 @@ script:
   # Call OCLint
   - ./do_oclint
   # memcheck
-  - valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./travis_qmake_gcc_cpp14_memcheck
+  - valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./AminoAcidFighterTest
   - cat memcheck.log
   # SLOCcount
   #   remove OCLint otherwise it will be counted as well
