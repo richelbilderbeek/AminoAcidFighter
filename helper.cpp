@@ -3,6 +3,8 @@
 #include <iostream>
 #include <QFile>
 #include <vector>
+
+#include "amino_acid.h"
 #include "helper.h"
 
 void create_fonts()
@@ -36,33 +38,23 @@ void create_sounds()
 
 void create_sprites()
 {
-  const std::vector<std::string> v = {
-    "Pictures/Bullet.png",
-    "Pictures/AminoAcids/Alanine.png",
-    "Pictures/AminoAcids/Arginine.png",
-    "Pictures/AminoAcids/Asparagine.png",
-    "Pictures/AminoAcids/AsparticAcid.png",
-    "Pictures/AminoAcids/Cysteine.png",
-    "Pictures/AminoAcids/GlutamicAcid.png",
-    "Pictures/AminoAcids/Glutamine.png",
-    "Pictures/AminoAcids/Glycine.png",
-    "Pictures/AminoAcids/Histidine.png",
-    "Pictures/AminoAcids/Isoleucine.png",
-    "Pictures/AminoAcids/Leucine.png",
-    "Pictures/AminoAcids/Lysine.png",
-    "Pictures/AminoAcids/Methionine.png",
-    "Pictures/AminoAcids/Phenylalanine.png",
-    "Pictures/AminoAcids/Proline.png",
-    "Pictures/AminoAcids/Serine.png",
-    "Pictures/AminoAcids/Threonine.png",
-    "Pictures/AminoAcids/Tryptophan.png",
-    "Pictures/AminoAcids/Tyrosine.png",
-    "Pictures/AminoAcids/Valine.png"
-  };
-
-  for (const std::string s: v)
+  std::vector<amino_acid>  amino_acids = get_all_amino_acids();
+  std::vector<std::string> amino_acid_names;
+  for(int i = 0; i != static_cast<int>(amino_acids.size()); ++i)
   {
-    QFile f( (std::string(":/sprites/") + s).c_str());
+    amino_acid_names.push_back(to_str(amino_acids[i]));
+  }
+
+  std::vector<std::string> file_names;
+  for(int i = 0; i != static_cast<int>(amino_acid_names.size()); ++i)
+  {
+    file_names.push_back("Pictures/AminoAcids/" + amino_acid_names[i] + ".png");
+  }
+  file_names.push_back("Pictures/Bullet.png");
+
+  for (const std::string s: file_names)
+  {
+    QFile f((std::string(":/sprites/") + s).c_str());
     const std::string filename{extract_base(s)};
     f.copy(filename.c_str());
     if (!QFile::exists(filename.c_str()))
