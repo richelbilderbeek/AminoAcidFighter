@@ -86,6 +86,7 @@ private:
 
 std::vector<double> collect_hit_points(const game_sfml& g);
 
+[[deprecated]]
 std::vector<player> create_game_players(
   std::vector<amino_acid> amino_acids,
   std::vector<sf::Vector2f> ps_pos
