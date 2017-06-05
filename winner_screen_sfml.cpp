@@ -18,7 +18,7 @@ winner_screen_sfml::winner_screen_sfml(
 void winner_screen_sfml::display()
 {
   //Clear
-  m_window.clear(sf::Color(128,128,128));
+  m_window.clear();
   //Text
   m_window.draw(m_winner_text);
   //Show
@@ -32,7 +32,7 @@ sf::Text create_winner_text(const int winner)
 
   sf::Text winner_text;
   winner_text.setFont(font);
-  winner_text.setPosition(sf::Vector2f(10, 10));
+  winner_text.setPosition(sf::Vector2f(70, 225));
   #if SFML_VERSION_MINOR > 3
   winner_text.setFillColor(sf::Color::Yellow);
   #else
@@ -41,7 +41,7 @@ sf::Text create_winner_text(const int winner)
   std::string winner_number = std::to_string(winner);
   sf::String winner_player = "Player " + winner_number + " wins!";
   winner_text.setString(winner_player);
-  winner_text.setCharacterSize(35);
+  winner_text.setCharacterSize(75);
 
   return winner_text;
 }
