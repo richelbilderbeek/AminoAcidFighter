@@ -67,6 +67,14 @@ Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)
     m_bullet.setOrigin(sf::Vector2f(x * ratio, y * ratio));
     m_textures.push_back(texture);
   }
+
+  //Load the background
+  {
+    sf::Texture * const texture = new sf::Texture;
+    texture->loadFromFile("BackgroundAminoAcidFighter.png");
+    m_background.setTexture(*texture);
+    m_textures.push_back(texture);
+  }
 }
 
 sf::Sprite& Sprites_sfml::get(const amino_acid aa) noexcept

@@ -99,7 +99,8 @@ void game_sfml::display()
     return;
   }
 
-  m_window.clear(sf::Color(128,128,128));
+  m_window.clear();
+  m_window.draw(m_sprites.get_background());
   draw_game_components(m_window, m_life_bars, m_hit_ranges, m_bullets);
   draw_players(m_players, m_window, m_sprites);
   m_window.display();

@@ -24,6 +24,7 @@
         <file>Pictures/AminoAcids/Threonine.png</file>
         <file>Pictures/AminoAcids/Tryptophan.png</file>
         <file>Pictures/AminoAcids/Tyrosine.png</file>
+        <file>Pictures/BackgroundAminoAcidFighter.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>amino_acid_fighter_tune.wav</file>
