@@ -20,8 +20,8 @@ public:
   );
 
   void do_action(int i, action any_action);
-  const auto& get_bullets() const noexcept { return m_bullets; }
-  auto& get_bullets() noexcept { return m_bullets; }
+  const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
+  std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
   game_state get_state() { return m_state; }
 
   const auto& get_players() const noexcept { return m_players; }
@@ -34,7 +34,9 @@ public:
   void tick();
 
 private:
+  ///All bullets currently in the game
   std::vector<bullet> m_bullets;
+
   std::vector<player> m_players;
   game_state m_state;
   double m_world_size;
@@ -62,6 +64,9 @@ std::vector<player> create_players(
 
 /// Create a test game
 game create_test_game_1();
+
+const std::vector<bullet>& get_bullets(const game& g);
+std::vector<bullet>& get_bullets(game& g);
 
 const std::vector<player>& get_players(const game& g);
 std::vector<player>& get_players(game& g);
