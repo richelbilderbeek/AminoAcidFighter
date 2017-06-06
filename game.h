@@ -15,7 +15,7 @@ class game
 {
 public:
   game(
-    std::vector<amino_acid>& players,
+    const std::vector<amino_acid>& players,
     const double world_size
   );
 
@@ -48,9 +48,9 @@ private:
 };
 
 ///Calculates the distance between a bullet and a player
-float calculate_distance_bullet_player(
-  bullet any_bullet,
-  player any_player
+double calculate_distance(
+  const bullet& any_bullet,
+  const player& any_player
 );
 
 ///Collect the hitpoints of the players
