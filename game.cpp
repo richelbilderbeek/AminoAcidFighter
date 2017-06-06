@@ -41,10 +41,14 @@ double calculate_distance(const bullet& b, const player& p)
 std::vector<double> collect_hit_points(const game& g)
 {
   std::vector<double> hps;
-  for (const auto& p: get_players(g))
-  {
-    hps.push_back(p.get_hp());
-  }
+  const auto ps = get_players(g);
+  hps.reserve(ps.size());
+  std::transform(
+    std::begin(ps),
+    std::end(ps),
+    std::back_inserter(hps),
+    [](const auto& p) { return p.get_hp(); }
+  );
   return hps;
 }
 
