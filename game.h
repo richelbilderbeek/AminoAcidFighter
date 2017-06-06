@@ -23,7 +23,10 @@ public:
   const auto& get_bullets() const noexcept { return m_bullets; }
   auto& get_bullets() noexcept { return m_bullets; }
   game_state get_state() { return m_state; }
+
   const auto& get_players() const noexcept { return m_players; }
+  auto& get_players() noexcept { return m_players; }
+
   auto get_world_size() const noexcept { return m_world_size; }
   auto set_bullets(std::vector<bullet> bullets) { m_bullets = bullets; }
 
@@ -36,6 +39,9 @@ private:
   game_state m_state;
   double m_world_size;
 
+  ///Check if one of the players is hit by a bullet
+  void bullet_hits_player();
+
   void do_damage();
 };
 
@@ -45,6 +51,9 @@ float calculate_distance_bullet_player(
   player any_player
 );
 
+///Collect the hitpoints of the players
+std::vector<double> collect_hit_points(const game& g);
+
 /// Create the 2,3 or 4 players at the right initial positions,
 std::vector<player> create_players(
   const std::vector<amino_acid>& amino_acids,
@@ -53,6 +62,9 @@ std::vector<player> create_players(
 
 /// Create a test game
 game create_test_game_1();
+
+const std::vector<player>& get_players(const game& g);
+std::vector<player>& get_players(game& g);
 
 ///Display the game state
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;

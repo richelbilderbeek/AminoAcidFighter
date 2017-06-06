@@ -18,7 +18,6 @@ game_sfml::game_sfml(sf::RenderWindow& window,
       create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_is_profile_run{is_profile_run},
     m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
-    m_players{create_players(amino_acids, window.getSize().x)},
     m_sprites(sprites),
     m_state{program_state::battle},
     m_window{window}
@@ -32,34 +31,25 @@ game_sfml::~game_sfml()
 
 void game_sfml::bullet_hits_player()
 {
-  for(auto i = 0u; i < m_players.size(); ++i)
-  {
-    for(auto j = 0u; j < m_bullets.size(); ++j)
-    {
-      float distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
-      if(distance <= get_hit_range_size())
-      {
-        m_players[i].lose_hp();
-        m_bullets[j].slow_down();
-      }
-    }
-  }
-
+  const auto players = get_players(*this);
   //Show the players' HPs in the bars
-  for(auto i = 0u; i < m_players.size(); ++i)
+  for(auto i = 0u; i < players.size(); ++i)
   {
-    m_life_bars[i].setSize(sf::Vector2f(m_players[i].get_hp(), m_life_bars[i].getSize().y));
+    m_life_bars[i].setSize(sf::Vector2f(players[i].get_hp(), m_life_bars[i].getSize().y));
   }
 }
 
 std::vector<double> collect_hit_points(const game_sfml& g)
 {
+  return collect_hit_points(g.get_game());
+  /*
   std::vector<double> hps;
-  for (const auto& p: g.get_players())
+  for (const auto& p: get_players())
   {
     hps.push_back(p.get_hp());
   }
   return hps;
+  */
 }
 
 int get_winner(const game_sfml& g)
@@ -102,7 +92,7 @@ void game_sfml::display()
   m_window.clear();
   m_window.draw(m_sprites.get_background());
   draw_game_components(m_window, m_life_bars, m_hit_ranges, m_bullets);
-  draw_players(m_players, m_window, m_sprites);
+  draw_players(get_players(*this), m_window, m_sprites);
   m_window.display();
 }
 
@@ -131,18 +121,19 @@ void game_sfml::process_event(sf::Event event)
       break;
     case sf::Event::KeyPressed:
       // keyboard support for player1 and player2
-      assert(m_players.size() >= 1);
+      assert(get_players(*this).size() >= 1);
       respond_to_key(
-        m_players[0],
-        m_players[1],
+        get_players(*this)[0],
+        get_players(*this)[1],
         m_bullets,
-        m_game);
+        m_game
+      );
       break;
     case sf::Event::JoystickButtonPressed:
       // joystick support for player3 and player4
       respond_to_joystick(
-        m_players[2],
-        m_players[3],
+        get_players(*this)[2],
+        get_players(*this)[3],
         m_bullets);
       break;
     default:
@@ -162,7 +153,7 @@ void game_sfml::tick()
 
   assert(m_window.getSize().x == m_window.getSize().y);
   //Move players
-  for(auto i = 0u; i != m_players.size(); ++i) { m_players[i].move(m_window.getSize().x); }
+  for(auto i = 0u; i != get_players(*this).size(); ++i) { get_players(*this)[i].move(m_window.getSize().x); }
 
   //Move bullets
   for(auto& bullet : m_bullets) {
@@ -171,10 +162,10 @@ void game_sfml::tick()
   }
 
   //Move hit ranges
-  for(auto i = 0u; i != m_players.size(); ++i)
+  for(auto i = 0u; i != get_players(*this).size(); ++i)
   {
-    m_hit_ranges[i].setPosition(m_players[i].get_x() + m_players[i].get_speed_x(),
-                              m_players[i].get_y() + m_players[i].get_speed_y());
+    m_hit_ranges[i].setPosition(get_players(*this)[i].get_x() + get_players(*this)[i].get_speed_x(),
+                              get_players(*this)[i].get_y() + get_players(*this)[i].get_speed_y());
   }
 
   //Check if bullet hits player
@@ -291,6 +282,16 @@ std::vector<sf::Vector2f> get_life_bar_positions()
       sf::Vector2f(490, 580)
   };
   return life_bar_positions;
+}
+
+const std::vector<player>& get_players(const game_sfml& g)
+{
+  return get_players(g.get_game());
+}
+
+std::vector<player>& get_players(game_sfml& g)
+{
+  return get_players(g.get_game());
 }
 
 std::vector<sf::Vector2f> get_start_positions()

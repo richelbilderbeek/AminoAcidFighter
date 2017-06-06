@@ -15,6 +15,22 @@ game::game(
 {
 }
 
+void game::bullet_hits_player()
+{
+  for(auto i = 0u; i < m_players.size(); ++i)
+  {
+    for(auto j = 0u; j < m_bullets.size(); ++j)
+    {
+      float distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
+      if(distance <= get_hit_range_size())
+      {
+        m_players[i].lose_hp();
+        m_bullets[j].slow_down();
+      }
+    }
+  }
+}
+
 float calculate_distance_bullet_player(bullet any_bullet, const player any_player)
 {
   const float bullet_position_x = any_bullet.get_x();
@@ -27,6 +43,16 @@ float calculate_distance_bullet_player(bullet any_bullet, const player any_playe
   const float y2 = length_y * length_y;
   const float a2 = x2 + y2;
   return sqrt(a2);
+}
+
+std::vector<double> collect_hit_points(const game& g)
+{
+  std::vector<double> hps;
+  for (const auto& p: get_players(g))
+  {
+    hps.push_back(p.get_hp());
+  }
+  return hps;
 }
 
 std::vector<player> create_players(
@@ -107,6 +133,16 @@ void game::do_damage()
       }
     }
   }
+}
+
+const std::vector<player>& get_players(const game& g)
+{
+  return g.get_players();
+}
+
+std::vector<player>& get_players(game& g)
+{
+  return g.get_players();
 }
 
 void game::tick()

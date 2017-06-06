@@ -35,7 +35,7 @@ void draw_player( //!OCLINT cannot make this any shorter
 }
 
 void draw_players(
-  std::vector<player>& ps,
+  std::vector<player> ps,
   sf::RenderWindow &w,
   Sprites_sfml& sprites)
 {

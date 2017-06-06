@@ -29,7 +29,9 @@ public:
   ///Stops the music
   ~game_sfml();
 
-  const std::vector<player>& get_players() const noexcept { return m_players; }
+  ///Read the game logic
+  const auto& get_game() const noexcept { return m_game; }
+  auto& get_game() noexcept { return m_game; }
 
   ///Obtain the current or state after execute
   program_state get_state() const noexcept { return m_state; }
@@ -64,9 +66,6 @@ private:
 
   ///Music played, starts at constructor, ends at destructor
   sf::Music m_music;
-
-  ///Players that join the game
-  std::vector<player> m_players;
 
   ///The sprites, cannot be const as the sprites are modified in-place
   Sprites_sfml& m_sprites;
@@ -103,6 +102,9 @@ void draw_game_components(
 );
 
 std::vector<sf::Vector2f> get_life_bar_positions();
+
+const std::vector<player>& get_players(const game_sfml& g);
+std::vector<player>& get_players(game_sfml& g);
 
 std::vector<sf::Vector2f> get_start_positions();
 

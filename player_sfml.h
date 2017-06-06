@@ -12,10 +12,12 @@ void draw_player(
   Sprites_sfml& sprites
 );
 
- void draw_players(
-  std::vector<player>& ps,
-  sf::RenderWindow& w
-, Sprites_sfml &sprites);
+///Indeed, just use a copy of players
+void draw_players(
+  std::vector<player> ps,
+  sf::RenderWindow& w,
+  Sprites_sfml& sprites
+);
 
 void draw_alanine(
   const player& p,
