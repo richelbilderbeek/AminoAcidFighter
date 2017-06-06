@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "bullet.h"
+#include "game.h"
 #include "player.h"
 #include "program_state.h"
 #include "sprites_sfml.h"
@@ -48,6 +49,9 @@ private:
 
   ///Will music be played?
   bool m_do_play_music;
+
+  ///The logic behind the battle
+  game m_game;
 
   ///The range in which a player can be hit by a bullet
   std::vector<sf::CircleShape> m_hit_ranges;

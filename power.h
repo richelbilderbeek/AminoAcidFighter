@@ -2,6 +2,7 @@
 #define POWER_H
 
 #include "bullet.h"
+//#include "game.h"
 
 enum class power
 {
@@ -35,8 +36,9 @@ enum class power
   turbo_boost // extra speed
 };
 
-void do_power(power any_power, std::vector<bullet>& bullets);
-void do_stop_bullets(std::vector<bullet>& bullets);
+class game;
+void do_power(power any_power, game& g);
+void do_stop_bullets(game& g);
 
 ///How many ticks do the powers last?
 ///Some of them only last only one tick

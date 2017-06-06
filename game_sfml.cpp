@@ -13,6 +13,7 @@ game_sfml::game_sfml(sf::RenderWindow& window,
   const bool is_profile_run,
   Sprites_sfml& sprites
 ) : m_do_play_music{do_play_music},
+    m_game{game(amino_acids, 600)},
     m_hit_ranges{set_hit_ranges(
       create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_is_profile_run{is_profile_run},
@@ -133,7 +134,8 @@ void game_sfml::process_event(sf::Event event)
       respond_to_key(
         m_players[0],
         m_players[1],
-        m_bullets);
+        m_bullets,
+        m_game);
       break;
     case sf::Event::JoystickButtonPressed:
       // joystick support for player3 and player4

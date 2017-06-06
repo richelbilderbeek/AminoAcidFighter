@@ -1,5 +1,7 @@
 #include "power.h"
 
+#include "game.h"
+
 int get_duration(const power any_power) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
@@ -37,7 +39,7 @@ int get_duration(const power any_power) //!OCLINT cannot make this any shorter
   return 0;
 }
 
-void do_power(power any_power, std::vector<bullet>& bullets) //!OCLINT cannot make this any shorter
+void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
   {
@@ -63,7 +65,7 @@ void do_power(power any_power, std::vector<bullet>& bullets) //!OCLINT cannot ma
     case power::shield           : /*do_shield()         */  ; break;
     case power::slowdown         : /*do_slowdown()       */  ; break;
     case power::spin             : /*do_spin()           */  ; break;
-    case power::stop_bullets     : do_stop_bullets(bullets)     ; break;
+    case power::stop_bullets     : do_stop_bullets(g)     ; break;
     case power::strafe_left      : /*do_strafe_left()    */  ; break;
     case power::strafe_right     : /*do_strafe_right()    */ ; break;
     case power::switch_players   : /*do_switch_players()*/   ; break;
@@ -73,11 +75,17 @@ void do_power(power any_power, std::vector<bullet>& bullets) //!OCLINT cannot ma
   //Not implemented yet
 }
 
-void do_stop_bullets(std::vector<bullet>& bullets)
+
+void do_stop_bullets(game& g)
 {
+  //No bullets enter here apperantly
+  std::vector<bullet> bullets = g.get_bullets();
+  std::vector<bullet> new_bullets;
   for(int i=0; i < static_cast<int>(bullets.size()); ++i)
   {
     bullets[i].set_speed_x_zero();
     bullets[i].set_speed_y_zero();
+    new_bullets.push_back(bullets[i]);
   }
+  g.set_bullets(new_bullets);
 }

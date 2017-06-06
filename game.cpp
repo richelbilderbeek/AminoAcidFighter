@@ -5,7 +5,7 @@
 #include "player.h"
 
 game::game(
-  const std::vector<amino_acid>& amino_acids,
+  std::vector<amino_acid>& amino_acids,
   const double world_size
 )
   : m_bullets{},
@@ -54,7 +54,7 @@ std::vector<player> create_players(
 game create_test_game_1()
 {
   const double world_size{314.159};
-  const std::vector<amino_acid> amino_acids =
+  std::vector<amino_acid> amino_acids =
   {
     amino_acid::tyrosine,
     amino_acid::glycine

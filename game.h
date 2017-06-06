@@ -15,16 +15,17 @@ class game
 {
 public:
   game(
-    const std::vector<amino_acid>& players,
+    std::vector<amino_acid>& players,
     const double world_size
   );
 
+  void do_action(int i, action any_action);
   const auto& get_bullets() const noexcept { return m_bullets; }
   auto& get_bullets() noexcept { return m_bullets; }
   game_state get_state() { return m_state; }
   const auto& get_players() const noexcept { return m_players; }
   auto get_world_size() const noexcept { return m_world_size; }
-  void do_action(int i, action any_action);
+  auto set_bullets(std::vector<bullet> bullets) { m_bullets = bullets; }
 
   ///Do a game 'tick', e.g. do this 60 times per second
   void tick();

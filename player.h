@@ -62,7 +62,7 @@ private:
 
 };
 
-void do_power(power any_power);
+void do_power(power any_power, game& g);
 
 /// Get the radius that each player has around its center
 /// in which is is hit, in pixels

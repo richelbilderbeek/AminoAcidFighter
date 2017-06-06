@@ -368,7 +368,8 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
 void respond_to_key( //!OCLINT cannot simplify this even more
   player &p1,
   player &p2,
-  std::vector<bullet> &bullets
+  std::vector<bullet> &bullets,
+  game& g
 )
 {
   // player1 controls
@@ -385,7 +386,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
     {
       power p = get_power(p1.get_amino_acid());
-      do_power(p, bullets);
+      do_power(p, g);
     }
   }
   // player2 controls
