@@ -116,12 +116,13 @@ bool player::uses_power() const
   return m_uses_power;
 }
 
-void player::start_using_power()
+void player::start_using_power(game& g)
 {
   m_uses_power = true;
+  do_stop_bullets(g);
 }
 
-void player::stops_using_power()
+void player::stops_using_power(game& )
 {
   m_uses_power = false;
 }

@@ -43,6 +43,9 @@ bool is_too_slow(
   const bullet& any_bullet
 );
 
+///Does the bullet have a non-zero delta x and delta y?
+bool is_moving(const bullet& b) noexcept;
+
 void remove_slow_bullets(std::vector<bullet> &bullets);
 std::ostream& operator<<(std::ostream &os, const bullet &b) noexcept;
 

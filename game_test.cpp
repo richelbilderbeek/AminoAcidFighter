@@ -253,3 +253,45 @@ BOOST_AUTO_TEST_CASE(check_game_powers_wear_out)
   BOOST_CHECK(!g.get_players()[0].uses_power());
 }
 
+BOOST_AUTO_TEST_CASE(power_stop_bullets_actually_stops_bullets)
+{
+  game g = create_test_game_1();
+
+  //Create bullets
+  g.do_action(0, action::shoot);
+  g.do_action(1, action::shoot);
+
+  //Both bullets must move
+  const auto bullets_before = get_bullets(g);
+  BOOST_CHECK_EQUAL(
+    2,
+    std::count_if(
+      std::begin(bullets_before),
+      std::end(bullets_before),
+      [](const auto& b)
+      {
+        return is_moving(b);
+      }
+    )
+  );
+
+  //Use the power to stop the bullets
+  g.do_action(0, action::use_power);
+
+
+  //Both bullets must stand still now
+  const auto bullets_after = get_bullets(g);
+  BOOST_CHECK_EQUAL(
+    0,
+    std::count_if(
+      std::begin(bullets_after),
+      std::end(bullets_after),
+      [](const auto& b)
+      {
+        return is_moving(b);
+      }
+    )
+  );
+
+}
+
