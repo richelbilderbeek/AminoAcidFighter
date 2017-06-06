@@ -8,12 +8,10 @@
 #include "player_sfml.h"
 
 game_sfml::game_sfml(sf::RenderWindow& window,
-  const bool do_play_music,
   std::vector<amino_acid> amino_acids,
   const bool is_profile_run,
   Sprites_sfml& sprites
-) : m_do_play_music{do_play_music},
-    m_game{game(amino_acids, 600)},
+) : m_game{game(amino_acids, 600)},
     m_hit_ranges{set_hit_ranges(
       create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_is_profile_run{is_profile_run},

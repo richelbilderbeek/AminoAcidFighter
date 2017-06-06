@@ -20,7 +20,6 @@ public:
   ///@param n_players the initial number of players suggested
   game_sfml(
     sf::RenderWindow& window,
-    const bool do_play_music,
     std::vector<amino_acid> amino_acids,
     const bool is_profile_run,
     Sprites_sfml& sprites
@@ -46,9 +45,6 @@ public:
   void tick();
 
 private:
-  ///Will music be played?
-  bool m_do_play_music;
-
   ///The logic behind the battle
   game m_game;
 

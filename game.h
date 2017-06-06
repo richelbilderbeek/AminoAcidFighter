@@ -35,6 +35,9 @@ public:
   void tick();
 
 private:
+  ///Will music be played?
+  bool m_do_play_music;
+
   ///All bullets currently in the game
   std::vector<bullet> m_bullets;
 

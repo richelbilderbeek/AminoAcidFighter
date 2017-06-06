@@ -60,7 +60,6 @@ void program_sfml::run_battle()
 
   game_sfml m(
     m_window,
-    do_play_music(m_args),
     m_amino_acids,
     is_profile_run(m_args),
     m_sprites
