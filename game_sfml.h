@@ -21,7 +21,6 @@ public:
   game_sfml(
     sf::RenderWindow& window,
     std::vector<amino_acid> amino_acids,
-    const bool is_profile_run,
     Sprites_sfml& sprites
   );
 
@@ -50,9 +49,6 @@ private:
 
   ///The range in which a player can be hit by a bullet
   std::vector<sf::CircleShape> m_hit_ranges;
-
-  ///Is this a profile run, yes or no?
-  bool m_is_profile_run;
 
   ///Life bars of all players
   std::vector<sf::RectangleShape> m_life_bars;
@@ -90,6 +86,8 @@ void draw_game_components(
 
 const std::vector<bullet>& get_bullets(const game_sfml& g);
 std::vector<bullet>& get_bullets(game_sfml& g);
+
+bool get_is_profile_run(const game_sfml& g);
 
 std::vector<sf::Vector2f> get_life_bar_positions();
 

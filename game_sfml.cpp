@@ -7,14 +7,13 @@
 #include "menu_sfml.h"
 #include "player_sfml.h"
 
-game_sfml::game_sfml(sf::RenderWindow& window,
+game_sfml::game_sfml(
+  sf::RenderWindow& window,
   std::vector<amino_acid> amino_acids,
-  const bool is_profile_run,
   Sprites_sfml& sprites
 ) : m_game{game(amino_acids, 600)},
     m_hit_ranges{set_hit_ranges(
       create_players(amino_acids, window.getSize().x),get_start_positions())},
-    m_is_profile_run{is_profile_run},
     m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
     m_sprites(sprites),
     m_state{program_state::battle},
@@ -53,7 +52,7 @@ std::vector<double> collect_hit_points(const game_sfml& g)
 void game_sfml::display()
 {
   // 600 fps (current speed on Travis) for 60 seconds
-  const int kill_frame{m_is_profile_run ? 600 * 60: -1};
+  const int kill_frame{get_is_profile_run(*this) ? 600 * 60: -1};
   static int frame = 0;
 
   //Kill in profiling
@@ -132,6 +131,11 @@ const std::vector<bullet>& get_bullets(const game_sfml& g)
 std::vector<bullet>& get_bullets(game_sfml& g)
 {
   return get_bullets(g.get_game());
+}
+
+bool get_is_profile_run(const game_sfml& g)
+{
+  return get_is_profile_run(g.get_game());
 }
 
 std::vector<sf::Vector2f> get_life_bar_positions()

@@ -23,7 +23,9 @@ public:
   void do_action(int i, action any_action);
   const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
   std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
-  game_state get_state() { return m_state; }
+  game_state get_state() noexcept { return m_state; }
+
+  bool get_is_profile_run() const noexcept { return m_is_profile_run; }
 
   const auto& get_players() const noexcept { return m_players; }
   auto& get_players() noexcept { return m_players; }
@@ -41,7 +43,12 @@ private:
   ///All bullets currently in the game
   std::vector<bullet> m_bullets;
 
+  ///Is this a profile run, yes or no?
+  bool m_is_profile_run;
+
   std::vector<player> m_players;
+
+  ///Current state
   game_state m_state;
   double m_world_size;
 
@@ -71,6 +78,8 @@ game create_test_game_1();
 
 const std::vector<bullet>& get_bullets(const game& g);
 std::vector<bullet>& get_bullets(game& g);
+
+bool get_is_profile_run(const game& g);
 
 const std::vector<player>& get_players(const game& g);
 std::vector<player>& get_players(game& g);
