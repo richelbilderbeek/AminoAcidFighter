@@ -18,6 +18,11 @@ bullet::bullet(
     m_y{y}
 {}
 
+bool is_moving(const bullet& b) noexcept
+{
+  return b.get_speed_x() != 0.0 || b.get_speed_y() != 0.0;
+}
+
 bool is_too_slow(const bullet& any_bullet)
 {
   //Bullets that are stopped by power "stop_bullets"

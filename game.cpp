@@ -113,7 +113,7 @@ void game::do_action(int i, action any_action)
   }
   if(any_action == action::use_power)
   {
-    m_players[i].start_using_power();
+    m_players[i].start_using_power(*this);
   }
 }
 
@@ -165,7 +165,7 @@ void game::tick()
     }
     for (auto i{0u}; i < m_players.size(); ++i)
     {
-      m_players[i].stops_using_power();
+      m_players[i].stops_using_power(*this);
     }
     do_damage();
     if(m_players[0].get_hp() <= 0.0)

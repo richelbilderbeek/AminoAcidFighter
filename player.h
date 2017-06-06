@@ -35,8 +35,12 @@ public:
   void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
   void stop();
-  void start_using_power();
-  void stops_using_power();
+
+  ///When a player starts using a power, the game logic 'game' may be modified
+  void start_using_power(game& g);
+
+  ///When a player its power ends, the game logic 'game' may be modified
+  void stops_using_power(game& g);
 
   void turn_left();
   void turn_right();

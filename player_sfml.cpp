@@ -385,8 +385,12 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
     {
+<<<<<<< HEAD
       p1.start_using_power();
       power p = get_power(p1.get_amino_acid());
+=======
+      const power p = get_power(p1.get_amino_acid());
+>>>>>>> 44462518e879cc3e27974c38317f1766f680bf96
       do_power(p, g);
     }
   }
