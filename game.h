@@ -15,7 +15,7 @@ class game
 {
 public:
   game(
-    std::vector<amino_acid>& players,
+    const std::vector<amino_acid>& players,
     const double world_size
   );
 

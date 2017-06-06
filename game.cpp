@@ -5,7 +5,7 @@
 #include "player.h"
 
 game::game(
-  std::vector<amino_acid>& amino_acids,
+  const std::vector<amino_acid>& amino_acids,
   const double world_size
 )
   : m_bullets{},
