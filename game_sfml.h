@@ -74,7 +74,7 @@ private:
   sf::RenderWindow& m_window;
 
   ///Check if one of the players is hit by a bullet
-  void bullet_hits_player();
+  void resize_life_bars();
 
   ///Show this menu on the screen
   void display();

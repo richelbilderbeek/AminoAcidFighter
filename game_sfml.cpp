@@ -29,7 +29,7 @@ game_sfml::~game_sfml()
   m_music.stop();
 }
 
-void game_sfml::bullet_hits_player()
+void game_sfml::resize_life_bars()
 {
   const auto players = get_players(*this);
   //Show the players' HPs in the bars
@@ -258,6 +258,7 @@ std::vector<sf::RectangleShape> set_life_bars(
 
 void game_sfml::tick()
 {
+  m_game.tick();
   assert(m_window.isOpen());
   sf::Event event;
   while(m_window.pollEvent(event))
@@ -267,14 +268,6 @@ void game_sfml::tick()
   display();
 
   assert(m_window.getSize().x == m_window.getSize().y);
-  //Move players
-  for(auto i = 0u; i != get_players(*this).size(); ++i) { get_players(*this)[i].move(m_window.getSize().x); }
-
-  //Move bullets
-  for(auto& bullet : get_bullets(*this)) {
-    bullet.slow_down();
-    bullet.move(m_window.getSize().x);
-  }
 
   //Move hit ranges
   for(auto i = 0u; i != get_players(*this).size(); ++i)
@@ -284,10 +277,7 @@ void game_sfml::tick()
   }
 
   //Check if bullet hits player
-  bullet_hits_player();
-
-  //Remove all bullets that have no speed
-  remove_slow_bullets(get_bullets(*this));
+  resize_life_bars();
 
   //Look for winner
   if(get_winner(*this) != 0)

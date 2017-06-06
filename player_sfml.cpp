@@ -385,6 +385,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
     {
+      p1.start_using_power();
       power p = get_power(p1.get_amino_acid());
       do_power(p, g);
     }

@@ -156,8 +156,13 @@ void game::tick()
 {
   if(get_state() == game_state::running)
   {
+    bullet_hits_player();
     for (auto& p: m_players) p.move(m_world_size);
-    for (auto& b: m_bullets) b.move(m_world_size);
+    for (auto& b: m_bullets)
+    {
+      b.move(m_world_size);
+      b.slow_down();
+    }
     for (auto i{0u}; i < m_players.size(); ++i)
     {
       m_players[i].stops_using_power();

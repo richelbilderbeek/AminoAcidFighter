@@ -6,6 +6,7 @@
 
 #include "action.h"
 #include "amino_acid.h"
+#include "bullet.h"
 #include "choose_amino_acids_menu.h"
 #include "game_state.h"
 #include "player.h"
