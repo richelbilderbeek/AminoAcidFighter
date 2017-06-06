@@ -17,15 +17,15 @@ game::game(
 
 void game::bullet_hits_player()
 {
-  for(auto i = 0u; i < m_players.size(); ++i)
+  for(auto& player: m_players)
   {
-    for(auto j = 0u; j < m_bullets.size(); ++j)
+    for(auto& bullet: m_bullets)
     {
-      float distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
+      const auto distance = calculate_distance_bullet_player(bullet, player);
       if(distance <= get_hit_range_size())
       {
-        m_players[i].lose_hp();
-        m_bullets[j].slow_down();
+        player.lose_hp();
+        bullet.slow_down();
       }
     }
   }
