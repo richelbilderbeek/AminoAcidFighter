@@ -1,10 +1,11 @@
 #include "game_sfml.h"
-#include "game.h"
-#include "player_sfml.h"
+
 #include "bullet_sfml.h"
-#include "menu_sfml.h"
-#include "choose_n_players_menu_sfml.h"
 #include "choose_amino_acids_menu_sfml.h"
+#include "choose_n_players_menu_sfml.h"
+#include "game.h"
+#include "menu_sfml.h"
+#include "player_sfml.h"
 
 game_sfml::game_sfml(sf::RenderWindow& window,
   const bool do_play_music,

@@ -8,7 +8,6 @@
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-
 #include "amino_acid.h"
 #include "game.h"
 #include "player.h"

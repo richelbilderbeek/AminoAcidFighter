@@ -2,8 +2,8 @@
 #define PROGRAM_SFML_H
 
 #include <SFML/Graphics.hpp>
-#include "sprites_sfml.h"
 #include "program_state.h"
+#include "sprites_sfml.h"
 
 ///The full AminoAcidFighte SFML program, that
 ///handles user interaction going through menus and the game.

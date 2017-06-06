@@ -1,8 +1,6 @@
 #ifndef WINNER_SCREEN_H
 #define WINNER_SCREEN_H
 
-#include <SFML/Graphics.hpp>
-
 class winner_screen
 {
 public:

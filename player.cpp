@@ -1,8 +1,9 @@
+#include "player.h"
+
 #include <cmath>
 #include <cassert>
 #include <iostream>
 #include "helper.h"
-#include "player.h"
 
 player::player(
   amino_acid any_amino_acid,
@@ -38,7 +39,7 @@ void player::decelerate()
 power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any shorter
 {
   switch (any_aa) {
-    case amino_acid::alanine:       return power::shield;
+    case amino_acid::alanine:       return power::stop_bullets;
     case amino_acid::arginine:      return power::shield;
     case amino_acid::asparagine:    return power::shield;
     case amino_acid::aspartic_acid: return power::shield;

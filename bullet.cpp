@@ -20,11 +20,18 @@ bullet::bullet(
 
 bool is_too_slow(const bullet& any_bullet)
 {
+  //Bullets that are stopped by power "stop_bullets"
+  //should not be removed.
+  if(any_bullet.get_speed_x() == 0 &&
+     any_bullet.get_speed_y() == 0)
+  { return false; }
+
   if(any_bullet.get_speed_x() < 0.5 &&
      any_bullet.get_speed_x() > -0.5 &&
      any_bullet.get_speed_y() < 0.5 &&
      any_bullet.get_speed_y() > -0.5)
   { return true; }
+
   return false;
 }
 

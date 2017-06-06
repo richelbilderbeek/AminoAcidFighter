@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <SFML/System.hpp>
-
 #include "choose_amino_acids_menu_sfml.h"
 #include "choose_n_players_menu_sfml.h"
 #include "game.h"

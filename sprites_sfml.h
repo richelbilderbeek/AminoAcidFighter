@@ -3,7 +3,6 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
-
 #include "amino_acid.h"
 
 class Sprites_sfml

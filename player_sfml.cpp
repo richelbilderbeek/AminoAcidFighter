@@ -1,6 +1,7 @@
+#include "player_sfml.h"
+
 #include <cassert>
 #include "sprites_sfml.h"
-#include "player_sfml.h"
 
 void draw_player( //!OCLINT cannot make this any shorter
   const player& p,
@@ -380,6 +381,11 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
       bullets.push_back(shoot(p1));
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+    {
+      power p = get_power(p1.get_amino_acid());
+      do_power(p, bullets);
     }
   }
   // player2 controls

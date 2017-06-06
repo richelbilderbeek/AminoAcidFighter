@@ -1,5 +1,6 @@
-#include <cassert>
 #include "amino_acid.h"
+
+#include <cassert>
 
 std::string to_str(const amino_acid a) noexcept //!OCLINT cannot make this any shorter
 {

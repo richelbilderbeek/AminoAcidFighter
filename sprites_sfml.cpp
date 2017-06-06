@@ -1,7 +1,6 @@
 #include "sprites_sfml.h"
 
 #include <cassert>
-
 #include "helper.h"
 
 Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)

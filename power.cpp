@@ -22,7 +22,7 @@ int get_duration(const power any_power) //!OCLINT cannot make this any shorter
     case power::power_shot: return 10;
     case power::repell: return 10;
     case power::reverse_speed: return 10;
-    case power::reversed_controls: return 10;
+    case power::reverse_controls: return 10;
     case power::shield: return 10;
     case power::slowdown: return 10;
     case power::spin: return 10;
@@ -35,4 +35,49 @@ int get_duration(const power any_power) //!OCLINT cannot make this any shorter
   }
   //Not implemented yet
   return 0;
+}
+
+void do_power(power any_power, std::vector<bullet>& bullets)
+{
+  switch (any_power)
+  {
+    case power::ceasefire        : /*do_ceasefire()        */; break;
+    case power::crash            : /*do_crash()            */; break;
+    case power::freeze_all       : /*do_freeze_all()       */; break;
+    case power::freeze_player    : /*do_freeze_player()    */; break;
+    case power::health           : /*do_health()           */; break;
+    case power::homing_missile   : /*do_homing_missle()    */; break;
+    case power::invisibility     : /*do_invisibility()     */; break;
+    case power::invisible_bullets: /*do_invisible_bullets()*/; break;
+    case power::kamikaze         : /*do_kamikaze()        */ ; break;
+    case power::maximize         : /*do_maximize()        */ ; break;
+    case power::mine             : /*do_mine()            */ ; break;
+    case power::minimize         : /*do_minimize()        */ ; break;
+    case power::mix_speed        : /*do_mix_speed()       */ ; break;
+    case power::multi_shot       : /*do_multi_shot()      */ ; break;
+    case power::opposite_switch  : /*do_opposite_switch() */ ; break;
+    case power::power_shot       : /*do_power_shot()      */ ; break;
+    case power::repell           : /*do_repell()          */ ; break;
+    case power::reverse_speed    : /*do_reverse_speed()   */ ; break;
+    case power::reverse_controls : /*do_reverse_controls()*/ ; break;
+    case power::shield           : /*do_shield()         */  ; break;
+    case power::slowdown         : /*do_slowdown()       */  ; break;
+    case power::spin             : /*do_spin()           */  ; break;
+    case power::stop_bullets     : do_stop_bullets(bullets)     ; break;
+    case power::strafe_left      : /*do_strafe_left()    */  ; break;
+    case power::strafe_right     : /*do_strafe_right()    */ ; break;
+    case power::switch_players   : /*do_switch_players()*/   ; break;
+    case power::teleport         : /*do_teleport()*/         ; break;
+    case power::turbo_boost      : /*do_turbo_boost()*/      ; break;
+  }
+  //Not implemented yet
+}
+
+void do_stop_bullets(std::vector<bullet>& bullets)
+{
+  for(int i=0; i < static_cast<int>(bullets.size()); ++i)
+  {
+    bullets[i].set_speed_x_zero();
+    bullets[i].set_speed_y_zero();
+  }
 }

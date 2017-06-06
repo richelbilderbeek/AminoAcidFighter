@@ -1,14 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <cmath>
+#include <SFML/Graphics.hpp>
 #include "amino_acid.h"
 #include "bullet.h"
 #include "power.h"
-#include <cmath>
-
-#include <SFML/Graphics.hpp>
-
-#include "bullet.h"
 
 class player
 {
@@ -23,11 +20,11 @@ public:
   void decelerate();
   auto get_amino_acid() const noexcept { return m_amino_acid; }
   auto get_hp() const noexcept { return m_hp; }
-  std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; };
+  std::pair<double, double> get_position() const noexcept { return { m_x, m_y }; }
 
   ///Return the special power of the amino acid
   auto get_rotation() const noexcept { return m_rotation_deg; }
-  std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; };
+  std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; }
   auto get_speed_x() const noexcept { return m_speed_x; }
   auto get_speed_y() const noexcept { return m_speed_y; }
   auto get_turn_speed() const noexcept { return m_turn_speed_deg_per_tick; }
@@ -64,6 +61,8 @@ private:
   double m_y;
 
 };
+
+void do_power(power any_power);
 
 /// Get the radius that each player has around its center
 /// in which is is hit, in pixels

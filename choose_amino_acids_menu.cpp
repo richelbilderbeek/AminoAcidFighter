@@ -1,5 +1,6 @@
-﻿#include <stdexcept>
-#include "choose_amino_acids_menu.h"
+﻿#include "choose_amino_acids_menu.h"
+
+#include <stdexcept>
 
 choose_amino_acids_menu::choose_amino_acids_menu(const std::vector<amino_acid>& initial_aas)
   : m_amino_acids{initial_aas}

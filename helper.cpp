@@ -1,11 +1,11 @@
+#include "helper.h"
+
 #include <cassert>
 #include <cmath>
 #include <iostream>
 #include <QFile>
 #include <vector>
-
 #include "amino_acid.h"
-#include "helper.h"
 
 void create_fonts()
 {

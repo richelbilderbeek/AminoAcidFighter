@@ -1,6 +1,7 @@
+#include "game.h"
+
 #include <cmath>
 #include <stdexcept>
-#include "game.h"
 #include "player.h"
 
 game::game(

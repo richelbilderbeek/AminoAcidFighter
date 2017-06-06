@@ -6,7 +6,6 @@
 
 #include <SFML/Config.hpp>
 #include <SFML/Graphics.hpp>
-
 #include "bullet.h"
 
 //May be slow, use Sprite_sfml::get_bullet instead

@@ -1,6 +1,8 @@
 #ifndef POWER_H
 #define POWER_H
 
+#include "bullet.h"
+
 enum class power
 {
   ceasefire, // no one can shoot except you
@@ -21,7 +23,7 @@ enum class power
   power_shot, // more powerfull shot
   repell, // all bullets within a certain range are repelled (or removed)
   reverse_speed, // go into the opposite direction
-  reversed_controls, // left becomes right, right becomes left for 5 sec (for the other players)
+  reverse_controls, // left becomes right, right becomes left for 5 sec (for the other players)
   shield, // a temporary (5 sec) shield
   slowdown, // slow down other players
   spin, // fast spin other players
@@ -32,6 +34,9 @@ enum class power
   teleport, // teleport to set location
   turbo_boost // extra speed
 };
+
+void do_power(power any_power, std::vector<bullet>& bullets);
+void do_stop_bullets(std::vector<bullet>& bullets);
 
 ///How many ticks do the powers last?
 ///Some of them only last only one tick

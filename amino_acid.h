@@ -29,9 +29,8 @@ enum class amino_acid
 };
 
 std::vector<amino_acid> get_all_amino_acids() noexcept;
-
-amino_acid get_prev(const amino_acid in);
 amino_acid get_next(const amino_acid in);
+amino_acid get_prev(const amino_acid in);
 std::string to_str(const amino_acid in) noexcept;
 
 #endif // AMINO_ACID_H
