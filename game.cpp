@@ -21,7 +21,7 @@ void game::bullet_hits_player()
   {
     for(auto& bullet: m_bullets)
     {
-      const auto distance = calculate_distance_bullet_player(bullet, player);
+      const auto distance = calculate_distance(bullet, player);
       if(distance <= get_hit_range_size())
       {
         player.lose_hp();
@@ -31,18 +31,11 @@ void game::bullet_hits_player()
   }
 }
 
-float calculate_distance_bullet_player(bullet any_bullet, const player any_player)
+double calculate_distance(const bullet& b, const player& p)
 {
-  const float bullet_position_x = any_bullet.get_x();
-  const float bullet_position_y = any_bullet.get_y();
-  const float player_position_x = any_player.get_x();
-  const float player_position_y = any_player.get_y();
-  const float length_x = bullet_position_x - player_position_x;
-  const float length_y = bullet_position_y - player_position_y;
-  const float x2 = length_x * length_x;
-  const float y2 = length_y * length_y;
-  const float a2 = x2 + y2;
-  return sqrt(a2);
+  const auto delta_x = b.get_x() - p.get_x();
+  const auto delta_y = b.get_y() - p.get_y();
+  return std::sqrt((delta_x * delta_x) + (delta_y * delta_y));
 }
 
 std::vector<double> collect_hit_points(const game& g)
@@ -126,7 +119,7 @@ void game::do_damage()
   {
     for(auto j{0u}; j < m_bullets.size(); ++j)
     {
-      double distance = calculate_distance_bullet_player(m_bullets[j], m_players[i]);
+      double distance = calculate_distance(m_bullets[j], m_players[i]);
       if(distance < get_hit_range_size())
       {
         m_players[i].lose_hp();
