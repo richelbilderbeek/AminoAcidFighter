@@ -52,28 +52,6 @@ std::vector<double> collect_hit_points(const game_sfml& g)
   */
 }
 
-int get_winner(const game_sfml& g)
-{
-  //Count the number of players that live
-  const std::vector<double> hps = collect_hit_points(g);
-  const int n_alive = std::count_if(
-    std::begin(hps), std::end(hps),
-    [](const double hp) { return hp > 0.0; }
-  );
-
-  //At least two players live
-  if (n_alive > 1) return 0;
-
-  //We have a winner or everyone died
-  const int n_players = hps.size();
-  for (int i=0; i!=n_players; ++i)
-  {
-    if (hps[i] > 0.0) { return i + 1; }
-  }
-  //Everyone, or the last two players, died at the same time
-  return -1;
-}
-
 void game_sfml::display()
 {
   // 600 fps (current speed on Travis) for 60 seconds
@@ -96,6 +74,43 @@ void game_sfml::display()
   m_window.display();
 }
 
+void draw_game_components(
+  sf::RenderWindow &w,
+  std::vector<sf::RectangleShape> life_bars,
+  std::vector<sf::CircleShape> hit_ranges,
+  std::vector<bullet> bullets)
+{
+  for(auto i{0u}; i != life_bars.size(); ++i) {
+    if(life_bars[i].getSize().x > 0.0) {
+      draw_life_bar(life_bars[i], w);
+    }
+  }
+  for(auto i{0u}; i != hit_ranges.size(); ++i) {
+    if(life_bars[i].getSize().x > 0.0) {
+      draw_hit_ranges(hit_ranges[i], w);
+    }
+  }
+  for(auto& bullet : bullets) {
+    const int window_size = w.getSize().x;
+    //Must we draw the 'shadow' player left or right?
+    const bool must_right{bullet.get_x() < window_size / 2};
+    const int dx = must_right ? window_size : -window_size;
+    const bool must_down{bullet.get_y() < window_size / 2};
+    const int dy = must_down ? window_size : -window_size;
+    //Real position
+    w.draw(to_sprite(bullet));
+    //Horizontal of player
+    bullet.set_position(bullet.get_x() + dx, bullet.get_y());
+    w.draw(to_sprite(bullet));
+    //Down-Right of player
+    bullet.set_position(bullet.get_x(), bullet.get_y() +  dy);
+    w.draw(to_sprite(bullet));
+    //Below player
+    bullet.set_position(bullet.get_x() - dx, bullet.get_y());
+    w.draw(to_sprite(bullet));
+  }
+}
+
 void game_sfml::execute()
 {
   assert(m_state == program_state::battle);
@@ -109,6 +124,60 @@ void game_sfml::execute()
     //Stay here
     assert(m_state == program_state::battle);
   }
+}
+
+std::vector<sf::Vector2f> get_life_bar_positions()
+{
+    const std::vector<sf::Vector2f> life_bar_positions {
+      sf::Vector2f(10 , 10 ),
+      sf::Vector2f(490, 10 ),
+      sf::Vector2f(10 , 580),
+      sf::Vector2f(490, 580)
+  };
+  return life_bar_positions;
+}
+
+const std::vector<player>& get_players(const game_sfml& g)
+{
+  return get_players(g.get_game());
+}
+
+std::vector<player>& get_players(game_sfml& g)
+{
+  return get_players(g.get_game());
+}
+
+std::vector<sf::Vector2f> get_start_positions()
+{
+  const std::vector<sf::Vector2f> start_positions {
+      sf::Vector2f(175, 175),
+      sf::Vector2f(425, 175),
+      sf::Vector2f(175, 425),
+      sf::Vector2f(425, 425)
+  };
+  return start_positions;
+}
+
+int get_winner(const game_sfml& g)
+{
+  //Count the number of players that live
+  const std::vector<double> hps = collect_hit_points(g);
+  const int n_alive = std::count_if(
+    std::begin(hps), std::end(hps),
+    [](const double hp) { return hp > 0.0; }
+  );
+
+  //At least two players live
+  if (n_alive > 1) return 0;
+
+  //We have a winner or everyone died
+  const int n_players = hps.size();
+  for (int i=0; i!=n_players; ++i)
+  {
+    if (hps[i] > 0.0) { return i + 1; }
+  }
+  //Everyone, or the last two players, died at the same time
+  return -1;
 }
 
 void game_sfml::process_event(sf::Event event)
@@ -139,6 +208,42 @@ void game_sfml::process_event(sf::Event event)
     default:
       break;
   }
+}
+
+std::vector<sf::CircleShape> set_hit_ranges(
+  std::vector<player> ps,
+  std::vector<sf::Vector2f> start_positions
+)
+{
+  std::vector<sf::CircleShape> hit_ranges;
+  for(auto i{0u}; i != ps.size(); ++i)
+  {
+    const float hit_range_size = get_hit_range_size();
+    sf::CircleShape hit_range;
+    hit_range.setPosition(start_positions[i]);
+    hit_range.setRadius(hit_range_size);
+    hit_range.setOrigin(sf::Vector2f(hit_range_size, hit_range_size));
+    hit_range.setOutlineColor(sf::Color::Blue);
+    hit_range.setOutlineThickness(2.0);
+    hit_range.setFillColor(sf::Color::Transparent);
+    hit_ranges.push_back(hit_range);
+  }
+  return hit_ranges;
+}
+
+std::vector<sf::RectangleShape> set_life_bars(
+  int player_amount,
+  std::vector<sf::Vector2f> life_bar_positions)
+{
+  std::vector<sf::RectangleShape> life_bars;
+  for(auto i{0}; i != player_amount; ++i) {
+    sf::RectangleShape life_bar;
+    life_bar.setPosition(life_bar_positions[i]);
+    life_bar.setSize(sf::Vector2f(100, 10));
+    life_bar.setFillColor(sf::Color::Red);
+    life_bars.push_back(life_bar);
+  }
+  return life_bars;
 }
 
 void game_sfml::tick()
@@ -179,129 +284,5 @@ void game_sfml::tick()
   {
     m_state = program_state::winner;
   }
-}
-
-std::vector<player> create_game_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> ps_pos)
-{
-  std::vector<player> players;
-  const int n_players = amino_acids.size();
-  for (int i{0}; i!=n_players; ++i)
-  {
-    players.push_back(
-      player(
-        amino_acids[i],
-        ps_pos[i].x,
-        ps_pos[i].y
-      )
-    );
-  }
-  return players;
-}
-
-void draw_game_components(
-  sf::RenderWindow &w,
-  std::vector<sf::RectangleShape> life_bars,
-  std::vector<sf::CircleShape> hit_ranges,
-  std::vector<bullet> bullets)
-{
-  for(auto i{0u}; i != life_bars.size(); ++i) {
-    if(life_bars[i].getSize().x > 0.0) {
-      draw_life_bar(life_bars[i], w);
-    }
-  }
-  for(auto i{0u}; i != hit_ranges.size(); ++i) {
-    if(life_bars[i].getSize().x > 0.0) {
-      draw_hit_ranges(hit_ranges[i], w);
-    }
-  }
-  for(auto& bullet : bullets) {
-    const int window_size = w.getSize().x;
-    //Must we draw the 'shadow' player left or right?
-    const bool must_right{bullet.get_x() < window_size / 2};
-    const int dx = must_right ? window_size : -window_size;
-    const bool must_down{bullet.get_y() < window_size / 2};
-    const int dy = must_down ? window_size : -window_size;
-    //Real position
-    w.draw(to_sprite(bullet));
-    //Horizontal of player
-    bullet.set_position(bullet.get_x() + dx, bullet.get_y());
-    w.draw(to_sprite(bullet));
-    //Down-Right of player
-    bullet.set_position(bullet.get_x(), bullet.get_y() +  dy);
-    w.draw(to_sprite(bullet));
-    //Below player
-    bullet.set_position(bullet.get_x() - dx, bullet.get_y());
-    w.draw(to_sprite(bullet));
-  }
-}
-
-std::vector<sf::CircleShape> set_hit_ranges(
-  std::vector<player> ps,
-  std::vector<sf::Vector2f> start_positions
-)
-{
-  std::vector<sf::CircleShape> hit_ranges;
-  for(auto i{0u}; i != ps.size(); ++i)
-  {
-    const float hit_range_size = get_hit_range_size();
-    sf::CircleShape hit_range;
-    hit_range.setPosition(start_positions[i]);
-    hit_range.setRadius(hit_range_size);
-    hit_range.setOrigin(sf::Vector2f(hit_range_size, hit_range_size));
-    hit_range.setOutlineColor(sf::Color::Blue);
-    hit_range.setOutlineThickness(2.0);
-    hit_range.setFillColor(sf::Color::Transparent);
-    hit_ranges.push_back(hit_range);
-  }
-  return hit_ranges;
-}
-
-std::vector<sf::RectangleShape> set_life_bars(
-  int player_amount,
-  std::vector<sf::Vector2f> life_bar_positions)
-{
-  std::vector<sf::RectangleShape> life_bars;
-  for(auto i{0}; i != player_amount; ++i) {
-    sf::RectangleShape life_bar;
-    life_bar.setPosition(life_bar_positions[i]);
-    life_bar.setSize(sf::Vector2f(100, 10));
-    life_bar.setFillColor(sf::Color::Red);
-    life_bars.push_back(life_bar);
-  }
-  return life_bars;
-}
-
-std::vector<sf::Vector2f> get_life_bar_positions()
-{
-    const std::vector<sf::Vector2f> life_bar_positions {
-      sf::Vector2f(10 , 10 ),
-      sf::Vector2f(490, 10 ),
-      sf::Vector2f(10 , 580),
-      sf::Vector2f(490, 580)
-  };
-  return life_bar_positions;
-}
-
-const std::vector<player>& get_players(const game_sfml& g)
-{
-  return get_players(g.get_game());
-}
-
-std::vector<player>& get_players(game_sfml& g)
-{
-  return get_players(g.get_game());
-}
-
-std::vector<sf::Vector2f> get_start_positions()
-{
-  const std::vector<sf::Vector2f> start_positions {
-      sf::Vector2f(175, 175),
-      sf::Vector2f(425, 175),
-      sf::Vector2f(175, 425),
-      sf::Vector2f(425, 425)
-  };
-  return start_positions;
 }
 
