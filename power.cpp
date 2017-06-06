@@ -37,7 +37,7 @@ int get_duration(const power any_power) //!OCLINT cannot make this any shorter
   return 0;
 }
 
-void do_power(power any_power, std::vector<bullet>& bullets)
+void do_power(power any_power, std::vector<bullet>& bullets) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
   {
