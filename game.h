@@ -17,7 +17,9 @@ class game
 public:
   game(
     const std::vector<amino_acid>& players,
-    const double world_size
+    const double world_size,
+    const bool do_play_music = true,
+    const bool is_profile_run = false
   );
 
   void do_action(int i, action any_action);
@@ -37,11 +39,12 @@ public:
   void tick();
 
 private:
-  ///Will music be played?
-  bool m_do_play_music;
 
   ///All bullets currently in the game
   std::vector<bullet> m_bullets;
+
+  ///Will music be played?
+  bool m_do_play_music;
 
   ///Is this a profile run, yes or no?
   bool m_is_profile_run;
@@ -50,6 +53,7 @@ private:
 
   ///Current state
   game_state m_state;
+
   double m_world_size;
 
   ///Check if one of the players is hit by a bullet

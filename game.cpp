@@ -6,9 +6,13 @@
 
 game::game(
   const std::vector<amino_acid>& amino_acids,
-  const double world_size
+  const double world_size,
+  const bool do_play_music,
+  const bool is_profile_run
 )
   : m_bullets{},
+    m_do_play_music{do_play_music},
+    m_is_profile_run{is_profile_run},
     m_players{create_players(amino_acids, world_size)},
     m_state{game_state::running},
     m_world_size{world_size}

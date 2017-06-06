@@ -20,9 +20,7 @@ BOOST_AUTO_TEST_CASE(game_sfml_construction)
 
   game_sfml g(
     w,
-    do_play_music,
     amino_acids,
-    is_profile_run,
     sprites
   );
   /* TODO
