@@ -69,7 +69,7 @@ void game_sfml::display()
 
   m_window.clear();
   m_window.draw(m_sprites.get_background());
-  draw_game_components(m_window, m_life_bars, m_hit_ranges, m_bullets);
+  draw_game_components(m_window, m_life_bars, m_hit_ranges, get_bullets(*this));
   draw_players(get_players(*this), m_window, m_sprites);
   m_window.display();
 }
@@ -124,6 +124,16 @@ void game_sfml::execute()
     //Stay here
     assert(m_state == program_state::battle);
   }
+}
+
+const std::vector<bullet>& get_bullets(const game_sfml& g)
+{
+  return get_bullets(g.get_game());
+}
+
+std::vector<bullet>& get_bullets(game_sfml& g)
+{
+  return get_bullets(g.get_game());
 }
 
 std::vector<sf::Vector2f> get_life_bar_positions()
@@ -194,7 +204,7 @@ void game_sfml::process_event(sf::Event event)
       respond_to_key(
         get_players(*this)[0],
         get_players(*this)[1],
-        m_bullets,
+        get_bullets(*this),
         m_game
       );
       break;
@@ -203,7 +213,7 @@ void game_sfml::process_event(sf::Event event)
       respond_to_joystick(
         get_players(*this)[2],
         get_players(*this)[3],
-        m_bullets);
+        get_bullets(*this));
       break;
     default:
       break;
@@ -261,7 +271,7 @@ void game_sfml::tick()
   for(auto i = 0u; i != get_players(*this).size(); ++i) { get_players(*this)[i].move(m_window.getSize().x); }
 
   //Move bullets
-  for(auto& bullet : m_bullets) {
+  for(auto& bullet : get_bullets(*this)) {
     bullet.slow_down();
     bullet.move(m_window.getSize().x);
   }
@@ -277,7 +287,7 @@ void game_sfml::tick()
   bullet_hits_player();
 
   //Remove all bullets that have no speed
-  remove_slow_bullets(m_bullets);
+  remove_slow_bullets(get_bullets(*this));
 
   //Look for winner
   if(get_winner(*this) != 0)

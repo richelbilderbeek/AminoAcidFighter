@@ -46,9 +46,6 @@ public:
   void tick();
 
 private:
-  ///All bullets currently in the game
-  std::vector<bullet> m_bullets;
-
   ///Will music be played?
   bool m_do_play_music;
 
@@ -88,18 +85,15 @@ private:
 
 std::vector<double> collect_hit_points(const game_sfml& g);
 
-[[deprecated]]
-std::vector<player> create_game_players(
-  std::vector<amino_acid> amino_acids,
-  std::vector<sf::Vector2f> ps_pos
-);
-
 void draw_game_components(
   sf::RenderWindow &w,
   std::vector<sf::RectangleShape> life_bars,
   std::vector<sf::CircleShape> hit_ranges,
   std::vector<bullet> bullets
 );
+
+const std::vector<bullet>& get_bullets(const game_sfml& g);
+std::vector<bullet>& get_bullets(game_sfml& g);
 
 std::vector<sf::Vector2f> get_life_bar_positions();
 
