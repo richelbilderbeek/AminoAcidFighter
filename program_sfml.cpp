@@ -25,6 +25,12 @@ program_sfml::program_sfml(const std::vector<std::string>& args)
   {
     show_help();
   }
+
+  //Might not be needed with some computers
+  if(!is_profile_run(args))
+  {
+    m_window.setFramerateLimit(60);
+  }
 }
 
 program_sfml::~program_sfml()
