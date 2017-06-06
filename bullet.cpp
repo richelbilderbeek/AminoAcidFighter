@@ -9,9 +9,11 @@ bullet::bullet(
   const double x,
   const double y,
   const double speed_x,
-  const double speed_y
+  const double speed_y,
+  const int n_frames_to_live
 )
   : m_damage{damage},
+    m_n_frames_left{n_frames_to_live},
     m_speed_x{speed_x},
     m_speed_y{speed_y},
     m_x{x},
@@ -23,28 +25,16 @@ bool is_moving(const bullet& b) noexcept
   return b.get_speed_x() != 0.0 || b.get_speed_y() != 0.0;
 }
 
-bool is_too_slow(const bullet& any_bullet)
+bool is_dead(const bullet& any_bullet)
 {
-  //Bullets that are stopped by power "stop_bullets"
-  //should not be removed.
-  if(any_bullet.get_speed_x() == 0 &&
-     any_bullet.get_speed_y() == 0)
-  { return false; }
-
-  if(any_bullet.get_speed_x() < 0.5 &&
-     any_bullet.get_speed_x() > -0.5 &&
-     any_bullet.get_speed_y() < 0.5 &&
-     any_bullet.get_speed_y() > -0.5)
-  { return true; }
-
-  return false;
+  return !any_bullet.is_alive();
 }
 
-void remove_slow_bullets(std::vector<bullet> &bullets)
+void remove_dead_bullets(std::vector<bullet> &bullets)
 {
   for(int i=0; i < static_cast<int>(bullets.size()); ++i)
   {
-    if(is_too_slow(bullets[i]))
+    if(is_dead(bullets[i]))
     {
       bullets[i] = bullets.back();
       bullets.pop_back();
@@ -60,6 +50,8 @@ void bullet::move(const double world_size)
   m_x = std::fmod(m_x + m_speed_x + world_size, world_size);
   //Keep m_y in [0, world_size>
   m_y = std::fmod(m_y + m_speed_y + world_size, world_size);
+
+  --m_n_frames_left;
 }
 
 void bullet::set_position(const double x, const double y)
