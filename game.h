@@ -25,6 +25,7 @@ public:
   void do_action(int i, action any_action);
   const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
   std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
+  bool get_do_play_music() const noexcept { return m_do_play_music; }
   game_state get_state() noexcept { return m_state; }
 
   bool get_is_profile_run() const noexcept { return m_is_profile_run; }

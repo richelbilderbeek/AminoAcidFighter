@@ -39,8 +39,14 @@ BOOST_AUTO_TEST_CASE(check_game_construction)
     amino_acid::alanine,
     amino_acid::glycine
   };
-  const game g(amino_acids, world_size);
+  const bool do_play_music{false};
+  const bool is_profile_run{false};
+  const game g(amino_acids, world_size, do_play_music, is_profile_run);
   BOOST_CHECK(g.get_players().size() == amino_acids.size());
+  BOOST_CHECK_EQUAL(g.get_world_size(), world_size);
+  BOOST_CHECK_EQUAL(g.get_do_play_music(), do_play_music);
+  BOOST_CHECK_EQUAL(g.get_is_profile_run(), is_profile_run);
+
 
 }
 
@@ -52,10 +58,14 @@ BOOST_AUTO_TEST_CASE(check_create_test_game_1)
     amino_acid::tyrosine,
     amino_acid::glycine
   };
-  const game g(amino_acids, world_size);
+  const bool do_play_music{false};
+  const bool is_profile_run{false};
+  const game g(amino_acids, world_size, do_play_music, is_profile_run);
   const game h = create_test_game_1();
   BOOST_CHECK(g.get_players() == h.get_players());
   BOOST_CHECK_EQUAL(g.get_world_size(), h.get_world_size());
+  BOOST_CHECK_EQUAL(g.get_do_play_music(), h.get_do_play_music());
+  BOOST_CHECK_EQUAL(g.get_is_profile_run(), h.get_is_profile_run());
 
 }
 
