@@ -12,9 +12,10 @@ game::game(
 )
   : m_bullets{},
     m_do_play_music{do_play_music},
+    m_game_state{game_state::running},
     m_is_profile_run{is_profile_run},
     m_players{create_players(amino_acids, world_size)},
-    m_state{game_state::running},
+    m_state{program_state::battle},
     m_world_size{world_size}
 {
 }
@@ -163,9 +164,14 @@ std::vector<player>& get_players(game& g)
   return g.get_players();
 }
 
+program_state get_state(const game& g)
+{
+  return g.get_state();
+}
+
 void game::tick()
 {
-  if(get_state() == game_state::running)
+  if(get_game_state() == game_state::running)
   {
     for (auto& p: m_players) p.move(m_world_size);
     for (auto& b: m_bullets)
@@ -182,9 +188,14 @@ void game::tick()
     do_damage();
     if(m_players[0].get_hp() <= 0.0)
     {
-      m_state = game_state::game_over;
+      m_game_state = game_state::game_over;
     }
   }
+}
+
+void set_state(game& g, program_state p)
+{
+  g.set_state(p);
 }
 
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept

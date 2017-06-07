@@ -26,7 +26,8 @@ public:
   const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
   std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
   bool get_do_play_music() const noexcept { return m_do_play_music; }
-  game_state get_state() noexcept { return m_state; }
+  game_state get_game_state() noexcept { return m_game_state; }
+  program_state get_state() const  noexcept { return m_state; }
 
   bool get_is_profile_run() const noexcept { return m_is_profile_run; }
 
@@ -35,6 +36,7 @@ public:
 
   auto get_world_size() const noexcept { return m_world_size; }
   auto set_bullets(std::vector<bullet> bullets) { m_bullets = bullets; }
+  void set_state(program_state p) { m_state = p; }
 
   ///Do a game 'tick', e.g. do this 60 times per second
   void tick();
@@ -47,13 +49,16 @@ private:
   ///Will music be played?
   bool m_do_play_music;
 
+  ///Current state
+  game_state m_game_state;
+
   ///Is this a profile run, yes or no?
   bool m_is_profile_run;
 
   std::vector<player> m_players;
 
-  ///Current state
-  game_state m_state;
+  ///In which state is the program while and directly after the battle?
+  program_state m_state;
 
   double m_world_size;
 
@@ -88,6 +93,10 @@ bool get_is_profile_run(const game& g);
 
 const std::vector<player>& get_players(const game& g);
 std::vector<player>& get_players(game& g);
+
+program_state get_state(const game& g);
+
+void set_state(game& g, program_state p);
 
 ///Display the game state
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;

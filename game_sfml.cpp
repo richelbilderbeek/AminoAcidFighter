@@ -18,7 +18,6 @@ game_sfml::game_sfml(
       create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
     m_sprites(sprites),
-    m_state{program_state::battle},
     m_window{window}
 {
 }
@@ -62,7 +61,7 @@ void game_sfml::display()
   if (kill_frame > 0 && frame > kill_frame)
   {
     m_window.close();
-    m_state = program_state::quit;
+    set_state(*this, program_state::quit);
     return;
   }
 
@@ -112,16 +111,16 @@ void draw_game_components(
 
 void game_sfml::execute()
 {
-  assert(m_state == program_state::battle);
+  assert(get_state(*this) == program_state::battle);
   while(m_window.isOpen())
   {
     tick();
     //Quit
-    if (m_state == program_state::quit) return;
+    if (get_state(*this) == program_state::quit) return;
     //Next screen
-    if (m_state == program_state::winner) return;
+    if (get_state(*this) == program_state::winner) return;
     //Stay here
-    assert(m_state == program_state::battle);
+    assert(get_state(*this) == program_state::battle);
   }
 }
 
@@ -172,6 +171,11 @@ std::vector<sf::Vector2f> get_start_positions()
   return start_positions;
 }
 
+program_state get_state(const game_sfml& g)
+{
+  return get_state(g.get_game());
+}
+
 int get_winner(const game_sfml& g)
 {
   //Count the number of players that live
@@ -199,7 +203,7 @@ void game_sfml::process_event(sf::Event event)
   switch(event.type)
   {
     case sf::Event::Closed:
-      m_state = program_state::quit;
+      set_state(*this, program_state::quit);
       m_window.close();
       break;
     case sf::Event::KeyPressed:
@@ -260,6 +264,11 @@ std::vector<sf::RectangleShape> set_life_bars(
   return life_bars;
 }
 
+void set_state(game_sfml& g, program_state p)
+{
+  set_state(g.get_game(), p);
+}
+
 void game_sfml::tick()
 {
   m_game.tick();
@@ -286,7 +295,7 @@ void game_sfml::tick()
   //Look for winner
   if(get_winner(*this) != 0)
   {
-    m_state = program_state::winner;
+    set_state(*this, program_state::winner);
   }
 }
 

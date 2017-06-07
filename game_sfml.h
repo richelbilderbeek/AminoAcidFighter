@@ -33,9 +33,6 @@ public:
   const auto& get_game() const noexcept { return m_game; }
   auto& get_game() noexcept { return m_game; }
 
-  ///Obtain the current or state after execute
-  program_state get_state() const noexcept { return m_state; }
-
   ///Runs the battle, which is handling input and displayal.
   ///Closes when the user wants to quit
   ///or continue to winner screen when a player has won.
@@ -60,9 +57,6 @@ private:
 
   ///The sprites, cannot be const as the sprites are modified in-place
   Sprites_sfml& m_sprites;
-
-  ///In which state is the program while and directly after the battle?
-  program_state m_state;
 
   ///Window used for displayal
   sf::RenderWindow& m_window;
@@ -98,6 +92,8 @@ std::vector<player>& get_players(game_sfml& g);
 
 std::vector<sf::Vector2f> get_start_positions();
 
+program_state get_state(const game_sfml& g);
+
 ///Get the winner. Returns
 /// * -1: everyone died
 /// *  0: at least two players are alive
@@ -120,5 +116,7 @@ std::vector<sf::RectangleShape> set_life_bars(
   int player_amount,
   std::vector<sf::Vector2f> life_bar_positions
 );
+
+void set_state(game_sfml& g, program_state p);
 
 #endif // GAME_SFML_H

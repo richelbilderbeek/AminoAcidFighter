@@ -69,7 +69,7 @@ void program_sfml::run_battle()
   m.execute();
 
   //Read the new state from the dialog
-  m_state = m.get_state();
+  m_state = get_state(m);
   if(m_state == program_state::quit) return;
   assert(m_state == program_state::winner);
   m_winner = get_winner(m);
