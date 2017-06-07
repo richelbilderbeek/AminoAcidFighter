@@ -10,8 +10,10 @@
 game_sfml::game_sfml(
   sf::RenderWindow& window,
   std::vector<amino_acid> amino_acids,
-  Sprites_sfml& sprites
-) : m_game{game(amino_acids, 600)},
+  Sprites_sfml& sprites,
+  const bool do_play_music,
+  const bool is_profile_run
+) : m_game{game(amino_acids, 600, do_play_music, is_profile_run)},
     m_hit_ranges{set_hit_ranges(
       create_players(amino_acids, window.getSize().x),get_start_positions())},
     m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},

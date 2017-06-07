@@ -18,8 +18,8 @@ public:
   game(
     const std::vector<amino_acid>& players,
     const double world_size,
-    const bool do_play_music = true,
-    const bool is_profile_run = false
+    const bool do_play_music,
+    const bool is_profile_run
   );
 
   void do_action(int i, action any_action);

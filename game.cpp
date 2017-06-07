@@ -86,7 +86,9 @@ game create_test_game_1()
     amino_acid::tyrosine,
     amino_acid::glycine
   };
-  return game{amino_acids, world_size};
+  const bool do_play_music{false};
+  const bool is_profile_run{false};
+  return game{amino_acids, world_size, do_play_music, is_profile_run};
 }
 
 void game::do_action(int i, action any_action)

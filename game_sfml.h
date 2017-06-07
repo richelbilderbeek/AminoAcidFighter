@@ -21,7 +21,9 @@ public:
   game_sfml(
     sf::RenderWindow& window,
     std::vector<amino_acid> amino_acids,
-    Sprites_sfml& sprites
+    Sprites_sfml& sprites,
+    const bool do_play_music,
+    const bool is_profile_run
   );
 
   ///Stops the music
