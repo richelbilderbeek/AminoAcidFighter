@@ -410,7 +410,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
       const power p = get_power(p2.get_amino_acid());
       do_power(p, g);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::T))
     {
       const power p = get_power(p2.get_amino_acid());
       do_power(p, g);

@@ -5,7 +5,9 @@ SOURCES += main_test.cpp helper_test.cpp \
     game_test.cpp \
     menu_test.cpp \
     player_test.cpp \
-    power_test.cpp
+    power_test.cpp \
+    winner_screen_test.cpp \
+    program_test.cpp
 
 include(AminoAcidFighter.pri)
 
@@ -54,3 +56,5 @@ LIBS += -lboost_unit_test_framework
 # qrc_[*].cpp:400:44: error: ‘qInitResources_[*]__init_variable__’ defined but not used
 # [*]: the resource filename
 QMAKE_CXXFLAGS += -Wno-unused-variable
+
+HEADERS +=
