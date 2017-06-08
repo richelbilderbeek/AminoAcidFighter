@@ -50,7 +50,7 @@ void create_sprites()
     }
   );
   file_names.push_back("Pictures/Bullet.png");
-  file_names.push_back("Pictures/BackgroundAminoAcidFighter.png");
+  file_names.push_back("Pictures/BackgroundAminoAcidFighter2.png");
 
   for (const std::string s: file_names)
   {

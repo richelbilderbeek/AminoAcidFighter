@@ -71,7 +71,7 @@ Sprites_sfml::Sprites_sfml() //!OCLINT Let @CarmenIJsebaart clean this up :-)
   //Load the background
   {
     sf::Texture * const texture = new sf::Texture;
-    texture->loadFromFile("BackgroundAminoAcidFighter.png");
+    texture->loadFromFile("BackgroundAminoAcidFighter2.png");
     m_background.setTexture(*texture);
     m_textures.push_back(texture);
   }

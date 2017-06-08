@@ -16,7 +16,6 @@ public:
   sf::Sprite& get_bullet() noexcept { return m_bullet; }
   sf::Sprite& get_background() noexcept { return m_background; }
 
-
   private:
   std::map<amino_acid, sf::Sprite> m_aas;
   std::vector<sf::Texture*> m_textures;

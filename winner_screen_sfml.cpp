@@ -33,16 +33,22 @@ sf::Text create_winner_text(const int winner)
   sf::Text winner_text;
   winner_text.setFont(font);
   winner_text.setPosition(sf::Vector2f(70, 225));
+  winner_text.setCharacterSize(75);
   #if SFML_VERSION_MINOR > 3
   winner_text.setFillColor(sf::Color::Yellow);
   #else
   winner_text.setColor(sf::Color::Yellow);
   #endif
-  std::string winner_number = std::to_string(winner);
-  sf::String winner_player = "Player " + winner_number + " wins!";
-  winner_text.setString(winner_player);
-  winner_text.setCharacterSize(75);
-
+  if(winner == -1)
+  {
+    winner_text.setString("Everybody Lost!");
+  }
+  else
+  {
+    std::string winner_number = std::to_string(winner);
+    sf::String winner_player = "Player " + winner_number + " wins!";
+    winner_text.setString(winner_player);
+  }
   return winner_text;
 }
 
@@ -74,7 +80,7 @@ void winner_screen_sfml::process_event(const sf::Event& event)
       m_state = program_state::quit;
       break;
     case sf::Event::KeyPressed:
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+      if(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
       {
         m_state = program_state::choose_n_players;
       }
