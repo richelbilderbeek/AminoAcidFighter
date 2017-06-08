@@ -388,6 +388,11 @@ void respond_to_key( //!OCLINT cannot simplify this even more
       const power p = get_power(p1.get_amino_acid());
       do_power(p, g);
     }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+    {
+      const power p = get_power(p1.get_amino_acid());
+      do_power(p, g);
+    }
   }
   // player2 controls
   if(p2.get_hp() > 0)
@@ -399,6 +404,16 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
     {
       bullets.push_back(shoot(p2));
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+    {
+      const power p = get_power(p2.get_amino_acid());
+      do_power(p, g);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+    {
+      const power p = get_power(p2.get_amino_acid());
+      do_power(p, g);
     }
   }
 }

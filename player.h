@@ -34,6 +34,9 @@ public:
   void set_amino_acid(const amino_acid aminoacid) { m_amino_acid = aminoacid; };
   void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
+  void set_speed_x(double speed) { m_speed_x = speed; }
+  void set_speed_y(double speed) { m_speed_y = speed; }
+
   void stop();
 
   ///When a player starts using a power, the game logic 'game' may be modified

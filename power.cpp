@@ -55,7 +55,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::maximize         : /*do_maximize()        */ ; break;
     case power::mine             : /*do_mine()            */ ; break;
     case power::minimize         : /*do_minimize()        */ ; break;
-    case power::mix_speed        : /*do_mix_speed()       */ ; break;
+    case power::mix_speed        : do_mix_speed(g)        ; break;
     case power::multi_shot       : /*do_multi_shot()      */ ; break;
     case power::opposite_switch  : /*do_opposite_switch() */ ; break;
     case power::power_shot       : /*do_power_shot()      */ ; break;
@@ -75,10 +75,24 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
   //Not implemented yet
 }
 
+void do_mix_speed(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    double new_speed_x = players[i].get_speed_y();
+    double new_speed_y = players[i].get_speed_x();
+    players[i].set_speed_x(new_speed_x);
+    players[i].set_speed_y(new_speed_y);
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
+}
 
 void do_stop_bullets(game& g)
 {
-  //No bullets enter here apperantly
   std::vector<bullet> bullets = g.get_bullets();
   std::vector<bullet> new_bullets;
   for(int i=0; i < static_cast<int>(bullets.size()); ++i)

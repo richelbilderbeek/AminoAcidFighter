@@ -36,6 +36,7 @@ public:
 
   auto get_world_size() const noexcept { return m_world_size; }
   auto set_bullets(std::vector<bullet> bullets) { m_bullets = bullets; }
+  auto set_players(std::vector<player> players) { m_players = players; }
   void set_state(program_state p) { m_state = p; }
 
   ///Do a game 'tick', e.g. do this 60 times per second
