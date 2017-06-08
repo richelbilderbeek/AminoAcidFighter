@@ -89,6 +89,7 @@ game create_test_game_1();
 const std::vector<bullet>& get_bullets(const game& g);
 std::vector<bullet>& get_bullets(game& g);
 
+bool get_do_play_music(const game& g);
 bool get_is_profile_run(const game& g);
 
 const std::vector<player>& get_players(const game& g);

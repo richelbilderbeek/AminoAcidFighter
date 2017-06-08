@@ -10,23 +10,25 @@ BOOST_AUTO_TEST_CASE(game_sfml_construction)
     sf::Style::Titlebar | sf::Style::Close
   };
 
-  const bool do_play_music{false};
   const std::vector<amino_acid> amino_acids =
   {
     amino_acid::alanine, amino_acid::arginine
   };
-  const bool is_profile_run{false};
   Sprites_sfml sprites;
+  const bool do_play_music{false};
+  const bool is_profile_run{false};
 
   game_sfml g(
     w,
     amino_acids,
-    sprites
+    sprites,
+    do_play_music,
+    is_profile_run
   );
-  /* TODO
-  BOOST_CHECK_EQUAL(do_play_music, w.do_play_music());
+  BOOST_CHECK_EQUAL(get_is_profile_run(g), is_profile_run);
+  /*
   BOOST_CHECK_EQUAL(amino_acids, w.get_amino_acids());
-  BOOST_CHECK_EQUAL(is_profile_run, w.is_profile_run());
+  BOOST_CHECK_EQUAL(get_do_play_music(g), do_play_musicrun);
   */
   g.tick();
 }

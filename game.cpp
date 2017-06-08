@@ -149,6 +149,11 @@ std::vector<bullet>& get_bullets(game& g)
   return g.get_bullets();
 }
 
+bool get_do_play_music(const game& g)
+{
+  return g.get_do_play_music();
+}
+
 bool get_is_profile_run(const game& g)
 {
   return g.get_is_profile_run();
