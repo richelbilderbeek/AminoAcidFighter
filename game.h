@@ -15,9 +15,10 @@
 class game
 {
 public:
+  ///@param world_size size of the (square) world in pixels
   game(
     const std::vector<amino_acid>& players,
-    const double world_size,
+    const int world_size,
     const bool do_play_music,
     const bool is_profile_run
   );
@@ -61,7 +62,8 @@ private:
   ///In which state is the program while and directly after the battle?
   program_state m_state;
 
-  double m_world_size;
+  ///The size of the (square) world in pixels
+  int m_world_size;
 
   ///Check if one of the players is hit by a bullet
   void bullet_hits_player();

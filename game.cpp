@@ -6,7 +6,7 @@
 
 game::game(
   const std::vector<amino_acid>& amino_acids,
-  const double world_size,
+  const int world_size,
   const bool do_play_music,
   const bool is_profile_run
 )
@@ -81,7 +81,7 @@ std::vector<player> create_players(
 
 game create_test_game_1()
 {
-  const double world_size{314.159};
+  const int world_size{314};
   std::vector<amino_acid> amino_acids =
   {
     amino_acid::tyrosine,
