@@ -80,6 +80,9 @@ double calculate_distance(
 ///Collect the hitpoints of the players
 std::vector<double> collect_hit_points(const game& g);
 
+///Count the number of bullets that are moving
+int count_moving_bullets(const game& g) noexcept;
+
 /// Create the 2,3 or 4 players at the right initial positions,
 std::vector<player> create_players(
   const std::vector<amino_acid>& amino_acids,
