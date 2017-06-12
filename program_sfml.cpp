@@ -58,9 +58,11 @@ void program_sfml::run_battle()
 {
   assert(m_state == program_state::battle);
 
+  game g(m_amino_acids, 600, do_play_music(m_args), is_profile_run(m_args));
+
   game_sfml m(
     m_window,
-    m.get_game(),
+    g,
     m_sprites
   );
 
