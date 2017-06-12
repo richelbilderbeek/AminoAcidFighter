@@ -57,6 +57,34 @@ std::vector<double> collect_hit_points(const game& g)
   return hps;
 }
 
+std::vector<double> collect_player_speed_xs(const game& g)
+{
+  std::vector<double> speed_xs;
+  const auto ps = g.get_players();
+  speed_xs.reserve(ps.size());
+  std::transform(
+    std::begin(ps),
+    std::end(ps),
+    std::back_inserter(speed_xs),
+    [](const auto& p) { return p.get_speed_x(); }
+  );
+  return speed_xs;
+}
+
+std::vector<double> collect_player_speed_ys(const game& g)
+{
+  std::vector<double> speed_ys;
+  const auto ps = g.get_players();
+  speed_ys.reserve(ps.size());
+  std::transform(
+    std::begin(ps),
+    std::end(ps),
+    std::back_inserter(speed_ys),
+    [](const auto& p) { return p.get_speed_y(); }
+  );
+  return speed_ys;
+}
+
 int count_moving_bullets(const game& g) noexcept
 {
   std::vector<bullet> bullets = g.get_bullets();

@@ -80,6 +80,9 @@ double calculate_distance(
 ///Collect the hitpoints of the players
 std::vector<double> collect_hit_points(const game& g);
 
+std::vector<double> collect_player_speed_xs(const game& g);
+std::vector<double> collect_player_speed_ys(const game& g);
+
 ///Count the number of bullets that are moving
 int count_moving_bullets(const game& g) noexcept;
 
