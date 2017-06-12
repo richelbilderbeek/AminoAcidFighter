@@ -59,8 +59,15 @@ std::vector<double> collect_hit_points(const game& g)
 
 int count_moving_bullets(const game& g) noexcept
 {
-  //STUB
-  return g.get_bullets().size();
+  std::vector<bullet> bullets = g.get_bullets();
+  return std::count_if(
+    std::begin(bullets),
+    std::end(bullets),
+    [](const bullet& b)
+    {
+      return b.get_speed_x() != 0.0 || b.get_speed_y() != 0.0;
+    }
+  );
 }
 
 std::vector<player> create_players(
