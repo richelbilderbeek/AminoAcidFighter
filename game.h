@@ -86,8 +86,11 @@ std::vector<player> create_players(
   const int world_size
 );
 
-/// Create a test game
+/// Create a minimal test game with a minimum of action going on
 game create_test_game_1();
+
+/// Create a game with a maximum of action going on
+game create_test_game_2();
 
 std::vector<amino_acid> get_amino_acids(const game& g);
 
