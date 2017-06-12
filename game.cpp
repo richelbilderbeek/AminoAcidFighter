@@ -57,6 +57,12 @@ std::vector<double> collect_hit_points(const game& g)
   return hps;
 }
 
+int count_moving_bullets(const game& g) noexcept
+{
+  //STUB
+  return g.get_bullets().size();
+}
+
 std::vector<player> create_players(
   const std::vector<amino_acid>& amino_acids,
   const int world_size
@@ -97,14 +103,14 @@ game create_test_game_2()
   const int world_size{640};
   std::vector<amino_acid> amino_acids =
   {
-    aspartic_acid,
-    glutamic_acid,
-    phenylalanine,
-    tryptophan
+    amino_acid::aspartic_acid,
+    amino_acid::glutamic_acid,
+    amino_acid::phenylalanine,
+    amino_acid::tryptophan
   };
   const bool do_play_music{false};
   const bool is_profile_run{false};
-  game g;
+  game g{amino_acids, world_size, do_play_music, is_profile_run};
   for (int i{0}; i!=4; ++i)
   {
     g.do_action(i, action::accelerate);
