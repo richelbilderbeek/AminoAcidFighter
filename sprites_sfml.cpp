@@ -83,3 +83,16 @@ sf::Sprite& Sprites_sfml::get(const amino_acid aa) noexcept
   assert(here != m_aas.end());
   return (*here).second;
 }
+
+std::ostream& operator<<(std::ostream &os, const Sprites_sfml&) noexcept
+{
+  os
+    << "These are the sprites, yeah!" << '\n'
+  ;
+  return os;
+}
+
+bool operator==(const Sprites_sfml&, const Sprites_sfml&) noexcept
+{
+  return true;
+}

@@ -11,7 +11,6 @@ public:
   //Prepare all sprites
   Sprites_sfml();
 
-  //sf::Sprite& get_alanine() const noexcept { return m_alanine; }
   sf::Sprite& get(const amino_acid aa) noexcept;
   sf::Sprite& get_bullet() noexcept { return m_bullet; }
   sf::Sprite& get_background() noexcept { return m_background; }
@@ -22,5 +21,9 @@ public:
   sf::Sprite m_bullet;
   sf::Sprite m_background;
 };
+
+std::ostream& operator<<(std::ostream &os, const Sprites_sfml&) noexcept;
+///Will always return true, because this are the one and only sprites.
+bool operator==(const Sprites_sfml&, const Sprites_sfml&) noexcept;
 
 #endif // SPRITES_SFML_H
