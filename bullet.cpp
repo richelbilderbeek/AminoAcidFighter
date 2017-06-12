@@ -74,3 +74,13 @@ std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept
   ;
   return os;
 }
+
+bool operator==(const bullet& lhs, const bullet& rhs) noexcept
+{
+  return lhs.get_damage() == rhs.get_damage()
+    && lhs.get_position() == rhs.get_position()
+    && lhs.get_speed_x() == rhs.get_speed_x()
+    && lhs.get_speed_y() == rhs.get_speed_y()
+    && lhs.get_x() == rhs.get_x()
+    && lhs.get_y() == rhs.get_y();
+}

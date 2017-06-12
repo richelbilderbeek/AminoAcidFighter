@@ -60,6 +60,8 @@ bool is_dead(const bullet& any_bullet);
 bool is_moving(const bullet& b) noexcept;
 
 void remove_dead_bullets(std::vector<bullet> &bullets);
+
 std::ostream& operator<<(std::ostream &os, const bullet &b) noexcept;
+bool operator==(const bullet& lhs, const bullet& rhs) noexcept;
 
 #endif // BULLET_H
