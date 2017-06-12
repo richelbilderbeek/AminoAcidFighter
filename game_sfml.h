@@ -20,24 +20,26 @@ public:
   ///@param n_players the initial number of players suggested
   game_sfml(
     sf::RenderWindow& window,
-    std::vector<amino_acid> amino_acids,
-    Sprites_sfml& sprites,
-    const bool do_play_music,
-    const bool is_profile_run
+    game g,
+    Sprites_sfml& sprites
   );
 
   ///Stops the music
   ~game_sfml();
-
-  ///Read the game logic
-  const auto& get_game() const noexcept { return m_game; }
-  auto& get_game() noexcept { return m_game; }
 
   ///Runs the battle, which is handling input and displayal.
   ///Closes when the user wants to quit
   ///or continue to winner screen when a player has won.
   ///This can be done by using the get_state member function
   void execute();
+
+  ///Read the game logic
+  const auto& get_game() const noexcept { return m_game; }
+  auto& get_game() noexcept { return m_game; }
+
+  const Sprites_sfml get_sprites() const noexcept { return m_sprites; }
+
+  const sf::RenderWindow& get_window() const noexcept { return m_window; }
 
   ///Handle input and show this screen once, to be used in testing only
   void tick();
@@ -80,6 +82,8 @@ void draw_game_components(
   std::vector<bullet> bullets
 );
 
+const game& get_game(const game_sfml& g);
+
 const std::vector<bullet>& get_bullets(const game_sfml& g);
 std::vector<bullet>& get_bullets(game_sfml& g);
 
@@ -90,9 +94,13 @@ std::vector<sf::Vector2f> get_life_bar_positions();
 const std::vector<player>& get_players(const game_sfml& g);
 std::vector<player>& get_players(game_sfml& g);
 
+const Sprites_sfml get_sprites(const game_sfml& g);
+
 std::vector<sf::Vector2f> get_start_positions();
 
 program_state get_state(const game_sfml& g);
+
+const sf::RenderWindow& get_window(const game_sfml& g);
 
 ///Get the winner. Returns
 /// * -1: everyone died

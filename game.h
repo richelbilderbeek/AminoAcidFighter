@@ -89,6 +89,8 @@ std::vector<player> create_players(
 /// Create a test game
 game create_test_game_1();
 
+std::vector<amino_acid> get_amino_acids(const game& g);
+
 const std::vector<bullet>& get_bullets(const game& g);
 std::vector<bullet>& get_bullets(game& g);
 

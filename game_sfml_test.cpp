@@ -18,7 +18,8 @@ BOOST_AUTO_TEST_CASE(game_sfml_construction)
     g,
     sprites
   );
-  BOOST_CHECK_EQUAL(get_window(h), w);
+
+  BOOST_CHECK_EQUAL(get_window(h).getSize(), w.getSize());
   BOOST_CHECK_EQUAL(get_game(h), g);
   BOOST_CHECK_EQUAL(get_sprites(h), sprites);
 }

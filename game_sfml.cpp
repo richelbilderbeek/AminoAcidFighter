@@ -9,14 +9,12 @@
 
 game_sfml::game_sfml(
   sf::RenderWindow& window,
-  std::vector<amino_acid> amino_acids,
-  Sprites_sfml& sprites,
-  const bool do_play_music,
-  const bool is_profile_run
-) : m_game{game(amino_acids, 600, do_play_music, is_profile_run)},
+  game g,
+  Sprites_sfml& sprites
+) : m_game{g},
     m_hit_ranges{set_hit_ranges(
-      create_players(amino_acids, window.getSize().x),get_start_positions())},
-    m_life_bars{set_life_bars(amino_acids.size(), get_life_bar_positions())},
+      create_players(get_amino_acids(g), window.getSize().x), get_start_positions())},
+    m_life_bars{set_life_bars(get_amino_acids(g).size(), get_life_bar_positions())},
     m_sprites(sprites),
     m_window{window}
 {
@@ -40,14 +38,6 @@ void game_sfml::resize_life_bars()
 std::vector<double> collect_hit_points(const game_sfml& g)
 {
   return collect_hit_points(g.get_game());
-  /*
-  std::vector<double> hps;
-  for (const auto& p: get_players())
-  {
-    hps.push_back(p.get_hp());
-  }
-  return hps;
-  */
 }
 
 void game_sfml::display()
@@ -134,6 +124,11 @@ std::vector<bullet>& get_bullets(game_sfml& g)
   return get_bullets(g.get_game());
 }
 
+const game& get_game(const game_sfml& g)
+{
+  return g.get_game();
+}
+
 bool get_is_profile_run(const game_sfml& g)
 {
   return get_is_profile_run(g.get_game());
@@ -171,9 +166,19 @@ std::vector<sf::Vector2f> get_start_positions()
   return start_positions;
 }
 
+const Sprites_sfml get_sprites(const game_sfml& g)
+{
+  return g.get_sprites();
+}
+
 program_state get_state(const game_sfml& g)
 {
   return get_state(g.get_game());
+}
+
+const sf::RenderWindow& get_window(const game_sfml& g)
+{
+  return g.get_window();
 }
 
 int get_winner(const game_sfml& g)

@@ -139,6 +139,17 @@ void game::do_damage()
   }
 }
 
+std::vector<amino_acid> get_amino_acids(const game& g)
+{
+  std::vector<player> ps = g.get_players();
+  std::vector<amino_acid> aas;
+  for(int i = 0; i != static_cast<int>(ps.size()); ++i)
+  {
+    aas.push_back(ps[i].get_amino_acid());
+  }
+  return aas;
+}
+
 const std::vector<bullet>& get_bullets(const game& g)
 {
   return g.get_bullets();
