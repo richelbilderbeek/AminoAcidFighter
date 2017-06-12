@@ -11,11 +11,13 @@ C++ game in which amino acids do battle
 
 ## 2017
 
+![Amino Acid Fighter v0.5](Pictures/AminoAcidFighter_0_5.png)
+
 ![Amino Acid Fighter](Pictures/AminoAcidFighterMenu.png)
 ![Amino Acid Fighter](Pictures/AminoAcidFighterMenu2.png)
 ![Amino Acid Fighter](Pictures/AminoAcidFighterGame.png)
 
 ## 2014
 
-![Amino Acid Fighter](Pictures/AminoAcidFighter_0_9.png)
-![Amino Acid Fighter Menu](Pictures/AminoAcidFighterMenu_0_9.png)
+![Amino Acid Fighter](Pictures/AminoAcidFighter_0_0_9.png)
+![Amino Acid Fighter Menu](Pictures/AminoAcidFighterMenu_0_0_9.png)
