@@ -305,3 +305,19 @@ BOOST_AUTO_TEST_CASE(power_stop_bullets_actually_stops_bullets)
 
 }
 
+
+BOOST_AUTO_TEST_CASE(games_can_be_compared_for_equality)
+{
+  const game g = create_test_game_1();
+  const game h = create_test_game_1();
+  const game i = create_test_game_2();
+  BOOST_CHECK_EQUAL(g, g);
+  BOOST_CHECK_EQUAL(g, h);
+  BOOST_CHECK_NE(g, i);
+  BOOST_CHECK_EQUAL(h, g);
+  BOOST_CHECK_EQUAL(h, h);
+  BOOST_CHECK_NE(h, i);
+  BOOST_CHECK_NE(i, g);
+  BOOST_CHECK_NE(i, h);
+  BOOST_CHECK_EQUAL(i, i);
+}

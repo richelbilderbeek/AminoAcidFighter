@@ -253,3 +253,14 @@ std::ostream& operator<<(std::ostream& os, const game& g) noexcept
   os << g.get_world_size();
   return os;
 }
+
+bool operator==(const game& lhs, const game& rhs) noexcept
+{
+  return lhs.get_bullets() == rhs.get_bullets()
+    && lhs.get_do_play_music() == rhs.get_do_play_music()
+    && lhs.get_game_state() == rhs.get_game_state()
+    && lhs.get_is_profile_run() == rhs.get_is_profile_run()
+    && lhs.get_players() == rhs.get_players()
+    && lhs.get_state() == rhs.get_state()
+    && lhs.get_world_size() == rhs.get_world_size();
+}

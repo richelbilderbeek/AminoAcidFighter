@@ -110,4 +110,6 @@ void set_state(game& g, program_state p);
 ///Display the game state
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;
 
+bool operator==(const game& lhs, const game& rhs) noexcept;
+
 #endif // GAME_H
