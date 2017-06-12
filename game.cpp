@@ -92,6 +92,29 @@ game create_test_game_1()
   return game{amino_acids, world_size, do_play_music, is_profile_run};
 }
 
+game create_test_game_2()
+{
+  const int world_size{640};
+  std::vector<amino_acid> amino_acids =
+  {
+    aspartic_acid,
+    glutamic_acid,
+    phenylalanine,
+    tryptophan
+  };
+  const bool do_play_music{false};
+  const bool is_profile_run{false};
+  game g;
+  for (int i{0}; i!=4; ++i)
+  {
+    g.do_action(i, action::accelerate);
+    g.do_action(i, action::turn_left);
+    g.do_action(i, action::shoot);
+  }
+  g.tick();
+  return g;
+}
+
 void game::do_action(int i, action any_action)
 {
   if(i < 0 || i >= static_cast<int>(m_players.size()))
