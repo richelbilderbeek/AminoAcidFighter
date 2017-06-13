@@ -20,22 +20,6 @@ game::game(
 {
 }
 
-void game::bullet_hits_player()
-{
-  for(auto& player: m_players)
-  {
-    for(auto& bullet: m_bullets)
-    {
-      const auto distance = calculate_distance(bullet, player);
-      if(distance <= get_hit_range_size())
-      {
-        player.lose_hp();
-        bullet.slow_down();
-      }
-    }
-  }
-}
-
 double calculate_distance(const bullet& b, const player& p)
 {
   const auto delta_x = b.get_x() - p.get_x();
@@ -199,14 +183,15 @@ void game::do_action(int i, action any_action)
 
 void game::do_damage()
 {
-  for(auto i{0u}; i < m_players.size(); ++i)
+  for(auto& player: m_players)
   {
-    for(auto j{0u}; j < m_bullets.size(); ++j)
+    for(auto& bullet: m_bullets)
     {
-      double distance = calculate_distance(m_bullets[j], m_players[i]);
-      if(distance < get_hit_range_size())
+      const auto distance = calculate_distance(bullet, player);
+      if(distance <= get_hit_range_size())
       {
-        m_players[i].lose_hp();
+        player.lose_hp();
+        bullet.slow_down();
       }
     }
   }
@@ -277,18 +262,21 @@ void game::tick()
   if(get_game_state() == game_state::running)
   {
     for (auto& p: m_players) p.move(m_world_size);
+
     for (auto& b: m_bullets)
     {
       b.move(m_world_size);
       b.slow_down();
     }
-    bullet_hits_player();
+    do_damage();
     remove_dead_bullets(m_bullets);
+
     for (auto i{0u}; i < m_players.size(); ++i)
     {
       m_players[i].stops_using_power(*this);
     }
     do_damage();
+
     if(m_players[0].get_hp() <= 0.0)
     {
       m_game_state = game_state::game_over;

@@ -68,9 +68,6 @@ private:
   ///The size of the (square) world in pixels
   int m_world_size;
 
-  ///Check if one of the players is hit by a bullet
-  void bullet_hits_player();
-
   void do_damage();
 };
 
