@@ -60,7 +60,7 @@ std::vector<double> collect_hit_points(const game& g)
 std::vector<double> collect_player_speed_xs(const game& g)
 {
   std::vector<double> speed_xs;
-  const auto ps = g.get_players();
+  const auto ps = get_players(g);
   speed_xs.reserve(ps.size());
   std::transform(
     std::begin(ps),
@@ -74,7 +74,7 @@ std::vector<double> collect_player_speed_xs(const game& g)
 std::vector<double> collect_player_speed_ys(const game& g)
 {
   std::vector<double> speed_ys;
-  const auto ps = g.get_players();
+  const auto ps = get_players(g);
   speed_ys.reserve(ps.size());
   std::transform(
     std::begin(ps),
@@ -85,9 +85,15 @@ std::vector<double> collect_player_speed_ys(const game& g)
   return speed_ys;
 }
 
+int count_bullets(const game& g) noexcept
+{
+  std::vector<bullet> bullets = get_bullets(g);
+  return bullets.size();
+}
+
 int count_moving_bullets(const game& g) noexcept
 {
-  std::vector<bullet> bullets = g.get_bullets();
+  std::vector<bullet> bullets = get_bullets(g);
   return std::count_if(
     std::begin(bullets),
     std::end(bullets),
@@ -172,7 +178,10 @@ void game::do_action(int i, action any_action)
   }
   if(any_action == action::shoot)
   {
-    m_bullets.push_back(shoot(m_players[i]));
+    if(m_players[i].get_shoot_ability() == true)
+    {
+      m_bullets.push_back(shoot(m_players[i]));
+    }
   }
   if(any_action == action::turn_left)
   {

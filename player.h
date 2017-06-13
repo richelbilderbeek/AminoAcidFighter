@@ -24,6 +24,7 @@ public:
 
   ///Return the special power of the amino acid
   auto get_rotation() const noexcept { return m_rotation_deg; }
+  auto get_shoot_ability() const noexcept { return m_able_to_shoot; }
   std::pair<double, double> get_speed() const noexcept { return { m_speed_x, m_speed_y }; }
   auto get_speed_x() const noexcept { return m_speed_x; }
   auto get_speed_y() const noexcept { return m_speed_y; }
@@ -48,9 +49,11 @@ public:
   void turn_left();
   void turn_right();
   void lose_hp();
+  void unable_to_shoot() { m_able_to_shoot = false; }
   bool uses_power() const;
 
 private:
+  bool m_able_to_shoot;
   amino_acid m_amino_acid;
   double m_hp;
 

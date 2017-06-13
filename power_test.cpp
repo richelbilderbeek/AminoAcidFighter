@@ -4,14 +4,18 @@
 
 BOOST_AUTO_TEST_CASE(power_ceasefire_must_ceasefire)
 {
-  game g = create_test_game_2();
+  game g = create_test_game_1();
 
-  //What before?
+  BOOST_CHECK_EQUAL(count_bullets(g), 0);
+  g.do_action(1, action::shoot);
+  BOOST_CHECK_EQUAL(count_bullets(g), 1);
 
   do_power(power::ceasefire, g);
 
-  //What after?
-  BOOST_CHECK(1 == 2); //TODO for Carmen
+  //No one is able to shoot
+  g.do_action(1, action::shoot);
+
+  BOOST_CHECK_EQUAL(count_bullets(g), 1);
 }
 
 BOOST_AUTO_TEST_CASE(power_crash_must_crash)
@@ -45,7 +49,7 @@ BOOST_AUTO_TEST_CASE(power_stop_bullets_must_stop_bullets)
   //There are moving bullets
   BOOST_CHECK_NE(count_moving_bullets(g), 0);
 
-  do_power(power::stop_bullets, game &g);
+  do_power(power::stop_bullets, g);
 
   //There are no moving bullets anymore
   BOOST_CHECK_EQUAL(count_moving_bullets(g), 0);

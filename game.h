@@ -83,6 +83,9 @@ std::vector<double> collect_hit_points(const game& g);
 std::vector<double> collect_player_speed_xs(const game& g);
 std::vector<double> collect_player_speed_ys(const game& g);
 
+///Count the numberof bullets currently in the game
+int count_bullets(const game& g) noexcept;
+
 ///Count the number of bullets that are moving
 int count_moving_bullets(const game& g) noexcept;
 

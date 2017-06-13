@@ -43,7 +43,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
   {
-    case power::ceasefire        : /*do_ceasefire()        */; break;
+    case power::ceasefire        : do_ceasefire(g)        ; break;
     case power::crash            : /*do_crash()            */; break;
     case power::freeze_all       : /*do_freeze_all()       */; break;
     case power::freeze_player    : /*do_freeze_player()    */; break;
@@ -73,6 +73,19 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::turbo_boost      : /*do_turbo_boost()*/      ; break;
   }
   //Not implemented yet
+}
+
+void do_ceasefire(game& g)
+{
+  std::vector<player> players = get_players(g);
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    players[i].unable_to_shoot();
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
 }
 
 void do_mix_speed(game& g)

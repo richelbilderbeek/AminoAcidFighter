@@ -10,7 +10,7 @@ player::player(
   const double x,
   const double y
 )
-  :
+  : m_able_to_shoot{true},
     m_amino_acid{any_amino_acid},
     m_hp{100.0},
     m_rotation_deg{0.0},
@@ -41,7 +41,7 @@ power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any
   switch (any_aa) {
     case amino_acid::alanine:       return power::stop_bullets;
     case amino_acid::arginine:      return power::mix_speed;
-    case amino_acid::asparagine:    return power::shield;
+    case amino_acid::asparagine:    return power::ceasefire;
     case amino_acid::aspartic_acid: return power::shield;
     case amino_acid::cysteine:      return power::shield;
     case amino_acid::glutamic_acid: return power::shield;
