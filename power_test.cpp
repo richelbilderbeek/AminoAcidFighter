@@ -7,12 +7,32 @@ BOOST_AUTO_TEST_CASE(power_ceasefire_must_ceasefire)
   game g = create_test_game_1();
 
   BOOST_CHECK_EQUAL(count_bullets(g), 0);
+
+  //Player 2 (index 1) shoots
   g.do_action(1, action::shoot);
   BOOST_CHECK_EQUAL(count_bullets(g), 1);
 
   do_power(power::ceasefire, g);
 
-  //No one is able to shoot
+  //Player 1 (index 0) cannot shoot anymore
+  g.do_action(0, action::shoot);
+
+  BOOST_CHECK_EQUAL(count_bullets(g), 1);
+}
+
+BOOST_AUTO_TEST_CASE(power_ceasefire_must_end)
+{
+  game g = create_test_game_1();
+
+  do_power(power::ceasefire, g);
+  for (int i=0; i!=get_duration(power::ceasefire); ++i)
+  {
+    //No one is able to shoot for the duration of the power
+    g.tick();
+  }
+
+  BOOST_CHECK_EQUAL(count_bullets(g), 0);
+  //Can shoot again
   g.do_action(1, action::shoot);
 
   BOOST_CHECK_EQUAL(count_bullets(g), 1);

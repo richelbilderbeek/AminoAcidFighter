@@ -23,7 +23,10 @@ public:
     const bool is_profile_run
   );
 
+  /// @param i the player's index, thus 0 for player 1
+  /// Will throw if i does not exist
   void do_action(int i, action any_action);
+
   const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
   std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
   bool get_do_play_music() const noexcept { return m_do_play_music; }
