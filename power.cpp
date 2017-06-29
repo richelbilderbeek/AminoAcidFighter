@@ -68,7 +68,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::stop_bullets     : do_stop_bullets(g)     ; break;
     case power::strafe_left      : /*do_strafe_left()    */  ; break;
     case power::strafe_right     : /*do_strafe_right()    */ ; break;
-    case power::switch_players   : /*do_switch_players()*/   ; break;
+    case power::switch_players   : do_switch_players(g)    ; break;
     case power::teleport         : /*do_teleport()*/         ; break;
     case power::turbo_boost      : /*do_turbo_boost()*/      ; break;
   }
@@ -147,4 +147,32 @@ void do_stop_bullets(game& g)
     new_bullets.push_back(bullets[i]);
   }
   g.set_bullets(new_bullets);
+}
+
+void do_switch_players(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+  std::vector<double> x_positions;
+  std::vector<double> y_positions;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    x_positions.push_back(players[i].get_x());
+    y_positions.push_back(players[i].get_y());
+  }
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    if(i != static_cast<int>(players.size()) - 1)
+    {
+      players[i].set_position(x_positions[i + 1], y_positions[i + 1]);
+      new_players.push_back(players[i]);
+    }
+    else
+    {
+      players[i].set_position(x_positions[0], y_positions[0]);
+      new_players.push_back(players[i]);
+    }
+  }
+  g.set_players(new_players);
 }

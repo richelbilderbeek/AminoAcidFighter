@@ -41,6 +41,7 @@ sf::Text create_winner_text(const int winner)
   #endif
   if(winner == -1)
   {
+    winner_text.setCharacterSize(65);
     winner_text.setString("Everybody Lost!");
   }
   else
