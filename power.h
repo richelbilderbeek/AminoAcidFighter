@@ -26,7 +26,7 @@ enum class power
   reverse_speed, // go into the opposite direction
   reverse_controls, // left becomes right, right becomes left for 5 sec (for the other players)
   shield, // a temporary (5 sec) shield
-  slowdown, // slow down other players
+  slowdown, // slow down all players
   spin, // fast spin other players
   stop_bullets, // bullets stop moving
   strafe_left, // move sideways to the left
@@ -39,6 +39,7 @@ enum class power
 class game;
 void do_reverse_speed(game& g);
 void do_power(power any_power, game& g);
+void do_slowdown(game& g);
 void do_mix_speed(game& g);
 void do_stop_bullets(game& g);
 

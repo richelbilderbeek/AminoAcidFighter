@@ -63,7 +63,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::reverse_speed    : do_reverse_speed(g)    ; break;
     case power::reverse_controls : /*do_reverse_controls()*/ ; break;
     case power::shield           : /*do_shield()         */  ; break;
-    case power::slowdown         : /*do_slowdown()       */  ; break;
+    case power::slowdown         : do_slowdown(g)         ; break;
     case power::spin             : /*do_spin()           */  ; break;
     case power::stop_bullets     : do_stop_bullets(g)     ; break;
     case power::strafe_left      : /*do_strafe_left()    */  ; break;
@@ -113,6 +113,22 @@ void do_reverse_speed(game& g)
   {
     double new_speed_x = -(players[i].get_speed_x());
     double new_speed_y = -(players[i].get_speed_y());
+    players[i].set_speed_x(new_speed_x);
+    players[i].set_speed_y(new_speed_y);
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
+}
+
+void do_slowdown(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    double new_speed_x = 0;
+    double new_speed_y = 0;
     players[i].set_speed_x(new_speed_x);
     players[i].set_speed_y(new_speed_y);
     new_players.push_back(players[i]);

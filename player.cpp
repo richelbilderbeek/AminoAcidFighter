@@ -43,7 +43,7 @@ power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any
     case amino_acid::arginine:      return power::mix_speed;
     case amino_acid::asparagine:    return power::ceasefire;
     case amino_acid::aspartic_acid: return power::reverse_speed;
-    case amino_acid::cysteine:      return power::shield;
+    case amino_acid::cysteine:      return power::slowdown;
     case amino_acid::glutamic_acid: return power::shield;
     case amino_acid::glutamine:     return power::shield;
     case amino_acid::glycine:       return power::shield;
