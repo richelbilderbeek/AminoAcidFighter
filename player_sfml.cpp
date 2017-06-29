@@ -379,21 +379,11 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { p1.turn_right(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { p1.accelerate(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { p1.decelerate(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::RControl))
     {
       bullets.push_back(shoot(p1));
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-    {
-      const power p = get_power(p1.get_amino_acid());
-      do_power(p, g);
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-    {
-      const power p = get_power(p1.get_amino_acid());
-      do_power(p, g);
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::G))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
     {
       const power p = get_power(p1.get_amino_acid());
       do_power(p, g);
@@ -406,16 +396,11 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { p2.turn_right(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { p2.decelerate(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { p2.turn_left (); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
     {
       bullets.push_back(shoot(p2));
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-    {
-      const power p = get_power(p2.get_amino_acid());
-      do_power(p, g);
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
     {
       const power p = get_power(p2.get_amino_acid());
       do_power(p, g);
