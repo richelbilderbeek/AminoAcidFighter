@@ -43,7 +43,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
   {
-    case power::ceasefire        : do_ceasefire(g)        ; break;
+    case power::ceasefire        : /*do_ceasefire(g)       */ ; break;
     case power::crash            : /*do_crash()            */; break;
     case power::freeze_all       : /*do_freeze_all()       */; break;
     case power::freeze_player    : /*do_freeze_player()    */; break;
@@ -60,7 +60,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::opposite_switch  : /*do_opposite_switch() */ ; break;
     case power::power_shot       : /*do_power_shot()      */ ; break;
     case power::repell           : /*do_repell()          */ ; break;
-    case power::reverse_speed    : /*do_reverse_speed()   */ ; break;
+    case power::reverse_speed    : do_reverse_speed(g)    ; break;
     case power::reverse_controls : /*do_reverse_controls()*/ ; break;
     case power::shield           : /*do_shield()         */  ; break;
     case power::slowdown         : /*do_slowdown()       */  ; break;
@@ -97,6 +97,22 @@ void do_mix_speed(game& g)
   {
     double new_speed_x = players[i].get_speed_y();
     double new_speed_y = players[i].get_speed_x();
+    players[i].set_speed_x(new_speed_x);
+    players[i].set_speed_y(new_speed_y);
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
+}
+
+void do_reverse_speed(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    double new_speed_x = -(players[i].get_speed_x());
+    double new_speed_y = -(players[i].get_speed_y());
     players[i].set_speed_x(new_speed_x);
     players[i].set_speed_y(new_speed_y);
     new_players.push_back(players[i]);

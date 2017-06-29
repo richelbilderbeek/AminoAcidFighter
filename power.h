@@ -37,7 +37,7 @@ enum class power
 };
 
 class game;
-void do_ceasefire(game& g);
+void do_reverse_speed(game& g);
 void do_power(power any_power, game& g);
 void do_mix_speed(game& g);
 void do_stop_bullets(game& g);
