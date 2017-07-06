@@ -69,7 +69,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::strafe_left      : /*do_strafe_left()    */  ; break;
     case power::strafe_right     : /*do_strafe_right()    */ ; break;
     case power::switch_players   : do_switch_players(g)    ; break;
-    case power::teleport         : /*do_teleport()*/         ; break;
+    case power::teleport         : do_teleport(g)         ; break;
     case power::turbo_boost      : /*do_turbo_boost()*/      ; break;
   }
   //Not implemented yet
@@ -173,6 +173,19 @@ void do_switch_players(game& g)
       players[i].set_position(x_positions[0], y_positions[0]);
       new_players.push_back(players[i]);
     }
+  }
+  g.set_players(new_players);
+}
+
+void do_teleport(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+      players[i].set_position(g.get_world_size() / 2, g.get_world_size() / 2);
+      new_players.push_back(players[i]);
   }
   g.set_players(new_players);
 }

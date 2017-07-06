@@ -338,17 +338,24 @@ void draw_life_bar(
 void respond_to_joystick( //!OCLINT cannot simplify this even more
   player &p3,
   player &p4,
-  std::vector<bullet> &bullets)
+  std::vector<bullet> &bullets,
+  game& g
+)
 {
   // player 3 controls
   if(p3.get_hp() > 0)
   {
     if(sf::Joystick::isButtonPressed(0, 0)) { p3.decelerate(); } // A button
     if(sf::Joystick::isButtonPressed(0, 1)) { p3.turn_right(); } // B button
-    if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left(); } // x button
+    if(sf::Joystick::isButtonPressed(0, 2)) { p3.turn_left(); } // X button
     if(sf::Joystick::isButtonPressed(0, 3)) { p3.accelerate(); } // Y button
     if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
       bullets.push_back(shoot(p3));
+    }
+    if(sf::Joystick::isButtonPressed(0, 5))
+    {
+      const power p = get_power(p3.get_amino_acid());
+      do_power(p, g);
     }
   }
 
@@ -357,10 +364,15 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   {
     if(sf::Joystick::isButtonPressed(1, 0)) { p4.decelerate(); } // A button
     if(sf::Joystick::isButtonPressed(1, 1)) { p4.turn_right(); } // B button
-    if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left(); } // x button
+    if(sf::Joystick::isButtonPressed(1, 2)) { p4.turn_left(); } // X button
     if(sf::Joystick::isButtonPressed(1, 3)) { p4.accelerate() ; } // Y button
     if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
       bullets.push_back(shoot(p4));
+    }
+    if(sf::Joystick::isButtonPressed(1, 5))
+    {
+      const power p = get_power(p4.get_amino_acid());
+      do_power(p, g);
     }
   }
 }

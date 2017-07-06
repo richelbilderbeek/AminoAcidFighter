@@ -226,7 +226,8 @@ void game_sfml::process_event(sf::Event event)
       respond_to_joystick(
         get_players(*this)[2],
         get_players(*this)[3],
-        get_bullets(*this));
+        get_bullets(*this),
+        m_game);
       break;
     default:
       break;
@@ -286,8 +287,6 @@ void game_sfml::tick()
   display();
 
   assert(m_window.getSize().x == m_window.getSize().y);
-  //assert(m_hit_ranges.size() == get_players(*this).size());
-  std::cerr << get_players(*this).size() <<'\n';
 
   //Move hit ranges
   for(auto i = 0u; i != get_players(*this).size(); ++i)

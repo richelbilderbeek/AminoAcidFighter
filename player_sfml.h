@@ -152,14 +152,16 @@ void draw_life_bar(
 void respond_to_joystick(
   player& p3,
   player& p4,
-  std::vector<bullet>& bullets
+  std::vector<bullet>& bullets,
+  game &g
 );
 
 void respond_to_key(
   player& p1,
   player& p2,
   std::vector<bullet>& bullets,
-  game& g);
+  game& g
+);
 
 
 #endif // PLAYER_SFML_H
