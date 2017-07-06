@@ -57,7 +57,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::minimize         : /*do_minimize()        */ ; break;
     case power::mix_speed        : do_mix_speed(g)        ; break;
     case power::multi_shot       : /*do_multi_shot()      */ ; break;
-    case power::opposite_switch  : /*do_opposite_switch() */ ; break;
+    case power::opposite_switch  : do_opposite_switch(g)  ; break;
     case power::power_shot       : /*do_power_shot()      */ ; break;
     case power::repell           : /*do_repell()          */ ; break;
     case power::reverse_speed    : do_reverse_speed(g)    ; break;
@@ -68,7 +68,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::stop_bullets     : do_stop_bullets(g)     ; break;
     case power::strafe_left      : /*do_strafe_left()    */  ; break;
     case power::strafe_right     : /*do_strafe_right()    */ ; break;
-    case power::switch_players   : do_switch_players(g)    ; break;
+    case power::switch_players   : do_switch_players(g)   ; break;
     case power::teleport         : do_teleport(g)         ; break;
     case power::turbo_boost      : /*do_turbo_boost()*/      ; break;
   }
@@ -119,6 +119,20 @@ void do_mix_speed(game& g)
   g.set_players(new_players);
 }
 
+void do_opposite_switch(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    double rotation = players[i].get_rotation();
+    double new_rotation = rotation + 180;
+    players[i].set_rotation(new_rotation);
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
+}
 void do_reverse_speed(game& g)
 {
   std::vector<player> players = g.get_players();

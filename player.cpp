@@ -46,7 +46,7 @@ power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any
     case amino_acid::cysteine:      return power::switch_players;
     case amino_acid::glutamic_acid: return power::teleport;
     case amino_acid::glutamine:     return power::kamikaze;
-    case amino_acid::glycine:       return power::shield;
+    case amino_acid::glycine:       return power::opposite_switch;
     case amino_acid::histidine:     return power::shield;
     case amino_acid::isoleucine:    return power::shield;
     case amino_acid::leucine:       return power::shield;
