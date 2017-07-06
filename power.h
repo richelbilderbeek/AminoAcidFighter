@@ -44,6 +44,7 @@ void do_slowdown(game& g);
 void do_stop_bullets(game& g);
 void do_switch_players(game& g);
 void do_teleport (game& g);
+void do_kamikaze (game& g);
 
 ///How many ticks do the powers last?
 ///Some of them only last only one tick

@@ -33,6 +33,7 @@ public:
   auto get_y() const noexcept { return m_y; }
   void move(const double world_size);
   void set_amino_acid(const amino_acid aminoacid) { m_amino_acid = aminoacid; }
+  void set_hp(const double hp) { m_hp = hp; }
   void set_position(const double x, const double y) noexcept { m_x = x; m_y = y; }
   void set_rotation(const double r) noexcept { m_rotation_deg = r; }
   void set_speed_x(double speed) { m_speed_x = speed; }
