@@ -25,8 +25,16 @@ player::player(
 void player::accelerate()
 {
   //const auto angle_degrees = m_rotation_deg - 30.0;
-  m_speed_x += std::cos( deg_to_rad(m_rotation_deg)) * 0.1;
-  m_speed_y -= std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
+  double max_speed_x = 6;
+  double max_speed_y = 6;
+  if(m_speed_x < max_speed_x)
+  {
+    m_speed_x += std::cos( deg_to_rad(m_rotation_deg)) * 0.1;
+  }
+  if(m_speed_y < max_speed_y)
+  {
+    m_speed_y -= std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
+  }
 }
 
 void player::decelerate()
@@ -47,8 +55,8 @@ power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any
     case amino_acid::glutamic_acid: return power::teleport;
     case amino_acid::glutamine:     return power::kamikaze;
     case amino_acid::glycine:       return power::opposite_switch;
-    case amino_acid::histidine:     return power::shield;
-    case amino_acid::isoleucine:    return power::shield;
+    case amino_acid::histidine:     return power::turbo_boost;
+    case amino_acid::isoleucine:    return power::health;
     case amino_acid::leucine:       return power::shield;
     case amino_acid::lysine:        return power::shield;
     case amino_acid::methionine:    return power::shield;
@@ -73,7 +81,6 @@ void player::move(const double world_size)
   m_y = std::fmod(m_y + m_speed_y + world_size, world_size);
   m_rotation_deg += m_turn_speed_deg_per_tick;
 }
-
 
 bullet shoot(const player& any_player)
 {

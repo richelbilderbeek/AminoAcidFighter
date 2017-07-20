@@ -47,7 +47,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::crash            : /*do_crash()            */; break;
     case power::freeze_all       : /*do_freeze_all()       */; break;
     case power::freeze_player    : /*do_freeze_player()    */; break;
-    case power::health           : /*do_health()           */; break;
+    case power::health           : do_health(g)           ; break;
     case power::homing_missile   : /*do_homing_missle()    */; break;
     case power::invisibility     : /*do_invisibility()     */; break;
     case power::invisible_bullets: /*do_invisible_bullets()*/; break;
@@ -70,7 +70,7 @@ void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
     case power::strafe_right     : /*do_strafe_right()    */ ; break;
     case power::switch_players   : do_switch_players(g)   ; break;
     case power::teleport         : do_teleport(g)         ; break;
-    case power::turbo_boost      : /*do_turbo_boost()*/      ; break;
+    case power::turbo_boost      : do_turbo_boost(g)      ; break;
   }
   //Not implemented yet
 }
@@ -83,6 +83,21 @@ void do_ceasefire(game& g)
   for(int i = 0; i != static_cast<int>(players.size()); ++i)
   {
     players[i].unable_to_shoot();
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
+}
+
+void do_health(game &g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    double current_hp = players[i].get_hp();
+    double new_hp = current_hp + 5;
+    players[i].set_hp(new_hp);
     new_players.push_back(players[i]);
   }
   g.set_players(new_players);
@@ -118,6 +133,7 @@ void do_mix_speed(game& g)
   }
   g.set_players(new_players);
 }
+
 
 void do_opposite_switch(game& g)
 {
@@ -218,3 +234,28 @@ void do_teleport(game& g)
   }
   g.set_players(new_players);
 }
+
+void do_turbo_boost(game& g)
+{
+  std::vector<player> players = g.get_players();
+  std::vector<player> new_players;
+  double max_speed_x = 6;
+  double max_speed_y = 6;
+
+  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  {
+    if((players[i].get_speed_x()) < max_speed_x)
+    {
+      double new_speed_x = (players[i].get_speed_x()) + 1;
+      players[i].set_speed_x(new_speed_x);
+    }
+    if((players[i].get_speed_y()) < max_speed_y)
+    {
+      double new_speed_y = (players[i].get_speed_y())+1;
+      players[i].set_speed_y(new_speed_y);
+    }
+    new_players.push_back(players[i]);
+  }
+  g.set_players(new_players);
+}
+
