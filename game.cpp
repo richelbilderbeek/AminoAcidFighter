@@ -277,10 +277,10 @@ void game::tick()
     }
     do_damage();
 
-    if(m_players[0].get_hp() <= 0.0)
+    /*if(m_players[0].get_hp() <= 0.0)
     {
       m_game_state = game_state::game_over;
-    }
+    }*/
   }
 }
 

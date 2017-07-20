@@ -13,7 +13,7 @@ enum class power
   health, // get health at a certain moment or hit
   homing_missile, // Choose player that gets certain damage
   invisibility, // become invisible
-  invisible_bullets, // shoot invisible bullets
+  invisible_bullets, // shoot sdddsnvisible bullets
   kamikaze, // everybody gets hit, including the player itself
   maximize, // maximize other players
   mine, // put invisible mine
