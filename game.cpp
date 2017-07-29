@@ -10,7 +10,8 @@ game::game(
   const bool do_play_music,
   const bool is_profile_run
 )
-  : m_bullets{},
+  : m_active_powers{},
+    m_bullets{},
     m_do_play_music{do_play_music},
     m_frame{0},
     m_game_state{game_state::running},
@@ -178,7 +179,8 @@ void game::do_action(int i, action any_action)
   }
   if(any_action == action::use_power)
   {
-    m_players[i].start_using_power(*this);
+    power_type t = get_power(m_players[i].get_amino_acid());
+    activate_power(i, t);
   }
 }
 
@@ -196,6 +198,17 @@ void game::do_damage()
       }
     }
   }
+}
+
+void game::activate_power(int i, power_type t)
+{
+  if(i < 0 || i >= static_cast<int>(m_players.size()))
+  {
+    throw std::invalid_argument("This player does not exist");
+  }
+  int end_frame = m_frame + get_duration(t);
+  m_active_powers.push_back(power(end_frame, i, t));
+  do_power(t, *this, i);
 }
 
 std::vector<amino_acid> get_amino_acids(const game& g)

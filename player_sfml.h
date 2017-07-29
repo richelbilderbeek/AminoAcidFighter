@@ -3,6 +3,7 @@
 
 #include <SFML/Config.hpp>
 #include <SFML/Graphics.hpp>
+#include "game.h"
 #include "player.h"
 #include "sprites_sfml.h"
 
@@ -150,15 +151,13 @@ void draw_life_bar(
 );
 
 void respond_to_joystick(
-  player& p3,
-  player& p4,
+  std::vector<player>& players,
   std::vector<bullet>& bullets,
-  game &g
+  game& g
 );
 
 void respond_to_key(
-  player& p1,
-  player& p2,
+  std::vector<player>& players,
   std::vector<bullet>& bullets,
   game& g
 );

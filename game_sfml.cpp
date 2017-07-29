@@ -215,8 +215,7 @@ void game_sfml::process_event(sf::Event event)
       // keyboard support for player1 and player2
       assert(get_players(*this).size() >= 1);
       respond_to_key(
-        get_players(*this)[0],
-        get_players(*this)[1],
+        get_players(*this),
         get_bullets(*this),
         m_game
       );
@@ -224,8 +223,7 @@ void game_sfml::process_event(sf::Event event)
     case sf::Event::JoystickButtonPressed:
       // joystick support for player3 and player4
       respond_to_joystick(
-        get_players(*this)[2],
-        get_players(*this)[3],
+        get_players(*this),
         get_bullets(*this),
         m_game);
       break;

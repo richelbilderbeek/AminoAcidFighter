@@ -10,6 +10,7 @@
 #include "choose_amino_acids_menu.h"
 #include "game_state.h"
 #include "player.h"
+#include "power.h"
 #include "program_state.h"
 
 class game
@@ -26,6 +27,10 @@ public:
   /// @param i the player's index, thus 0 for player 1
   /// Will throw if i does not exist
   void do_action(int i, action any_action);
+
+  /// @param i the player's index, thus 0 for player 1
+  /// Will throw if i does not exist
+  void activate_power(int i, power_type t);
 
   const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
   std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
@@ -47,6 +52,9 @@ public:
   void tick();
 
 private:
+
+  ///Powers that are currently active in the game
+  std::vector<power> m_active_powers;
 
   ///All bullets currently in the game
   std::vector<bullet> m_bullets;

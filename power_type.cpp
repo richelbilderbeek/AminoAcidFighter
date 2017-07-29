@@ -39,42 +39,6 @@ int get_duration(const power_type any_power) //!OCLINT cannot make this any shor
   return 0;
 }
 
-void do_power(power_type any_power, game& g) //!OCLINT cannot make this any shorter
-{
-  switch (any_power)
-  {
-    case power_type::ceasefire        : /*do_ceasefire(g)       */ ; break;
-    case power_type::crash            : /*do_crash()            */; break;
-    case power_type::freeze_all       : /*do_freeze_all()       */; break;
-    case power_type::freeze_player    : /*do_freeze_player()    */; break;
-    case power_type::health           : do_health(g)           ; break;
-    case power_type::homing_missile   : /*do_homing_missle()    */; break;
-    case power_type::invisibility     : /*do_invisibility()     */; break;
-    case power_type::invisible_bullets: /*do_invisible_bullets()*/; break;
-    case power_type::kamikaze         : do_kamikaze(g)         ; break;
-    case power_type::maximize         : /*do_maximize()        */ ; break;
-    case power_type::mine             : /*do_mine()            */ ; break;
-    case power_type::minimize         : /*do_minimize()        */ ; break;
-    case power_type::mix_speed        : do_mix_speed(g)        ; break;
-    case power_type::multi_shot       : /*do_multi_shot()      */ ; break;
-    case power_type::opposite_switch  : do_opposite_switch(g)  ; break;
-    case power_type::power_shot       : /*do_power_shot()      */ ; break;
-    case power_type::repell           : /*do_repell()          */ ; break;
-    case power_type::reverse_speed    : do_reverse_speed(g)    ; break;
-    case power_type::reverse_controls : /*do_reverse_controls()*/ ; break;
-    case power_type::shield           : /*do_shield()         */  ; break;
-    case power_type::slowdown         : do_slowdown(g)         ; break;
-    case power_type::spin             : /*do_spin()           */  ; break;
-    case power_type::stop_bullets     : do_stop_bullets(g)     ; break;
-    case power_type::strafe_left      : /*do_strafe_left()    */  ; break;
-    case power_type::strafe_right     : /*do_strafe_right()    */ ; break;
-    case power_type::switch_players   : do_switch_players(g)   ; break;
-    case power_type::teleport         : do_teleport(g)         ; break;
-    case power_type::turbo_boost      : do_turbo_boost(g)      ; break;
-  }
-  //Not implemented yet
-}
-
 void do_ceasefire(game& g)
 {
   std::vector<player> players = get_players(g);
@@ -88,18 +52,20 @@ void do_ceasefire(game& g)
   g.set_players(new_players);
 }
 
-void do_health(game &g)
+void do_health(game &g, const int i)
 {
   std::vector<player> players = g.get_players();
   std::vector<player> new_players;
 
-  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  double current_hp = players[i].get_hp();
+  double new_hp = current_hp + 5;
+  players[i].set_hp(new_hp);
+
+  for(int j = 0; j != static_cast<int>(players.size()); ++j)
   {
-    double current_hp = players[i].get_hp();
-    double new_hp = current_hp + 5;
-    players[i].set_hp(new_hp);
-    new_players.push_back(players[i]);
+    new_players.push_back(players[j]);
   }
+
   g.set_players(new_players);
 }
 
@@ -222,16 +188,18 @@ void do_switch_players(game& g)
   g.set_players(new_players);
 }
 
-void do_teleport(game& g)
+void do_teleport(game& g, const int i)
 {
   std::vector<player> players = g.get_players();
   std::vector<player> new_players;
 
-  for(int i = 0; i != static_cast<int>(players.size()); ++i)
+  players[i].set_position(g.get_world_size() / 2, g.get_world_size() / 2);
+
+  for(int j = 0; j != static_cast<int>(players.size()); ++j)
   {
-      players[i].set_position(g.get_world_size() / 2, g.get_world_size() / 2);
-      new_players.push_back(players[i]);
+    new_players.push_back(players[j]);
   }
+
   g.set_players(new_players);
 }
 
