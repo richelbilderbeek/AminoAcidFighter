@@ -11,7 +11,8 @@ SOURCES += \
     $$PWD/choose_n_players_menu.cpp \
     $$PWD/choose_amino_acids_menu.cpp \
     $$PWD/winner_screen.cpp \
-    $$PWD/power_type.cpp
+    $$PWD/power_type.cpp \
+    $$PWD/power.cpp
 
 HEADERS += \
     $$PWD/action.h \
@@ -26,7 +27,8 @@ HEADERS += \
     $$PWD/choose_n_players_menu.h \
     $$PWD/choose_amino_acids_menu.h \
     $$PWD/winner_screen.h \
-    $$PWD/power_type.h
+    $$PWD/power_type.h \
+    $$PWD/power.h
 
 RESOURCES += \
     $$PWD/AminoAcidFighter.qrc

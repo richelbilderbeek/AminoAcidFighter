@@ -54,6 +54,9 @@ private:
   ///Will music be played?
   bool m_do_play_music;
 
+  ///Current frame, is increased every tick
+  int m_frame;
+
   ///Current state
   game_state m_game_state;
 

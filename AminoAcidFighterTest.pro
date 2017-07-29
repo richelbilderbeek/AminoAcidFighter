@@ -7,7 +7,8 @@ SOURCES += main_test.cpp helper_test.cpp \
     player_test.cpp \
     winner_screen_test.cpp \
     program_test.cpp \
-    power_type_test.cpp
+    power_type_test.cpp \
+    power_test.cpp
 
 include(AminoAcidFighter.pri)
 

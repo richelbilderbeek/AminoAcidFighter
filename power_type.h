@@ -1,8 +1,7 @@
-#ifndef POWER_H
-#define POWER_H
+#ifndef POWER_TYPE_H
+#define POWER_TYPE_H
 
 #include "bullet.h"
-//#include "game.h"
 
 enum class power_type
 {
@@ -49,7 +48,7 @@ void do_switch_players(game& g);
 void do_teleport (game& g);
 void do_turbo_boost (game& g);
 
-///How many ticks do the powers last?
+///How many ticks do the power_types last?
 ///Some of them only last only one tick
 int get_duration(const power_type any_power);
 

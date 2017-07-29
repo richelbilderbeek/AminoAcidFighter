@@ -12,6 +12,7 @@ game::game(
 )
   : m_bullets{},
     m_do_play_music{do_play_music},
+    m_frame{0},
     m_game_state{game_state::running},
     m_is_profile_run{is_profile_run},
     m_players{create_players(amino_acids, world_size)},
@@ -276,11 +277,7 @@ void game::tick()
       m_players[i].stops_using_power(*this);
     }
     do_damage();
-
-    /*if(m_players[0].get_hp() <= 0.0)
-    {
-      m_game_state = game_state::game_over;
-    }*/
+    ++m_frame;
   }
 }
 
