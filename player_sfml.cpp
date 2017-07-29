@@ -354,7 +354,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
     }
     if(sf::Joystick::isButtonPressed(0, 5))
     {
-      const power p = get_power(p3.get_amino_acid());
+      const power_type p = get_power(p3.get_amino_acid());
       do_power(p, g);
     }
   }
@@ -371,7 +371,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
     }
     if(sf::Joystick::isButtonPressed(1, 5))
     {
-      const power p = get_power(p4.get_amino_acid());
+      const power_type p = get_power(p4.get_amino_acid());
       do_power(p, g);
     }
   }
@@ -397,7 +397,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
     {
-      const power p = get_power(p1.get_amino_acid());
+      const power_type p = get_power(p1.get_amino_acid());
       do_power(p, g);
     }
   }
@@ -414,7 +414,7 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
     {
-      const power p = get_power(p2.get_amino_acid());
+      const power_type p = get_power(p2.get_amino_acid());
       do_power(p, g);
     }
   }

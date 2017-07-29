@@ -4,7 +4,7 @@
 #include "bullet.h"
 //#include "game.h"
 
-enum class power
+enum class power_type
 {
   ceasefire, // no one can shoot except you
   crash, // player is able to hurt other players by bumping
@@ -41,7 +41,7 @@ void do_health (game& g);
 void do_kamikaze (game& g);
 void do_mix_speed(game& g);
 void do_opposite_switch(game& g);
-void do_power(power any_power, game& g);
+void do_power(power_type any_power, game& g);
 void do_reverse_speed(game& g);
 void do_slowdown(game& g);
 void do_stop_bullets(game& g);
@@ -51,6 +51,6 @@ void do_turbo_boost (game& g);
 
 ///How many ticks do the powers last?
 ///Some of them only last only one tick
-int get_duration(const power any_power);
+int get_duration(const power_type any_power);
 
 #endif // POWER_H

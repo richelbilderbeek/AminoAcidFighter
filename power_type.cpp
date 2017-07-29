@@ -1,76 +1,76 @@
-#include "power.h"
+#include "power_type.h"
 
 #include "game.h"
 
-int get_duration(const power any_power) //!OCLINT cannot make this any shorter
+int get_duration(const power_type any_power) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
   {
-    case power::ceasefire: return 10;
-    case power::crash: return 10;
-    case power::freeze_all: return 10;
-    case power::freeze_player: return 10;
-    case power::health: return 10;
-    case power::homing_missile: return 10;
-    case power::invisibility: return 10;
-    case power::invisible_bullets: return 10;
-    case power::kamikaze: return 10;
-    case power::maximize: return 10;
-    case power::mine: return 10;
-    case power::minimize: return 10;
-    case power::mix_speed: return 10;
-    case power::multi_shot: return 10;
-    case power::opposite_switch: return 10;
-    case power::power_shot: return 10;
-    case power::repell: return 10;
-    case power::reverse_speed: return 10;
-    case power::reverse_controls: return 10;
-    case power::shield: return 10;
-    case power::slowdown: return 10;
-    case power::spin: return 10;
-    case power::stop_bullets: return 10;
-    case power::strafe_left: return 10;
-    case power::strafe_right: return 10;
-    case power::switch_players: return 10;
-    case power::teleport: return 10;
-    case power::turbo_boost: return 10;
+    case power_type::ceasefire: return 10;
+    case power_type::crash: return 10;
+    case power_type::freeze_all: return 10;
+    case power_type::freeze_player: return 10;
+    case power_type::health: return 10;
+    case power_type::homing_missile: return 10;
+    case power_type::invisibility: return 10;
+    case power_type::invisible_bullets: return 10;
+    case power_type::kamikaze: return 10;
+    case power_type::maximize: return 10;
+    case power_type::mine: return 10;
+    case power_type::minimize: return 10;
+    case power_type::mix_speed: return 10;
+    case power_type::multi_shot: return 10;
+    case power_type::opposite_switch: return 10;
+    case power_type::power_shot: return 10;
+    case power_type::repell: return 10;
+    case power_type::reverse_speed: return 10;
+    case power_type::reverse_controls: return 10;
+    case power_type::shield: return 10;
+    case power_type::slowdown: return 10;
+    case power_type::spin: return 10;
+    case power_type::stop_bullets: return 10;
+    case power_type::strafe_left: return 10;
+    case power_type::strafe_right: return 10;
+    case power_type::switch_players: return 10;
+    case power_type::teleport: return 10;
+    case power_type::turbo_boost: return 10;
   }
   //Not implemented yet
   return 0;
 }
 
-void do_power(power any_power, game& g) //!OCLINT cannot make this any shorter
+void do_power(power_type any_power, game& g) //!OCLINT cannot make this any shorter
 {
   switch (any_power)
   {
-    case power::ceasefire        : /*do_ceasefire(g)       */ ; break;
-    case power::crash            : /*do_crash()            */; break;
-    case power::freeze_all       : /*do_freeze_all()       */; break;
-    case power::freeze_player    : /*do_freeze_player()    */; break;
-    case power::health           : do_health(g)           ; break;
-    case power::homing_missile   : /*do_homing_missle()    */; break;
-    case power::invisibility     : /*do_invisibility()     */; break;
-    case power::invisible_bullets: /*do_invisible_bullets()*/; break;
-    case power::kamikaze         : do_kamikaze(g)         ; break;
-    case power::maximize         : /*do_maximize()        */ ; break;
-    case power::mine             : /*do_mine()            */ ; break;
-    case power::minimize         : /*do_minimize()        */ ; break;
-    case power::mix_speed        : do_mix_speed(g)        ; break;
-    case power::multi_shot       : /*do_multi_shot()      */ ; break;
-    case power::opposite_switch  : do_opposite_switch(g)  ; break;
-    case power::power_shot       : /*do_power_shot()      */ ; break;
-    case power::repell           : /*do_repell()          */ ; break;
-    case power::reverse_speed    : do_reverse_speed(g)    ; break;
-    case power::reverse_controls : /*do_reverse_controls()*/ ; break;
-    case power::shield           : /*do_shield()         */  ; break;
-    case power::slowdown         : do_slowdown(g)         ; break;
-    case power::spin             : /*do_spin()           */  ; break;
-    case power::stop_bullets     : do_stop_bullets(g)     ; break;
-    case power::strafe_left      : /*do_strafe_left()    */  ; break;
-    case power::strafe_right     : /*do_strafe_right()    */ ; break;
-    case power::switch_players   : do_switch_players(g)   ; break;
-    case power::teleport         : do_teleport(g)         ; break;
-    case power::turbo_boost      : do_turbo_boost(g)      ; break;
+    case power_type::ceasefire        : /*do_ceasefire(g)       */ ; break;
+    case power_type::crash            : /*do_crash()            */; break;
+    case power_type::freeze_all       : /*do_freeze_all()       */; break;
+    case power_type::freeze_player    : /*do_freeze_player()    */; break;
+    case power_type::health           : do_health(g)           ; break;
+    case power_type::homing_missile   : /*do_homing_missle()    */; break;
+    case power_type::invisibility     : /*do_invisibility()     */; break;
+    case power_type::invisible_bullets: /*do_invisible_bullets()*/; break;
+    case power_type::kamikaze         : do_kamikaze(g)         ; break;
+    case power_type::maximize         : /*do_maximize()        */ ; break;
+    case power_type::mine             : /*do_mine()            */ ; break;
+    case power_type::minimize         : /*do_minimize()        */ ; break;
+    case power_type::mix_speed        : do_mix_speed(g)        ; break;
+    case power_type::multi_shot       : /*do_multi_shot()      */ ; break;
+    case power_type::opposite_switch  : do_opposite_switch(g)  ; break;
+    case power_type::power_shot       : /*do_power_shot()      */ ; break;
+    case power_type::repell           : /*do_repell()          */ ; break;
+    case power_type::reverse_speed    : do_reverse_speed(g)    ; break;
+    case power_type::reverse_controls : /*do_reverse_controls()*/ ; break;
+    case power_type::shield           : /*do_shield()         */  ; break;
+    case power_type::slowdown         : do_slowdown(g)         ; break;
+    case power_type::spin             : /*do_spin()           */  ; break;
+    case power_type::stop_bullets     : do_stop_bullets(g)     ; break;
+    case power_type::strafe_left      : /*do_strafe_left()    */  ; break;
+    case power_type::strafe_right     : /*do_strafe_right()    */ ; break;
+    case power_type::switch_players   : do_switch_players(g)   ; break;
+    case power_type::teleport         : do_teleport(g)         ; break;
+    case power_type::turbo_boost      : do_turbo_boost(g)      ; break;
   }
   //Not implemented yet
 }

@@ -8,10 +8,10 @@ SOURCES += \
     $$PWD/program.cpp \
     $$PWD/program_state.cpp \
     $$PWD/game_state.cpp \
-    $$PWD/power.cpp \
     $$PWD/choose_n_players_menu.cpp \
     $$PWD/choose_amino_acids_menu.cpp \
-    $$PWD/winner_screen.cpp
+    $$PWD/winner_screen.cpp \
+    $$PWD/power_type.cpp
 
 HEADERS += \
     $$PWD/action.h \
@@ -23,10 +23,10 @@ HEADERS += \
     $$PWD/program.h \
     $$PWD/program_state.h \
     $$PWD/game_state.h \
-    $$PWD/power.h \
     $$PWD/choose_n_players_menu.h \
     $$PWD/choose_amino_acids_menu.h \
-    $$PWD/winner_screen.h
+    $$PWD/winner_screen.h \
+    $$PWD/power_type.h
 
 RESOURCES += \
     $$PWD/AminoAcidFighter.qrc

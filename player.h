@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "amino_acid.h"
 #include "bullet.h"
-#include "power.h"
+#include "power_type.h"
 
 class player
 {
@@ -73,13 +73,13 @@ private:
 
 };
 
-void do_power(power any_power, game& g);
+void do_power(power_type any_power, game& g);
 
 /// Get the radius that each player has around its center
 /// in which is is hit, in pixels
 double get_hit_range_size();
 
-power get_power(const amino_acid any_aa) noexcept;
+power_type get_power(const amino_acid any_aa) noexcept;
 
 ///Creat a bullet shot by the player
 bullet shoot(const player& any_player);
