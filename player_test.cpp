@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include "helper.h"
 #include "player.h"
+#include "game.h"
 
 BOOST_AUTO_TEST_CASE(player_construction)
 {
@@ -23,3 +24,24 @@ BOOST_AUTO_TEST_CASE(tyrosine_has_shield_as_special_power)
   BOOST_CHECK(get_power(amino_acid::tyrosine) == power_type::shield);
 }
 
+BOOST_AUTO_TEST_CASE(player_start_using_power_starts_using_power)
+{
+  game g = create_test_game_1();
+  player& p = get_player(g, 0);
+  BOOST_CHECK(!p.is_using_power());
+  p.start_using_power();
+  BOOST_CHECK(p.is_using_power());
+}
+
+BOOST_AUTO_TEST_CASE(player_using_power_has_a_duration)
+{
+  game g = create_test_game_1();
+  player& p = get_player(g, 0);
+  p.start_using_power();
+  BOOST_CHECK(p.is_using_power());
+  for (int i=0; i!=100; ++i)
+  {
+    g.tick();
+  }
+  BOOST_CHECK(!p.is_using_power());
+}

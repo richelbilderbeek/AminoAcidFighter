@@ -20,7 +20,9 @@ player::player(
     m_uses_power{false},
     m_x{x},
     m_y{y}
-{}
+{
+  assert(!is_using_power());
+}
 
 void player::accelerate()
 {
@@ -44,17 +46,22 @@ void player::decelerate()
   m_speed_y += std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
 }
 
+std::pair<double, double> get_position(const player& p) noexcept
+{
+  return std::make_pair(p.get_x(), p.get_y());
+}
+
 power_type get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any shorter
 {
   switch (any_aa) {
-    case amino_acid::alanine:       return power_type::stop_bullets;
+    case amino_acid::alanine:       return power_type::ceasefire; //Tested for
     case amino_acid::arginine:      return power_type::mix_speed;
     case amino_acid::asparagine:    return power_type::reverse_speed;
     case amino_acid::aspartic_acid: return power_type::slowdown;
     case amino_acid::cysteine:      return power_type::switch_players;
     case amino_acid::glutamic_acid: return power_type::teleport;
     case amino_acid::glutamine:     return power_type::kamikaze;
-    case amino_acid::glycine:       return power_type::opposite_switch;
+    case amino_acid::glycine:       return power_type::stop_bullets; //Tested for
     case amino_acid::histidine:     return power_type::turbo_boost;
     case amino_acid::isoleucine:    return power_type::health;
     case amino_acid::leucine:       return power_type::shield;
@@ -62,7 +69,7 @@ power_type get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make thi
     case amino_acid::methionine:    return power_type::shield;
     case amino_acid::phenylalanine: return power_type::shield;
     case amino_acid::proline:       return power_type::shield;
-    case amino_acid::serine:        return power_type::shield;
+    case amino_acid::serine:        return power_type::mix_speed; //Tested for
     case amino_acid::threonine:     return power_type::shield;
     case amino_acid::tryptophan:    return power_type::shield;
     case amino_acid::tyrosine:      return power_type::shield;
@@ -101,11 +108,11 @@ bullet shoot(const player& any_player)
   return bullet(10, x_shooter, y_shooter, speed_x, speed_y);
 }
 
-void player::stop()
+void stop(player& p)
 {
-  m_speed_x = 0.0;
-  m_speed_y = 0.0;
-  m_turn_speed_deg_per_tick = 0.0;
+  p.set_speed_x(0.0);
+  p.set_speed_y(0.0);
+  p.set_rotation(0.0);
 }
 
 void player::turn_left()
@@ -118,18 +125,17 @@ void player::turn_right()
   m_turn_speed_deg_per_tick += 0.1;
 }
 
-bool player::uses_power() const
+bool player::is_using_power() const noexcept
 {
   return m_uses_power;
 }
 
-void player::start_using_power(game& g)
+void player::start_using_power()
 {
   m_uses_power = true;
-  do_stop_bullets(g);
 }
 
-void player::stops_using_power(game& )
+void player::stop_using_power()
 {
   m_uses_power = false;
 }

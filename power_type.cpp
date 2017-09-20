@@ -131,6 +131,17 @@ void do_reverse_speed(game& g)
   g.set_players(new_players);
 }
 
+/*
+void do_shield(game& g, const int player_index)
+{
+  assert(!has_shield(g, player_index));
+
+  g.m_active_powers
+
+  assert(has_shield(g, player_index));
+}
+*/
+
 void do_slowdown(game& g)
 {
   std::vector<player> players = g.get_players();
@@ -145,19 +156,6 @@ void do_slowdown(game& g)
     new_players.push_back(players[i]);
   }
   g.set_players(new_players);
-}
-
-void do_stop_bullets(game& g)
-{
-  std::vector<bullet> bullets = g.get_bullets();
-  std::vector<bullet> new_bullets;
-  for(int i=0; i < static_cast<int>(bullets.size()); ++i)
-  {
-    bullets[i].set_speed_x_zero();
-    bullets[i].set_speed_y_zero();
-    new_bullets.push_back(bullets[i]);
-  }
-  g.set_bullets(new_bullets);
 }
 
 void do_switch_players(game& g)

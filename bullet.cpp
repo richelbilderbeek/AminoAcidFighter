@@ -66,6 +66,12 @@ void bullet::slow_down()
   m_speed_y *= 0.999;
 }
 
+void stop(bullet& b) noexcept
+{
+  b.set_speed_x(0.0);
+  b.set_speed_y(0.0);
+}
+
 std::ostream& operator<<(std::ostream& os, const bullet& b) noexcept
 {
   os

@@ -36,13 +36,14 @@ enum class power_type
 };
 
 class game;
+
 void do_health (game& g, const int i);
 void do_kamikaze (game& g);
 void do_mix_speed(game& g);
 void do_opposite_switch(game& g);
 void do_reverse_speed(game& g);
+
 void do_slowdown(game& g);
-void do_stop_bullets(game& g);
 void do_switch_players(game& g);
 void do_teleport (game& g, const int i);
 void do_turbo_boost (game& g);

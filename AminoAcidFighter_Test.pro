@@ -1,16 +1,5 @@
 # Files
-SOURCES += main_test.cpp \
-    helper_test.cpp \
-    amino_acid_test.cpp \
-    bullet_test.cpp \
-    game_test.cpp \
-    menu_test.cpp \
-    player_test.cpp \
-    winner_screen_test.cpp \
-    program_test.cpp \
-    power_type_test.cpp \
-    power_test.cpp
-
+SOURCES += main.cpp
 include(AminoAcidFighter.pri)
 
 # C++14
@@ -47,16 +36,10 @@ CONFIG(debug, debug|release) {
 # QT
 QT += core
 
-# Don't do this: use
 # SFML
-#LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-
-# Boost.Test
-LIBS += -lboost_unit_test_framework
+LIBS += -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 # Prevent Qt for failing with this error:
 # qrc_[*].cpp:400:44: error: ‘qInitResources_[*]__init_variable__’ defined but not used
 # [*]: the resource filename
 QMAKE_CXXFLAGS += -Wno-unused-variable
-
-HEADERS +=

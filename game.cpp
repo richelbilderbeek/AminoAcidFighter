@@ -85,7 +85,7 @@ int count_moving_bullets(const game& g) noexcept
     std::end(bullets),
     [](const bullet& b)
     {
-      return b.get_speed_x() != 0.0 || b.get_speed_y() != 0.0;
+      return is_moving(b);
     }
   );
 }
@@ -117,7 +117,7 @@ game create_test_game_1()
   const int world_size{314};
   std::vector<amino_acid> amino_acids =
   {
-    amino_acid::tyrosine,
+    amino_acid::alanine,
     amino_acid::glycine
   };
   const bool do_play_music{false};
@@ -130,7 +130,7 @@ game create_test_game_2()
   const int world_size{640};
   std::vector<amino_acid> amino_acids =
   {
-    amino_acid::aspartic_acid,
+    amino_acid::serine, //Tested for
     amino_acid::glutamic_acid,
     amino_acid::phenylalanine,
     amino_acid::tryptophan
@@ -148,39 +148,47 @@ game create_test_game_2()
   return g;
 }
 
-void game::do_action(int i, action any_action)
+void game::do_action(const int player_index, const action any_action)
 {
-  if(i < 0 || i >= static_cast<int>(m_players.size()))
+  if(player_index < 0 || player_index >= static_cast<int>(m_players.size()))
   {
     throw std::invalid_argument("This player does not exist");
   }
   if(any_action == action::accelerate)
   {
-    m_players[i].accelerate();
+    m_players[player_index].accelerate();
   }
   if(any_action == action::decelerate)
   {
-    m_players[i].decelerate();
+    m_players[player_index].decelerate();
   }
   if(any_action == action::shoot)
   {
-    if(m_players[i].get_shoot_ability() == true)
+    if (is_cease_fire(*this)) return;
+    if(m_players[player_index].get_shoot_ability() == true)
     {
-      m_bullets.push_back(shoot(m_players[i]));
+      m_bullets.push_back(shoot(m_players[player_index]));
     }
   }
   if(any_action == action::turn_left)
   {
-    m_players[i].turn_left();
+    m_players[player_index].turn_left();
   }
   if(any_action == action::turn_right)
   {
-    m_players[i].turn_right();
+    m_players[player_index].turn_right();
   }
   if(any_action == action::use_power)
   {
-    power_type t = get_power(m_players[i].get_amino_acid());
-    activate_power(i, t);
+    power_type t = get_power(m_players[player_index].get_amino_acid());
+    const int end_frame = m_frame + get_duration(t);
+    m_active_powers.push_back(power(end_frame, player_index, t));
+    get_player(*this, player_index).start_using_power();
+    switch (t)
+    {
+      case power_type::stop_bullets: stop_bullets(*this); break;
+      default: break;
+    }
   }
 }
 
@@ -200,16 +208,19 @@ void game::do_damage()
   }
 }
 
-void game::activate_power(int i, power_type t)
+
+#ifdef THINK_THIS_IS_A_GREAT_IDEA_20170920
+void game::activate_power(const int player_index, power_type t)
 {
-  if(i < 0 || i >= static_cast<int>(m_players.size()))
+  if(player_index < 0 || player_index >= static_cast<int>(m_players.size()))
   {
     throw std::invalid_argument("This player does not exist");
   }
   int end_frame = m_frame + get_duration(t);
-  m_active_powers.push_back(power(end_frame, i, t));
-  do_power(t, *this, i);
+  m_active_powers.push_back(power(end_frame, player_index, t));
+  do_power(t, *this, player_index);
 }
+#endif // THINK_THIS_IS_A_GREAT_IDEA_20170920
 
 std::vector<amino_acid> get_amino_acids(const game& g)
 {
@@ -236,6 +247,11 @@ std::vector<amino_acid> get_amino_acids(const game& g)
   return aas;
 }
 
+amino_acid get_amino_acid(const game& g, const int player_index)
+{
+  return get_player(g, player_index).get_amino_acid();
+}
+
 const std::vector<bullet>& get_bullets(const game& g)
 {
   return g.get_bullets();
@@ -256,6 +272,21 @@ bool get_is_profile_run(const game& g)
   return g.get_is_profile_run();
 }
 
+int get_n_players(const game& g)
+{
+  return get_players(g).size();
+}
+
+const player& get_player(const game& g, const int player_index)
+{
+  return get_players(g).at(player_index);
+}
+
+player& get_player(game& g, const int player_index)
+{
+  return get_players(g).at(player_index);
+}
+
 const std::vector<player>& get_players(const game& g)
 {
   return g.get_players();
@@ -266,15 +297,51 @@ std::vector<player>& get_players(game& g)
   return g.get_players();
 }
 
+power_type get_power(const game& g, const int player_index)
+{
+  return get_power(get_amino_acid(g, player_index));
+}
+
 program_state get_state(const game& g)
 {
   return g.get_state();
+}
+
+bool has_power(const game& g, const power_type t)
+{
+  const auto& powers = g.get_powers();
+  const auto j = std::find_if(
+    std::begin(powers),
+    std::end(powers),
+    [t](const power& p)
+    {
+      return t == p.get_type();
+    }
+  );
+  return j != std::end(powers);
+}
+
+bool is_cease_fire(const game& g) noexcept
+{
+  return has_power(g, power_type::ceasefire);
+}
+
+void set_state(game& g, program_state p)
+{
+  g.set_state(p);
+}
+
+void stop_bullets(game &g)
+{
+  for (auto& b: get_bullets(g)) { stop(b); }
 }
 
 void game::tick()
 {
   if(get_game_state() == game_state::running)
   {
+    ++m_frame;
+
     for (auto& p: m_players) p.move(m_world_size);
 
     for (auto& b: m_bullets)
@@ -285,18 +352,26 @@ void game::tick()
     do_damage();
     remove_dead_bullets(m_bullets);
 
-    for (auto i{0u}; i < m_players.size(); ++i)
-    {
-      m_players[i].stops_using_power(*this);
-    }
-    do_damage();
-    ++m_frame;
-  }
-}
 
-void set_state(game& g, program_state p)
-{
-  g.set_state(p);
+    //Let players stop their powers
+    for (const power& p: m_active_powers)
+    {
+      if (m_frame == p.get_endframe())
+      {
+        m_players[p.get_player_index()].stop_using_power();
+      }
+    }
+    //Remove powers that have lasted
+    const auto new_end = std::remove_if(
+      std::begin(m_active_powers),
+      std::end(m_active_powers),
+      [frame = m_frame](const power& p)
+      {
+        return frame == p.get_endframe();
+      }
+    );
+    m_active_powers.erase(new_end, std::end(m_active_powers));
+  }
 }
 
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept

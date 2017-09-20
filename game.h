@@ -24,13 +24,15 @@ public:
     const bool is_profile_run
   );
 
-  /// @param i the player's index, thus 0 for player 1
+  /// @param player_index the player's index, thus 0 for player 1
   /// Will throw if i does not exist
-  void do_action(int i, action any_action);
+  void do_action(const int player_index, const action any_action);
 
+  #ifdef THINK_THIS_IS_A_GREAT_IDEA_20170920
   /// @param i the player's index, thus 0 for player 1
   /// Will throw if i does not exist
-  void activate_power(int i, power_type t);
+  void activate_power(const int player_index, const power_type t);
+  #endif //THINK_THIS_IS_A_GREAT_IDEA_20170920
 
   const std::vector<bullet>& get_bullets() const noexcept { return m_bullets; }
   std::vector<bullet>& get_bullets() noexcept { return m_bullets; }
@@ -42,6 +44,9 @@ public:
 
   const auto& get_players() const noexcept { return m_players; }
   auto& get_players() noexcept { return m_players; }
+
+  ///Get the powers active in the game
+  const auto& get_powers() const noexcept { return m_active_powers; }
 
   auto get_world_size() const noexcept { return m_world_size; }
   auto set_bullets(std::vector<bullet> bullets) { m_bullets = bullets; }
@@ -114,18 +119,43 @@ game create_test_game_2();
 
 std::vector<amino_acid> get_amino_acids(const game& g);
 
+///Get the amino acid type of a player
+///Will throw if there is no player with that index
+amino_acid get_amino_acid(const game& g, const int player_index);
+
 const std::vector<bullet>& get_bullets(const game& g);
 std::vector<bullet>& get_bullets(game& g);
 
 bool get_do_play_music(const game& g);
 bool get_is_profile_run(const game& g);
 
+///Get the number of players
+int get_n_players(const game& g);
+
+///Will throw if there is no player with that index
+const player& get_player(const game& g, const int player_index);
+
+///Will throw if there is no player with that index
+player& get_player(game& g, const int player_index);
+
 const std::vector<player>& get_players(const game& g);
 std::vector<player>& get_players(game& g);
 
+///Get the power type of a player
+power_type get_power(const game& g, const int player_index);
+
 program_state get_state(const game& g);
 
+///Is a certain power type active in the game?
+bool has_power(const game& g, const power_type t);
+
+///Is there a cease fire (no shooting allowed) active?
+bool is_cease_fire(const game& g) noexcept;
+
 void set_state(game& g, program_state p);
+
+///Stop all the bullets
+void stop_bullets(game &g);
 
 ///Display the game state
 std::ostream& operator<<(std::ostream& os, const game& g) noexcept;

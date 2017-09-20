@@ -12,10 +12,11 @@ BOOST_AUTO_TEST_CASE(power_ceasefire_must_ceasefire)
   g.do_action(1, action::shoot);
   BOOST_CHECK_EQUAL(count_bullets(g), 1);
 
-  do_power(power_type::ceasefire, g);
+  assert(get_power(g, 0) == power_type::ceasefire);
+  g.do_action(0, action::use_power);
 
-  //Player 1 (index 0) cannot shoot anymore
-  g.do_action(0, action::shoot);
+  //Player 2 (index 1) cannot shoot anymore
+  g.do_action(1, action::shoot);
 
   BOOST_CHECK_EQUAL(count_bullets(g), 1);
 }
@@ -24,7 +25,9 @@ BOOST_AUTO_TEST_CASE(power_ceasefire_must_end)
 {
   game g = create_test_game_1();
 
-  do_power(power_type::ceasefire, g);
+  assert(get_power(g, 0) == power_type::ceasefire);
+  g.do_action(0, action::use_power);
+
   for (int i=0; i!=get_duration(power_type::ceasefire); ++i)
   {
     //No one is able to shoot for the duration of the power
@@ -46,7 +49,8 @@ BOOST_AUTO_TEST_CASE(power_mix_speed_must_mix_the_speeds)
   const auto speed_ys_before = collect_player_speed_ys(g);
 
   //Reverses the x and y speed of the players
-  do_power(power_type::mix_speed, g);
+  assert(get_power(g, 0) == power_type::mix_speed);
+  g.do_action(0, action::use_power);
 
   const auto speed_xs_after = collect_player_speed_xs(g);
   const auto speed_ys_after = collect_player_speed_ys(g);
@@ -57,12 +61,15 @@ BOOST_AUTO_TEST_CASE(power_mix_speed_must_mix_the_speeds)
 
 BOOST_AUTO_TEST_CASE(power_stop_bullets_must_stop_bullets)
 {
-  game g = create_test_game_2();
+  game g = create_test_game_1();
 
   //There are moving bullets
+  g.do_action(0, action::shoot);
+  g.do_action(1, action::shoot);
   BOOST_CHECK_NE(count_moving_bullets(g), 0);
 
-  do_power(power_type::stop_bullets, g);
+  assert(get_power(g, 1) == power_type::stop_bullets);
+  g.do_action(1, action::use_power);
 
   //There are no moving bullets anymore
   BOOST_CHECK_EQUAL(count_moving_bullets(g), 0);
