@@ -149,18 +149,18 @@ BOOST_AUTO_TEST_CASE(check_game_do_action_decellerate_undoes_accelerate)
 BOOST_AUTO_TEST_CASE(check_game_players_turn_speed_changes_with_turn_left)
 {
   game g = create_test_game_1();
-  const auto turn_speed_before = g.get_players()[0].get_turn_speed();
+  const auto turn_speed_before = get_player(g, 0).get_turn_speed();
   g.do_action(0, action::turn_left);
-  const auto turn_speed_after = g.get_players()[0].get_turn_speed();
+  const auto turn_speed_after = get_player(g, 0).get_turn_speed();
   BOOST_CHECK(turn_speed_before != turn_speed_after);
 }
 
 BOOST_AUTO_TEST_CASE(check_game_players_turn_speed_changes_with_turn_right)
 {
   game g = create_test_game_1();
-  const auto turn_speed_before = g.get_players()[0].get_turn_speed();
+  const auto turn_speed_before = get_player(g, 0).get_turn_speed();
   g.do_action(0, action::turn_right);
-  const auto turn_speed_after = g.get_players()[0].get_turn_speed();
+  const auto turn_speed_after = get_player(g, 0).get_turn_speed();
   BOOST_CHECK(turn_speed_before != turn_speed_after);
 }
 
@@ -173,10 +173,10 @@ BOOST_AUTO_TEST_CASE(check_game_player_remains_in_screen)
   {
     g.tick();
   }
-  BOOST_CHECK(g.get_players()[0].get_x() >= 0.0);
-  BOOST_CHECK(g.get_players()[0].get_y() >= 0.0);
-  BOOST_CHECK(g.get_players()[0].get_x() < g.get_world_size());
-  BOOST_CHECK(g.get_players()[0].get_y() < g.get_world_size());
+  BOOST_CHECK(get_player(g, 0).get_x() >= 0.0);
+  BOOST_CHECK(get_player(g, 0).get_y() >= 0.0);
+  BOOST_CHECK(get_player(g, 0).get_x() < g.get_world_size());
+  BOOST_CHECK(get_player(g, 0).get_y() < g.get_world_size());
 
   BOOST_CHECK(g.get_players()[1].get_x() >= 0.0);
   BOOST_CHECK(g.get_players()[1].get_y() >= 0.0);
@@ -187,13 +187,13 @@ BOOST_AUTO_TEST_CASE(check_game_player_remains_in_screen)
 BOOST_AUTO_TEST_CASE(check_game_player_bullets_do_damage)
 {
   game g = create_test_game_1();
-  const auto hp_before = g.get_players()[0].get_hp();
+  const auto hp_before = get_player(g, 0).get_hp();
 
   g.do_action(0, action::shoot);
   bullet& b = g.get_bullets()[0];
   b.set_position(get_position(get_player(g, 0)));
   g.tick();
-  const auto hp_after = g.get_players()[0].get_hp();
+  const auto hp_after = get_player(g, 0).get_hp();
   BOOST_CHECK_LT(hp_after, hp_before);
 }
 
@@ -202,20 +202,20 @@ BOOST_AUTO_TEST_CASE(check_game_players_rotation_changes_after_turning_left)
   game g = create_test_game_1();
   g.do_action(0, action::turn_left);
   //Does not turn yet
-  assert(g.get_players()[0].get_rotation() == 0.0);
+  assert(get_player(g, 0).get_rotation() == 0.0);
   g.tick();
-  BOOST_CHECK_NE(g.get_players()[0].get_rotation(), 0.0);
+  BOOST_CHECK_NE(get_player(g, 0).get_rotation(), 0.0);
 }
 
 BOOST_AUTO_TEST_CASE(check_game_players_rotation_changes_after_turning_right)
 {
   game g = create_test_game_1();
-  const auto turn_speed_before = g.get_players()[0].get_turn_speed();
+  const auto turn_speed_before = get_player(g, 0).get_turn_speed();
   g.do_action(0, action::turn_right);
   //Does not turn yet
-  assert(g.get_players()[0].get_rotation() == 0.0);
+  assert(get_player(g, 0).get_rotation() == 0.0);
   g.tick();
-  BOOST_CHECK_NE(g.get_players()[0].get_rotation(), 0.0);
+  BOOST_CHECK_NE(get_player(g, 0).get_rotation(), 0.0);
 }
 
 BOOST_AUTO_TEST_CASE(check_game_running_at_start)
@@ -227,10 +227,10 @@ BOOST_AUTO_TEST_CASE(check_game_running_at_start)
 BOOST_AUTO_TEST_CASE(check_game_over_after_player_one_dies)
 {
   game g = create_test_game_1();
-  const auto hp_before = g.get_players()[0].get_hp();
+  const auto hp_before = get_player(g, 0).get_hp();
 
   g.do_action(0, action::shoot);
-  while (g.get_players()[0].get_hp() > 0.0)
+  while (get_player(g, 0).get_hp() > 0.0)
   {
     bullet& b = g.get_bullets()[0];
     b.set_position(get_position(get_player(g, 0)));
@@ -243,24 +243,24 @@ BOOST_AUTO_TEST_CASE(check_game_do_action_use_power)
 {
   game g = create_test_game_1();
 
-  assert(!g.get_players()[0].uses_power());
+  assert(!get_player(g, 0).uses_power());
   g.do_action(0, action::use_power);
   BOOST_CHECK(
-    g.get_players()[0].uses_power()
+    get_player(g, 0).uses_power()
   );
 }
 
 BOOST_AUTO_TEST_CASE(check_game_powers_wear_out)
 {
   game g = create_test_game_1();
-  assert(!g.get_players()[0].uses_power());
+  assert(!get_player(g, 0).uses_power());
   g.do_action(0, action::use_power);
-  assert(g.get_players()[0].uses_power());
+  assert(get_player(g, 0).uses_power());
   for (int i=0; i!=1000; ++i)
   {
     g.tick();
   }
-  BOOST_CHECK(!g.get_players()[0].uses_power());
+  BOOST_CHECK(!get_player(g, 0).uses_power());
 }
 
 BOOST_AUTO_TEST_CASE(power_stop_bullets_actually_stops_bullets)
