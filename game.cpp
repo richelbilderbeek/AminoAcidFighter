@@ -159,6 +159,21 @@ bool get_is_profile_run(const game& g)
   return g.get_is_profile_run();
 }
 
+int get_n_players(const game& g)
+{
+  return get_players(g).size();
+}
+
+const player& get_player(const game& g, const int player_index)
+{
+  return get_players(g).at(player_index);
+}
+
+player& get_player(game& g, const int player_index)
+{
+  return get_players(g).at(player_index);
+}
+
 const std::vector<player>& get_players(const game& g)
 {
   return g.get_players();
@@ -188,7 +203,7 @@ void game::tick()
     remove_dead_bullets(m_bullets);
     for (auto i{0u}; i < m_players.size(); ++i)
     {
-      m_players[i].stops_using_power(*this);
+      m_players[i].stop_using_power(*this);
     }
     do_damage();
     if(m_players[0].get_hp() <= 0.0)

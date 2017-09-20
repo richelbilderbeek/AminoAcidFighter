@@ -1,5 +1,6 @@
 # Files
-SOURCES += main_test.cpp helper_test.cpp \
+SOURCES += main_test.cpp \
+    helper_test.cpp \
     amino_acid_test.cpp \
     bullet_test.cpp \
     game_test.cpp \

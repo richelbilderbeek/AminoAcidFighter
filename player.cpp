@@ -36,6 +36,11 @@ void player::decelerate()
   m_speed_y += std::sin(-deg_to_rad(m_rotation_deg)) * 0.1;
 }
 
+std::pair<double, double> get_position(const player& p) noexcept
+{
+  return std::make_pair(p.get_x(), p.get_y());
+}
+
 power get_power(const amino_acid any_aa) noexcept //!OCLINT cannot make this any shorter
 {
   switch (any_aa) {
@@ -122,7 +127,7 @@ void player::start_using_power(game& g)
   do_stop_bullets(g);
 }
 
-void player::stops_using_power(game& )
+void player::stop_using_power(game& )
 {
   m_uses_power = false;
 }

@@ -191,7 +191,7 @@ BOOST_AUTO_TEST_CASE(check_game_player_bullets_do_damage)
 
   g.do_action(0, action::shoot);
   bullet& b = g.get_bullets()[0];
-  b.set_position(g.get_players()[0].get_position());
+  b.set_position(get_position(get_player(g, 0)));
   g.tick();
   const auto hp_after = g.get_players()[0].get_hp();
   BOOST_CHECK_LT(hp_after, hp_before);
@@ -233,7 +233,7 @@ BOOST_AUTO_TEST_CASE(check_game_over_after_player_one_dies)
   while (g.get_players()[0].get_hp() > 0.0)
   {
     bullet& b = g.get_bullets()[0];
-    b.set_position(g.get_players()[0].get_position());
+    b.set_position(get_position(get_player(g, 0)));
     g.tick();
   }
   BOOST_CHECK(g.get_game_state() == game_state::game_over);

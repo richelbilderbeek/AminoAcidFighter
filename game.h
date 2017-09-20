@@ -92,6 +92,15 @@ std::vector<bullet>& get_bullets(game& g);
 bool get_do_play_music(const game& g);
 bool get_is_profile_run(const game& g);
 
+///Get the number of players
+int get_n_players(const game& g);
+
+///Will throw if there is no player with that index
+const player& get_player(const game& g, const int player_index);
+
+///Will throw if there is no player with that index
+player& get_player(game& g, const int player_index);
+
 const std::vector<player>& get_players(const game& g);
 std::vector<player>& get_players(game& g);
 
