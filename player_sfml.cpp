@@ -337,7 +337,7 @@ void draw_life_bar(
 
 void respond_to_joystick( //!OCLINT cannot simplify this even more
   std::vector<player> &players,
-  std::vector<bullet> &bullets,
+  std::vector<bullet> &,
   game& g
 )
 {
@@ -348,13 +348,13 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
     if(sf::Joystick::isButtonPressed(0, 1)) { players[2].turn_right(); } // B button
     if(sf::Joystick::isButtonPressed(0, 2)) { players[2].turn_left(); } // X button
     if(sf::Joystick::isButtonPressed(0, 3)) { players[2].accelerate(); } // Y button
-    if(sf::Joystick::isButtonPressed(0, 4)) { // LB button
-      bullets.push_back(shoot(players[2]));
+    if(sf::Joystick::isButtonPressed(0, 4))
+    {
+      g.do_action(2, action::shoot);
     }
     if(sf::Joystick::isButtonPressed(0, 5))
     {
-      const power_type p = get_power(players[2].get_amino_acid());
-      g.activate_power(2, p);
+      g.do_action(2, action::use_power);
     }
   }
 
@@ -365,20 +365,20 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
     if(sf::Joystick::isButtonPressed(1, 1)) { players[3].turn_right(); } // B button
     if(sf::Joystick::isButtonPressed(1, 2)) { players[3].turn_left(); } // X button
     if(sf::Joystick::isButtonPressed(1, 3)) { players[3].accelerate() ; } // Y button
-    if(sf::Joystick::isButtonPressed(1, 4)) { // LB button
-      bullets.push_back(shoot(players[3]));
+    if(sf::Joystick::isButtonPressed(1, 4))
+    {
+      g.do_action(3, action::shoot);
     }
     if(sf::Joystick::isButtonPressed(1, 5))
     {
-      const power_type p = get_power(players[3].get_amino_acid());
-      g.activate_power(3, p);
+      g.do_action(3, action::use_power);
     }
   }
 }
 
 void respond_to_key( //!OCLINT cannot simplify this even more
   std::vector<player> &players,
-  std::vector<bullet> &bullets,
+  std::vector<bullet> &,
   game& g
 )
 {
@@ -389,31 +389,29 @@ void respond_to_key( //!OCLINT cannot simplify this even more
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { players[0].turn_right(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up   )) { players[0].accelerate(); }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down )) { players[0].decelerate(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::RControl))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-      bullets.push_back(shoot(players[0]));
+      g.do_action(0, action::shoot);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
     {
-      const power_type p = get_power(players[0].get_amino_acid());
-      g.activate_power(0, p);
+      g.do_action(0, action::use_power);
     }
   }
   // player2 controls
   if(players[1].get_hp() > 0)
   {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W  )) { players[1].accelerate(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D  )) { players[1].turn_right(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S  )) { players[1].decelerate(); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A  )) { players[1].turn_left (); }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { players[1].accelerate(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { players[1].turn_right(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { players[1].decelerate(); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { players[1].turn_left (); }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::X))
     {
-      bullets.push_back(shoot(players[1]));
+      g.do_action(1, action::shoot);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
     {
-      const power_type p = get_power(players[1].get_amino_acid());
-      g.activate_power(1, p);
+      g.do_action(1, action::use_power);
     }
   }
 }

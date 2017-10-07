@@ -99,7 +99,7 @@ power_type get_power(const amino_acid any_aa) noexcept;
 
 
 ///Creat a bullet shot by the player
-bullet shoot(const player& any_player);
+bullet create_new_bullet(const player& any_player);
 
 ///Set movement speed to zero
 void stop(player& p);

@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <cassert>
 #include <cmath>
 #include <stdexcept>
 #include "player.h"
@@ -167,7 +168,9 @@ void game::do_action(const int player_index, const action any_action)
     if (is_cease_fire(*this)) return;
     if(m_players[player_index].get_shoot_ability() == true)
     {
-      m_bullets.push_back(shoot(m_players[player_index]));
+      const auto new_bullet = create_new_bullet(m_players[player_index]);
+      assert(!is_dead(new_bullet));
+      m_bullets.push_back(new_bullet);
     }
   }
   if(any_action == action::turn_left)
@@ -236,14 +239,6 @@ std::vector<amino_acid> get_amino_acids(const game& g)
       return player.get_amino_acid();
     }
   );
-  /* Old, for educational value
-  std::vector<player> ps = g.get_players();
-  std::vector<amino_acid> aas;
-  for(int i = 0; i != static_cast<int>(ps.size()); ++i)
-  {
-    aas.push_back(ps[i].get_amino_acid());
-  }
-  */
   return aas;
 }
 

@@ -89,20 +89,20 @@ void player::move(const double world_size)
   m_rotation_deg += m_turn_speed_deg_per_tick;
 }
 
-bullet shoot(const player& any_player)
+bullet create_new_bullet(const player& any_player)
 {
-  auto rot_degree = any_player.get_rotation() + 30 + 10.7389;
+  const auto rot_degree = any_player.get_rotation() + 30 + 10.7389;
   //10.7389 = angle from turn origin to shooter origin
-  auto rot_radians = rot_degree * M_PI / 180;
-  auto pos_x = any_player.get_x();
-  auto pos_y = any_player.get_y();
-  float x_shooter = pos_x + (32*std::cos(rot_radians)); //GOOD
-  float y_shooter = pos_y + (32*std::sin(rot_radians)); //GOOD
+  const auto rot_radians = rot_degree * M_PI / 180;
+  const auto pos_x = any_player.get_x();
+  const auto pos_y = any_player.get_y();
+  const double x_shooter = pos_x + (32.0 * std::cos(rot_radians));
+  const double y_shooter = pos_y + (32.0 * std::sin(rot_radians));
 
   //shoot angle
-  double angle_deg = rot_degree + 90 + 18;
+  const double angle_deg = rot_degree + 90 + 18;
   //18 = angle from hitrange to shooter origin
-  double angle_rad = angle_deg * M_PI / 180;
+  const double angle_rad = angle_deg * M_PI / 180;
   const double speed_x{ std::sin(angle_rad) * 1.5};
   const double speed_y{-std::cos(angle_rad) * 1.5};
   return bullet(10, x_shooter, y_shooter, speed_x, speed_y);
