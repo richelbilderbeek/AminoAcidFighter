@@ -376,7 +376,7 @@ void respond_to_joystick( //!OCLINT cannot simplify this even more
   }
 }
 
-void respond_to_key( //!OCLINT cannot simplify this even more
+void respond_to_key(
   std::vector<player> &players,
   std::vector<bullet> &,
   game& g
