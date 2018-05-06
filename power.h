@@ -2,7 +2,6 @@
 #define POWER_H
 
 #include "bullet.h"
-//#include "game.h"
 
 enum class power
 {
