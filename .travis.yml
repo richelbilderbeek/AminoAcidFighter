@@ -33,7 +33,8 @@ install:
   - sudo npm install -g markdown-link-check
 
 services:
- - xvfb
+  - xvfb
+  - alsa
 
 script: 
   # Game logic non-SFML tests
