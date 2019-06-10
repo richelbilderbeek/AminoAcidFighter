@@ -4,14 +4,6 @@ compiler:
   - gcc
   # - clang 
 
-
-install:
-
-script:
-  # Check dead links
-  - rm .travis.yml
-  - ./check_dead_links
-
 addons: 
   apt: 
     packages: libboost-all-dev
