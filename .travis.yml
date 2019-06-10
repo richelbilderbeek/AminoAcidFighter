@@ -4,6 +4,14 @@ compiler:
   - gcc
   # - clang 
 
+
+install:
+
+script:
+  # Check dead links
+  - rm .travis.yml
+  - ./check_dead_links
+
 addons: 
   apt: 
     packages: libboost-all-dev
@@ -27,6 +35,10 @@ install:
   - sudo apt-get install -qq valgrind
   # SLOCcount
   - sudo apt-get install sloccount
+  # Check dead links
+  - sudo apt-get install -qq npm
+  - npm config set strict-ssl false
+  - sudo npm install -g markdown-link-check
 
 services:
  - xvfb
@@ -56,6 +68,9 @@ script:
   # memcheck
   - valgrind --leak-check=full -v --show-reachable=yes --log-file=memcheck.log ./AminoAcidFighterTest
   - cat memcheck.log
+  # Check dead links
+  - rm .travis.yml
+  - ./check_dead_links
   # SLOCcount
   #   remove OCLint otherwise it will be counted as well
   - rm -rf oclint-0.10.3
