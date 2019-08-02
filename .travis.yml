@@ -12,8 +12,6 @@ install:
   - sudo apt-get install -qq qt5-qmake qt5-default
   # SFML
   - sudo apt-get install libsfml-dev
-  # clang-tidy
-  - sudo apt-get install -qq clang-3.8
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # Codecov
@@ -68,8 +66,6 @@ script:
   #   remove OCLint otherwise it will be counted as well
   - rm -rf oclint-0.10.3
   - cd ..; sloccount --overhead 1 --personcost 22614 AminoAcidFighter; cd AminoAcidFighter
-  # clang-tidy
-  #- ./do_clang-tidy
 
 after_success:
   # Codecov
