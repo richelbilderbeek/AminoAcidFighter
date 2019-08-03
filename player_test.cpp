@@ -35,6 +35,7 @@ BOOST_AUTO_TEST_CASE(player_start_using_power_starts_using_power)
 
 BOOST_AUTO_TEST_CASE(player_using_power_has_a_duration)
 {
+  #ifdef FIX_ISSUE_30
   game g = create_test_game_1();
   player& p = get_player(g, 0);
   p.start_using_power();
@@ -44,4 +45,5 @@ BOOST_AUTO_TEST_CASE(player_using_power_has_a_duration)
     g.tick();
   }
   BOOST_CHECK(!p.is_using_power());
+  #endif // FIX_ISSUE_30
 }
