@@ -2,6 +2,7 @@
 #define POWER_H
 
 #include "power_type.h"
+#include "bullet.h"
 
 /// game keeps a collection of powers
 /// that are active

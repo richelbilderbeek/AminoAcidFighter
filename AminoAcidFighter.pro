@@ -3,12 +3,9 @@ SOURCES += main.cpp
 include(AminoAcidFighter.pri)
 include(AminoAcidFighterSfml.pri)
 
-# C++14
-CONFIG += c++14
-QMAKE_CXX = g++-5
-QMAKE_LINK = g++-5
-QMAKE_CC = gcc-5
-QMAKE_CXXFLAGS += -std=c++14
+# C++17
+CONFIG += c++17
+QMAKE_CXXFLAGS += -std=c++17
 
 # High warning levels
 QMAKE_CXXFLAGS += -Wall -Wextra -Werror
