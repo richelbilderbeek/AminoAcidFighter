@@ -1,9 +1,9 @@
 # AminoAcidFighter
 
-Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.com)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
 ---|---|---
-master|[![Build Status](https://travis-ci.org/richelbilderbeek/AminoAcidFighter.svg?branch=master)](https://travis-ci.org/richelbilderbeek/AminoAcidFighter)|[![codecov.io](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/branch/master)
-develop|[![Build Status](https://travis-ci.org/richelbilderbeek/AminoAcidFighter.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/AminoAcidFighter)|[![codecov.io](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/branch/develop)
+master|[![Build Status](https://travis-ci.com/richelbilderbeek/AminoAcidFighter.svg?branch=master)](https://travis-ci.com/richelbilderbeek/AminoAcidFighter)|[![codecov.io](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/branch/master)
+develop|[![Build Status](https://travis-ci.com/richelbilderbeek/AminoAcidFighter.svg?branch=develop)](https://travis-ci.com/richelbilderbeek/AminoAcidFighter)|[![codecov.io](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/AminoAcidFighter/branch/develop)
 
 C++ game in which amino acids do battle
 
