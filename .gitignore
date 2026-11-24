@@ -84,3 +84,6 @@ gprof.log
 debug/
 release/
 qrc_*\.cpp
+
+# Generated when building the website
+site/
