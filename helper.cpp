@@ -10,7 +10,7 @@
 void create_fonts()
 {
   const std::vector<std::string> v = { "arial.ttf" };
-  for (const std::string s: v)
+  for (const std::string& s: v)
   {
     QFile f( (":/fonts/" + s).c_str());
     f.copy(s.c_str());
@@ -28,7 +28,7 @@ void create_resources()
 void create_sounds()
 {
   const std::vector<std::string> v = { "amino_acid_fighter_tune.wav" };
-  for (const std::string s: v)
+  for (const std::string& s: v)
   {
     QFile f( (":/sounds/" + s).c_str());
     f.copy(s.c_str());
@@ -52,7 +52,7 @@ void create_sprites()
   file_names.push_back("Pictures/Bullet.png");
   file_names.push_back("Pictures/BackgroundAminoAcidFighter2.png");
 
-  for (const std::string s: file_names)
+  for (const std::string& s: file_names)
   {
     QFile f((std::string(":/sprites/") + s).c_str());
     const std::string filename{extract_base(s)};
