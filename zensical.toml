@@ -2,7 +2,7 @@
 site_name = "Amino Acid Fighter"
 site_url = "https://richelbilderbeek.github.io/AminoAcidFighter/"
 repo_url = "https://github.com/richelbilderbeek/AminoAcidFighter"
-edit_uri = "blob/master/docs/"
+edit_uri = "blob/main/docs/"
 
 nav = [
   { "Start" = "README.md"}
