@@ -3,13 +3,11 @@ AminoAcidFighter
 Asparagine
 Aspartic
 Bilderbeek's
-codecov
 Cysteine
 Glutamic
 Glutamine
 Glycine
 Histidine
-io
 Isoleucine
 Lysine
 Methionine
@@ -19,3 +17,6 @@ Richèl
 Threonine
 Tyrosine
 Valine
+Zensical
+codecov
+io
